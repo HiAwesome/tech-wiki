@@ -98,6 +98,17 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 - {+ Just regular text +}
 - {+ Text with escaped \`backticks\` inside +}
 
+### 数学
+
+显示复杂的数字计算。
+
+This math is inline $`a^2+b^2=c^2`$.
+
+This is on a separate line
+
+```math
+a^2+b^2=c^2
+```
 
 
 
