@@ -133,21 +133,6 @@ kkkk
 kkkk
 >>>
 
-### 脚注
-
-脚注会永远显示在 MarkDown 文档的最下面。
-
-脚注参考标记如下所示: [^1]
-
-此参考标记是字母和数字的组合. [^footnote-42]
-
-
-
-[^1]: 这是脚注中的文字。
-
-[^footnote-42]: 这是另外一个脚注。
-
-
 ### 图片
 
 ![gitlab-logo](image/gitlab-logo.png)
