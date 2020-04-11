@@ -86,6 +86,17 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 
 第一种方式是使用官方 emoji 支持列表的格式，第二种方式是使用 UTF-8 直接打出来的表情，后者更自然也更有移植性。
 
+### 内连差异
+
+- {+ addition 1 +}
+- [+ addition 2 +]
+- {- deletion 3 -}
+- [- deletion 4 -]
+
+
+- {+ Just regular text +}
+- {+ Text with `backticks` inside +}
+- {+ Text with escaped \`backticks\` inside +}
 
 
 
