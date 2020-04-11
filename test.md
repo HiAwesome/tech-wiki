@@ -102,9 +102,9 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 
 显示复杂的数字计算。
 
-This math is inline $`a^2+b^2=c^2`$.
+正常的行显示: $`a^2+b^2=c^2`$.
 
-This is on a separate line
+单独的行显示:
 
 ```math
 a^2+b^2=c^2
