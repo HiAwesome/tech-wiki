@@ -4,4 +4,3 @@
 * [Presto 整理.md](database/Presto%20整理)
 * [Java Links.md](link/Java%20Links)
 * [Pro Git 读书笔记.md](tool/Pro%20Git%20读书笔记)
-* [TK 的学习方法论.md](tool/TK%20的学习方法论)
