@@ -88,14 +88,14 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 
 ### 内连差异
 
+用来显示文件改动差异效果较好。
+
 - {+ addition 1 +}
 - [+ addition 2 +]
 - {- deletion 3 -}
 - [- deletion 4 -]
 
-
 - {+ Just regular text +}
-- {+ Text with `backticks` inside +}
 - {+ Text with escaped \`backticks\` inside +}
 
 
