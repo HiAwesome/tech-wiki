@@ -1,11 +1,4 @@
-* [Java 中的 Native 关键字作用？](#java-中的-native-关键字作用)
-* [为什么在 Java 中 System.arraycopy 方法是 Native 的?](#为什么在-java-中-systemarraycopy-方法是-native-的)
-* [为什么说 Java 中的 Date 类设计的比较失败？](#为什么说-java-中的-date-类设计的比较失败)
-* [Java 中 DateFormat 是线程不安全的会导致什么问题？](#java-中-dateformat-是线程不安全的会导致什么问题)
-* [如何为 Java 编写符合规范的注释？](#如何为-java-编写符合规范的注释)
-* [为何标注 Java Thread 下部分方法为过时的？](#为何标注-java-thread-下部分方法为过时的)
-
-
+[[_TOC_]]
 
 # Java 中的 Native 关键字作用？
 
