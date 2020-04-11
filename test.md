@@ -143,4 +143,13 @@ kkkk
 
 [^footnote-42]: 这是另外一个脚注。
 
+### 图片
+
+![gitlab-logo](image/gitlab-logo.png)
+
+### 视频
+
+![🍿️🍿️🍿️🍿️🍿️](video/爆米花.mp4)
+
+
 
