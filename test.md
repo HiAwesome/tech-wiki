@@ -90,13 +90,13 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 
 用来显示文件改动差异效果较好。
 
-- {+ addition 1 +}
-- [+ addition 2 +]
-- {- deletion 3 -}
-- [- deletion 4 -]
+- {+ 增加 1 +}
+- [+ 增加 2 +]
+- {- 删除 3 -}
+- [- 删除 4 -]
 
-- {+ Just regular text +}
-- {+ Text with escaped \`backticks\` inside +}
+- {+ 正常字符 +}
+- {+ 字符中有 \`反引号\` 的 +}
 
 ### 数学
 
