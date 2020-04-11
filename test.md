@@ -143,7 +143,6 @@ kkkk
 
 ### 上标和下标
 
-水的公式为 H<sub>2</sub>O
-相对论的公式为 E = mc<sup>2</sup>.
+水的公式为 H<sub>2</sub>O, 而相对论的公式为 E = mc<sup>2</sup>.
 
 
