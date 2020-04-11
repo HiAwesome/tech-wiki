@@ -58,11 +58,7 @@ classDiagram
 
 ### 表情
 
-有时您想稍微 :monkey: 一下，然后在您的💬上加上一些🌟。 好吧，我们有礼物送给您：
-⚡您可以在支持GFM的任何地方使用表情符号。 ✌
-您可以使用它指出🐛或警告🙊补丁。 如果有人改进了您的really代码，请向他们发送一些🎂。 人们会为此而嘘你。
-如果您是新手，请不要be。 您可以轻松加入表情符号👪。 您需要做的只是查找受支持的代码之一。
-有关所有受支持的表情符号代码的列表，请查阅表情符号备忘单。 👍
+1. 官方 Emoji 样例
 
 Sometimes you want to :monkey: around a bit and add some :star2: to your :speech_balloon:. Well we have a gift for you:
 
@@ -73,4 +69,30 @@ You can use it to point out a :bug: or warn about :speak_no_evil: patches. And i
 If you're new to this, don't be :fearful:. You can easily join the emoji :family:. All you need to do is to look up one of the supported codes.
 
 Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all supported emoji codes. :thumbsup:
+
+2. 直接打出来的表情
+
+有时您想稍微🐒一下，然后在您的💬上加上一些🌟。好吧，我们有礼物送给您：
+
+⚡您可以在支持GFM的任何地方使用表情符号。✌️
+
+您可以使用它指出🐛或警告🙊补丁。如果有人改进了您的🐌代码，请向他们发送一些🎂。人们会为此而❤️你。
+
+如果您是新手，请不要😨。您可以轻松加入表情符号👪。您需要做的只是查找受支持的代码之一。
+
+有关[所有受支持的表情符号代码的列表](https://www.emojicopy.com)，请查阅表情符号备忘单。👍
+
+3. 总结
+
+第一种方式是使用官方 emoji 支持列表的格式，第二种方式是使用 UTF-8 直接打出来的表情，后者更自然也更有移植性。
+
+
+
+
+
+
+
+
+
+
 
