@@ -86,7 +86,30 @@ Consult the [Emoji Cheat Sheet](https://www.emojicopy.com) for a list of all sup
 
 第一种方式是使用官方 emoji 支持列表的格式，第二种方式是使用 UTF-8 直接打出来的表情，后者更自然也更有移植性。
 
+### 代码块以及嵌套语言
 
+1. yaml
+
+```yaml
+   ---
+    title: about front matter
+    example: this
+    language: yaml
+   ---
+```
+
+2. JSON
+
+```json
+   ;;;
+   {
+      "title": "about Front Matter",
+      "example": {
+         "language": "json"        
+      } 
+   }
+   ;;;
+```
 
 
 
