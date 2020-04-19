@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="exporter-version" content="Evernote Mac 9.3.3 (459821)"/>
+    <meta name="keywords" content="1"/>
+    <meta name="created" content="2020-04-19 12:28:06 +0000"/>
+    <meta name="source" content="web.clip7"/>
+    <meta name="source-application" content="webclipper.evernote"/>
+    <meta name="source-url" content="https://www.hi-linux.com/posts/11850.html"/>
+    <meta name="updated" content="2020-04-19 12:28:28 +0000"/>
+    <title>GitHub 加速最佳实践 - 运维之美</title></head>
+<body>
+<div style="font-size: 16px; min-width: 100%; position: relative;">
+    <div style="box-sizing: border-box; font-size: 10px;">
+        <div style="box-sizing: border-box; background-color: rgb(255, 255, 255); overflow-x: hidden; font-size: 16px;">
+            <div style="box-sizing:border-box;overflow-x:hidden;">
+                <div style="box-sizing:border-box;">
+                    <div style="box-sizing:border-box;">
+                        <div style="box-sizing:border-box;">
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">GitHub，又称世界上最大的同性交友平台(GayHub)。但由于众所周知的原因，GitHub 在没有翻墙的前提下，访问速度就像乌龟在漫步。让追求效率的技术人员痛苦不堪，恨不得肉身翻墙，享受优质互联网服务的同时晒晒太阳，吹吹海风。</span>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">熟练的技术人员基本上都使用 Terminal 或者命令行访问 GitHub。那么问题来了，怎么优雅地使用 GitHub 呢？</span>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">Git 目前支持的两种协议 </span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">ssh://</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 和 </span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">https://</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">，其代理配置各不相同：</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">http.proxy</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">用于 </span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">https://</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 协议，</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">ssh://</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 协议的代理需要配置 </span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">ssh</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 的 </span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">ProxyCommand</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 参数。</span>
+                            </div>
+                            <span style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"
+
+                            />
+                            <h3 style="box-sizing: border-box; font-size: 24px; margin: 30px 0px 10px;"><a
+                                    href="https://www.hi-linux.com/posts/11850.html#%E9%92%88%E5%AF%B9https-%E5%8D%8F%E8%AE%AEhttps%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"
+                                    style="background-color: transparent; box-sizing: border-box; opacity: 0; -webkit-font-smoothing: antialiased; left: -0.75em; font-size: 1.1em; margin-top: -0.1em; position: absolute; margin-left: -1em; padding-right: 0.5em;"/><a
+                                    style="font-size: 1.1em; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.1; font-weight: 700; background-color: transparent; color: rgb(51, 122, 183); text-decoration: none;"
+                                    href="https://www.hi-linux.com/posts/11850.html#%E9%92%88%E5%AF%B9https-%E5%8D%8F%E8%AE%AEhttps%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86">ℬ</a><span
+                                    style="font-size: 24px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.1; font-weight: 700;">针对HTTPS 协议(https://)配置代理</span>
+                            </h3>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">配置 git 对 https:// 协议开头的仓库使用 http 代理,可以通过以下两种方法：</span>
+                            </div>
+                            <ul style="box-sizing:border-box;margin-top:0px;margin-bottom:40px;">
+                                <li style="box-sizing:border-box;">
+                                    <div><span
+                                            style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">通过命令行进行设置</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7; font-weight: 700; box-sizing: border-box;">针对所有git服务器设置代理</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ git config --global http.proxy http://127.0.0.1:1087</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7; font-weight: 700; box-sizing: border-box;">只针对github.com设置代理</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ git config --global http.https://github.com.proxy http://127.0.0.1:1087</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7; font-weight: 700; box-sizing: border-box;">如果代理需要帐号密码，可按如下格式</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">2</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">3</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">4</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">5</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:1087</span>
+                                                    </div>
+                                                    <div><br style="box-sizing:border-box;"/></div>
+                                                    <div><span style="box-sizing:border-box;height:20px;"><span
+                                                            style="box-sizing: border-box; margin-top: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(153, 153, 153); line-height: 1.42857;">#proxyuser= 代理的登录用户名</span></span>
+                                                    </div>
+                                                    <div><span style="box-sizing:border-box;height:20px;"><span
+                                                            style="box-sizing: border-box; margin-top: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(153, 153, 153); line-height: 1.42857;">#proxypwd= 代理的登录密码</span></span>
+                                                    </div>
+                                                    <div><span style="box-sizing:border-box;height:20px;"><span
+                                                            style="box-sizing: border-box; margin-top: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(153, 153, 153); line-height: 1.42857;">#proxy.server.com:1087 = 代理的ip（或域名）以及端口</span></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <ul style="box-sizing:border-box;margin-top:0px;margin-bottom:40px;">
+                                <li style="box-sizing:border-box;">
+                                    <div><span
+                                            style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">通过编辑git配置文件</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">2</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">3</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">4</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ vim  ~/.gitconfig</span>
+                                                    </div>
+                                                    <div><br style="box-sizing:border-box;"/></div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">[http]</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    proxy = http://127.0.0.1:1087</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <h3 style="box-sizing: border-box; font-size: 24px; margin: 30px 0px 10px;"><a
+                                    href="https://www.hi-linux.com/posts/11850.html#%E9%92%88%E5%AF%B9ssh-%E5%8D%8F%E8%AE%AEssh%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"
+                                    style="background-color: transparent; box-sizing: border-box; opacity: 0; -webkit-font-smoothing: antialiased; left: -0.75em; font-size: 1.1em; margin-top: -0.1em; position: absolute; margin-left: -1em; padding-right: 0.5em;"/><a
+                                    style="font-size: 1.1em; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.1; font-weight: 700; background-color: transparent; color: rgb(51, 122, 183); text-decoration: none;"
+                                    href="https://www.hi-linux.com/posts/11850.html#%E9%92%88%E5%AF%B9ssh-%E5%8D%8F%E8%AE%AEssh%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86">ℬ</a><span
+                                    style="font-size: 24px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.1; font-weight: 700;">针对SSH 协议(ssh://)配置代理</span>
+                            </h3>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">使用 ssh 的好处就是在 clone 数据,或者提交数据到 </span><a
+                                    href="http://github.com/" target="_blank" rel="noopener"
+                                    style="background-color: transparent; box-sizing: border-box; font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.7; color: rgb(51, 122, 183); text-decoration: none;">github.com</a><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;"> 时,不用在输入 github 的帐号密码。</span>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">下面是 ssh 的设置,打开 ~/.ssh/config 输入 :</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">2</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">3</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">4</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">5</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">6</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">7</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">8</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">9</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ vim ~/.ssh/config</span>
+                                                    </div>
+                                                    <div><br style="box-sizing:border-box;"/></div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">Host github.com *.github.com</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    ProxyCommand connect -H 127.0.0.1:1087 %h %p <span
+                                                            style="box-sizing: border-box; margin-top: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(153, 153, 153); line-height: 1.42857;">#设置代理</span></span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    HostName %h</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    Port 22</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    User git</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    IdentityFile  ~/.ssh/id_rsa <span
+                                                            style="box-sizing: border-box; margin-top: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(153, 153, 153); line-height: 1.42857;"># 这里是私钥，不要放成公钥啦</span></span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">    IdentitiesOnly yes</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">通过</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">ProxyCommand</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">命令设置代理，其中的</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">connect</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">是一个工具用于进行代理的转换。</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">connect</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">通常需要安装，各发行版一般打包后的包名为</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">proxy-connect</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">或者</span><span
+                                    style="font-size: 90%; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(199, 37, 78); line-height: 1.7; background-color: rgb(249, 242, 244); box-sizing: border-box; padding: 2px 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">connect-proxy</span><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">。</span>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">connect项目地址：</span><a
+                                    href="https://bitbucket.org/gotoh/connect" target="_blank" rel="noopener"
+                                    style="background-color: transparent; box-sizing: border-box; font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.7; color: rgb(51, 122, 183); text-decoration: none;">https://bitbucket.org/gotoh/connect</a>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7; font-weight: 700; box-sizing: border-box;">安装方式</span>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">Ubuntu</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ sudo apt-get install connect-proxy</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">Centos</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ sudo yum install connect-proxy</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">Mac OS X</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ brew install  connect</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <div style="box-sizing: border-box; margin: 30px 0px;"><span
+                                    style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7; font-weight: 700; box-sizing: border-box;">测试</span>
+                            </div>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">2</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ ssh -T git@github.com</span>
+                                                    </div>
+                                                    <div><span
+                                                            style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">Hi username! You ve successfully authenticated, but GitHub does not provide shell access.</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <h3 style="box-sizing: border-box; font-size: 24px; margin: 30px 0px 10px;"><a
+                                    href="https://www.hi-linux.com/posts/11850.html#%E5%85%B6%E5%AE%83%E5%B0%8F%E6%8A%80%E5%B7%A7"
+                                    style="background-color: transparent; box-sizing: border-box; opacity: 0; -webkit-font-smoothing: antialiased; left: -0.75em; font-size: 1.1em; margin-top: -0.1em; position: absolute; margin-left: -1em; padding-right: 0.5em;"/><a
+                                    style="font-size: 1.1em; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.1; font-weight: 700; background-color: transparent; color: rgb(51, 122, 183); text-decoration: none;"
+                                    href="https://www.hi-linux.com/posts/11850.html#%E5%85%B6%E5%AE%83%E5%B0%8F%E6%8A%80%E5%B7%A7">ℬ</a><span
+                                    style="font-size: 24px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.1; font-weight: 700;">其它小技巧</span>
+                            </h3>
+                            <ul style="box-sizing:border-box;margin-top:0px;margin-bottom:40px;">
+                                <li style="box-sizing:border-box;">
+                                    <div><span
+                                            style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">取消当前使用代理</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857; box-sizing: border-box; height: 20px;">$ git config --global --</span><span
+                                                        style="box-sizing: border-box; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(249, 145, 87); line-height: 1.42857;">unset</span><span
+                                                        style="font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857; box-sizing: border-box; height: 20px;"> http.proxy</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <ul style="box-sizing:border-box;margin-top:0px;margin-bottom:40px;">
+                                <li style="box-sizing:border-box;">
+                                    <div><span
+                                            style="font-size: 16px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.7;">查看当前使用代理</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div style="box-sizing: border-box; overflow: auto; padding: 15px; font-size: 13px; background-color: rgb(45, 45, 45); margin: 20px 0px; background-position: initial initial; background-repeat: initial initial;">
+                                <div style="box-sizing:border-box;min-height:0.01%;overflow-x:auto;">
+                                    <div><br/></div>
+                                    <table style="font-size: inherit; border-spacing: 0px; border-collapse: collapse; box-sizing: border-box; background-color: transparent; max-width: 100%; margin: 0px; border: none; width: auto;">
+                                        <colgroup>
+                                            <col/>
+                                            <col/>
+                                        </colgroup>
+                                        <tbody style="box-sizing:border-box;">
+                                        <tr style="box-sizing:border-box;">
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px 20px 1px 1px; margin: 0px; border: none; text-align: right; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(102, 102, 102); line-height: 1.42857;">1</span>
+                                                </div>
+                                            </td>
+                                            <td style="box-sizing: border-box; vertical-align: top; padding: 0px; border: none;">
+                                                <div style="box-sizing: border-box; word-break: break-all; overflow-wrap: break-word; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(45, 45, 45); overflow: auto; font-size: 13px; padding: 1px; margin: 0px; border: none; background-position: initial initial; background-repeat: initial initial;">
+                                                    <span style="box-sizing: border-box; height: 20px; font-size: 13px; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; color: rgb(204, 204, 204); line-height: 1.42857;">$ git config --global --get http.proxy</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div><br/></div>
+                                </div>
+                            </div>
+                            <h3 style="box-sizing: border-box; font-size: 24px; margin: 30px 0px 10px;"><a
+                                    href="https://www.hi-linux.com/posts/11850.html#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"
+                                    style="background-color: transparent; box-sizing: border-box; opacity: 0; -webkit-font-smoothing: antialiased; left: -0.75em; font-size: 1.1em; margin-top: -0.1em; position: absolute; margin-left: -1em; padding-right: 0.5em;"/><a
+                                    style="font-size: 1.1em; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; line-height: 1.1; font-weight: 700; background-color: transparent; color: rgb(51, 122, 183); text-decoration: none;"
+                                    href="https://www.hi-linux.com/posts/11850.html#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">ℬ</a><span
+                                    style="font-size: 24px; font-family: -apple-system, &quot;Helvetica Neue&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, STHeiti, &quot;Microsoft YaHei&quot;, &quot;Microsoft JhengHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans CN&quot;, &quot;Noto Sans SC&quot;, &quot;Source Han Sans TC&quot;, &quot;Noto Sans CJK TC&quot;, &quot;WenQuanYi Micro Hei&quot;, SimSun, sans-serif; color: rgb(64, 64, 64); line-height: 1.1; font-weight: 700;">参考文档</span>
+                            </h3></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div><br/></div>
+</body>
+</html>
