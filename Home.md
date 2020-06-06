@@ -15,3 +15,8 @@
 ## Github
 
 * [Github](/link/Github)
+
+## Another Link
+
+* [为什么Python 3.6以后字典有序并且效率更高？](https://www.cnblogs.com/xieqiankun/p/python_dict.html)
+
