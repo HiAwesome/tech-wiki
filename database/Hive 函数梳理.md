@@ -17,6 +17,34 @@ describe function <function_name>;
 describe function extended <function_name>;
 ```
 
+# 更新
+
+lateral view explode 和 lateral view outer explode 的区别（参考[Hive-lateral view explode](https://www.jianshu.com/p/4951f2b41098)）：
+
+如果 UDTF 转换的 Array 是空的怎么办呢？
+在 Hive 0.12 里面会支持 outer 关键字，如果 UDTF 的结果是空，默认会被忽略输出。
+如果加上 outer 关键字，则会像 left outer join 一样，还是会输出select出的列，而 UDTF 的输出结果是 NULL。
+
+```sql
+SELECT 
+    name,
+    a
+FROM (
+    select 'zhangsan' name
+) t
+LATERAL VIEW explode(array()) C AS a; 
+-- 空
+
+SELECT 
+    name,
+    a
+FROM (
+    select 'zhangsan' name
+) t
+LATERAL VIEW OUTER explode(array()) C AS a; 
+-- zhangsan NULL
+```
+
 # 内置运算符
 
 ## 运算符优先级
