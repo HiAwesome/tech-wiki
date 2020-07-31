@@ -1,5 +1,3 @@
-[[_TOC_]]
-
 # Java 中的 Native 关键字作用？
 
 * [native keyword in java](https://www.geeksforgeeks.org/native-keyword-java/)

@@ -1,5 +1,3 @@
-[[_TOC_]]
-
 # 总览
 
 Facebook 在开源 Hive 后，发现 MapReduce 模型计算效率慢且对异构数据库支持较差。为解决这些问题，Facebook 开发并开源了 Presto，本文对 Presto 的应用做基本的整理。整理文档时 Persto 官网版本为 0.229。

@@ -1,5 +1,3 @@
-[[_TOC_]]
-
 # 倾斜表梳理
 
 [官网地址](https://cwiki.apache.org/confluence/display/Hive/ListBucketing).
