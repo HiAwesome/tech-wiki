@@ -1,8 +1,11 @@
-# Database
+# Home
 
 * [Hive 函数梳理](/database/Hive%20函数梳理.md)
 * [Hive 倾斜表](/database/Hive%20倾斜表.md)
 * [Presto 函数整理](/database/Presto%20函数整理.md)
+* [JetBrain 经验](1/JetBrain%20经验.md)
+* [正则表达式](1/正则表达式.md)
+* [程序员](1/程序员.md)
 
 # Link
 
