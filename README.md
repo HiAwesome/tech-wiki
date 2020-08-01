@@ -32,28 +32,9 @@
 * [ ] [后端技术总结](https://github.com/NotFound9/interviewGuide)
 * [ ] [BAT Interviews](https://github.com/lengyue1024/BAT_interviews)
 * [ ] [Awesome Mac](https://github.com/jaywcjlove/awesome-mac/blob/master/README-zh.md)
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
 
 # Tech Blog
 
 * [ ] [逸飞的技术日志](https://yifei.me/)
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
-* [ ] []()
 
 

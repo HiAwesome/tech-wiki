@@ -50,3 +50,19 @@
 * [ ] [设计模式在外卖营销业务中的实践](https://tech.meituan.com/2020/03/19/design-pattern-practice-in-marketing.html)
 * [ ] [Java线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html)
 * [ ] [Java 8系列之重新认识HashMap](https://tech.meituan.com/2016/06/24/java-hashmap.html)
+
+# Interview
+
+* [awesome-resume](https://github.com/resumejob/awesome-resume)
+* [日均TB级数据处理：微博广告智能监控系统搭建之路](https://dbaplus.cn/news-160-2263-1.html)
+* [微博广告生态体系及核心架构](https://pic.huodongjia.com/ganhuodocs/2017-12-13/1513148325.33.pdf)
+* [彭冬：微博商业基础大数据平台（D+）的架构演进](https://cloud.tencent.com/developer/article/1039700)
+* [微博广告策略工程架构体系演进](https://zhuanlan.zhihu.com/p/82688637)
+* [微博广告 Hubble 系统：秒级大规模分布式智能监控平台架构实践](https://www.ctolib.com/topics-120059.html)
+* [微博2亿日活背后，广告系统不掉线的全景运维大法](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650781035&idx=1&sn=0c5b13e72e3d3ff4322c390d189b178f)
+* [日均百亿级日志处理：微博基于Flink的实时计算平台建设](https://dbaplus.cn/news-73-2790-1.html)
+* [大数据变现实践：微博百亿营收背后的数据挖掘技术](https://dbaplus.cn/news-73-2749-1.html)
+* [微博广告中心](https://tui.weibo.com/)
+* [彭冬 - 数据驱动价值：微博广告收入增长之道](https://www.slidestalk.com/DBAPlus/data_drive_business_in_weibo)
+* [微博广告分布式配置中心的构建与实践](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650778104&idx=2&sn=d069efc206e5312f6b2d5360196bae7f)
+* [微博基于ClickHouse灵活监控百亿流量下的业务指标](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650779076&idx=1&sn=3a64a4fa3e8e6067d3e722c46c664663)
