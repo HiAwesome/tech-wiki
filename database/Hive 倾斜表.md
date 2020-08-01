@@ -1,4 +1,4 @@
-# 倾斜表梳理
+# Hive 倾斜表
 
 [官网地址](https://cwiki.apache.org/confluence/display/Hive/ListBucketing).
 打开 stored as directories 属性时，需要打开子目录支持和递归目录支持，确保查询有效性，可以参考[How does 'Skewed by .. Stored As Directories function' in Hive?](https://mapr.com/community/s/question/0D50L00006BIu5HSAT/how-does-skewed-by-stored-as-directories-function-in-hive) 或者 [Can Hive recursively descend into subdirectories without partitions or editing hive-site.xml?](https://stackoverflow.com/a/32529995).
