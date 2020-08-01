@@ -11,7 +11,8 @@
 
 # Book
 
-* [Pro Git 读书笔记](/book/Pro%20Git%20读书笔记.md)
-* [单元测试之道 Java 版 读书笔记](/book/单元测试之道%20Java%20版%20读书笔记.md)
+[x] [Pro Git 读书笔记](/book/Pro%20Git%20读书笔记.md)
+[x] [单元测试之道 Java 版 读书笔记](/book/单元测试之道%20Java%20版%20读书笔记.md)
+[] [深入浅出 Java 多线程](http://concurrent.redspider.group/article/01/1.html)
 
 
