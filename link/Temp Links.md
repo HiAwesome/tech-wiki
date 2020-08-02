@@ -1,5 +1,6 @@
 # FLink
 
+* [ ] [flink-training-course](https://github.com/flink-china/flink-training-course), [Apache Flink Community China: Youtube](https://www.youtube.com/channel/UCAkoUdyLRnXHQFC7rJyqGxQ/videos?view=0&sort=da&flow=grid)
 * [ ] [Flink面试，看这篇就足够了](https://mp.weixin.qq.com/s/HJn7pmUUVNFhECoj8wfTQg)
 * [ ] [流计算框架 Flink 与 Storm 的性能对比](https://tech.meituan.com/2017/11/17/flink-benchmark.html)
 * [ ] [美团点评基于 Flink 的实时数仓建设实践](https://tech.meituan.com/2018/10/18/meishi-data-flink.html)
