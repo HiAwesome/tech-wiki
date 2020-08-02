@@ -1,13 +1,13 @@
 * Maven 下载使用代理，添加到 Maven -> Importing -> VM options for importer： 
     * -DproxySet=true -DproxyHost=0.0.0.0 -DproxyPort=1087
-* JetBrains 产品禁用双击 Shift 的 Search Everywhere [解决方案](https://stackoverflow.com/a/48894157) :
+* JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
     1. 打开 Find Action...（在 Windows 和 Linux 上为“ Ctrl-Shift-A”，在 macOS 上为“ Cmd-Shift-A”）
     2. 键入“ Registry...”，按 Enter
     3. 找到 key 为 ide.suppress.double.click.handler（只需开始键入即可进行速度搜索）并启用它（打对勾）
-* 目前 JetBrains 产品的配置存储在 GitHub 这个私有仓库，各个 JetBrains 产品从这个地址拉去配置覆盖本地即可。
 * IDEA 中临时 SQL 文件运行时需要绑定 Session（运行环境），如果需要去除的话点击右上角的固定 Session 并选择 Detach Session 即可。
 * IDEA 查找 Database 插件的表对象、存储过程对象，调用 Symbols 查询即可，Mac 快捷键为 Option + Command + O
-* Maven 执行 IDEA打包执行 test 的插件：maven-surefire-plugin，具体见官方介绍和用户提问。打包报警：The parameter forkMode is deprecated since version 2.14. Use forkCount and reuseForks instead.useSystemClassloader setting has no effect when not forking，解决方案：Stack Overflow，Maven，我在代码中进行了测试，还是会有报警提示，进一步查看问题是发现快捷键设置有误，出现报警提示是因为走了 Maven 的 Debug 模式。
+* Maven 执行 IDEA打包执行 test 的插件：maven-surefire-plugin，具体见 [maven-surefire-plugin](https://maven.apache.org/surefire/maven-surefire-plugin/usage.html) 和 [Maven doesn't execute any unit test](https://stackoverflow.com/questions/16708013/maven-doesnt-execute-any-unit-test) 。打包报警：The parameter forkMode is deprecated since version 2.14. Use forkCount and reuseForks instead.useSystemClassloader setting has no effect when not forking，解决方案：[Maven surefire forkMode pertest deprecated. What is the new settings?
+](https://stackoverflow.com/questions/40096382/maven-surefire-forkmode-pertest-deprecated-what-is-the-new-settings/40096619#40096619) ，[Migrating the Deprecated forkMode Parameter to forkCount and reuseForks](http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html#Migrating_the_Deprecated_forkMode_Parameter_to_forkCount_and_reuseForks) ，我在代码中进行了测试，还是会有报警提示，进一步查看问题是发现快捷键设置有误，出现报警提示是因为走了 Maven 的 Debug 模式。
 * IDEA 装上了刷 LeetCode 的插件，定义临时文件地址为 Scratch 文件夹下的 leetcode 文件夹，操作起来非常直接顺手。
 * LeetCode 账号美区为 a 结尾，中区为 b 结尾，密码一致。
 * IDEA 使用 lombok 插件无效，在设置中找到 Setting -> Build, Execution, Deployment -> Compiler -> Annotation Processors，然后打勾 Enable annotation processing。
