@@ -1,5 +1,25 @@
-* Maven 下载使用代理，添加到 Maven -> Importing -> VM options for importer： 
-    * -DproxySet=true -DproxyHost=0.0.0.0 -DproxyPort=1087
+* Maven 设定使用代理，在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。本机目前的设定如下，当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 即可。在无法改动 setting.xml 文件的情况下在 IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=0.0.0.0 -DproxyPort=1087
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>/Users/moqi/Applications/maven/repository</localRepository>
+
+    <proxies>
+        <!-- 设置 HTTP 代理 -->
+        <proxy>
+            <id>trojan-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>0.0.0.0</host>
+            <port>1087</port>
+        </proxy>
+    </proxies>
+
+</settings>
+``` 
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
     1. 打开 Find Action...（在 Windows 和 Linux 上为“ Ctrl-Shift-A”，在 macOS 上为“ Cmd-Shift-A”）
     2. 键入“ Registry...”，按 Enter
