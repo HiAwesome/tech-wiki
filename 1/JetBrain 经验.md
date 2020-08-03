@@ -23,6 +23,7 @@
 
 </settings>
 ``` 
+* 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated ) 。
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
     1. 打开 Find Action...（在 Windows 和 Linux 上为“ Ctrl-Shift-A”，在 macOS 上为“ Cmd-Shift-A”）
     2. 键入“ Registry...”，按 Enter
@@ -67,7 +68,6 @@
     * 在 VM options 中加入 -Dlog4j.configuration=file:/Users/moqi/opt/data/log4j_dir/log4j-error.properties 为项目指定 log4j.properties.
     * 如果是在 Spark 部署环境下则参考 [How to log using log4j to local file system inside a Spark application that runs on YARN?](https://stackoverflow.com/questions/28454080/how-to-log-using-log4j-to-local-file-system-inside-a-spark-application-that-runs)
 * 应该把开源项目自身放在一个 IDEA 项目里面，比如 Spark、Hadoop 等, 在此项目中查看源码方便快捷好用。
-* 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated ) 。
 * [IDEA 的 42 个技巧 On Youtube](https://www.youtube.com/watch?v=eq3KiAH4IBI)
 * IDEA [JavaDoc 注释加上 URL](https://stackoverflow.com/questions/1082050/linking-to-an-external-url-in-javadoc) 的语法是：@see \<a href="http://google.com">http://google.com</a\> 在 ScalaDoc 注释加上 URL 的语法是 [[http://scala-lang.org Scala web site]] 
 * Mac 上 IDEA 快捷键将 Command + 2 给结构( Structure )，将 Command + 3 给继承关系( Hierarchy )。
