@@ -22,6 +22,8 @@
 
 # Github Project
 
+* [ ] [fucking-algorithm](https://github.com/labuladong/fucking-algorithm)
+* [ ] [CS-Notes](https://github.com/CyC2018/CS-Notes)
 * [ ] [大数据成神之路](https://github.com/wangzhiwubigdata/God-Of-BigData)
 * [ ] [软件工程技术面试个人指南](https://github.com/kdn251/interviews/blob/master/README-zh-cn.md)
 * [ ] [Awesome Java: 精选的Java框架，库和软件清单](https://github.com/akullpp/awesome-java)
