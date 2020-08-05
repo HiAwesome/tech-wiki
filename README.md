@@ -22,6 +22,7 @@
 
 # Github Project
 
+* [ ] [algorithm-pattern](https://github.com/greyireland/algorithm-pattern)
 * [ ] [fucking-algorithm](https://github.com/labuladong/fucking-algorithm)
 * [ ] [CS-Notes](https://github.com/CyC2018/CS-Notes)
 * [ ] [大数据成神之路](https://github.com/wangzhiwubigdata/God-Of-BigData)
