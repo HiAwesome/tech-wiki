@@ -11,6 +11,7 @@
 
 * [Java Links](/link/Java%20Links.md)
 * [Temp Links](/link/Temp%20Links.md)
+* [Explore ByteDance LeetCode](/link/Explore%20ByteDance%20LeetCode.md)
 
 # Book
 
