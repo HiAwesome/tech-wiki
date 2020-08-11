@@ -52,6 +52,7 @@
 * [跳表的 Python 实现](https://zhuanlan.zhihu.com/p/54869087)
 * [给产品经理的代码课](https://yifei.me/note/386/)
 * [常用的反爬虫封禁手段概览](https://yifei.me/note/64/)
+* [如何做一个 Code Review](https://yifei.me/note/334/)
 * [ ] [手把手教你JAVA 线上故障排查](https://mp.weixin.qq.com/s/uBZ_dtXId4Ih0lID-he7BQ)
 * [ ] [五年总结：过往记忆大数据公众号原创精选](https://www.iteblog.com/archives/2559.html)
 * [ ] [设计模式在外卖营销业务中的实践](https://tech.meituan.com/2020/03/19/design-pattern-practice-in-marketing.html)
