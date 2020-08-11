@@ -53,6 +53,7 @@
 * [ ] [Java线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html)
 * [ ] [Java 8系列之重新认识HashMap](https://tech.meituan.com/2016/06/24/java-hashmap.html)
 * [ ] [字节跳动算法题+场景题+智力题100题](https://www.nowcoder.com/discuss/428158?type=5&channel=-1&source_id=-1)
+* [x] [软件工程中的 “3” 的规则](https://yifei.me/note/550/)
 
 # Interview
 
