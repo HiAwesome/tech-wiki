@@ -1,6 +1,6 @@
 * Maven 设定使用代理
   * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
-  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=0.0.0.0 -DproxyPort=1087
+  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=1087
   * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -16,7 +16,7 @@
             <id>trojan-proxy</id>
             <active>true</active>
             <protocol>http</protocol>
-            <host>0.0.0.0</host>
+            <host>127.0.0.1</host>
             <port>1087</port>
         </proxy>
     </proxies>
@@ -44,7 +44,7 @@
 * 整理 IDEA 的细分使用教程：
     * [Introduction to Version Control Systems in IntelliJ IDEA](https://www.youtube.com/watch?v=MaQnpCaiop0) ：① Git 的 commit message 框右上角的钟表标志可以显示最近的所有 commit message，然后选择一个开始做修改比较方便。② Git 的 commit and push 有快捷键，Mac 默认是 Option + Command + K。
 * JetBrains APP 可能在粘贴 SQL 语句的时候出现问题，比如单引号出现了两次导致语法出错，全选重写粘贴一遍即可。
-* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 0.0.0.0 和 1087。最后测试访问 Google 成功即可。
+* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 1087。最后测试访问 Google 成功即可。
 * IDEA 设置复制进来文件 [不自动格式化](https://intellij-support.jetbrains.com/hc/en-us/community/posts/207280009-Paste-without-auto-formatting) ：Settings/Preferences | Editor | General | Smart Keys --> Reformat on Paste 设置为 None 即可。
 * 设置了 IDEA 单文件查 History 的快捷键：Control + Command + H。
 * 在目前版本的 IDEA（2019.1.2）中，局部变量被重新赋值的话 IDEA 默认为这个变量名显示加上下划线，相当于 Java 中 Final 修饰局部变量名的作用。
