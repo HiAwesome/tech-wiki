@@ -1,3 +1,27 @@
+# JDK Mission Control
+
+Mac OS 指定 JDK Mission Control 使用 JDK 版本, 打开 JMC 包内容的 Info.plist 将其中
+
+```xml
+<array>
+    <string>-keyring</string>
+    <string>~/.eclipse_keyring</string>
+</array>
+```
+
+更新为
+
+```xml
+<array>
+    <string>-keyring</string>
+    <string>~/.eclipse_keyring</string>
+    <string>-vm</string>
+    <string>/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home/jre/</string>
+</array>
+```
+
+即新增后 vm 参数，具体的值放在 array 最后一个参数上，以 jre 结尾。
+ 
 # VisualVM
 
 * [Mac OS 指定 VisualVM 使用 JDK 版本](https://github.com/oracle/visualvm/issues/13#issuecomment-280287797) create ~/Library/Application Support/VisualVM/2.0.4/etc/visualvm.conf file. Its content should look like this: visualvm_jdkhome=visualvm_jdkhome=/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home 
