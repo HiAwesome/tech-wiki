@@ -1,3 +1,7 @@
+# VisualVM
+
+* [Mac OS 指定 VisualVM 使用 JDK 版本](https://github.com/oracle/visualvm/issues/13#issuecomment-280287797) create ~/Library/Application Support/VisualVM/2.0.4/etc/visualvm.conf file. Its content should look like this: visualvm_jdkhome=visualvm_jdkhome=/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home 
+
 # Java 正则表达式
 
 * [replaceAll的妙用：正则表达式的捕获与反向引用](https://blog.csdn.net/kingzhsh/article/details/98247650)
