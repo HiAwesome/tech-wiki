@@ -1,3 +1,4 @@
+* IDEA 设置保存文件时去掉自动生成的回车： Setting -> Editor -> General, 去掉 Ensure an empty line at the end of a file on Save 的打勾。 
 * IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。 
 * Maven 设定使用代理
   * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
