@@ -1,3 +1,19 @@
+* Maven 设定自动下载 Source 和 Doc, 在 Maven Setting 中加入以下设定
+```xml
+<profiles>
+    <profile>
+        <id>downloadSources</id>
+        <properties>
+            <downloadSources>true</downloadSources>
+            <downloadJavadocs>true</downloadJavadocs>
+        </properties>
+    </profile>
+</profiles>
+
+<activeProfiles>
+    <activeProfile>downloadSources</activeProfile>
+</activeProfiles>
+```
 * IDEA 设置保存文件时去掉自动生成的回车： Setting -> Editor -> General, 去掉 Ensure an empty line at the end of a file on Save 的打勾。 
 * IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。 
 * Maven 设定使用代理
@@ -5,25 +21,16 @@
   * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=1087
   * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
-    <localRepository>/Users/moqi/Applications/maven/repository</localRepository>
-
-    <proxies>
-        <!-- 设置 HTTP 代理 -->
-        <proxy>
-            <id>trojan-proxy</id>
-            <active>true</active>
-            <protocol>http</protocol>
-            <host>127.0.0.1</host>
-            <port>1087</port>
-        </proxy>
-    </proxies>
-
-</settings>
+<proxies>
+    <!-- 设置 HTTP 代理 -->
+    <proxy>
+        <id>trojan-proxy</id>
+        <active>true</active>
+        <protocol>http</protocol>
+        <host>127.0.0.1</host>
+        <port>1087</port>
+    </proxy>
+</proxies>
 ``` 
 * 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated ) 。
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
