@@ -1,3 +1,4 @@
+* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://127.0.0.1:1087 && npm config set https-proxy https://127.0.0.1:1087 即可。
 * [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
 ```xml
 <profiles>
