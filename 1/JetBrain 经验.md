@@ -1,3 +1,4 @@
+* [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
 * [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://127.0.0.1:1087 && npm config set https-proxy https://127.0.0.1:1087 即可。
 * [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
 ```xml
