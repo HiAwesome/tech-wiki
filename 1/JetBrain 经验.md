@@ -1,7 +1,7 @@
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
 * [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
 * [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
-* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://127.0.0.1:1087 && npm config set https-proxy https://127.0.0.1:1087 即可。
+* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:1087 && npm config set https-proxy https://localhost:1087 即可。
 * [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
 ```xml
 <profiles>
