@@ -15,3 +15,5 @@ From runoob.com
 * [pull](https://docs.mongodb.com/manual/reference/operator/update/pull/)
 * [set](https://docs.mongodb.com/manual/reference/operator/update/set/)
 * [elemMatch](https://docs.mongodb.com/manual/reference/operator/query/elemMatch/)
+* [updateOne](https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/)
+* [insertOne](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/)
