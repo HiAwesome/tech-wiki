@@ -8,3 +8,10 @@
 ## [mongoDB 教程](https://www.runoob.com/mongodb/mongodb-tutorial.html)
 
 From runoob.com
+
+## 高频命令
+
+* [addToSet](https://docs.mongodb.com/manual/reference/operator/update/addToSet/)
+* [pull](https://docs.mongodb.com/manual/reference/operator/update/pull/)
+* [set](https://docs.mongodb.com/manual/reference/operator/update/set/)
+* [elemMatch](https://docs.mongodb.com/manual/reference/operator/query/elemMatch/)
