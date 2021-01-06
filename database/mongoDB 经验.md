@@ -1,5 +1,6 @@
 # mongoDB 经验
 
+* [mongo shell 连接](https://docs.mongodb.com/manual/mongo/), mongo "mongodb://mongodb0.example.com:28015"
 * [Mac OS install mongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 * [在 mongoDB 中创建数据库](https://www.mongodb.com/basics/create-database)
 * [在 mongoDB 中创建 Collection](https://docs.mongodb.com/manual/reference/method/db.createCollection/)
