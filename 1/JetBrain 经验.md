@@ -1,4 +1,4 @@
-* IDEA 设置不限制 go 代码中自动折叠 return 语句: Preferences -> Editor -> Inlay Hints -> Go -> 去掉打勾: Show return parameters
+* [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
 * [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
 * [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
