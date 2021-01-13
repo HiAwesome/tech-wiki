@@ -1,6 +1,6 @@
 # Home
 
-* [Faas](1/FaaS.md)
+* [Function as a Service](1/FaaS.md)
 * [mongoDB 经验](/database/mongoDB%20经验.md)
 * [Hive 函数梳理](/database/Hive%20函数梳理.md)
 * [Hive 倾斜表](/database/Hive%20倾斜表.md)
