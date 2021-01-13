@@ -16,7 +16,7 @@
 # 微观
 
 * [读书笔记：对线程模型的批评](https://coolshell.cn/articles/4626.html)
-* [Lambda and Stream In Java 8](https://docs.google.com/presentation/d/1lQHzw3bQCHV3hChC2S7UcSnAnWlVfx9UXW40Pc535pU/edit#slide=id.g863e222db7_2_418)
+* [Lambda and Stream In Java 8](https://docs.google.com/presentation/d/1lQHzw3bQCHV3hChC2S7UcSnAnWlVfx9UXW40Pc535pU)
 * [StreamTest.java](https://github.com/moqimoqidea/moqi-tool-java/blob/master/src/test/java/com/moqi/test/stream/StreamTest.java)
 * [头等函数（first-class function）](https://zh.wikipedia.org/wiki/%E5%A4%B4%E7%AD%89%E5%87%BD%E6%95%B0)  
 * [Go: 函数每次被调用时都会返回下一个数的平方](https://github.com/HiAwesome/go-demo/blob/main/src/ch05/06/squares/squares.go)
