@@ -20,3 +20,4 @@
 * [StreamTest.java](https://github.com/moqimoqidea/moqi-tool-java/blob/master/src/test/java/com/moqi/test/stream/StreamTest.java)
 * [头等函数（first-class function）](https://zh.wikipedia.org/wiki/%E5%A4%B4%E7%AD%89%E5%87%BD%E6%95%B0)  
 * [Go: 函数每次被调用时都会返回下一个数的平方](https://github.com/HiAwesome/go-demo/blob/main/src/ch05/06/squares/squares.go)
+* [Go: 模拟一个网络爬虫，使用广度优先算法(函数作为参数)](https://github.com/HiAwesome/go-demo/blob/main/src/ch05/06/findlinks3/findlinks3.go)
