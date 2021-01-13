@@ -4,7 +4,7 @@
 
 * [聊一聊开源 Serverless 平台 Apache OpenWhisk](https://blog.xinkuo.me/post/apache-openwhisk.html)
 * [什么是无服务器Serverless](https://blog.xinkuo.me/post/what-is-serverless.html)
-* [Kubernetes Serverless 框架的全面对比（OpennFaas、OpenWhisk、Fission、Kubeless 等](http://dockone.io/article/9074)
+* [Kubernetes Serverless 框架的全面对比（OpenFaas、OpenWhisk、Fission、Kubeless 等](http://dockone.io/article/9074)
 * [Fission-workflows](https://github.com/fission/fission-workflows/blob/master/README.md)
 * [Serverless](https://martinfowler.com/bliki/Serverless.html)
 * [Why The Future Of Software And Apps Is Serverless](https://readwrite.com/2012/10/15/why-the-future-of-software-and-apps-is-serverless/)
