@@ -1,3 +1,6 @@
+* [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
+    * [IntelliJ IDEA way of editing multiple lines](https://stackoverflow.com/a/27862706)。Clone Caret Above / Below 功能: 需要先按一次 option，第二次再按下 option 不释放(两次的间隔时间可以稍微长点，目前 Mac 配置 double option 会激活 Alfred 弹窗), 这个时候使用上下键进行多行光标的插入。
+    * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
 * [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
 * [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
