@@ -43,5 +43,5 @@
 # Tech Blog
 
 * [ ] [逸飞的技术日志](https://yifei.me/)
-
+* [x] [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 
