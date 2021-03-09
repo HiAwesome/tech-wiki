@@ -1,3 +1,5 @@
+# [Why use @PostConstruct?](https://stackoverflow.com/questions/3406555/why-use-postconstruct)
+
 # JDK Mission Control
 
 Mac OS 指定 JDK Mission Control 使用 JDK 版本, 打开 JMC 包内容的 Info.plist 将其中
