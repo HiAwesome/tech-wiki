@@ -1,5 +1,9 @@
 # 与 Java 有关的链接
 
+## Postman
+
+* [Dynamic variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/), 随机变量列表。
+
 ## Optional Dependency in Maven
 
 * [Maven: Optional Dependencies and Dependency Exclusions](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
