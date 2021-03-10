@@ -1,8 +1,10 @@
-# [Why use @PostConstruct?](https://stackoverflow.com/questions/3406555/why-use-postconstruct)
+# 与 Java 有关的链接
 
-# [UNDERSTANDING APACHE MAVEN – THE SERIES](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/)
+## [Why use @PostConstruct?](https://stackoverflow.com/questions/3406555/why-use-postconstruct)
 
-# JDK Mission Control
+## [UNDERSTANDING APACHE MAVEN – THE SERIES](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/)
+
+## JDK Mission Control
 
 Mac OS 指定 JDK Mission Control 使用 JDK 版本, 打开 JMC 包内容的 Info.plist 将其中
 
@@ -26,15 +28,15 @@ Mac OS 指定 JDK Mission Control 使用 JDK 版本, 打开 JMC 包内容的 Inf
 
 即新增后 vm 参数，具体的值放在 array 最后一个参数上，以 jre 结尾。
  
-# VisualVM
+## VisualVM
 
 * [Mac OS 指定 VisualVM 使用 JDK 版本](https://github.com/oracle/visualvm/issues/13#issuecomment-280287797) create ~/Library/Application Support/VisualVM/2.0.4/etc/visualvm.conf file. Its content should look like this: visualvm_jdkhome=visualvm_jdkhome=/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home 
 
-# Java 正则表达式
+## Java 正则表达式
 
 * [replaceAll的妙用：正则表达式的捕获与反向引用](https://blog.csdn.net/kingzhsh/article/details/98247650)
 
-# Java 中的 Native 关键字作用？
+## Java 中的 Native 关键字作用？
 
 * [native keyword in java](https://www.geeksforgeeks.org/native-keyword-java/)
 
@@ -59,12 +61,12 @@ Native关键字的主要目标是：
 
 Native 方法充分体现出"语言设计者实现出来的机制总是比开发者自己做的效率更高，因为他们可以不受语言本身的限制。 ——《函数式编程思维》"
 
-# 为什么在 Java 中 System.arraycopy 方法是 Native 的?
+## 为什么在 Java 中 System.arraycopy 方法是 Native 的?
 
 * [Why is System.arraycopy native in Java?](https://stackoverflow.com/questions/2772152/why-is-system-arraycopy-native-in-java)
     * 在本机代码中，可以使用单个 memcpy/memmove，这与n个不同的复制操作memmove相反。性能差异很大。
 
-# 为什么说 Java 中的 Date 类设计的比较失败？
+## 为什么说 Java 中的 Date 类设计的比较失败？
 
 * [What's wrong with Java Date & Time API?](https://stackoverflow.com/questions/1969442/whats-wrong-with-java-date-time-api)
     * 年数基于 1990，月数基于 0。
@@ -78,7 +80,7 @@ Native 方法充分体现出"语言设计者实现出来的机制总是比开发
     * Before Java 8: [Joda Time](https://github.com/JodaOrg/joda-time)
     * In or After Java 8: [Java Time](https://docs.oracle.com/javase/9/docs/api/java/time/package-summary.html)
 
-# Java 中 DateFormat 是线程不安全的会导致什么问题？
+## Java 中 DateFormat 是线程不安全的会导致什么问题？
 
 * [“Java DateFormat is not threadsafe” what does this leads to?](https://stackoverflow.com/questions/4021151/java-dateformat-is-not-threadsafe-what-does-this-leads-to)
     * 如果您同时解析两个日期，则一个调用可能被另一个数据污染。
@@ -90,14 +92,14 @@ Native 方法充分体现出"语言设计者实现出来的机制总是比开发
     * 您还可以使用线程安全的 [joda-time DateTimeFormat](https://www.joda.org/joda-time/apidocs/index.html)。
     * ThreadLocal + SimpleDateFormat = SimpleDateFormatThreadSafe
     
-# 如何为 Java 编写符合规范的注释？
+## 如何为 Java 编写符合规范的注释？
 
 有如下两份资料以供参考：
     
 * [How to Write Doc Comments for the Javadoc Tool](https://www.oracle.com/technetwork/articles/java/index-137868.html)
 * [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html#s7-javadoc) 
 
-# 为何标注 Java Thread 下部分方法为过时的？
+## 为何标注 Java Thread 下部分方法为过时的？
 
 * 官方文档：[Java Thread Primitive Deprecation](https://docs.oracle.com/javase/8/docs/technotes/guides/concurrency/threadPrimitiveDeprecation.html), 解释了为什么将如下几个方法标注为过时：
     * Thread.stop
