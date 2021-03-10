@@ -1,5 +1,10 @@
 # 与 Java 有关的链接
 
+## Optional Dependency in Maven
+
+* [Maven: Optional Dependencies and Dependency Exclusions](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
+* [Baeldung: Optional Dependency in Maven](https://www.baeldung.com/maven-optional-dependency)
+
 ## [Why use @PostConstruct?](https://stackoverflow.com/questions/3406555/why-use-postconstruct)
 
 ## [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/)
