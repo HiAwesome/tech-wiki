@@ -3,7 +3,7 @@
 ## Spring Boot H2 Database
 
 * 浏览器访问地址:  http://localhost:8080/h2-console
-* 无配置时需要确保 JDBC URL 字段被设置为 JDBC:h2:mem:testdb
+* 无配置时需要确保 JDBC URL 字段被设置为 jdbc:h2:mem:testdb
 * 复杂情况请参考 [javatpoint](https://www.javatpoint.com/spring-boot-h2-database)
 
 ## Spring Interceptor
