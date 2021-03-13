@@ -1,5 +1,9 @@
 # 与 Java 有关的链接
 
+## Java libs and third party libs
+
+* [Converting Iterable to Collection in Java](https://www.baeldung.com/java-iterable-to-collection)
+
 ## Maven
 
 ### Optional Dependency in Maven
