@@ -1,5 +1,16 @@
 # Spring
 
+## 学习中较好的 Spring 博客
+
+* [KL Blog: Spring](http://www.kailing.pub/index/columns/colid/10.html)
+
+## spring.jpa.open-in-view=true
+
+使用 Spring Data JPA 时，Springboot 启动报警告: 2021-03-14 00:09:26.064  WARN 27833 --- \[  restartedMain\] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning. 于是 Google 了一下:
+
+* [Spring Boot 中建议关闭 Open-EntityManager-in-view](http://www.kailing.pub/article/index/arcid/266.html)
+* [What is this spring.jpa.open-in-view=true property in Spring Boot?](https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot)
+
 ## Spring Boot H2 Database
 
 * 浏览器访问地址:  http://localhost:8080/h2-console
