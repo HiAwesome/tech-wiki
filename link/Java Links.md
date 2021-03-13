@@ -1,5 +1,10 @@
 # 与 Java 有关的链接
 
+## Java 枚举是自动可序列化的
+
+* [Java Enums Are Inherently Serializable](https://www.infoworld.com/article/2072870/java-enums-are-inherently-serializable.html)
+* [Is custom enum Serializable too?](https://stackoverflow.com/questions/15521309/is-custom-enum-serializable-too)
+
 ## Java libs and third party libs
 
 * [Converting Iterable to Collection in Java](https://www.baeldung.com/java-iterable-to-collection)
