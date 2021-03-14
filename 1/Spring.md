@@ -1,8 +1,8 @@
 # Spring
 
-## 学习中较好的 Spring 博客
+## Spring Security 碰到的问题
 
-* [KL Blog: Spring](http://www.kailing.pub/index/columns/colid/10.html)
+* [There is no PasswordEncoder mapped for the id "null" 的解决办法](https://blog.csdn.net/Hello_World_QWP/article/details/81811462)
 
 ## spring.jpa.open-in-view=true
 
@@ -22,3 +22,7 @@
 * [Spring MVC Interceptor Example – XML and Annotation Java Config](https://howtodoinjava.com/spring-core/spring-mvc-interceptor-example/)
 * [Spring Framework 5.3.4 PathPattern](https://docs.spring.io/spring-framework/docs/5.3.4/javadoc-api/org/springframework/web/util/pattern/PathPattern.html)
 * [Spring MVC Interceptor HandlerInterceptorAdapter, HandlerInterceptor Example](https://www.journaldev.com/2676/spring-mvc-interceptor-example-handlerinterceptor-handlerinterceptoradapter)
+
+## 学习中较好的 Spring 博客
+
+* [KL Blog: Spring](http://www.kailing.pub/index/columns/colid/10.html)
