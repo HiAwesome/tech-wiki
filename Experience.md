@@ -1,5 +1,19 @@
 # 零散的经验
 
+## Mac with 罗技 MX 套装
+
+### 设定蓝牙和连接器双连接模式
+
+目前 Mac 使用 MX 键盘和鼠标，使用蓝牙连接比较方便，但没有连接器方便。因为 MX 可以连接三套设备，所以设定 MX 使用蓝牙连接 Mac 一次，再设定 MX 使用连接器连接 Mac 一次，这样就会占据两套设备。日常使用连接器，即插即用时使用蓝牙。
+
+### [解决罗技 mx master3 鼠标按住控制键无法切换 Mac 桌面的问题](https://apple.stackexchange.com/a/310741)
+
+鼠标调用的是键盘快捷键 Ctrl + <- / Ctrl + ->，因此需要在键盘设置中打开这对快捷键组合。
+
+System Preferences -> Keyboard -> SHortcuts(top) -> Mission COntrol (left panel) -> Move left a space / Move right a space (right panel)
+
+又因为鼠标操作与按键交互直觉上方向相反，因而把 Move left a space 设置为 Ctrl + ->, 把 Move right a space 设置为 Ctrl + <-, 直觉上比较匹配。
+
 ## Mac 使用 Surge 的技巧
 
 ### 增强模式分享代理给其他设备时
@@ -78,14 +92,6 @@ Host gitlab.com *.gitlab.com
 ## [外接显示器时，让 Alfred 在当前显示器中显示](http://freelancer-x.com/196/%E5%A4%96%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%99%A8%E6%97%B6%EF%BC%8C%E8%AE%A9-alfred-%E5%9C%A8%E5%BD%93%E5%89%8D%E6%98%BE%E7%A4%BA%E5%99%A8%E4%B8%AD%E6%98%BE%E7%A4%BA%EF%BC%88%E6%89%93%E5%BC%80%EF%BC%89/)
 
 Preferencet-> Appearance -> Options -> Show Alfred on, choose mouse screen.
-
-## [解决罗技 mx master3 鼠标按住控制键无法切换 Mac 桌面的问题](https://apple.stackexchange.com/a/310741)
-
-鼠标调用的是键盘快捷键 Ctrl + <- / Ctrl + ->，因此需要在键盘设置中打开这对快捷键组合。
-
-System Preferences -> Keyboard -> SHortcuts(top) -> Mission COntrol (left panel) -> Move left a space / Move right a space (right panel)
-
-又因为鼠标操作与按键交互直觉上方向相反，因而把 Move left a space 设置为 Ctrl + ->, 把 Move right a space 设置为 Ctrl + <-, 直觉上比较匹配。
 
 ## Mac 为 APP 单独设定语言
 
