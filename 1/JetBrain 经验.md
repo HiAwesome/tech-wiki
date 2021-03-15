@@ -6,7 +6,7 @@
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
 * [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
 * [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
-* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:1087 && npm config set https-proxy https://localhost:1087 即可。
+* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:6152 && npm config set https-proxy https://localhost:6152 即可。
 * [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
 
   ```xml
@@ -38,7 +38,7 @@
 * IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。 
 * Maven 设定使用代理
   * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
-  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=1087
+  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=6152
   * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
     ```xml
     <proxies>
@@ -48,7 +48,7 @@
             <active>true</active>
             <protocol>http</protocol>
             <host>127.0.0.1</host>
-            <port>1087</port>
+            <port>6152</port>
         </proxy>
     </proxies>
     ``` 
@@ -73,7 +73,7 @@
 * 整理 IDEA 的细分使用教程：
     * [Introduction to Version Control Systems in IntelliJ IDEA](https://www.youtube.com/watch?v=MaQnpCaiop0) ：① Git 的 commit message 框右上角的钟表标志可以显示最近的所有 commit message，然后选择一个开始做修改比较方便。② Git 的 commit and push 有快捷键，Mac 默认是 Option + Command + K。
 * JetBrains APP 可能在粘贴 SQL 语句的时候出现问题，比如单引号出现了两次导致语法出错，全选重写粘贴一遍即可。
-* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 1087。最后测试访问 Google 成功即可。
+* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 6152。最后测试访问 Google 成功即可。
 * IDEA 设置复制进来文件 [不自动格式化](https://intellij-support.jetbrains.com/hc/en-us/community/posts/207280009-Paste-without-auto-formatting) ：Settings/Preferences | Editor | General | Smart Keys --> Reformat on Paste 设置为 None 即可。
 * 设置了 IDEA 单文件查 History 的快捷键：Control + Command + H。
 * 在目前版本的 IDEA（2019.1.2）中，局部变量被重新赋值的话 IDEA 默认为这个变量名显示加上下划线，相当于 Java 中 Final 修饰局部变量名的作用。
