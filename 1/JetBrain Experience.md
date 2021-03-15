@@ -1,3 +1,4 @@
+* [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
 * [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
 * [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
     * [IntelliJ IDEA way of editing multiple lines](https://stackoverflow.com/a/27862706)。Clone Caret Above / Below 功能: 需要先按一次 option，第二次再按下 option 不释放(两次的间隔时间可以稍微长点，目前 Mac 配置 double option 会激活 Alfred 弹窗), 这个时候使用上下键进行多行光标的插入。
