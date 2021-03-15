@@ -11,6 +11,8 @@
 
 ## Maven
 
+### [Maven Deploy to Nexus](https://www.baeldung.com/maven-deploy-nexus)
+
 ### Optional Dependency in Maven
 
 * [Maven: Optional Dependencies and Dependency Exclusions](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
