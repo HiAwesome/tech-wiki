@@ -1,5 +1,9 @@
 # MySQL
 
+## Partitioning
+
+### [24.6.1 Partitioning Keys, Primary Keys, and Unique Keys](https://dev.mysql.com/doc/refman/8.0/en/partitioning-limitations-partitioning-keys-unique-keys.html)
+
 ## Data Types
 
 ### enum type
