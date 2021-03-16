@@ -1,5 +1,9 @@
 # MySQL
 
+## SQL Statements
+
+### [13.1.15 CREATE INDEX Statement](https://dev.mysql.com/doc/refman/8.0/en/create-index.html)
+
 ## Partitioning
 
 ### [24.6.1 Partitioning Keys, Primary Keys, and Unique Keys](https://dev.mysql.com/doc/refman/8.0/en/partitioning-limitations-partitioning-keys-unique-keys.html)
