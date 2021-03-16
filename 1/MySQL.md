@@ -15,6 +15,8 @@
 
 ## Other
 
+### [How can I simulate an array variable in MySQL?](https://stackoverflow.com/a/13996761)
+
 ### [MySQL 获取表的 comment 字段](https://blog.csdn.net/u011341352/article/details/48272963)
 
 查看获取表内字段注释：
