@@ -15,4 +15,36 @@
 
 ## Other
 
+### [MySQL 获取表的 comment 字段](https://blog.csdn.net/u011341352/article/details/48272963)
+
+查看获取表内字段注释：
+
+```mysql-sql
+show full columns from tablename;
+```
+
+查看表注释:
+
+```mysql-sql
+show table status;
+```
+
+### [MySQL 5.7.18 中文注释乱码](https://www.pianshen.com/article/26111468501/)
+
+查看mysql字符集编码：
+
+```mysql-sql
+show variables where Variable_name like '%char%';
+```
+
+修改字符集编码：
+
+```mysql-sql
+set character_set_client=utf8;
+set character_set_connection=utf8;
+set character_set_database=utf8;
+set character_set_results=utf8;
+set character_set_server=utf8;
+```
+
 ### [9.3 Keywords and Reserved Words](https://dev.mysql.com/doc/refman/8.0/en/keywords.html)
