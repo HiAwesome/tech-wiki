@@ -13,4 +13,6 @@
 * [MySQL: bigint Vs int](https://stackoverflow.com/questions/4769416/mysql-bigint-vs-int)
 * [When should I use UNSIGNED and SIGNED INT in MySQL?](https://stackoverflow.com/a/11515613)
 
+## Other
 
+### [9.3 Keywords and Reserved Words](https://dev.mysql.com/doc/refman/8.0/en/keywords.html)
