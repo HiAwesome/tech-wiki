@@ -1,0 +1,7 @@
+# MySQL
+
+## bigint VS int
+
+* [11.1.2 Integer Types](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)
+* [BIGINT mysql performance compared to INT](https://stackoverflow.com/a/9377107)
+* [MySQL: bigint Vs int](https://stackoverflow.com/questions/4769416/mysql-bigint-vs-int)
