@@ -4,6 +4,61 @@
 
 * [There is no PasswordEncoder mapped for the id "null" 的解决办法](https://blog.csdn.net/Hello_World_QWP/article/details/81811462)
 
+### [Spring Security: Exploring JDBC Authentication](https://www.baeldung.com/spring-security-jdbc-authentication)
+
+Spring Security JDBC Authentication 默认建表语句和测试数据：
+
+```mysql-sql
+-- schema.sql
+
+CREATE TABLE users (
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  enabled TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (username)
+);
+  
+CREATE TABLE authorities (
+  username VARCHAR(50) NOT NULL,
+  authority VARCHAR(50) NOT NULL,
+  FOREIGN KEY (username) REFERENCES users(username)
+);
+
+CREATE UNIQUE INDEX ix_auth_username
+  on authorities (username,authority);
+```
+
+```mysql-sql
+-- data.sql
+
+INSERT INTO users (username, password, enabled)
+  values ('user',
+    '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a',
+    1);
+
+INSERT INTO authorities (username, authority)
+  values ('user', 'ROLE_USER');
+```
+
+#### [Spring Boot /h2-console throws 403 with Spring Security 1.5.2](https://stackoverflow.com/a/53066577)
+
+```java
+
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/h2-console/**").permitAll();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+    }
+}
+```
+
 ## spring.jpa.open-in-view=true
 
 使用 Spring Data JPA 时，Springboot 启动报警告: 2021-03-14 00:09:26.064  WARN 27833 --- \[  restartedMain\] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning. 于是 Google 了一下:
