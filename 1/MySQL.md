@@ -64,3 +64,5 @@ set character_set_server=utf8;
 ```
 
 ### [9.3 Keywords and Reserved Words](https://dev.mysql.com/doc/refman/8.0/en/keywords.html)
+
+### [MySQL command line formatting with UTF8](https://stackoverflow.com/a/6788223)
