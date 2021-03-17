@@ -1,5 +1,11 @@
 # MySQL
 
+## Character Sets, Collations, Unicode
+
+### [10.3.3 Database Character Set and Collation](https://dev.mysql.com/doc/refman/8.0/en/charset-database.html)
+
+### [What is the best collation to use for MySQL with PHP?](https://stackoverflow.com/questions/367711/what-is-the-best-collation-to-use-for-mysql-with-php)
+
 ## SQL Statements
 
 ### [13.1.15 CREATE INDEX Statement](https://dev.mysql.com/doc/refman/8.0/en/create-index.html)
