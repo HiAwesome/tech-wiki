@@ -204,3 +204,14 @@ http_proxy=http://proxy-server:8080 hg clone https://vim.googlecode.com/hg
 ## Mac 上的十六进制文件编辑器
 
 [Hex Fiend](https://ridiculousfish.com/hexfiend/)
+
+
+## Mac 上终端无法自动换行
+
+目前仍未 100% 解决，多发生在 M1 CPU 的 Mac 的 iTerm2 上。
+
+* Google search: terminal terminal input does not wrap automatically
+* [Terminal prompt not wrapping correctly](https://unix.stackexchange.com/a/105974)
+* [How do I get long command lines to wrap to the next line?](https://askubuntu.com/a/24422)
+* [linux 输入长命令行 会无缘无故的回到行开始,本来应该在下一行继续的!](https://www.iteye.com/blog/flytreeleft-1541616)
+* [终端输出不自动换行？](https://bbs.csdn.net/topics/391833631)
