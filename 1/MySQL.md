@@ -1,5 +1,17 @@
 # MySQL
 
+## mysql primary key int vs varchar
+
+### [Is there a REAL performance difference between INT and VARCHAR primary keys?](https://stackoverflow.com/a/332363)
+
+You make a good point that you can avoid some number of joined queries by using what's called a [natural key](https://en.wikipedia.org/wiki/Natural_key) instead of a [surrogate key](https://en.wikipedia.org/wiki/Surrogate_key). Only you can assess if the benefit of this is significant in your application.
+
+That is, you can measure the queries in your application that are the most important to be speedy, because they work with large volumes of data or they are executed very frequently. If these queries benefit from eliminating a join, and do not suffer by using a varchar primary key, then do it.
+
+Don't use either strategy for all tables in your database. It's likely that in some cases, a natural key is better, but in other cases a surrogate key is better.
+
+Other folks make a good point that it's rare in practice for a natural key to never change or have duplicates, so surrogate keys are usually worthwhile.
+
 ## Character Sets, Collations, Unicode
 
 ### [10.3.3 Database Character Set and Collation](https://dev.mysql.com/doc/refman/8.0/en/charset-database.html)
