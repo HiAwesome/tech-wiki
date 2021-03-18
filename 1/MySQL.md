@@ -1,5 +1,11 @@
 # MySQL
 
+## Functions and Operators
+
+### [Infomation Functions](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)
+
+* [LAST_INSERT_ID()](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_last-insert-id)
+
 ## mysql primary key int vs varchar
 
 ### [Is there a REAL performance difference between INT and VARCHAR primary keys?](https://stackoverflow.com/a/332363)
