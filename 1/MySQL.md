@@ -34,6 +34,10 @@ You can read more on specific unicode character sets on the MySQL manual - [10.1
 
 ## Data Types
 
+### Date and Time Data Types
+
+* [11.2.5 Automatic Initialization and Updating for TIMESTAMP and DATETIME](https://dev.mysql.com/doc/refman/8.0/en/timestamp-initialization.html)
+
 ### enum type
 
 * [11.3.5 The ENUM Type](https://dev.mysql.com/doc/refman/8.0/en/enum.html)
