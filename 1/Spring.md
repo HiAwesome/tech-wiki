@@ -42,6 +42,8 @@ INSERT INTO authorities (username, authority)
 
 #### [Spring Boot /h2-console throws 403 with Spring Security 1.5.2](https://stackoverflow.com/a/53066577)
 
+### [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
+
 ```java
 
 @Configuration
