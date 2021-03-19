@@ -1,5 +1,18 @@
 # Docker
 
+## Docker Troubleshoot
+
+### driver failed programming external connectivity on endpoint
+
+* [cadvisor prevents docker from removing monitored containers?](https://github.com/google/cadvisor/issues/771), 重启 docker 服务
+* [driver failed programming external connectivity on endpoint](https://github.com/docker/compose/issues/3277)
+* [csdn: driver failed programming external connectivity on endpoint](https://blog.csdn.net/whatday/article/details/86762264), 重启 docker 服务
+
+### docker unable to remove filesystem device or resource busy
+
+* [解决docker删除container出现device or resource busy](https://qiita.com/domino-jiang/items/d1cac56e68fba67893e3)
+* [Unix: How to get over “device or resource busy”?](https://unix.stackexchange.com/a/11241)
+
 ## Docker compose
 
 * [Overview of docker-compose CLI](https://docs.docker.com/compose/reference/overview/)
