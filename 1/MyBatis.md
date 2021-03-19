@@ -11,3 +11,4 @@
 * [generatedKey](http://mybatis.org/generator/configreference/generatedKey.html)
 * [ignoreColumn](http://mybatis.org/generator/configreference/ignoreColumn.html)
 * [ignoreColumnsByRegex](http://mybatis.org/generator/configreference/ignoreColumnsByRegex.html)
+* [domainObjectRenamingRule](http://mybatis.org/generator/configreference/domainObjectRenamingRule.html)
