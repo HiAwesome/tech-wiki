@@ -35,3 +35,11 @@
 目前 Mac 使用 Surge 代理，设定 Docker 代理中 Web Server(HTTP), Secure Web Server(HTTPS) 皆为 http://127.0.0.1:6152 实测 Docker Desktop 携带的 K8s 可正常启动。
 
 ## [Mac: Docker logs and troubleshooting](https://docs.docker.com/docker-for-mac/troubleshoot/#diagnose-and-feedback)
+
+## Using Docker
+
+### Docker with MySQL
+
+#### [docker hub: mysql image](https://hub.docker.com/_/mysql)
+
+docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
