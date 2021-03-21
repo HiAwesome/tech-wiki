@@ -20,3 +20,15 @@ sudo ufw allow from <IP> to any port ssh
 sudo ufw enable
 sudo ufw default deny
 ```
+
+## Proxy
+
+### [How to Set the Proxy for APT on Ubuntu 18.04](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-set-the-proxy-for-apt-for-ubuntu-18-04/)
+
+```shell
+vim /etc/apt/apt.conf.d/proxy.conf
+
+Acquire::http::Proxy "http://172.16.8.1:6152"
+Acquire::https::Proxy "http://172.16.8.1:6152"
+Acquire::socks5::proxy "socks://172.16.8.1:6153"
+```
