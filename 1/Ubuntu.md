@@ -1,5 +1,24 @@
 # Ubuntu
 
+## Docker
+
+### [How to Configure the Linux Firewall for Docker Swarm on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-configure-the-linux-firewall-for-docker-swarm-on-ubuntu-16-04)
+
+```shell
+sudo ufw allow 22/tcp
+sudo ufw allow 2376/tcp
+sudo ufw allow 2377/tcp
+sudo ufw allow 7946/tcp
+sudo ufw allow 7946/udp
+sudo ufw allow 4789/udp
+
+sudo ufw reload
+
+sudo ufw enable
+
+sudo systemctl restart docker
+```
+
 ## SSH
 
 ### [How to open ssh port 22 on Ubuntu 20.04 Focal Fossa Linux](https://linuxconfig.org/how-to-open-ssh-port-22-on-ubuntu-20-04-focal-fossa-linux)
@@ -19,16 +38,4 @@ sudo ufw allow from <IP> to any port ssh
 ```shell
 sudo ufw enable
 sudo ufw default deny
-```
-
-## Proxy
-
-### [How to Set the Proxy for APT on Ubuntu 18.04](https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-set-the-proxy-for-apt-for-ubuntu-18-04/)
-
-```shell
-vim /etc/apt/apt.conf.d/proxy.conf
-
-Acquire::http::Proxy "http://172.16.8.1:6152"
-Acquire::https::Proxy "http://172.16.8.1:6152"
-Acquire::socks5::proxy "socks://172.16.8.1:6153"
 ```
