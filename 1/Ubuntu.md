@@ -1,5 +1,11 @@
 # Ubuntu
 
+## Network
+
+### [Network - Configuration](https://ubuntu.com/server/docs/network-configuration)
+
+### [Setting Up Static IP Address on Ubuntu 20.04 LTS](https://linuxhint.com/setup_static_ip_address_ubuntu/)
+
 ## Docker
 
 ### [How to Configure the Linux Firewall for Docker Swarm on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-configure-the-linux-firewall-for-docker-swarm-on-ubuntu-16-04)
