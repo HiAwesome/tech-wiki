@@ -2,7 +2,11 @@
 
 ## [Mybatis All Products](https://blog.mybatis.org/p/products.html)
 
-## [配置](https://mybatis.org/mybatis-3/zh/configuration.html)
+## [mybatis-spring](http://mybatis.org/spring/zh/index.html)
+
+## [mybatis-spring-boot-autoconfigure](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
+
+## [Mybatis 3 配置](https://mybatis.org/mybatis-3/zh/configuration.html)
 
 ## Mybatis Generator
 
