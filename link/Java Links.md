@@ -11,6 +11,8 @@
 
 ## Maven
 
+### [IntelliJ IDEA: Maven dependencies](https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html)
+
 ### [Maven Deploy to Nexus](https://www.baeldung.com/maven-deploy-nexus)
 
 ### Optional Dependency in Maven

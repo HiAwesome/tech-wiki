@@ -1,5 +1,33 @@
 # Spring
 
+## DAO
+
+### Mybatis
+
+* [Baeldung: MyBatis with Spring](https://www.baeldung.com/spring-mybatis)
+* [Baeldung: Spring JDBC](https://www.baeldung.com/spring-jdbc-jdbctemplate)
+
+### DAO Unit Test
+
+* [Stack Overflow: Using annotation @Sql, is it possible to execute scripts in Class level before Method level?](https://stackoverflow.com/a/32892436)
+* [Stack Overflow: Using JUnit Categories with Maven Failsafe plugin](https://stackoverflow.com/a/18373848)
+* [Baeldung: Testing in Spring Boot](https://www.baeldung.com/spring-boot-testing)
+* [Baeldung: Testing with Spring and Spock](https://www.baeldung.com/spring-spock-testing)
+* [Baeldung: Quick Guide on Loading Initial Data with Spring Boot](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
+* [Baeldung: Spring JdbcTemplate Unit Testing](https://www.baeldung.com/spring-jdbctemplate-testing)
+
+### HikariCP
+
+* [主流Java数据库连接池比较及前瞻 20180430](https://blog.didispace.com/java-datasource-pool-compare/), 推荐 HikariCP.
+* [Github: brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP).
+* [HikariCP MySQL Configuration](https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration), 请注意，不需要传递 DataSource class 参数，如主页 wiki 所言: The MySQL DataSource is known to be broken with respect to network timeout support. Use jdbcUrl configuration instead.
+* [Baeldung: Introduction to HikariCP](https://www.baeldung.com/hikaricp)
+* [Baeldung: Configuring a Hikari Connection Pool with Spring Boot](https://www.baeldung.com/spring-boot-hikari)
+
+## Bean Problem
+
+* [Baeldung: The BeanDefinitionOverrideException in Spring Boot](https://www.baeldung.com/spring-boot-bean-definition-override-exception)
+
 ## [Field injection is not recommended]()
 
 * [Field Dependency Injection Considered Harmful](https://www.vojtechruzicka.com/field-dependency-injection-considered-harmful/)
