@@ -1,6 +1,6 @@
 # MySQL
 
-## [Soft delete design]
+## Soft delete design
 
 ### [Deleting data: soft, hard or audit?](https://www.martyfriedel.com/blog/deleting-data-soft-hard-or-audit)
 
@@ -10,7 +10,7 @@
 
 ### [Soft delete best practices (PHP/MySQL)](https://stackoverflow.com/a/5020597)
 
-## [Composite Primary Key]
+## Composite Primary Key
 
 ### [ALTER TABLE to add a composite primary key](https://stackoverflow.com/a/8859374)
 
