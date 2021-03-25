@@ -1,5 +1,19 @@
 # MySQL
 
+## [Soft delete design]
+
+### [Deleting data: soft, hard or audit?](https://www.martyfriedel.com/blog/deleting-data-soft-hard-or-audit)
+
+### [Physical vs. logical (hard vs. soft) delete of database record?](https://stackoverflow.com/a/378355)
+
+### [Are soft deletes a good idea?](https://stackoverflow.com/a/2549843)
+
+### [Soft delete best practices (PHP/MySQL)](https://stackoverflow.com/a/5020597)
+
+## [Composite Primary Key]
+
+### [ALTER TABLE to add a composite primary key](https://stackoverflow.com/a/8859374)
+
 ### [Composite Primary Key performance drawback in MySQL](https://stackoverflow.com/a/1460544) 
 
 ### [What's the difference between composite primary index and two primary indexes?](https://stackoverflow.com/a/45292184)
