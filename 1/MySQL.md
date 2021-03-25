@@ -1,5 +1,9 @@
 # MySQL
 
+### [Composite Primary Key performance drawback in MySQL](https://stackoverflow.com/a/1460544) 
+
+### [What's the difference between composite primary index and two primary indexes?](https://stackoverflow.com/a/45292184)
+
 ## Functions and Operators
 
 ### [Infomation Functions](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)
