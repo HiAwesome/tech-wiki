@@ -2,10 +2,10 @@
 
 ## [Spring Support](https://www.jetbrains.com/help/idea/spring-support.html)
 
-*. [Tutorial: Create your first Spring application](https://www.jetbrains.com/help/idea/your-first-spring-application.html)
-*. [Tutorial: Explore Spring support features](https://www.jetbrains.com/help/idea/spring-support-tutorial.html)
-*. [Spring diagrams](https://www.jetbrains.com/help/idea/spring-diagrams.html)
-*. [Spring Boot](https://www.jetbrains.com/help/idea/spring-boot.html)
+* [Tutorial: Create your first Spring application](https://www.jetbrains.com/help/idea/your-first-spring-application.html)
+* [Tutorial: Explore Spring support features](https://www.jetbrains.com/help/idea/spring-support-tutorial.html)
+* [Spring diagrams](https://www.jetbrains.com/help/idea/spring-diagrams.html)
+* [Spring Boot](https://www.jetbrains.com/help/idea/spring-boot.html)
 
 ## 代理
 
