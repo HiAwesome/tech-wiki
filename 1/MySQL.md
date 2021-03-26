@@ -10,7 +10,33 @@
 
 ### [Soft delete best practices (PHP/MySQL)](https://stackoverflow.com/a/5020597)
 
-## Composite Primary Key
+## Primary Key
+
+### [阿里巴巴 Java开发手册（嵩山版）: MySQL 数据库建表规约](https://github.com/alibaba/p3c)
+
+> 9.【强制】表必备三字段：id, create_time, update_time。
+> 
+> 说明：其中 id 必为主键，类型为 bigint unsigned、单表时自增、步长为 1。create_time, update_time 的类型均为 datetime 类型，前者现在时表示主动式创建，后者过去分词表示被动式更新。
+
+### [为什么总是需要无意义的 ID](https://draveness.me/whys-the-design-meaningless-identifier/)
+
+> 需要通过唯一的标识符对数据或者事件进行识别或者去重；
+> 
+> 只有无意义的标识符才会绝对唯一的，任何携带其他信息的标识都可能重复；
+
+相关优质 blog: [为什么这么设计系列文章](https://draveness.me/whys-the-design/)
+
+### [为什么 MySQL 的自增主键不单调也不连续](https://draveness.me/whys-the-design-mysql-auto-increment/)
+
+### [The great primary-key debate](https://www.techrepublic.com/article/the-great-primary-key-debate/)
+
+> The single-most important issue facing the database developer is good design. If the foundation is weak, so is the building. To avoid future problems and subsequent (and perhaps convoluted) repairs, we recommend that you use surrogate keys. This simple design choice is one of the easiest ways to provide your application with a strong, stable, yet flexible foundation.
+
+### [MySQL 数据库主键的思考](https://blog.csdn.net/zengqiang1/article/details/79312774)
+
+> 小型系统或者系统架构初期，数据没有超过百万或者千万，可以使用自增主键；
+> 
+> 当数据成长到几百万或者超过千万时，并且增量很高时，这时就涉及到分库分表，这时就必须使用自动生成 id 方案。
 
 ### [ALTER TABLE to add a composite primary key](https://stackoverflow.com/a/8859374)
 
