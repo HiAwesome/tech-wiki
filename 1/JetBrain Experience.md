@@ -1,15 +1,44 @@
-* [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
-* [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
-* [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
-    * [IntelliJ IDEA way of editing multiple lines](https://stackoverflow.com/a/27862706)。Clone Caret Above / Below 功能: 需要先按一次 option，第二次再按下 option 不释放(两次的间隔时间可以稍微长点，目前 Mac 配置 double option 会激活 Alfred 弹窗), 这个时候使用上下键进行多行光标的插入。
-    * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
-* [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
-* [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
-* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
-* [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
-* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:6152 && npm config set https-proxy https://localhost:6152 即可。
-* [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
+# Jetbrain Experience
 
+## [Spring Support](https://www.jetbrains.com/help/idea/spring-support.html)
+
+*. [Tutorial: Create your first Spring application](https://www.jetbrains.com/help/idea/your-first-spring-application.html)
+*. [Tutorial: Explore Spring support features](https://www.jetbrains.com/help/idea/spring-support-tutorial.html)
+*. [Spring diagrams](https://www.jetbrains.com/help/idea/spring-diagrams.html)
+*. [Spring Boot](https://www.jetbrains.com/help/idea/spring-boot.html)
+
+## 代理
+
+* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 6152。最后测试访问 Google 成功即可。
+* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:6152 && npm config set https-proxy https://localhost:6152 即可。
+* Maven 设定使用代理
+  * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
+  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=6152
+  * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
+    ```xml
+    <proxies>
+        <!-- 设置 HTTP 代理 -->
+        <proxy>
+            <id>trojan-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>127.0.0.1</host>
+            <port>6152</port>
+        </proxy>
+    </proxies>
+    ``` 
+
+## Maven
+
+* IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。
+* 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 和 pom.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated 和 *.pom.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated 和 pom.lastUpdated ) 。
+* Maven 执行 IDEA打包执行 test 的插件：maven-surefire-plugin，具体见 [maven-surefire-plugin](https://maven.apache.org/surefire/maven-surefire-plugin/usage.html) 和 [Maven doesn't execute any unit test](https://stackoverflow.com/questions/16708013/maven-doesnt-execute-any-unit-test) 。打包报警：The parameter forkMode is deprecated since version 2.14. Use forkCount and reuseForks instead.useSystemClassloader setting has no effect when not forking，解决方案：[Maven surefire forkMode pertest deprecated. What is the new settings?
+](https://stackoverflow.com/questions/40096382/maven-surefire-forkmode-pertest-deprecated-what-is-the-new-settings/40096619#40096619) ，[Migrating the Deprecated forkMode Parameter to forkCount and reuseForks](http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html#Migrating_the_Deprecated_forkMode_Parameter_to_forkCount_and_reuseForks) ，我在代码中进行了测试，还是会有报警提示，进一步查看问题是发现快捷键设置有误，出现报警提示是因为走了 Maven 的 Debug 模式。
+* 使用 IDEA 打包带有 Scala 部分的 Maven 文件，首先要引入 Build 部分的插件 (1) **scala-maven-plugin** , (2) **maven-assembly-plugin[可选，一般用来打 jar-with-dependencies 的包]** , 然后在执行打包命令的时候，网络上的命令是：mvn clean scala:compile compile package , 但是因为使用了 Maven Helper 插件，所以省略最前面的 mvn , 也就是 **clean scala:compile compile package** 即可。
+* Maven 执行 Scala 程序去掉一些 Warning 的常用处理方案：
+    * Multiple versions of scala libraries detected!  ----->  在 scala-maven-plugin 的 configuration 中输入以下键值对：<scalaCompatVersion>2.11</scalaCompatVersion>    <scalaVersion>2.11.11</scalaVersion>    目前观测 scalaCompatVersion 是兼容版本， scalaVersion 是精确版本。
+    * Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!  -----> 在 pom 文件中加入 <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+* [Maven 设定自动下载 Source 和 Doc](https://www.baeldung.com/maven-download-sources-javadoc), 在 IDEA 中 Preference > Build, Execution, Deployment > Build Tools > Maven > importing 对 Sources、Documentation、Annotations 打勾，在 Maven Setting 中加入以下设定：
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
   <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -34,34 +63,28 @@
   
   </settings>
   ```
+* 无法启动可能是因为使用 Proxifier 配置有问题，此代理只需要下载不到 maven 依赖或者插件的时候用，其他时候关闭。
+* 默认 IDEA 全局 maven 依赖使用私服，demo 依赖自带 Bundled (Maven 3)，且 User setting file 和 Local repository 都不覆盖，意味着私服的 repository 需要不同地址，相互隔离。
+* Maven 项目总是打包不成功，却能正常启动，请对每个项目进行 mvn clean install 操作。
 
+## Tricks
+
+* [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
+* [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
+* [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
+    * [IntelliJ IDEA way of editing multiple lines](https://stackoverflow.com/a/27862706)。Clone Caret Above / Below 功能: 需要先按一次 option，第二次再按下 option 不释放(两次的间隔时间可以稍微长点，目前 Mac 配置 double option 会激活 Alfred 弹窗), 这个时候使用上下键进行多行光标的插入。
+    * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
+* [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
+* [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
+* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
+* [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
 * IDEA 设置保存文件时去掉自动生成的回车： Setting -> Editor -> General, 去掉 Ensure an empty line at the end of a file on Save 的打勾。 
-* IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。 
-* Maven 设定使用代理
-  * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
-  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=6152
-  * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
-    ```xml
-    <proxies>
-        <!-- 设置 HTTP 代理 -->
-        <proxy>
-            <id>trojan-proxy</id>
-            <active>true</active>
-            <protocol>http</protocol>
-            <host>127.0.0.1</host>
-            <port>6152</port>
-        </proxy>
-    </proxies>
-    ``` 
-* 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 和 pom.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated 和 *.pom.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated 和 pom.lastUpdated ) 。
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
     1. 打开 Find Action...（在 Windows 和 Linux 上为“ Ctrl-Shift-A”，在 macOS 上为“ Cmd-Shift-A”）
     2. 键入“ Registry...”，按 Enter
     3. 找到 key 为 ide.suppress.double.click.handler（只需开始键入即可进行速度搜索）并启用它（打对勾）
 * IDEA 中临时 SQL 文件运行时需要绑定 Session（运行环境），如果需要去除的话点击右上角的固定 Session 并选择 Detach Session 即可。
 * **IDEA 查找 Database 插件的表对象、存储过程对象，调用 Symbols 查询即可，Mac 快捷键为 Option + Command + O**
-* Maven 执行 IDEA打包执行 test 的插件：maven-surefire-plugin，具体见 [maven-surefire-plugin](https://maven.apache.org/surefire/maven-surefire-plugin/usage.html) 和 [Maven doesn't execute any unit test](https://stackoverflow.com/questions/16708013/maven-doesnt-execute-any-unit-test) 。打包报警：The parameter forkMode is deprecated since version 2.14. Use forkCount and reuseForks instead.useSystemClassloader setting has no effect when not forking，解决方案：[Maven surefire forkMode pertest deprecated. What is the new settings?
-](https://stackoverflow.com/questions/40096382/maven-surefire-forkmode-pertest-deprecated-what-is-the-new-settings/40096619#40096619) ，[Migrating the Deprecated forkMode Parameter to forkCount and reuseForks](http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html#Migrating_the_Deprecated_forkMode_Parameter_to_forkCount_and_reuseForks) ，我在代码中进行了测试，还是会有报警提示，进一步查看问题是发现快捷键设置有误，出现报警提示是因为走了 Maven 的 Debug 模式。
 * IDEA 装上了刷 LeetCode 的插件，定义临时文件地址为 Scratch 文件夹下的 leetcode 文件夹，操作起来非常直接顺手。
 * **LeetCode 账号美区为 a 结尾，中区为 b 结尾，密码一致。**
 * IDEA 使用 lombok 插件无效，在设置中找到 Setting -> Build, Execution, Deployment -> Compiler -> Annotation Processors，然后打勾 Enable annotation processing。
@@ -74,7 +97,6 @@
 * 整理 IDEA 的细分使用教程：
     * [Introduction to Version Control Systems in IntelliJ IDEA](https://www.youtube.com/watch?v=MaQnpCaiop0) ：① Git 的 commit message 框右上角的钟表标志可以显示最近的所有 commit message，然后选择一个开始做修改比较方便。② Git 的 commit and push 有快捷键，Mac 默认是 Option + Command + K。
 * JetBrains APP 可能在粘贴 SQL 语句的时候出现问题，比如单引号出现了两次导致语法出错，全选重写粘贴一遍即可。
-* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 6152。最后测试访问 Google 成功即可。
 * IDEA 设置复制进来文件 [不自动格式化](https://intellij-support.jetbrains.com/hc/en-us/community/posts/207280009-Paste-without-auto-formatting) ：Settings/Preferences | Editor | General | Smart Keys --> Reformat on Paste 设置为 None 即可。
 * 设置了 IDEA 单文件查 History 的快捷键：Control + Command + H。
 * 在目前版本的 IDEA（2019.1.2）中，局部变量被重新赋值的话 IDEA 默认为这个变量名显示加上下划线，相当于 Java 中 Final 修饰局部变量名的作用。
@@ -103,7 +125,6 @@
 * Mac 上 IDEA 快捷键将 Command + 2 给结构( Structure )，将 Command + 3 给继承关系( Hierarchy )。
 * 鼠标悬停在打开类选项卡上面显示文件的绝对路径，按住 Ctrl 鼠标左键点击打开多层目录选择一个打开文件目录。
 * 运行web项目没有跑起来首先检查是否把 resources 文件标记为合适的文件类型，如果无法读取 mapper 配置文件，而文件目录在java下，记得配置合适的扫描
-* 无法启动可能是因为使用 Proxifier 配置有问题，此代理只需要下载不到 maven 依赖或者插件的时候用，其他时候关闭。
 * 新装 JRebel 或者项目 使用的时候 需要在 JRebel Panel 块点击启用。
 * IDEA通过左边项目栏的 "Show Members" 控制"定位"展示到"类"的程度，还是"类里方法"的程度。
 * SVN 提交的时候选择 Optimize imports 和 Cleanup ，Git只选择 Optimize imports 即可。
@@ -124,7 +145,6 @@
     * When working with IntelliJ IDEA, you don't need to worry about saving changed files: all changes are auto saved. 
     * Unwanted changes can be undone at any stage of your development workflow. Any file or directory can be reverted to any of the previous states.
 * 在测试项目进行创建方法的时候，从 test100 开始，这样每次减一每次都在最上面。
-* Maven 项目总是打包不成功，却能正常启动，请对每个项目进行 mvn clean install 操作。
 * 在选中代码块进行替换的时候，记得先 Ctrl + R，然后选择 In Selection。
 * **项目中使用 lambda 表达式的时候，记得写注释过渡。**
 * IDEA 关闭 Java 自动导包：设置 -> search 'auto import' -> 去掉 Add unambiguous imports on the fly 的√ 
@@ -139,7 +159,6 @@
     * 光标放在问题处，Alt + Enter 会出现一般的解决方案，这个时候不要按回车，按 →
     * 出现一堆选项，选择最上面 Edit inspection profile setting
     * 在 Inspections 界面，左边会出现问题的原因，右边的 Description 会出现具体的描述，Ctrl + A 全选借助翻译插件 Ctrl + Shift + Y 得到中文示意。
-* 默认 IDEA 全局 maven 依赖使用私服，demo 依赖自带 Bundled (Maven 3)，且 User setting file 和 Local repository 都不覆盖，意味着私服的 repository 需要不同地址，相互隔离。
 * Setting -> Editor -> Code Style -> Java -> Code Generation: Final Modifier，下面两个选项分别表示提取为成员变量或者提取为参数变量加 final 修饰。如果常有校验值是否只被赋值一次的需求，可以勾选。
 * 在 Mac 或者 Linux 系统运行项目，run 可以，但是 debug 报错，内容是 Required connector 'com.sun.jdi.SharedMemoryListen' not found. Check your JDK installation. 这个时候在设置 Build, Wxecution, Deployment -> Debugger 中勾选 Show alternative source switcher 即可。
 * 在 Mac 系统下如何找 IDEA 安装路径（适用于用 Jetbrain Toolbox 管理的情况）：先 Alfred 搜索 idea 进入 Toolbox 目录下 IDEA，然后再"显示包内容"看到 Contents，点进去看到 info.plist, 以文本方式打开这个文件，就可以看到最下面映射的真是目录，例如此条笔记记录时本机的目录是：<string>/Users/moqi/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/182.3911.36/IntelliJ IDEA.app</string>
@@ -149,7 +168,3 @@
 * 当我们设置了组件窗口的 **Pinned Mode** 属性之后，在切换到其他组件窗口的时候，已设置该属性的窗口不会自动隐藏。也就是说关闭了这个属性，则使用完一个组件窗口的时候就自动隐藏了。
 * 我们可以根据选择的代码，查看该段代码的本地历史，这样就省去了查看文件中其他内容的历史了。除了对文件可以查看历史，文件夹也是可以查看各个文件变化的历史。（选中代码中某一段，右键单击 Local History -> **Show History for Selection**）
 * **IDEA 出现 " [错误：找不到或无法加载主类](https://stackoverflow.com/questions/10654120/error-could-not-find-or-load-main-class-in-intellij-ide) "**：解决方案：1. 如果原来或者刚才一直可用，突然出现这种情况，特别是对其他语言比如说 Scala 的类出现这种情况，则首先怀疑是文件夹并没有设置为 (Sources Root) 属性，如果在测试包下，则需要设定为 (Test Sources Root) 属性，**目前发现在未操作的情况下 IDEA 可能会将其他语言的包设定为(Unmark as Sources Root) 属性**。 2. 清空 IDEA 缓存: IDEA -> file -> invalidate Cache/restart 
-* 使用 IDEA 打包带有 Scala 部分的 Maven 文件，首先要引入 Build 部分的插件 (1) **scala-maven-plugin** , (2) **maven-assembly-plugin[可选，一般用来打 jar-with-dependencies 的包]** , 然后在执行打包命令的时候，网络上的命令是：mvn clean scala:compile compile package , 但是因为使用了 Maven Helper 插件，所以省略最前面的 mvn , 也就是 **clean scala:compile compile package** 即可。
-* Maven 执行 Scala 程序去掉一些 Warning 的常用处理方案：
-    * Multiple versions of scala libraries detected!  ----->  在 scala-maven-plugin 的 configuration 中输入以下键值对：<scalaCompatVersion>2.11</scalaCompatVersion>    <scalaVersion>2.11.11</scalaVersion>    目前观测 scalaCompatVersion 是兼容版本， scalaVersion 是精确版本。
-    * Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!  -----> 在 pom 文件中加入 <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
