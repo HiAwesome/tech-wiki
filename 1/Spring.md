@@ -4,6 +4,8 @@
 
 ### [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
 
+### [JDBC Repositories](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/#jdbc.repositories)
+
 ## DAO
 
 ### Spring JDBC Template
