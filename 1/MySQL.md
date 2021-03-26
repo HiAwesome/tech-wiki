@@ -38,6 +38,12 @@
 > 
 > 当数据成长到几百万或者超过千万时，并且增量很高时，这时就涉及到分库分表，这时就必须使用自动生成 id 方案。
 
+### [MySQL原理与实践（六）：自增主键的使用](https://blog.csdn.net/qq_25827845/article/details/91477092)
+
+> 表定义的自增值达到上限后的逻辑是：再申请下一个 id 时，得到的值保持不变。
+> 
+> 从这个角度看，我们还是应该在 InnoDB 表中主动创建自增主键。因为，表自增 id 到达上限后，再插入数据时报主键冲突错误，是更能被接受的。毕竟覆盖数据，就意味着数据丢失，影响的是数据可靠性；报主键冲突，是插入失败，影响的是可用性。而一般情况下，可靠性优先于可用性。
+
 ### [ALTER TABLE to add a composite primary key](https://stackoverflow.com/a/8859374)
 
 ### [Composite Primary Key performance drawback in MySQL](https://stackoverflow.com/a/1460544) 
