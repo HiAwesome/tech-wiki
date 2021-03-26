@@ -2,10 +2,15 @@
 
 ## DAO
 
+### Spring JDBC Template
+
+* [Baeldung: Spring JDBC](https://www.baeldung.com/spring-jdbc-jdbctemplate)
+* [Springboot: Working with SQL Databases](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-sql)
+* [Spring 的 NamedParameterJdbcTemplate 使用方法小结以及项目实战实例](https://blog.csdn.net/Jaiaxn/article/details/87889550)
+
 ### Mybatis
 
 * [Baeldung: MyBatis with Spring](https://www.baeldung.com/spring-mybatis)
-* [Baeldung: Spring JDBC](https://www.baeldung.com/spring-jdbc-jdbctemplate)
 
 ### DAO Unit Test
 
