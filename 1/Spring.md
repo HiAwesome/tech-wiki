@@ -1,5 +1,9 @@
 # Spring
 
+## [Spring Guides](https://spring.io/guides)
+
+### [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
+
 ## DAO
 
 ### Spring JDBC Template
