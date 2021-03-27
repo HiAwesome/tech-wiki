@@ -66,6 +66,7 @@
 * 无法启动可能是因为使用 Proxifier 配置有问题，此代理只需要下载不到 maven 依赖或者插件的时候用，其他时候关闭。
 * 默认 IDEA 全局 maven 依赖使用私服，demo 依赖自带 Bundled (Maven 3)，且 User setting file 和 Local repository 都不覆盖，意味着私服的 repository 需要不同地址，相互隔离。
 * Maven 项目总是打包不成功，却能正常启动，请对每个项目进行 mvn clean install 操作。
+* [Unable to find javadoc command: The environment variable JAVA_HOME is not correctly set](https://superuser.com/a/1367009), This is because IntelliJ's internal consoles use their own environment. You can set variables for Maven in the settings dialog under `Build, Execution, Deployment` > `Build Tools` > `Maven` > `Runner` > `Environment variables`. Add `JAVA_HOME` with whatever `echo $JAVA_HOME` returns in your usual terminal window as a value and Maven will be able to find the `javadoc` command!
 
 ## Tricks
 
