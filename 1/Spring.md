@@ -10,7 +10,10 @@
 
 ## DAO
 
-### [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)
+### [Transaction](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction)
+
+* [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)
+* [Baeldung: Transactions with Spring and JPA](https://www.baeldung.com/transaction-configuration-with-jpa-and-spring)
 
 ### Spring JDBC Template
 
