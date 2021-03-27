@@ -33,6 +33,7 @@
 * [Baeldung: Testing with Spring and Spock](https://www.baeldung.com/spring-spock-testing)
 * [Baeldung: Quick Guide on Loading Initial Data with Spring Boot](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
 * [Baeldung: Spring JdbcTemplate Unit Testing](https://www.baeldung.com/spring-jdbctemplate-testing)
+* [How unit test insert record in spring (no delete method)](https://stackoverflow.com/a/51277993)
 
 ### HikariCP
 
