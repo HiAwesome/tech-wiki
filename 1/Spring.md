@@ -14,6 +14,7 @@
 
 * [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)
 * [Baeldung: Transactions with Spring and JPA](https://www.baeldung.com/transaction-configuration-with-jpa-and-spring)
+* [Rollback transaction after @Test](https://stackoverflow.com/a/12626636), 补充：使用 org.springframework.test.annotation.Commit 可以提交测试事务。
 
 ### Spring JDBC Template
 
