@@ -10,6 +10,8 @@
 
 ## DAO
 
+### [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)
+
 ### Spring JDBC Template
 
 * [Baeldung: Spring JDBC](https://www.baeldung.com/spring-jdbc-jdbctemplate)
@@ -129,4 +131,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 ## 学习中较好的 Spring 博客
 
+* [Hello. Do you want to become a better Java developer?](https://www.marcobehler.com/)
 * [KL Blog: Spring](http://www.kailing.pub/index/columns/colid/10.html)
