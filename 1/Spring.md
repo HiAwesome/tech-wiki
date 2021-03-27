@@ -12,6 +12,8 @@
 
 ### [Transaction](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction)
 
+* [How to handle manually transactions while using jdbcTemplate?](https://stackoverflow.com/a/60088953)
+* [@EnableTransactionManagement in Spring Boot](https://stackoverflow.com/a/40724843)
 * [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)
 * [Baeldung: Transactions with Spring and JPA](https://www.baeldung.com/transaction-configuration-with-jpa-and-spring)
 * [Rollback transaction after @Test](https://stackoverflow.com/a/12626636), 补充：使用 org.springframework.test.annotation.Commit 可以提交测试事务。
