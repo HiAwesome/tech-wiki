@@ -46,12 +46,26 @@
 
 docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
+### [Zombie docker container that can't be killed](https://stackoverflow.com/a/52493047)
+
+I figured it out. Turns out it was related to docker swarm. I had experimented with it at some point without fully understanding what it is and what it does and apparently it just stayed there.
+
+All I had to do was:
+
+```shell
+docker swarm leave --force
+```
+
+and it worked like a head-shot to an actual zombie.
+
 ### [docker - how do you disable auto-restart on a container?](https://stackoverflow.com/a/37600885)
 
 You can use the `--restart=unless-stopped` option, as @Shibashis mentioned, or update the restart policy (this requires docker 1.11 or newer);
 
 See the documentation for docker update and [Docker restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
 
-> docker update --restart=no my-container
+```shell
+docker update --restart=no my-container
+```
 
 that updates the restart-policy for an existing container (`my-container`)
