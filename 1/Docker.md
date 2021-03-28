@@ -45,3 +45,13 @@
 #### [docker hub: mysql image](https://hub.docker.com/_/mysql)
 
 docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+### [docker - how do you disable auto-restart on a container?](https://stackoverflow.com/a/37600885)
+
+You can use the `--restart=unless-stopped` option, as @Shibashis mentioned, or update the restart policy (this requires docker 1.11 or newer);
+
+See the documentation for docker update and [Docker restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
+
+> docker update --restart=no my-container
+
+that updates the restart-policy for an existing container (`my-container`)
