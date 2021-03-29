@@ -4,7 +4,8 @@
 
 ## Spring Config
 
-### [Baeldung: Spring Profiles](https://www.baeldung.com/spring-profiles)
+* [Baeldung: Spring Profiles](https://www.baeldung.com/spring-profiles)
+* [Make Spring JUnit Test run on test database](https://stackoverflow.com/a/43374987)
 
 ## [Spring Guides](https://spring.io/guides)
 
