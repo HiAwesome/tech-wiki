@@ -2,6 +2,10 @@
 
 ## [Youtube Video, 20200914: Tutorial: Reactive Spring Boot](https://www.youtube.com/watch?v=229gPlcc5d8)
 
+## Spring Config
+
+### [Baeldung: Spring Profiles](https://www.baeldung.com/spring-profiles)
+
 ## [Spring Guides](https://spring.io/guides)
 
 ### [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
