@@ -1,5 +1,38 @@
 # 零散的经验
 
+## [ssh “permissions are too open” error](https://stackoverflow.com/a/9270753)
+
+Keys need to be only readable by you:
+
+> chmod 400 ~/.ssh/id_rsa
+
+If Keys need to be read-writable by you:
+
+> chmod 600 ~/.ssh/id_rsa
+
+600 appears to be fine as well (in fact better in most cases, because you don't need to change file permissions later to edit it).
+
+The relevant portion from the manpage (`man ssh`)
+
+> ~/.ssh/id_rsa
+         Contains the private key for authentication.  These files contain sensitive 
+         data and should be readable by the user but not
+         accessible by others (read/write/execute).  ssh will simply ignore a private 
+         key file if it is              
+         accessible by others.  It is possible to specify a
+         passphrase when generating the key which will be used to encrypt the sensitive 
+         part of this file using 3DES.
+> 
+> ~/.ssh/identity.pub
+> 
+> ~/.ssh/id_dsa.pub
+> 
+> ~/.ssh/id_ecdsa.pub
+> 
+> ~/.ssh/id_rsa.pub
+         Contains the public key for authentication.  These files are not sensitive and 
+         can (but need not) be readable by anyone.
+
 ## Mac with 罗技 MX 套装
 
 ### 设定蓝牙和连接器双连接模式
