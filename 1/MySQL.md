@@ -1,5 +1,10 @@
 # MySQL
 
+## null vs empty string
+
+* [MySQL: NULL vs “”](https://stackoverflow.com/a/12706491)
+* [https://dba.stackexchange.com/questions/59/when-to-use-null-and-when-to-use-an-empty-string](https://dba.stackexchange.com/a/69)
+
 ## Soft delete design
 
 ### [Deleting data: soft, hard or audit?](https://www.martyfriedel.com/blog/deleting-data-soft-hard-or-audit)
