@@ -1,5 +1,9 @@
 # 零散的经验
 
+## [Zsh Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+Zsh 的命令自动补全，默认基于历史命令。
+
 ## [ssh “permissions are too open” error](https://stackoverflow.com/a/9270753)
 
 Keys need to be only readable by you:
