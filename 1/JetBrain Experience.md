@@ -2,6 +2,20 @@
 
 ## [Official documents](https://www.jetbrains.com/help/idea/discover-intellij-idea.html)
 
+### [Write and edit source code: Code reference information](https://www.jetbrains.com/help/idea/viewing-reference-information.html)
+
+关于代码参考信息的基础操作：
+
+* [Quick Definition](https://www.jetbrains.com/help/idea/viewing-reference-information.html#view-definition-symbols): Option + Space. 以弹窗的方式快速显示定义，作用于所有的 Symbol 对象，高频使用。
+* [Quick Type Definition](https://www.jetbrains.com/help/idea/viewing-reference-information.html#quick-type-definition), 默认无快捷键，使用 `View | Quick Type Definition` 触发，显示 Symbol 对象的类型定义。经测试：一是 List 这样的集合则会显示为 List<E>；二是必须将光标置于对象之上，例如 `String symbol` 则只有 symbol 可以触发；三是复杂 Type 预览一部分意义不大，不如直接 Command + 光标点击进入类本身方便；所以低频使用。
+* [Type Info](https://www.jetbrains.com/help/idea/viewing-reference-information.html#expression-static-data): Control + Shift + P. 显示类型信息，比较方便，高频使用。官方举例为在 `List<String> list = new ArrayList<>(); list.add("1");` 中光标放在第二个 list 之上，触发 Type Info 后会显示如下五条内容：
+  * Type: List\<String\>
+  * Nullability: non-null
+  * Constraints: exactly ArrayList
+  * Locality: local object
+  * Size: 0
+* [Context Info](https://www.jetbrains.com/help/idea/viewing-reference-information.html#productivity-tips): Control + Shift + Q. 官网一句话介绍 `If the current method or class declaration is not visible, you can view it in the tooltip`，经测试用于屏幕无法展示函数名时会显示函数名以及注解，无法展示类名时则展示类名以及注解，比较方便。
+
 ### [Analysis: Profiling tools](https://www.jetbrains.com/help/idea/cpu-profiler.html)
 
 * [Youtube Video, 20200408: Profiling Tools and IntelliJ IDEA Ultimate](https://www.youtube.com/watch?v=OQcyAtukps4)
