@@ -97,8 +97,27 @@
 * Maven 项目总是打包不成功，却能正常启动，请对每个项目进行 mvn clean install 操作。
 * [Unable to find javadoc command: The environment variable JAVA_HOME is not correctly set](https://superuser.com/a/1367009), This is because IntelliJ's internal consoles use their own environment. You can set variables for Maven in the settings dialog under `Build, Execution, Deployment` > `Build Tools` > `Maven` > `Runner` > `Environment variables`. Add `JAVA_HOME` with whatever `echo $JAVA_HOME` returns in your usual terminal window as a value and Maven will be able to find the `javadoc` command!
 
-## Tricks
+## Tips
 
+* [Docker on Intellij IDEA](https://www.jetbrains.com/help/idea/docker.html), Docker 支持，需要熟悉。
+* [Structural search and replace](https://www.jetbrains.com/help/idea/structural-search-and-replace.html), 结构化的搜索和替换。先熟悉基础语法和规则，再找适合场景测试。
+* [宏: macros](https://www.jetbrains.com/help/idea/using-macros-in-the-editor.html), 功能存在，官网有简单的例子，目前还未找到特别适合的使用场景。
+* URL Mapping, shoutcut `Shift + Command + \`, 适合在类似 Spring MVC 这样的 Web 项目中根据地址找到相关代码。
+* [XPath search](https://www.jetbrains.com/help/idea/xpath-search.html), 搜索项目中 XML Files 符合 XPath 约束的内容，位置在顶级菜单 `Edit -> Find -> Find by XPath`, 默认快捷键 Option + Command + X.
+* [Change the highlighting level for a file](https://www.jetbrains.com/help/idea/disabling-and-enabling-inspections.html#change-highlighting-level-for-file), 更改文件的突出显示级别，快捷键 Shift + Option + Command + H, 一般用于设定当前文件近检查语法而忽略低级语音规则（例如单词正确性）。
+* [Explore test results](https://www.jetbrains.com/help/idea/viewing-and-exploring-test-results.html), 其中查看最近的测试列表快捷键为 Shift + Command + 分号 
+* [File templates](https://www.jetbrains.com/help/idea/using-file-and-code-templates.html), 文件模版功能。主要看顶级菜单 `Tools -> Save File as Template...` 是否实用。语法为 Apache Velocity, 简易规则见 [VTL reference guide](http://velocity.apache.org/engine/2.0/vtl-reference.html).
+* 方法交换入参的位置，需要光标放在入参上: Shift + Option + Command + 左/右
+* 目前设定版本控制同文件对比仓库版本为 Option + V, 对比单文件差异时比较方便。
+* 在顶级菜单 `Help -> Diagnostic Tools` 放置了一批 IntelliJ IDEA 检查自身的诊断工具，例如：
+  * [Activity Monitor](https://www.jetbrains.com/help/idea/activity-monitor.html) 
+  * Analyze Plugin Startup Performance, 分析插件启动时间
+  * Profile Indexing, 诊断索引的问题
+  * Profile Slow Startup, 诊断慢启动的问题
+* Productivity Guide 中统计了大部分 Tips 及用户调用频率，目前已对呼出此菜单设定快捷键 Option + 右中括号。
+* Keymap 的两种搜索方式：默认是用操作名找快捷键，点击 `Find Shortcut` 后则是用快捷键找操作名，结合使用较好。
+* [Join Lines](https://www.jetbrains.com/help/idea/working-with-source-code.html#editor_lines_code_blocks): Control + Shift + J, 合并行操作，经测试与 Command + Enter 为互逆操作，比较方便。 
+* [Add Carets to Ends of Selected Lines](https://www.jetbrains.com/webstorm/guide/tips/add-carets-at-line-end): Option + Shift + G, 经测试是多行编辑的行尾模式，等于多选行之后按 Command + 右键。
 * [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
 * [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
 * [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)

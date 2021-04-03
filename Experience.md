@@ -1,5 +1,23 @@
 # 零散的经验
 
+## Apple Support Official
+
+### [Mac 上的菜单中显示的那些符号表示什么？](https://support.apple.com/zh-cn/guide/mac-help/cpmh0011/mac)
+
+### [Mac 键盘快捷键](https://support.apple.com/zh-cn/HT201236)
+
+## [Mac OS X 系统中 Delete 删除键的 5 种用法](http://tech.sina.com.cn/s/jq/2015-03-06/doc-icczmvun6516277.shtml)
+
+> 第一种：按 delete 键，实现 Windows 键盘上退格键的功能，也就是删除光标之前的一个字符（默认）；
+> 
+> 第二种：按 fn+delete 键，删除光标之后的一个字符；
+>
+> 第三种：按 option+delete 键，删除光标之前的一个单词（英文有效）；
+>
+> 第四种：按 command+delete 键，删除光标之前整行内容；
+>
+> 第五种：选中文件后按 command+delete，删除掉该文件。
+
 ## [Zsh Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
 Zsh 的命令自动补全，默认基于历史命令。
