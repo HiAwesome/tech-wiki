@@ -102,6 +102,7 @@
 * [Docker on Intellij IDEA](https://www.jetbrains.com/help/idea/docker.html), Docker 支持，需要熟悉。
 * [Structural search and replace](https://www.jetbrains.com/help/idea/structural-search-and-replace.html), 结构化的搜索和替换。先熟悉基础语法和规则，再找适合场景测试。
 * [宏: macros](https://www.jetbrains.com/help/idea/using-macros-in-the-editor.html), 功能存在，官网有简单的例子，目前还未找到特别适合的使用场景。
+* Insert Live Template: Command + J, 很好的解决了在 Java 文档注释中无法触发类似于 fixme 这样的模板的问题。
 * URL Mapping, shoutcut `Shift + Command + \`, 适合在类似 Spring MVC 这样的 Web 项目中根据地址找到相关代码。
 * [XPath search](https://www.jetbrains.com/help/idea/xpath-search.html), 搜索项目中 XML Files 符合 XPath 约束的内容，位置在顶级菜单 `Edit -> Find -> Find by XPath`, 默认快捷键 Option + Command + X.
 * [Change the highlighting level for a file](https://www.jetbrains.com/help/idea/disabling-and-enabling-inspections.html#change-highlighting-level-for-file), 更改文件的突出显示级别，快捷键 Shift + Option + Command + H, 一般用于设定当前文件近检查语法而忽略低级语音规则（例如单词正确性）。
