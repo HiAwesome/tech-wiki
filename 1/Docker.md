@@ -40,6 +40,12 @@
 
 ## Using Docker
 
+### Docker with Postgres
+
+#### [docker hub: postgres image](https://hub.docker.com/_/postgres)
+
+docker run --name some-postgres -p 54321:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+
 ### Docker with MySQL
 
 #### [docker hub: mysql image](https://hub.docker.com/_/mysql)
