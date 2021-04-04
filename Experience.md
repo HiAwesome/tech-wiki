@@ -1,5 +1,11 @@
 # 零散的经验
 
+## Snipaste shotcuts
+
+Snipaste 只需要设定截屏快捷键，其他的暂时全部删除。
+
+由于 IntelliJ IDEA 中 F1 快捷键为快速查看文档，且在大部分软件中 F1 为查看帮助文档，因此设定 Snipaste 截图为 Command + Shift + F1。
+
 ## Apple Support Official
 
 ### [Mac 上的菜单中显示的那些符号表示什么？](https://support.apple.com/zh-cn/guide/mac-help/cpmh0011/mac)
