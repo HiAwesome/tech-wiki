@@ -99,6 +99,8 @@
 
 ## Tips
 
+* Expand and shrink the code selection: We moved the caret to the beginning of the `if` statement. Press `Option + 上` two times to select it. A keyword might be a good starting point for choosing the corresponding statement with
+  just a few presses. 经测试对 if, for, method, class 都有效果，选择时只需要先将光标放在关键字最前面，然后按两次 `Option + 上` 即可，非常方便。
 * IDEA 对 Java 中静态字段或方法的建议需要按 Control + Space 两次：Sometimes, you need to see suggestions for static constants or methods. Press `Control + Space` twice to ge them in the lookup.
 * [Docker on Intellij IDEA](https://www.jetbrains.com/help/idea/docker.html), Docker 支持，需要熟悉。
 * [Structural search and replace](https://www.jetbrains.com/help/idea/structural-search-and-replace.html), 结构化的搜索和替换。先熟悉基础语法和规则，再找适合场景测试。
