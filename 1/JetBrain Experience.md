@@ -99,6 +99,12 @@
 
 ## Tips
 
+* Code format:
+  * 选中了代码块按 `Command + Option + L`, 仅格式化选中部分的代码。
+  * 未选中任何代码块按 `Command + Option + L`, 格式化这个文件。
+  * 按 `Shift + Command + Option + L` 出现格式化菜单。范围可以三选一，分别是 Only VCS changed text, Selected text, Whole file；格式化选项三选多，分别是 Optimize imports, Rearrange code, Code cleanup.
+* Completion with tab: This replaces the word at the caret rather than simply inserts it. 选中 IDEA 给出的建议然后使用 `Tab` 而不是 `Enter` 会替换插入符号处的元素而不是简单的插入。
+* Collapse: 使用 `Command + -` 与 `Command + =` 收起展开单个方法，使用 `Command + Shift + -` 与 `Command + Shift + =` 收起展开所有方法。对类名之上的注解和导入语句同样适用。
 * Expand and shrink the code selection: We moved the caret to the beginning of the `if` statement. Press `Option + 上` two times to select it. A keyword might be a good starting point for choosing the corresponding statement with
   just a few presses. 经测试对 if, for, method, class 都有效果，选择时只需要先将光标放在关键字最前面，然后按两次 `Option + 上` 即可，非常方便。
 * IDEA 对 Java 中静态字段或方法的建议需要按 Control + Space 两次：Sometimes, you need to see suggestions for static constants or methods. Press `Control + Space` twice to ge them in the lookup.
@@ -129,7 +135,7 @@
     * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
 * [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
-* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
+* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows. 这个快捷键和 `Command + Option + T` Surround 为相反操作，可以轻易对于语句块加上 `try / catch / final` 然后又去掉。
 * [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
 * IDEA 设置保存文件时去掉自动生成的回车： Setting -> Editor -> General, 去掉 Ensure an empty line at the end of a file on Save 的打勾。 
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
