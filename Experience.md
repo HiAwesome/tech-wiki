@@ -1,6 +1,14 @@
 # 零散的经验
 
-## Snipaste shotcuts
+## [Bob](https://ripperhe.gitee.io/bob/#/) shortcuts
+
+无罗技键鼠配合的设定快捷键如下：
+
+* 划词翻译：Option + L
+* 截图翻译：Option + Shift + F1
+* 输入翻译：Option + K
+
+## Snipaste shortcuts
 
 Snipaste 只需要设定截屏快捷键，其他的暂时全部删除。
 
