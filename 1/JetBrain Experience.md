@@ -36,6 +36,37 @@
 * [Spring diagrams](https://www.jetbrains.com/help/idea/spring-diagrams.html)
 * [Spring Boot](https://www.jetbrains.com/help/idea/spring-boot.html)
 
+## Debug
+
+### [Debugging Code](https://www.jetbrains.com/help/idea/debugging-code.html)
+
+* [Tutorial: Remote debug 远程 Debug](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html), 本地按照教程使用非 jar 包运行的方式失败，原因是 [Unable to open debugger port through IntelliJ](https://stackoverflow.com/a/40641628), 以 jar 运行则成功。
+* [Tutorial: Detect concurrency issues 检测并发问题](https://www.jetbrains.com/help/idea/detect-concurrency-issues.html)
+
+### JDWP
+
+Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Protocol](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/introclientissues005.html), [Java7 jdwp-spec](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/jdwp-spec.html).
+
+一篇与此有关的文章质量较高，[Java远程调试（Remote Debugging）的那些事](https://www.jianshu.com/p/d168ecdce022).
+
+> * 远程JVM调试怎么工作的
+> 
+> 一切源于被称作 Agents 的东西。
+> 
+> 运行着各种编译过的 .class 文件的JVM， 有一种特性，可以允许外部的库（Java或C++写的libraries）在运行时注入到 JVM 中。这些外部的库就称作 Agents, 他们有能力修改运行中 .class 文件的内容。
+> 
+> 这些 Agents 拥有的这些 JVM 的功能权限， 是在 JVM 内运行的 Java Code 所无法获取的， 他们能用来做一些有趣的事情，比如修改运行中的源码， 性能分析等。 像 JRebel 工具就是用了这些功能达到魔术般的效果。
+> 
+> 传递一个 Agent Lib 给 JVM, 通过添加 agentlib:libname[=options] 格式的启动参数即可办到。像上面的远程调试我们用的就是 **-agentlib:jdwp=... **来引入 jdwp 这个 Agent 的。
+> 
+> jdwp 是一个 JVM 特定的 JDWP（Java Debug Wire Protocol） 可选实现，用来定义调试者与运行JVM之间的通讯，它的是通过 JVM 本地库的 jdwp.so 或者 jdwp.dll 支持实现的。
+> 
+> * 它到底是怎么工作的呢？
+> 
+> 简单来说， jdwp agent 会建立运行应用的 JVM 和调试者（本地或者远程）之间的桥梁。既然他是一个Agent Library, 它就有能力拦截运行的代码。
+> 
+> 在 JVM 架构里， debugging 功能在 JVM 本身的内部是找不到的，它是一种抽象到外部工具的方式（也称作调试者 debugger）。这些调试工具或者运行在 JVM 的本地 或者在远程。这是一种解耦，模块化的架构。
+
 ## 代理
 
 * JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 6152。最后测试访问 Google 成功即可。
