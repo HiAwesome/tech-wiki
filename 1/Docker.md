@@ -60,7 +60,7 @@ docker run --name some-postgres -p 54321:5432 -e POSTGRES_PASSWORD=mysecretpassw
 
 #### [docker hub: mysql image](https://hub.docker.com/_/mysql)
 
-docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=moqi -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
 ### [Zombie docker container that can't be killed](https://stackoverflow.com/a/52493047)
 
