@@ -1,5 +1,19 @@
 # MySQL
 
+## PingCAP TiDB
+
+### [Can't connect using mysql client (using password: NO)](https://github.com/pingcap/tidb/issues/14021#issuecomment-591560953)
+
+> Reproducible on MySQL 8 client bundled with Ubuntu with master version of TiDB.
+>
+> The problem is authentication plugin mismatch. While TiDB wants the client to authenticate using mysql_native_password, the client still replies using caching_sha2_password which TiDB doesn't support yet ([#9411](https://github.com/pingcap/tidb/issues/9411)).
+>
+> You can [force the MySQL client to use the native password plugin](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html) with:
+>
+> ```sql
+> mysql --default-auth=mysql_native_password -h ::1 -P 4000 -u user -pPassword ...
+> ```
+
 ## null vs empty string
 
 * [MySQL: NULL vs “”](https://stackoverflow.com/a/12706491)
