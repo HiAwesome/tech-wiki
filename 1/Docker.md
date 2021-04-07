@@ -36,15 +36,31 @@
 
 目前 Mac 使用 Surge 代理，设定 Docker 代理中 Web Server(HTTP), Secure Web Server(HTTPS) 皆为 http://127.0.0.1:6152 实测 Docker Desktop 携带的 K8s 可正常启动。
 
+## Docker Use Aliyun Registry Mirrors
+
+[阿里云 Docker 镜像加速器](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors), 每个阿里云用户有私有的加速地址，配置在 daemon.json 即可，加速器页面亦有文档。
+
+优点是拉取速度快，push 也方便。
+
+缺点是版本和 Docker 官方有时间差，冷门镜像无法加速时更慢。
+
+最终不加，裸 Docker 加 Surge 代理。
+
 ## [Mac: Docker logs and troubleshooting](https://docs.docker.com/docker-for-mac/troubleshoot/#diagnose-and-feedback)
 
 ## Using Docker
+
+### Docker with Postgres
+
+#### [docker hub: postgres image](https://hub.docker.com/_/postgres)
+
+docker run --name some-postgres -p 54321:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 
 ### Docker with MySQL
 
 #### [docker hub: mysql image](https://hub.docker.com/_/mysql)
 
-docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=moqi -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
 ### [Zombie docker container that can't be killed](https://stackoverflow.com/a/52493047)
 

@@ -2,6 +2,20 @@
 
 ## [Official documents](https://www.jetbrains.com/help/idea/discover-intellij-idea.html)
 
+### [Write and edit source code: Code reference information](https://www.jetbrains.com/help/idea/viewing-reference-information.html)
+
+关于代码参考信息的基础操作：
+
+* [Quick Definition](https://www.jetbrains.com/help/idea/viewing-reference-information.html#view-definition-symbols): Option + Space. 以弹窗的方式快速显示定义，作用于所有的 Symbol 对象，高频使用。
+* [Quick Type Definition](https://www.jetbrains.com/help/idea/viewing-reference-information.html#quick-type-definition), 默认无快捷键，使用 `View | Quick Type Definition` 触发，显示 Symbol 对象的类型定义。经测试：一是 List 这样的集合则会显示为 List<E>；二是必须将光标置于对象之上，例如 `String symbol` 则只有 symbol 可以触发；三是复杂 Type 预览一部分意义不大，不如直接 Command + 光标点击进入类本身方便；所以低频使用。
+* [Type Info](https://www.jetbrains.com/help/idea/viewing-reference-information.html#expression-static-data): Control + Shift + P. 显示类型信息，比较方便，高频使用。官方举例为在 `List<String> list = new ArrayList<>(); list.add("1");` 中光标放在第二个 list 之上，触发 Type Info 后会显示如下五条内容：
+  * Type: List\<String\>
+  * Nullability: non-null
+  * Constraints: exactly ArrayList
+  * Locality: local object
+  * Size: 0
+* [Context Info](https://www.jetbrains.com/help/idea/viewing-reference-information.html#productivity-tips): Control + Shift + Q. 官网一句话介绍 `If the current method or class declaration is not visible, you can view it in the tooltip`，经测试用于屏幕无法展示函数名时会显示函数名以及注解，无法展示类名时则展示类名以及注解，比较方便。
+
 ### [Analysis: Profiling tools](https://www.jetbrains.com/help/idea/cpu-profiler.html)
 
 * [Youtube Video, 20200408: Profiling Tools and IntelliJ IDEA Ultimate](https://www.youtube.com/watch?v=OQcyAtukps4)
@@ -21,6 +35,37 @@
 * [Tutorial: Explore Spring support features](https://www.jetbrains.com/help/idea/spring-support-tutorial.html)
 * [Spring diagrams](https://www.jetbrains.com/help/idea/spring-diagrams.html)
 * [Spring Boot](https://www.jetbrains.com/help/idea/spring-boot.html)
+
+## Debug
+
+### [Debugging Code](https://www.jetbrains.com/help/idea/debugging-code.html)
+
+* [Tutorial: Remote debug 远程 Debug](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html), 本地按照教程使用非 jar 包运行的方式失败，原因是 [Unable to open debugger port through IntelliJ](https://stackoverflow.com/a/40641628), 以 jar 运行则成功。
+* [Tutorial: Detect concurrency issues 检测并发问题](https://www.jetbrains.com/help/idea/detect-concurrency-issues.html)
+
+### JDWP
+
+Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Protocol](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/introclientissues005.html), [Java7 jdwp-spec](https://docs.oracle.com/javase/7/docs/technotes/guides/jpda/jdwp-spec.html).
+
+一篇与此有关的文章质量较高，[Java远程调试（Remote Debugging）的那些事](https://www.jianshu.com/p/d168ecdce022).
+
+> * 远程JVM调试怎么工作的
+> 
+> 一切源于被称作 Agents 的东西。
+> 
+> 运行着各种编译过的 .class 文件的JVM， 有一种特性，可以允许外部的库（Java或C++写的libraries）在运行时注入到 JVM 中。这些外部的库就称作 Agents, 他们有能力修改运行中 .class 文件的内容。
+> 
+> 这些 Agents 拥有的这些 JVM 的功能权限， 是在 JVM 内运行的 Java Code 所无法获取的， 他们能用来做一些有趣的事情，比如修改运行中的源码， 性能分析等。 像 JRebel 工具就是用了这些功能达到魔术般的效果。
+> 
+> 传递一个 Agent Lib 给 JVM, 通过添加 agentlib:libname[=options] 格式的启动参数即可办到。像上面的远程调试我们用的就是 **-agentlib:jdwp=... **来引入 jdwp 这个 Agent 的。
+> 
+> jdwp 是一个 JVM 特定的 JDWP（Java Debug Wire Protocol） 可选实现，用来定义调试者与运行JVM之间的通讯，它的是通过 JVM 本地库的 jdwp.so 或者 jdwp.dll 支持实现的。
+> 
+> * 它到底是怎么工作的呢？
+> 
+> 简单来说， jdwp agent 会建立运行应用的 JVM 和调试者（本地或者远程）之间的桥梁。既然他是一个Agent Library, 它就有能力拦截运行的代码。
+> 
+> 在 JVM 架构里， debugging 功能在 JVM 本身的内部是找不到的，它是一种抽象到外部工具的方式（也称作调试者 debugger）。这些调试工具或者运行在 JVM 的本地 或者在远程。这是一种解耦，模块化的架构。
 
 ## 代理
 
@@ -83,8 +128,37 @@
 * Maven 项目总是打包不成功，却能正常启动，请对每个项目进行 mvn clean install 操作。
 * [Unable to find javadoc command: The environment variable JAVA_HOME is not correctly set](https://superuser.com/a/1367009), This is because IntelliJ's internal consoles use their own environment. You can set variables for Maven in the settings dialog under `Build, Execution, Deployment` > `Build Tools` > `Maven` > `Runner` > `Environment variables`. Add `JAVA_HOME` with whatever `echo $JAVA_HOME` returns in your usual terminal window as a value and Maven will be able to find the `javadoc` command!
 
-## Tricks
+## Tips
 
+* Code format:
+  * 选中了代码块按 `Command + Option + L`, 仅格式化选中部分的代码。
+  * 未选中任何代码块按 `Command + Option + L`, 格式化这个文件。
+  * 按 `Shift + Command + Option + L` 出现格式化菜单。范围可以三选一，分别是 Only VCS changed text, Selected text, Whole file；格式化选项三选多，分别是 Optimize imports, Rearrange code, Code cleanup.
+* Completion with tab: This replaces the word at the caret rather than simply inserts it. 选中 IDEA 给出的建议然后使用 `Tab` 而不是 `Enter` 会替换插入符号处的元素而不是简单的插入。
+* Collapse: 使用 `Command + -` 与 `Command + =` 收起展开单个方法，使用 `Command + Shift + -` 与 `Command + Shift + =` 收起展开所有方法。对类名之上的注解和导入语句同样适用。
+* Expand and shrink the code selection: We moved the caret to the beginning of the `if` statement. Press `Option + 上` two times to select it. A keyword might be a good starting point for choosing the corresponding statement with
+  just a few presses. 经测试对 if, for, method, class 都有效果，选择时只需要先将光标放在关键字最前面，然后按两次 `Option + 上` 即可，非常方便。
+* IDEA 对 Java 中静态字段或方法的建议需要按 Control + Space 两次：Sometimes, you need to see suggestions for static constants or methods. Press `Control + Space` twice to ge them in the lookup.
+* [Docker on Intellij IDEA](https://www.jetbrains.com/help/idea/docker.html), Docker 支持，需要熟悉。
+* [Structural search and replace](https://www.jetbrains.com/help/idea/structural-search-and-replace.html), 结构化的搜索和替换。先熟悉基础语法和规则，再找适合场景测试。
+* [宏: macros](https://www.jetbrains.com/help/idea/using-macros-in-the-editor.html), 功能存在，官网有简单的例子，目前还未找到特别适合的使用场景。
+* Insert Live Template: Command + J, 很好的解决了在 Java 文档注释中无法触发类似于 fixme 这样的模板的问题。
+* URL Mapping, shortcut `Shift + Command + \`, 适合在类似 Spring MVC 这样的 Web 项目中根据地址找到相关代码。
+* [XPath search](https://www.jetbrains.com/help/idea/xpath-search.html), 搜索项目中 XML Files 符合 XPath 约束的内容，位置在顶级菜单 `Edit -> Find -> Find by XPath`, 默认快捷键 Option + Command + X.
+* [Change the highlighting level for a file](https://www.jetbrains.com/help/idea/disabling-and-enabling-inspections.html#change-highlighting-level-for-file), 更改文件的突出显示级别，快捷键 Shift + Option + Command + H, 一般用于设定当前文件近检查语法而忽略低级语音规则（例如单词正确性）。
+* [Explore test results](https://www.jetbrains.com/help/idea/viewing-and-exploring-test-results.html), 其中查看最近的测试列表快捷键为 Shift + Command + 分号 
+* [File templates](https://www.jetbrains.com/help/idea/using-file-and-code-templates.html), 文件模版功能。主要看顶级菜单 `Tools -> Save File as Template...` 是否实用。语法为 Apache Velocity, 简易规则见 [VTL reference guide](http://velocity.apache.org/engine/2.0/vtl-reference.html).
+* 方法交换入参的位置，需要光标放在入参上: Shift + Option + Command + 左/右
+* 目前设定版本控制同文件对比仓库版本为 Option + V, 对比单文件差异时比较方便。
+* 在顶级菜单 `Help -> Diagnostic Tools` 放置了一批 IntelliJ IDEA 检查自身的诊断工具，例如：
+  * [Activity Monitor](https://www.jetbrains.com/help/idea/activity-monitor.html) 
+  * Analyze Plugin Startup Performance, 分析插件启动时间
+  * Profile Indexing, 诊断索引的问题
+  * Profile Slow Startup, 诊断慢启动的问题
+* Productivity Guide 中统计了大部分 Tips 及用户调用频率，目前已对呼出此菜单设定快捷键 Option + 右中括号。
+* Keymap 的两种搜索方式：默认是用操作名找快捷键，点击 `Find Shortcut` 后则是用快捷键找操作名，结合使用较好。
+* [Join Lines](https://www.jetbrains.com/help/idea/working-with-source-code.html#editor_lines_code_blocks): Control + Shift + J, 合并行操作，经测试与 Command + Enter 为互逆操作，比较方便。 
+* [Add Carets to Ends of Selected Lines](https://www.jetbrains.com/webstorm/guide/tips/add-carets-at-line-end): Option + Shift + G, 经测试是多行编辑的行尾模式，等于多选行之后按 Command + 右键。
 * [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
 * [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
 * [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
@@ -92,7 +166,7 @@
     * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
 * [IDEA 设置 go 代码显示时中不自动折叠 return/panic/format 语句](https://stackoverflow.com/a/59320983): Go to Settings/Preferences | Editor | General | Code Folding | Go and toggle them on/off as needed.
 * [IDEA 显示 Kotlin not configured](https://stackoverflow.com/a/64404454), 在 Gradle 项目中使用命令 rm -rf .idea .gradle gradle
-* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows.
+* [IDEA 移除外部包装代码块](https://stackoverflow.com/a/8882692), **Code | Unwrap/Remove...** Command + Shift + fn + Backspace on Mac, Ctrl + Shift + Delete On Windows. 这个快捷键和 `Command + Option + T` Surround 为相反操作，可以轻易对于语句块加上 `try / catch / final` 然后又去掉。
 * [IDEA 设置不再生成 Java 方法的 @param 和 @return 注释](https://www.jetbrains.com/help/idea/working-with-code-documentation.html#add-new-comment), Disable automatic comments: In the **Settings/Preferences** dialog, go to **Editor | General | Smart Keys**, and clear the **Insert documentation comment stub** checkbox.
 * IDEA 设置保存文件时去掉自动生成的回车： Setting -> Editor -> General, 去掉 Ensure an empty line at the end of a file on Save 的打勾。 
 * JetBrains 产品禁用双击 Shift 的 Search Everywhere，参考 [How do I disable the Search Everywhere shortcut?](https://stackoverflow.com/a/48894157) :
