@@ -130,6 +130,7 @@ Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Proto
 
 ## Tips
 
+* To start a JavaScript debug session, hold Cmd+Shift and click the URL link. —— IntelliJ IDEA 2021.1
 * Code format:
   * 选中了代码块按 `Command + Option + L`, 仅格式化选中部分的代码。
   * 未选中任何代码块按 `Command + Option + L`, 格式化这个文件。
