@@ -11,6 +11,7 @@
 3. 经过基础测试也被 IntelliJ IDEA、Github 支持。
 4. 可以轻易转换为多种格式，最常用的是 HTML、PDF、EPUB。
 5. [Compare AsciiDoc and Markdown](https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/).
+6. Use AsciiDoc for document markup. Really. It's actually **readable** by humans, easier to parse and way more flexible than XML.    ——Linus Torvalds
 
 ## [Bob](https://ripperhe.gitee.io/bob/#/) shortcuts
 
