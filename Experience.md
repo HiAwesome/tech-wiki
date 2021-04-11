@@ -230,6 +230,36 @@ lsof -nP -iTCP:$PORT | grep LISTEN
 
 ## [在 Mac 下安装 nvm 管理 node 版本](https://blog.csdn.net/Charissa2017/article/details/104497572)
 
+查看本地 node 的所有版本
+```shell
+nvm list
+```
+
+设置默认版本的Node，每次启动终端都使用该版本的node
+```shell
+nvm alias default 版本号
+```
+
+切换到指定的node版本
+```shell
+nvm use 10.19
+```
+
+卸载指定的node版本
+```shell
+nvm uninstall 版本号
+```
+
+安装最新的node稳定版本
+```shell
+nvm install --lts
+```
+
+查看node的所有的版本
+```shell
+nvm ls-remote
+```
+
 [nvm on github](https://github.com/nvm-sh/nvm)
 
 ## [在 Mac 下运行 Lisp 程序](https://luciaca.cn/2019/03/22/running-lisp-under-mac-os/)
