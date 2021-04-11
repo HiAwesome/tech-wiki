@@ -1,5 +1,16 @@
 # 零散的经验
 
+## [文档标记语言的比较及选择](https://en.wikipedia.org/wiki/Comparison_of_document-markup_languages)
+
+从 Wikipedia 可以看到 [Markdown](https://en.wikipedia.org/wiki/Markdown) 最为流行，但确实目前是一个静态的标准。像 Github、Gitlab、Stack Overflow 都支持了带有各自风味的 Common Markdown, 因为无法统一这个标准本身。
+
+另一个是 [asciidoctor](https://github.com/asciidoctor/asciidoctor/blob/master/README-zh_CN.adoc), 和 [AsciiDoc](https://en.wikipedia.org/wiki/AsciiDoc) 有一定的渊源，**后期可能转换到这个文档标记工具**，原因如下：
+
+1. 它是一个依然在不断更新的标准，几个依然在更新的 Github Repo。
+2. 有 Eclipse 基金会支持，和其他赞助。
+3. 经过基础测试也被 IntelliJ IDEA、Github 支持。
+4. 可以轻易转换为多种格式，最常用的是 HTML、PDF、EPUB。
+
 ## [Bob](https://ripperhe.gitee.io/bob/#/) shortcuts
 
 无罗技键鼠配合的设定快捷键如下：
