@@ -10,6 +10,7 @@
 2. 有 Eclipse 基金会支持，和其他赞助。
 3. 经过基础测试也被 IntelliJ IDEA、Github 支持。
 4. 可以轻易转换为多种格式，最常用的是 HTML、PDF、EPUB。
+5. [Compare AsciiDoc and Markdown](https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/).
 
 ## [Bob](https://ripperhe.gitee.io/bob/#/) shortcuts
 
