@@ -243,6 +243,11 @@ lsof -nP -iTCP:$PORT | grep LISTEN
 
 ## [在 Mac 下安装 nvm 管理 node 版本](https://blog.csdn.net/Charissa2017/article/details/104497572)
 
+安装最新的node稳定版本
+```shell
+nvm install --lts
+```
+
 查看本地 node 的所有版本
 ```shell
 nvm list
@@ -261,11 +266,6 @@ nvm use 10.19
 卸载指定的node版本
 ```shell
 nvm uninstall 版本号
-```
-
-安装最新的node稳定版本
-```shell
-nvm install --lts
 ```
 
 查看node的所有的版本
