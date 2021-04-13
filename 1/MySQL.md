@@ -2,6 +2,8 @@
 
 ## PingCAP TiDB
 
+* [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+
 ### [Can't connect using mysql client (using password: NO)](https://github.com/pingcap/tidb/issues/14021#issuecomment-591560953)
 
 > Reproducible on MySQL 8 client bundled with Ubuntu with master version of TiDB.

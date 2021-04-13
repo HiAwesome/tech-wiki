@@ -90,6 +90,7 @@ Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Proto
 
 ## Maven
 
+* [Maven. Ignored Files](https://www.jetbrains.com/help/idea/maven-ignored-files.html), 在 Settings/Preferences | Build, Execution, Deployment | Build Tools | Maven | Ignored Files 中去掉打勾即可。
 * IDEA Maven 项目报错，鼠标悬浮在 Maven 中显示 Problems: Cannot reconnect. 的解决办法 [Intellij Idea Maven 'cannot reconnect' error](https://stackoverflow.com/a/30615332), 即手动删除整个 ～/.m2/repository 文件夹，然后再次更新您的 Maven 项目。
 * 删除 Maven 下载失败的包：搜索电脑上后缀名为 jar.lastUpdated 和 pom.lastUpdated 的文件并且全部删除即可。Windows 下用 Everything ( 语法 *.jar.lastUpdated 和 *.pom.lastUpdated ) ，Mac 下直接 Option + Command + Space ( 语法 jar.lastUpdated 和 pom.lastUpdated ) 。
 * Maven 执行 IDEA打包执行 test 的插件：maven-surefire-plugin，具体见 [maven-surefire-plugin](https://maven.apache.org/surefire/maven-surefire-plugin/usage.html) 和 [Maven doesn't execute any unit test](https://stackoverflow.com/questions/16708013/maven-doesnt-execute-any-unit-test) 。打包报警：The parameter forkMode is deprecated since version 2.14. Use forkCount and reuseForks instead.useSystemClassloader setting has no effect when not forking，解决方案：[Maven surefire forkMode pertest deprecated. What is the new settings?
