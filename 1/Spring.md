@@ -1,5 +1,11 @@
 # Spring
 
+## Spring MVC
+
+### [Spring @RequestParam Annotation](https://www.baeldung.com/spring-request-param)
+
+### [Validating RequestParams and PathVariables in Spring](https://www.baeldung.com/spring-validate-requestparam-pathvariable)
+
 ## [Youtube Video, 20200914: Tutorial: Reactive Spring Boot](https://www.youtube.com/watch?v=229gPlcc5d8)
 
 ## Spring Config
