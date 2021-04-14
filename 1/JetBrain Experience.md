@@ -162,7 +162,7 @@ Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Proto
 * [Join Lines](https://www.jetbrains.com/help/idea/working-with-source-code.html#editor_lines_code_blocks): Control + Shift + J, 合并行操作，经测试与 Command + Enter 为互逆操作，比较方便。 
 * [Add Carets to Ends of Selected Lines](https://www.jetbrains.com/webstorm/guide/tips/add-carets-at-line-end): Option + Shift + G, 经测试是多行编辑的行尾模式，等于多选行之后按 Command + 右键。
 * [IDEA 中全屏工具窗口](https://stackoverflow.com/a/36046318), Mac 默认快捷键是 Shift + Command + ' 最后一个按键是单引号。
-* [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转。
+* [IDEA 中导航到下一个引用上](https://www.jetbrains.com/help/idea/find-highlight-usages.html), 首先 Command + Shift + f7 使得元素变成高亮状态，然后使用 Command + G, Command + Shift + G 进行跳转, 也可以使用 Ctrl + Command + G 进入所有命中多处编辑模式。
 * [IDEA 中文件的多行编辑操作](https://www.jetbrains.com/help/idea/working-with-source-code.html#multiple_cursor)
     * [IntelliJ IDEA way of editing multiple lines](https://stackoverflow.com/a/27862706)。Clone Caret Above / Below 功能: 需要先按一次 option，第二次再按下 option 不释放(两次的间隔时间可以稍微长点，目前 Mac 配置 double option 会激活 Alfred 弹窗), 这个时候使用上下键进行多行光标的插入。
     * Column Selection Mode: 这个功能使得光标可以选择文本编辑器的任何位置，而不是局限于有代码的部分。如果打开了状态栏，会看到显示文本编码的部分显示 Column 字样。Mac 默认快捷键是 Shift + Command + 8, 但是这里有一个问题，当按下 Shift 时数字 8 实际上变成了 \*, 导致无法触发，故而设定快捷键 Option + 8 触发 Column Selection Mode 模式。为了方便使用后序的 Clone Caret Above / Below 功能，也配置了相对应的快捷键，其中 Clone Caret Above 配置了 Option + 9, Clone Caret Below 配置了 Option + 0.
