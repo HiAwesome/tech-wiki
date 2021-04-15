@@ -8,6 +8,10 @@
 
 ## [Mybatis 3 配置](https://mybatis.org/mybatis-3/zh/configuration.html)
 
+### [Mybatis 3 SQL: insert, update 和 delete](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#insert_update_and_delete)
+
+### [MyBatis Insert List values](https://stackoverflow.com/a/45693515)
+
 ## Mybatis Generator
 
 ### [XML Configuration Reference](http://mybatis.org/generator/configreference/xmlconfig.html)
