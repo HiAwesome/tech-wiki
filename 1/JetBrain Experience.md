@@ -18,6 +18,8 @@
 
 ### [Analysis: Profiling tools](https://www.jetbrains.com/help/idea/cpu-profiler.html)
 
+### [Analysis: Dependencies analysis: Dependency Structure Matrix](https://www.jetbrains.com/help/idea/dsm-analysis.html)
+
 * [Youtube Video, 20200408: Profiling Tools and IntelliJ IDEA Ultimate](https://www.youtube.com/watch?v=OQcyAtukps4)
 * [Async Profiler](https://www.jetbrains.com/help/idea/async-profiler.html)
 * [Java Flight Recorder](https://www.jetbrains.com/help/idea/java-flight-recorder.html)
