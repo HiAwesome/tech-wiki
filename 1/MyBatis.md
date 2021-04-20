@@ -12,6 +12,14 @@
 
 * [MyBatis Insert List values](https://stackoverflow.com/a/45693515)
 
+### [How to run arbitrary sql with mybatis?](https://stackoverflow.com/a/47866375/7379661)
+
+Reusable fragment of SQL can be used to create select part of query dynamically. In you mapper pass query as normal parameter:
+
+`@Param("sql")String sql`
+
+In your query just access the parameter using **${sql}** instead of **#{sql}**. Value in parameter sql can be a fully valid sql query or a fragment of sql query.
+
 ## Mybatis Generator
 
 ### [XML Configuration Reference](http://mybatis.org/generator/configreference/xmlconfig.html)
