@@ -2,6 +2,12 @@
 
 ## [Official documents](https://www.jetbrains.com/help/idea/discover-intellij-idea.html)
 
+### [Write and edit source code: LightEdit mode](https://www.jetbrains.com/help/idea/lightedit-mode.html)
+
+```shell
+idea -e myfile.txt
+```
+
 ### [Write and edit source code: Code reference information](https://www.jetbrains.com/help/idea/viewing-reference-information.html)
 
 关于代码参考信息的基础操作：
