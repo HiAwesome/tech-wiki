@@ -1,5 +1,7 @@
 # Spring
 
+## [Spring validate string value is a JSON](https://stackoverflow.com/a/59204301/7379661)
+
 ## [Java Bean Validation Basics](https://www.baeldung.com/javax-validation)
 
 ## Spring MVC
