@@ -1,5 +1,7 @@
 # Spring
 
+## [Java Bean Validation Basics](https://www.baeldung.com/javax-validation)
+
 ## Spring MVC
 
 ### [Spring @RequestParam Annotation](https://www.baeldung.com/spring-request-param)
