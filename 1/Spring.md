@@ -1,5 +1,9 @@
 # Spring
 
+### [Spring @PathVariable without ending slash (String with IP address)](https://stackoverflow.com/a/24946723/7379661)
+
+使用 PathVariable 传递 IP 地址会截断最后一个点及其之后的内容，详情参考上面链接。
+
 ## [Spring validate string value is a JSON](https://stackoverflow.com/a/59204301/7379661)
 
 ## [Java Bean Validation Basics](https://www.baeldung.com/javax-validation)
