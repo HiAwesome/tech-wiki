@@ -1,5 +1,7 @@
 # Spring
 
+### [How to bind @RequestParam to object in Spring](http://dolszewski.com/spring/how-to-bind-requestparam-to-object/)
+
 ### [Spring @PathVariable without ending slash (String with IP address)](https://stackoverflow.com/a/24946723/7379661)
 
 使用 PathVariable 传递 IP 地址会截断最后一个点及其之后的内容，详情参考上面链接。
