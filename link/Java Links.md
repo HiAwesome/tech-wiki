@@ -1,5 +1,11 @@
 # 与 Java 有关的链接
 
+### [Guava - CaseFormat Class](https://www.tutorialspoint.com/guava/guava_caseformat.htm)
+
+### [What is the simplest way to convert a Java string from all caps (words separated by underscores) to CamelCase (no word separators)?](https://stackoverflow.com/a/16667311/7379661)
+
+### [Java Warning “Unchecked Cast”](https://www.baeldung.com/java-warning-unchecked-cast)
+
 ## Java 枚举是自动可序列化的
 
 * [Java Enums Are Inherently Serializable](https://www.infoworld.com/article/2072870/java-enums-are-inherently-serializable.html)

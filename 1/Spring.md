@@ -1,5 +1,9 @@
 # Spring
 
+### [How can I access path variables in my custom HandlerMethodArgumentResolver](https://stackoverflow.com/a/28939816/7379661)
+
+### [spring-boot 下划线和驼峰转换](https://adolphor.com/2019/11/16/spring-boot-under-lower-camel.html)
+
 ### [How to bind @RequestParam to object in Spring](http://dolszewski.com/spring/how-to-bind-requestparam-to-object/)
 
 ### [Spring @PathVariable without ending slash (String with IP address)](https://stackoverflow.com/a/24946723/7379661)
