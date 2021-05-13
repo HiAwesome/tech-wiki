@@ -1,5 +1,7 @@
 # Spring
 
+### [Validation in Spring Boot](https://www.baeldung.com/spring-boot-bean-validation)
+
 ### [How can I access path variables in my custom HandlerMethodArgumentResolver](https://stackoverflow.com/a/28939816/7379661)
 
 ### [spring-boot 下划线和驼峰转换](https://adolphor.com/2019/11/16/spring-boot-under-lower-camel.html)
