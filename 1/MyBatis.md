@@ -1,5 +1,7 @@
 # Mybatis
 
+### [Mybatis 框架下 SQL 注入攻击的 3 种方式](https://www.huaweicloud.com/articles/496ce6f4fa4e99c0003b25ef83f0d5e7.html)
+
 ## [Mybatis All Products](https://blog.mybatis.org/p/products.html)
 
 ## [mybatis-spring](http://mybatis.org/spring/zh/index.html)
