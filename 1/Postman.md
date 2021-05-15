@@ -6,6 +6,8 @@
 
 * New Runner Tab: Shift + Command + R
 
+## [Hi Awesome Postman](https://hi-awesome.postman.co/home)
+
 ## [Official Document](https://learning.postman.com/docs/getting-started/introduction/)
 
 ### Getting Started
