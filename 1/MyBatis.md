@@ -1,5 +1,10 @@
 # Mybatis
 
+### Mybatis OGNL Expression
+
+* [MyBatis 之 OGNL的应用](https://blog.csdn.net/u013952133/article/details/79856198)
+* [MyBatis 动态 SQL](https://www.jianshu.com/p/681c6de9f20a)
+
 ### [Mybatis 框架下 SQL 注入攻击的 3 种方式](https://www.huaweicloud.com/articles/496ce6f4fa4e99c0003b25ef83f0d5e7.html)
 
 ## [Mybatis All Products](https://blog.mybatis.org/p/products.html)
