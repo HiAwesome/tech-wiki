@@ -2,6 +2,23 @@
 
 ### [What is the difference between introspection and reflection?](https://stackoverflow.com/a/25199156)
 
+#### [内省 (计算机科学)](https://zh.wikipedia.org/wiki/%E5%86%85%E7%9C%81_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6))
+
+Java 中最简单的类型自省的例子是 `instanceof` 算符。例如：
+
+```java
+if (obj instanceof Person) {
+    Person p = (Person)obj;
+    p.walk();
+}
+```
+
+`java.lang.Class` 类是更高级自省的基础。例如：
+
+```java
+System.out.println(obj.getClass().getName());
+```
+
 ### [Guava - CaseFormat Class](https://www.tutorialspoint.com/guava/guava_caseformat.htm)
 
 ### [What is the simplest way to convert a Java string from all caps (words separated by underscores) to CamelCase (no word separators)?](https://stackoverflow.com/a/16667311/7379661)
