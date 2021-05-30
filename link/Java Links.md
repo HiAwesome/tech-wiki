@@ -37,6 +37,22 @@ System.out.println(obj.getClass().getName());
 
 【强制】避免用 Apache Beanutils 进行属性的 copy。说明：Apache BeanUtils 性能较差，可以使用其他方案比如 Spring BeanUtils, Cglib BeanCopier，注意均是浅拷贝。    ——[Java开发手册（嵩山版）](https://github.com/alibaba/p3c/blob/master/Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%B5%A9%E5%B1%B1%E7%89%88%EF%BC%89.pdf)
 
+### [对象拷贝之Apache BeanUtils、Spring的BeanUtils、Mapstruct、BeanCopier、PropertieyUtils对比（深拷贝）](https://blog.csdn.net/ZYC88888/article/details/109681423)
+
+### [常见 Bean 映射工具分析评测及 Orika 介绍](https://www.jianshu.com/p/40e0e64797b9)
+
+```text
+Benchmark                     Mode  Samples   Score  Score error  Units  
+o.s.MyBenchmark.apache        avgt      100  25.246        0.535  us/op  
+o.s.MyBenchmark.beanCopier    avgt      100   0.004        0.000  us/op  
+o.s.MyBenchmark.byHand        avgt      100   0.004        0.000  us/op  
+o.s.MyBenchmark.dozer         avgt      100   5.855        0.260  us/op  
+o.s.MyBenchmark.orika         avgt      100   0.353        0.017  us/op  
+o.s.MyBenchmark.spring        avgt      100   0.627        0.020  us/op  
+```
+
+统计报告中 Units 单位为微秒/次，由 Score 项可以看出，基于 ASM 的 cglib BeanCopier 拷贝速度基本和手写 get/set 方法的速度无异，其次的就是基于 javassist 的 Orika 了，Orika 的速度是 spring BeanUtils 的两倍，Dozer 的 20 倍，Apache BeanUtils 的 120 倍。
+
 ## Java 枚举是自动可序列化的
 
 * [Java Enums Are Inherently Serializable](https://www.infoworld.com/article/2072870/java-enums-are-inherently-serializable.html)
