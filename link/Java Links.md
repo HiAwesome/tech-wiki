@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+### [What is the difference between introspection and reflection?](https://stackoverflow.com/a/25199156)
+
 ### [Guava - CaseFormat Class](https://www.tutorialspoint.com/guava/guava_caseformat.htm)
 
 ### [What is the simplest way to convert a Java string from all caps (words separated by underscores) to CamelCase (no word separators)?](https://stackoverflow.com/a/16667311/7379661)
