@@ -6,6 +6,14 @@
 
 ### [Java Warning “Unchecked Cast”](https://www.baeldung.com/java-warning-unchecked-cast)
 
+## 著名的库
+
+### [Google Guava User Guide](https://github.com/google/guava/wiki)
+
+### [Apache Commons](http://commons.apache.org/)
+
+#### [BeanUtils 1.9.4 User Guide](http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.4/apidocs/org/apache/commons/beanutils/package-summary.html#package_description)
+
 ## Java 枚举是自动可序列化的
 
 * [Java Enums Are Inherently Serializable](https://www.infoworld.com/article/2072870/java-enums-are-inherently-serializable.html)
