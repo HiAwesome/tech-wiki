@@ -33,7 +33,7 @@ System.out.println(obj.getClass().getName());
 
 #### [BeanUtils 1.9.4 User Guide](http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.4/apidocs/org/apache/commons/beanutils/package-summary.html#package_description)
 
-##### [Apache BeanUtils VS Spring BeanUtils of Bean mapping tool](https://programmer.group/apache-beanutils-vs-spring-beanutils-of-bean-mapping-tool.html)
+##### [Bean映射工具之Apache BeanUtils VS Spring BeanUtils](https://pjmike.github.io/2018/11/03/Bean%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7%E4%B9%8BApache-BeanUtils-VS-Spring-BeanUtils)
 
 【强制】避免用 Apache Beanutils 进行属性的 copy。说明：Apache BeanUtils 性能较差，可以使用其他方案比如 Spring BeanUtils, Cglib BeanCopier，注意均是浅拷贝。    ——[Java开发手册（嵩山版）](https://github.com/alibaba/p3c/blob/master/Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%B5%A9%E5%B1%B1%E7%89%88%EF%BC%89.pdf)
 
