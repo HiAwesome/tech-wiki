@@ -27,6 +27,8 @@ System.out.println(obj.getClass().getName());
 
 ## 著名的库
 
+### [Quick Guide to MapStruct](https://www.baeldung.com/mapstruct)
+
 ### [Google Guava User Guide](https://github.com/google/guava/wiki)
 
 ### [Apache Commons](http://commons.apache.org/)
