@@ -35,3 +35,6 @@
 * su - 可以切换到 root 账号，效果同 sudo su
 * [What's the difference between `chmod a+x` and `chmod +x`?](https://unix.stackexchange.com/a/639441)
 * [Why does chmod +w not give write permission to other(o)](https://unix.stackexchange.com/a/429424)
+* [umask - wikipedia](https://en.wikipedia.org/wiki/Umask)
+
+
