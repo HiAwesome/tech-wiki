@@ -75,6 +75,24 @@ curl -sL https://rpm.nodesource.com/setup_14.x | bash -
 npm install -g tldr
 ```
 
+### 安装 [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
+
+```shell
+$ sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+$ sudo yum install ripgrep
+```
+
+### 安装最新 Git
+
+**[https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7)**.
+
+### 安装 [fzf](https://github.com/junegunn/fzf#using-git)
+
+```shell
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
 ### Tips
 
 * su - 可以切换到 root 账号，效果同 sudo su
