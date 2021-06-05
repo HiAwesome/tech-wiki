@@ -100,6 +100,10 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 3. 安装 [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
 4. 安装 [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
 
+### 安装 jq
+
+* [How to Install jq(JSON processor) on RHEL/CentOS 7/8](https://www.cyberithub.com/how-to-install-jq-json-processor-on-rhel-centos-7-8/)
+
 ### Tips
 
 * su - 可以切换到 root 账号，效果同 sudo su
