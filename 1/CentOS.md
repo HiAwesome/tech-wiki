@@ -36,5 +36,5 @@
 * [What's the difference between `chmod a+x` and `chmod +x`?](https://unix.stackexchange.com/a/639441)
 * [Why does chmod +w not give write permission to other(o)](https://unix.stackexchange.com/a/429424)
 * [umask - wikipedia](https://en.wikipedia.org/wiki/Umask)
-
+* 为什么可执行权限缩写为 x 而不是 e？个人猜猜因为 read 和 write 中也含有 e, 而 x 是 execute 中第一个其他两个权限不包括的字母。
 
