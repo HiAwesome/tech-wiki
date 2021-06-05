@@ -30,3 +30,8 @@
 * [Centos 7 学习之静态IP设置(续)](https://blog.csdn.net/johnnycode/article/details/50184073)
 * [Questions about CentOS-7](https://wiki.centos.org/FAQ/CentOS7#head-a21a9e454157700367c9b7e9ccb1ff9954bec881)
 
+### Tips
+
+* su - 可以切换到 root 账号，效果同 sudo su
+* [What's the difference between `chmod a+x` and `chmod +x`?](https://unix.stackexchange.com/a/639441)
+* [Why does chmod +w not give write permission to other(o)](https://unix.stackexchange.com/a/429424)
