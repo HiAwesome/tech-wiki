@@ -93,6 +93,13 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
+### 安装 zsh 及其插件
+
+1. [How to install Zsh version 5.6.2 into CentOS 7](https://gist.github.com/moqimoqidea/e4b0dd31741370ce91bd638f83ed1a25)
+2. 将 `~/.zshrc` 中 `ZSH_THEME` 属性设置为 `simple`.
+3. 安装 [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh#basic-installation)
+4. 安装 [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
+
 ### Tips
 
 * su - 可以切换到 root 账号，效果同 sudo su
