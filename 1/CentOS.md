@@ -114,4 +114,4 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * cd -> change directory.
 * x 权限对于 linux 文件夹来说，表示进入该文件夹的权限。
 * [How To Set Up SSH Keys on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-centos7)
-
+* 很多读者都会误会 /usr 为 user 的缩写，其实 usr 是 Unix Software Resource 的缩写， 也就 是"Unix操作系统软件资源"所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。
