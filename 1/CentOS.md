@@ -2,7 +2,9 @@
 
 环境： Cent OS 7 on Vmware Fusion.
 
-## 设置静态 IP
+## 20200605
+
+### 设置静态 IP
 
 1. Vmware Fusion 外面设置连接方式为 Bridged Networking -> Wi-Fi.
 2. /etc/sysconfig/network-scripts/ifcfg-ens33 从 BOOTPROTO=dhcp 变更为:
