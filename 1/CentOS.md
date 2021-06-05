@@ -48,6 +48,11 @@ F                    Forward forever; like "tail -f".
 r  ^R  ^L            Repaint screen.
 R                    Repaint screen, discarding buffered input.
 ```
+### 安装 [shellcheck](https://github.com/koalaman/shellcheck)
+
+```shell
+yum -y install epel-release && yum install ShellCheck
+```
 
 ### Tips
 
