@@ -4,6 +4,10 @@
 
 ## 20200605
 
+### Keyboard & Mouse
+
+设置 CentOS 7 的键盘映射，从标准的 `Profile - Default` 复制一份命名为 `Profile - CentOS7`, 然后将 `Key Mappings` -> `Virtual Machine Shortcut` 的部分全部带上 `Shift`, 例如 `Control - C` 变更为 `Shift - Control - C`.
+
 ### 设置静态 IP
 
 1. Vmware Fusion 外面设置连接方式为 Bridged Networking -> Wi-Fi.
