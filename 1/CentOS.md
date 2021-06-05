@@ -54,6 +54,27 @@ R                    Repaint screen, discarding buffered input.
 yum -y install epel-release && yum install ShellCheck
 ```
 
+### 安装 node.js
+
+```shell
+curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+
+## Run `sudo yum install -y nodejs` to install Node.js 14.x and npm.
+## You may also need development tools to build native addons:
+     sudo yum install gcc-c++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+     sudo yum install yarn
+```
+
+### 安装 [tldr](https://github.com/tldr-pages/tldr)
+
+依赖较新版本的 node.js
+
+```shell
+npm install -g tldr
+```
+
 ### Tips
 
 * su - 可以切换到 root 账号，效果同 sudo su
