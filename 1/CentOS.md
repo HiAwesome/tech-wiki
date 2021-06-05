@@ -109,4 +109,5 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * 为什么可执行权限缩写为 x 而不是 e？个人猜猜因为 read 和 write 中也含有 e, 而 x 是 execute 中第一个其他两个权限不包括的字母。
 * cd -> change directory.
 * x 权限对于 linux 文件夹来说，表示进入该文件夹的权限。
+* [How To Set Up SSH Keys on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-centos7)
 
