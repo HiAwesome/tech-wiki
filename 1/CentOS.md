@@ -115,3 +115,5 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * x 权限对于 linux 文件夹来说，表示进入该文件夹的权限。
 * [How To Set Up SSH Keys on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-centos7)
 * 很多读者都会误会 /usr 为 user 的缩写，其实 usr 是 Unix Software Resource 的缩写， 也就 是"Unix操作系统软件资源"所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。
+* 例题：网络文件常常提到类似"./run.sh"之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。"./"代表"本目录"的意思，所以"./run.sh"代表"执行本目录下，名为run.sh的文件"啰！
+
