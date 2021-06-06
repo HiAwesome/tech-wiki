@@ -165,3 +165,15 @@ x86_64
 GNU/Linux
 ```
 
+### pwd
+
+```text
+~ cd /var/mail
+/var/mail pwd
+/var/mail
+/var/mail pwd -P
+/var/spool/mail
+/var ls -ld mail
+lrwxrwxrwx. 1 root root 10 May 31 23:56 mail -> spool/mail
+```
+
