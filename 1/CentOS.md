@@ -119,6 +119,9 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * `~account` 代表 account 这个使用者的主文件夹（account是个帐号名称）
 * 另外，针对`cd`的使用方法，如果仅输入`cd`时，代表的就是`cd ~`的意思喔，亦即是会回到自己的主文件夹啦！而那个`cd -`比较难以理解，请自行多做几次练习，就会比较明白了。
 * `pwd`是`Print Working Directory`的缩写，也就是显示目前所在目录的指令。
+* `mkdir`命令`-p`的含义：`-p, --parents`, no error if existing, make parent directories as needed.
+* `rmdir`命令`-p`的含义：`-p, --parents`, remove DIRECTORY and its ancestors; e.g., `rmdir -p a/b/c` is similar to `rmdir a/b/c a/b a`.
+* `ls`命令`-f`的含义：直接列出结果，而不进行排序 （ls 默认会以文件名排序！）
 
 ## 20200606
 
