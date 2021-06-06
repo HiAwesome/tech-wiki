@@ -117,3 +117,49 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * 很多读者都会误会 /usr 为 user 的缩写，其实 usr 是 Unix Software Resource 的缩写， 也就 是"Unix操作系统软件资源"所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。
 * 例题：网络文件常常提到类似"./run.sh"之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。"./"代表"本目录"的意思，所以"./run.sh"代表"执行本目录下，名为run.sh的文件"啰！
 
+## 20200606
+
+### 命令练习
+
+#### uname
+
+```text
+~ uname --help
+Usage: uname [OPTION]...
+Print certain system information.  With no OPTION, same as -s.
+
+  -a, --all                print all information, in the following order,
+                             except omit -p and -i if unknown:
+  -s, --kernel-name        print the kernel name
+  -n, --nodename           print the network node hostname
+  -r, --kernel-release     print the kernel release
+  -v, --kernel-version     print the kernel version
+  -m, --machine            print the machine hardware name
+  -p, --processor          print the processor type or "unknown"
+  -i, --hardware-platform  print the hardware platform or "unknown"
+  -o, --operating-system   print the operating system
+      --help     display this help and exit
+      --version  output version information and exit
+
+GNU coreutils online help: <http://www.gnu.org/software/coreutils/>
+For complete documentation, run: info coreutils 'uname invocation'
+~ uname -a
+Linux localhost 3.10.0-1160.25.1.el7.x86_64 #1 SMP Wed Apr 28 21:49:45 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+~ uname -s
+Linux
+~ uname -n
+localhost
+~ uname -r
+3.10.0-1160.25.1.el7.x86_64
+~ uname -v
+#1 SMP Wed Apr 28 21:49:45 UTC 2021
+~ uname -m
+x86_64
+~ uname -p
+x86_64
+~ uname -i
+x86_64
+~ uname -o
+GNU/Linux
+```
+
