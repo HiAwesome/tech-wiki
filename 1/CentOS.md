@@ -343,3 +343,60 @@ passwd: /usr/bin/passwd /etc/passwd /usr/share/man/man1/passwd.1.gz /usr/share/m
 /tmp whereis -m passwd
 passwd: /usr/share/man/man1/passwd.1.gz /usr/share/man/man5/passwd.5.gz
 ```
+
+##### localte
+
+```text
+/tmp locate keyword
+/usr/lib/node_modules/npm/node_modules/har-validator/node_modules/ajv/lib/keyword.js
+/usr/lib64/perl5/CORE/keywords.h
+/usr/lib64/python2.7/keyword.py
+/usr/lib64/python2.7/keyword.pyc
+/usr/lib64/python2.7/keyword.pyo
+/usr/share/systemtap/examples/keyword-index.html
+/usr/share/systemtap/examples/keyword-index.txt
+/usr/src/kernels/3.10.0-1160.25.1.el7.x86_64/scripts/genksyms/keywords.gperf
+/usr/src/kernels/3.10.0-1160.25.1.el7.x86_64/scripts/genksyms/keywords.hash.c
+/usr/src/kernels/3.10.0-1160.25.1.el7.x86_64/scripts/genksyms/keywords.hash.c_shipped
+/usr/src/kernels/3.10.0-1160.el7.x86_64/scripts/genksyms/keywords.gperf
+/usr/src/kernels/3.10.0-1160.el7.x86_64/scripts/genksyms/keywords.hash.c
+/usr/src/kernels/3.10.0-1160.el7.x86_64/scripts/genksyms/keywords.hash.c_shipped
+/tmp locate -S
+Database /var/lib/mlocate/mlocate.db:
+	21,871 directories
+	201,072 files
+	10,587,933 bytes in file names
+	4,773,354 bytes used to store database
+/tmp updatedb
+/tmp locate -S
+Database /var/lib/mlocate/mlocate.db:
+	21,901 directories
+	201,476 files
+	10,593,897 bytes in file names
+	4,777,549 bytes used to store database
+```
+
+##### find
+
+```text
+范例一：将过去系统上面 24 小时内有更动过内容 （mtime） 的文件列出
+/tmp find /etc -mtime 0
+/etc
+/etc/pki/nssdb
+/etc/profile.d
+/etc/ld.so.conf.d
+/etc/ld.so.cache
+/etc/alternatives
+/etc/alternatives/pax
+/etc/alternatives/pax-man
+/etc/foomatic
+/etc/redhat-lsb
+/etc/lsb-release.d
+
+范例二：寻找 /etc/cups/ 下面的文件，如果文件日期比 /etc/passwd 新就列出
+/tmp find /etc/cups/ -newer /etc/passwd
+/etc/cups/
+/etc/cups/subscriptions.conf.O
+/etc/cups/subscriptions.conf
+```
+
