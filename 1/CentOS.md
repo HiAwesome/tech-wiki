@@ -127,6 +127,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 * `ls`命令`-t`的含义：依时间排序，而不是用文件名。
 * `ls`命令`--full-time`的含义：以完整时间模式 （包含年、月、日、时、分） 输出。
 * 无论如何，`ls`最常被使用到的功能还是那个`-l`的选项，为此，很多 distribution 在默认的情况中，已经将`ll`（L 的小写）设置成为`ls -l`的意思了！其实，那个功能是 Bash shell 的 alias 功能呢～也就是说，我们直接输入`ll`就等于是输入`ls -l`是一样的。
+* 嘿嘿！Linux 里面有"猫"指令？喔！不是的， cat 是 Concatenate （连续） 的简写， 主要的功能是将一个文件的内容连续的印出在屏幕上面！
 
 ## 20200606
 
@@ -201,6 +202,17 @@ cp: overwrite ‘/tmp/zshrc’? y
 /tmp ls -ls /var/log/wtmp wtmp_2
 44 -rw-rw-r--. 1 root utmp 42240 Jun  6 09:23 /var/log/wtmp
 44 -rw-rw-r--. 1 root utmp 42240 Jun  6 09:23 wtmp_2
+/tmp cp /etc/ /tmp
+cp: omitting directory ‘/etc/’
+/tmp cp -r /etc/ /tmp
+/tmp ls -l zshrc
+-rw-r--r--. 1 root root 3703 Jun  6 10:27 zshrc
+/tmp cp -s zshrc zshrc_slink
+/tmp cp -l zshrc zshrc_hlink
+/tmp ls -l zshrc*
+-rw-r--r--. 2 root root 3703 Jun  6 10:27 zshrc
+-rw-r--r--. 2 root root 3703 Jun  6 10:27 zshrc_hlink
+lrwxrwxrwx. 1 root root    5 Jun  6 10:32 zshrc_slink -> zshrc
 ```
 
 
