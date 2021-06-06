@@ -2,6 +2,34 @@
 
 环境： Cent OS 7 on Vmware Fusion.
 
+## Tips
+
+* su - 可以切换到 root 账号，效果同 sudo su
+* [What's the difference between `chmod a+x` and `chmod +x`?](https://unix.stackexchange.com/a/639441)
+* [Why does chmod +w not give write permission to other(o)](https://unix.stackexchange.com/a/429424)
+* [umask - wikipedia](https://en.wikipedia.org/wiki/Umask)
+* 为什么可执行权限缩写为 x 而不是 e？个人猜猜因为 read 和 write 中也含有 e, 而 x 是 execute 中第一个其他两个权限不包括的字母。
+* cd -> change directory.
+* x 权限对于 linux 文件夹来说，表示进入该文件夹的权限。
+* [How To Set Up SSH Keys on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-centos7)
+* 很多读者都会误会 /usr 为 user 的缩写，其实 usr 是 Unix Software Resource 的缩写， 也就 是"Unix操作系统软件资源"所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。
+* 例题：网络文件常常提到类似"./run.sh"之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。"./"代表"本目录"的意思，所以"./run.sh"代表"执行本目录下，名为run.sh的文件"啰！
+* `~account` 代表 account 这个使用者的主文件夹（account是个帐号名称）
+* 另外，针对`cd`的使用方法，如果仅输入`cd`时，代表的就是`cd ~`的意思喔，亦即是会回到自己的主文件夹啦！而那个`cd -`比较难以理解，请自行多做几次练习，就会比较明白了。
+* `pwd`是`Print Working Directory`的缩写，也就是显示目前所在目录的指令。
+* `mkdir`命令`-p`的含义：`-p, --parents`, no error if existing, make parent directories as needed.
+* `rmdir`命令`-p`的含义：`-p, --parents`, remove DIRECTORY and its ancestors; e.g., `rmdir -p a/b/c` is similar to `rmdir a/b/c a/b a`.
+* `ls`命令`-f`的含义：直接列出结果，而不进行排序 （ls 默认会以文件名排序！）
+* `ls`命令`-r`的含义：将排序结果反向输出，例如：原本文件名由小到大，反向则为由大到小；
+* `ls`命令`-S`的含义：以文件大小大小排序，而不是用文件名排序；
+* `ls`命令`-t`的含义：依时间排序，而不是用文件名。
+* `ls`命令`--full-time`的含义：以完整时间模式 （包含年、月、日、时、分） 输出。
+* 无论如何，`ls`最常被使用到的功能还是那个`-l`的选项，为此，很多 distribution 在默认的情况中，已经将`ll`（L 的小写）设置成为`ls -l`的意思了！其实，那个功能是 Bash shell 的 alias 功能呢～也就是说，我们直接输入`ll`就等于是输入`ls -l`是一样的。
+* 嘿嘿！Linux 里面有"猫"指令？喔！不是的， cat 是 Concatenate （连续） 的简写， 主要的功能是将一个文件的内容连续的印出在屏幕上面！
+* `head`命令 -n 选项后面的参数较有趣，如果接的是负数，例如上面范例的 -n -100 时，代表列前的所有行数，但不包括后面100行。举例来说 CentOS 7.1 的 /etc/mandb.conf 共有131行，则上述的指令`head -n -100 /etc/man_db.conf`就会列出前面 31 行，后面 100 行不会打印出来 了。
+* `tail`命令，当下达`tail -n +100 /etc/man_db.conf`代表该文件从 100 行以后都会被列出来，同样的，在 man_db.conf 共有 131 行，因此第 100~131 行就会被列出来啦！前面的 99 行都不会被显示出来喔！
+
+
 ## 20200605
 
 ### Keyboard & Mouse
@@ -104,31 +132,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 * [How to Install jq(JSON processor) on RHEL/CentOS 7/8](https://www.cyberithub.com/how-to-install-jq-json-processor-on-rhel-centos-7-8/)
 
-### Tips
-
-* su - 可以切换到 root 账号，效果同 sudo su
-* [What's the difference between `chmod a+x` and `chmod +x`?](https://unix.stackexchange.com/a/639441)
-* [Why does chmod +w not give write permission to other(o)](https://unix.stackexchange.com/a/429424)
-* [umask - wikipedia](https://en.wikipedia.org/wiki/Umask)
-* 为什么可执行权限缩写为 x 而不是 e？个人猜猜因为 read 和 write 中也含有 e, 而 x 是 execute 中第一个其他两个权限不包括的字母。
-* cd -> change directory.
-* x 权限对于 linux 文件夹来说，表示进入该文件夹的权限。
-* [How To Set Up SSH Keys on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-centos7)
-* 很多读者都会误会 /usr 为 user 的缩写，其实 usr 是 Unix Software Resource 的缩写， 也就 是"Unix操作系统软件资源"所放置的目录，而不是使用者的数据啦！这点要注意。 FHS建议所有软件开发者，应该将他们的数据合理的分别放置到这个目录下的次目录，而不要自行创建该软件自己独立的目录。
-* 例题：网络文件常常提到类似"./run.sh"之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。"./"代表"本目录"的意思，所以"./run.sh"代表"执行本目录下，名为run.sh的文件"啰！
-* `~account` 代表 account 这个使用者的主文件夹（account是个帐号名称）
-* 另外，针对`cd`的使用方法，如果仅输入`cd`时，代表的就是`cd ~`的意思喔，亦即是会回到自己的主文件夹啦！而那个`cd -`比较难以理解，请自行多做几次练习，就会比较明白了。
-* `pwd`是`Print Working Directory`的缩写，也就是显示目前所在目录的指令。
-* `mkdir`命令`-p`的含义：`-p, --parents`, no error if existing, make parent directories as needed.
-* `rmdir`命令`-p`的含义：`-p, --parents`, remove DIRECTORY and its ancestors; e.g., `rmdir -p a/b/c` is similar to `rmdir a/b/c a/b a`.
-* `ls`命令`-f`的含义：直接列出结果，而不进行排序 （ls 默认会以文件名排序！）
-* `ls`命令`-r`的含义：将排序结果反向输出，例如：原本文件名由小到大，反向则为由大到小；
-* `ls`命令`-S`的含义：以文件大小大小排序，而不是用文件名排序；
-* `ls`命令`-t`的含义：依时间排序，而不是用文件名。
-* `ls`命令`--full-time`的含义：以完整时间模式 （包含年、月、日、时、分） 输出。
-* 无论如何，`ls`最常被使用到的功能还是那个`-l`的选项，为此，很多 distribution 在默认的情况中，已经将`ll`（L 的小写）设置成为`ls -l`的意思了！其实，那个功能是 Bash shell 的 alias 功能呢～也就是说，我们直接输入`ll`就等于是输入`ls -l`是一样的。
-* 嘿嘿！Linux 里面有"猫"指令？喔！不是的， cat 是 Concatenate （连续） 的简写， 主要的功能是将一个文件的内容连续的印出在屏幕上面！
-
 ## 20200606
 
 ### 命令练习
@@ -175,7 +178,7 @@ x86_64
 GNU/Linux
 ```
 
-### pwd
+#### pwd
 
 ```text
 ~ cd /var/mail
@@ -187,7 +190,7 @@ GNU/Linux
 lrwxrwxrwx. 1 root root 10 May 31 23:56 mail -> spool/mail
 ```
 
-### cp
+#### cp
 
 ```text
 ~ cp ~/.zshrc /tmp/zshrc
@@ -215,4 +218,48 @@ cp: omitting directory ‘/etc/’
 lrwxrwxrwx. 1 root root    5 Jun  6 10:32 zshrc_slink -> zshrc
 ```
 
+### 文件的时间
 
+* modification time（mtime）：当该文件的“内容数据”变更时，就会更新这个时间！内容数据指的是文件的内容，而不是文件的属性或权限喔！
+* status time（ctime）：当该文件的“状态（status）”改变时，就会更新这个时间，举例来说，像是权限与属性被更改了，都会更新这个时间啊。
+* access time（atime）：当“该文件的内容被取用”时，就会更新这个读取时间（access）。举例来说，我们使用 cat 去读取 /etc/man_db.conf，就会更新该文件的 atime 了。
+
+```text
+~ date; ls -l /etc/man_db.conf ; ls -l --time=atime /etc/man_db.conf ; ls -l --time=ctime /etc/man_db.conf
+Sun Jun  6 13:42:06 CST 2021
+-rw-r--r--. 1 root root 5171 Oct 31  2018 /etc/man_db.conf
+-rw-r--r--. 1 root root 5171 Jun  5 11:10 /etc/man_db.conf
+-rw-r--r--. 1 root root 5171 May 31 23:59 /etc/man_db.conf
+```
+
+#### touch
+
+```text
+/tmp touch -d '2 days ago' zshrc
+/tmp date; ll zshrc; ll --time=atime zshrc; ll --time=ctime zshrc
+Sun Jun  6 13:53:26 CST 2021
+-rw-r--r--. 1 root root 3.7K Jun  4 13:53 zshrc
+-rw-r--r--. 1 root root 3.7K Jun  4 13:53 zshrc
+-rw-r--r--. 1 root root 3.7K Jun  6 13:53 zshrc
+/tmp touch -t 201406150202 zshrc
+/tmp date; ll zshrc; ll --time=atime zshrc; ll --time=ctime zshrc
+Sun Jun  6 13:53:51 CST 2021
+-rw-r--r--. 1 root root 3.7K Jun 15  2014 zshrc
+-rw-r--r--. 1 root root 3.7K Jun 15  2014 zshrc
+-rw-r--r--. 1 root root 3.7K Jun  6 13:53 zshrc
+```
+
+#### od
+
+```text
+od -t oCc /etc/issue
+0000000 134 123 012 113 145 162 156 145 154 040 134 162 040 157 156 040
+          \   S  \n   K   e   r   n   e   l       \   r       o   n
+0000020 141 156 040 134 155 012 012
+          a   n       \   m  \n  \n
+0000027
+~ echo 'password' | od -t oCc
+0000000 160 141 163 163 167 157 162 144 012
+          p   a   s   s   w   o   r   d  \n
+0000011
+```
