@@ -28,7 +28,7 @@
 * 嘿嘿！Linux 里面有"猫"指令？喔！不是的， cat 是 Concatenate （连续） 的简写， 主要的功能是将一个文件的内容连续的印出在屏幕上面！
 * `head`命令 -n 选项后面的参数较有趣，如果接的是负数，例如上面范例的 -n -100 时，代表列前的所有行数，但不包括后面100行。举例来说 CentOS 7.1 的 /etc/mandb.conf 共有131行，则上述的指令`head -n -100 /etc/man_db.conf`就会列出前面 31 行，后面 100 行不会打印出来 了。
 * `tail`命令，当下达`tail -n +100 /etc/man_db.conf`代表该文件从 100 行以后都会被列出来，同样的，在 man_db.conf 共有 131 行，因此第 100~131 行就会被列出来啦！前面的 99 行都不会被显示出来喔！
-
+* 文件隐藏属性：`chattr [+-=][ASacdistu] (file|dir)`
 
 ## 20200605
 
@@ -262,4 +262,17 @@ od -t oCc /etc/issue
 0000000 160 141 163 163 167 157 162 144 012
           p   a   s   s   w   o   r   d  \n
 0000011
+```
+
+#### chattr
+
+```text
+/tmp touch attrtest
+/tmp chattr +i attrtest
+/tmp rm attrtest
+rm: cannot remove ‘attrtest’: Operation not permitted
+/tmp rm -f attrtest
+rm: cannot remove ‘attrtest’: Operation not permitted
+/tmp chattr -i attrtest
+/tmp rm -f attrtest
 ```
