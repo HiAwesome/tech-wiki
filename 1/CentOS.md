@@ -28,7 +28,7 @@
 * 嘿嘿！Linux 里面有"猫"指令？喔！不是的， cat 是 Concatenate （连续） 的简写， 主要的功能是将一个文件的内容连续的印出在屏幕上面！
 * `head`命令 -n 选项后面的参数较有趣，如果接的是负数，例如上面范例的 -n -100 时，代表列前的所有行数，但不包括后面100行。举例来说 CentOS 7.1 的 /etc/mandb.conf 共有131行，则上述的指令`head -n -100 /etc/man_db.conf`就会列出前面 31 行，后面 100 行不会打印出来 了。
 * `tail`命令，当下达`tail -n +100 /etc/man_db.conf`代表该文件从 100 行以后都会被列出来，同样的，在 man_db.conf 共有 131 行，因此第 100~131 行就会被列出来啦！前面的 99 行都不会被显示出来喔！
-* 文件隐藏属性：`chattr [+-=][ASacdistu] (file|dir)`
+* 文件隐藏属性：`chattr [+-=][ASacdistu] (file|dir)`, 常见的包括只能新增数据的 +a 与完全不能更动文件的 +i 属性。
 
 ## 20200605
 
@@ -398,5 +398,137 @@ Database /var/lib/mlocate/mlocate.db:
 /etc/cups/
 /etc/cups/subscriptions.conf.O
 /etc/cups/subscriptions.conf
+
+范例三：搜寻 /home/moqi/.dbus 下面属于 dmtsai 的文件
+/tmp find /home/moqi/.dbus -user moqi
+/home/moqi/.dbus
+/home/moqi/.dbus/session-bus
+/home/moqi/.dbus/session-bus/e74863b8ab774b2cb2bc6f4a24973651-0
+/home/moqi/.dbus/session-bus/e74863b8ab774b2cb2bc6f4a24973651-1
+
+范例四：搜寻系统中不属于任何人的文件
+/tmp find / -nouser
+find: ‘/proc/24890/task/24890/fd/5’: No such file or directory
+find: ‘/proc/24890/task/24890/fdinfo/5’: No such file or directory
+find: ‘/proc/24890/fd/6’: No such file or directory
+find: ‘/proc/24890/fdinfo/6’: No such file or directory
+/root/.fzf/bin/fzf
+/var/spool/mail/moqi1
+/tmp/.ICE-unix/1880
+/tmp/tracker-extract-files.1001
+/tmp/.esd-1001
+^C
+
+范例五：找出文件名为 passwd 这个文件
+/tmp find / -name passwd
+/sys/fs/selinux/class/passwd
+/sys/fs/selinux/class/passwd/perms/passwd
+/etc/pam.d/passwd
+/etc/passwd
+/tmp/etc/pam.d/passwd
+/tmp/etc/passwd
+/usr/bin/passwd
+/usr/share/bash-completion/completions/passwd
+^C
+
+范例五：找出文件名包含了 passwd 这个关键字的文件
+/tmp find / -name "*passwd*"
+/sys/fs/selinux/class/passwd
+/sys/fs/selinux/class/passwd/perms/passwd
+/etc/security/opasswd
+/etc/pam.d/passwd
+/etc/passwd
+/etc/passwd-
+/root/.tldr/cache/pages/linux/smbpasswd.md
+/root/.tldr/cache/pages/linux/gpasswd.md
+/root/.tldr/cache/pages/common/passwd.md
+
+范例六：找出 /run 目录下，文件类型为 Socket 的文件名有哪些？
+/tmp find /run -type s
+/run/abrt/abrt.socket
+/run/vmware/guestServicePipe
+/run/gssproxy.sock
+/run/chrony/chronyd.sock
+/run/dbus/system_bus_socket
+/run/rpcbind.sock
+/run/avahi-daemon/socket
+/run/libvirt/libvirt-admin-sock
+/run/libvirt/libvirt-sock-ro
+/run/libvirt/libvirt-sock
+/run/libvirt/virtlogd-sock
+/run/libvirt/virtlockd-sock
+/run/cups/cups.sock
+/run/user/42/pulse/native
+/run/lsm/ipc/simc
+/run/lsm/ipc/sim
+/run/lvm/lvmpolld.socket
+/run/lvm/lvmetad.socket
+/run/udev/control
+/run/systemd/shutdownd
+/run/systemd/private
+/run/systemd/journal/socket
+/run/systemd/journal/stdout
+/run/systemd/cgroups-agent
+/run/systemd/notify
+
+范例七：搜寻文件当中含有 SGID 或 SUID 或 SBIT 的属性
+/tmp find / -perm /7000
+/dev/mqueue
+/dev/shm
+find: ‘/proc/25091/task/25091/fd/5’: No such file or directory
+find: ‘/proc/25091/task/25091/fdinfo/5’: No such file or directory
+find: ‘/proc/25091/fd/6’: No such file or directory
+find: ‘/proc/25091/fdinfo/6’: No such file or directory
+/run/log/journal
+/run/log/journal/e74863b8ab774b2cb2bc6f4a24973651
+/var/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-chronyd.service-7raPJK/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-rtkit-daemon.service-ZH3Ni4/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-cups.service-jAqP0G/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-bolt.service-rL7r3D/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-colord.service-RLDmrT/tmp
+/var/tmp/systemd-private-efa4e514bf3142b4ab078aab0b48d78e-fwupd.service-pcqOaI/tmp
+^C
+
+范例八：将上个范例找到的文件使用 ls -l 列出来～
+/tmp find /usr/bin /usr/sbin -perm /7000 -exec ls -l {} \;
+-rwsr-xr-x. 1 root root 32096 Oct 31  2018 /usr/bin/fusermount
+-r-xr-sr-x. 1 root tty 15344 Jun 10  2014 /usr/bin/wall
+-rwsr-xr-x. 1 root root 61320 Oct  1  2020 /usr/bin/ksu
+-rws--x--x. 1 root root 23968 Feb  3 00:31 /usr/bin/chfn
+-rws--x--x. 1 root root 23880 Feb  3 00:31 /usr/bin/chsh
+-rwsr-xr-x. 1 root root 27856 Apr  1  2020 /usr/bin/passwd
+-rwsr-xr-x. 1 root root 32128 Feb  3 00:31 /usr/bin/su
+-rwsr-xr-x. 1 root root 73888 Aug  9  2019 /usr/bin/chage
+-rwsr-xr-x. 1 root root 78408 Aug  9  2019 /usr/bin/gpasswd
+-rwsr-xr-x. 1 root root 41936 Aug  9  2019 /usr/bin/newgrp
+-rwsr-xr-x. 1 root root 44264 Feb  3 00:31 /usr/bin/mount
+-rwsr-xr-x. 1 root root 23576 Apr  1  2020 /usr/bin/pkexec
+-rwsr-xr-x. 1 root root 31984 Feb  3 00:31 /usr/bin/umount
+...
+
+范例九：找出系统中，大于 1MB 的文件
+/tmp find / -size +1M
+/boot/efi/EFI/centos/MokManager.efi
+/boot/efi/EFI/centos/mmx64.efi
+/boot/efi/EFI/centos/shim.efi
+/boot/efi/EFI/centos/shimx64-centos.efi
+/boot/efi/EFI/centos/shimx64.efi
+/boot/efi/EFI/BOOT/BOOTX64.EFI
+/boot/grub2/fonts/unicode.pf2
+/boot/System.map-3.10.0-1160.el7.x86_64
+/boot/vmlinuz-3.10.0-1160.el7.x86_64
+/boot/initramfs-0-rescue-e74863b8ab774b2cb2bc6f4a24973651.img
+/boot/vmlinuz-0-rescue-e74863b8ab774b2cb2bc6f4a24973651
+/boot/System.map-3.10.0-1160.25.1.el7.x86_64
+/boot/vmlinuz-3.10.0-1160.25.1.el7.x86_64
+/boot/initramfs-3.10.0-1160.25.1.el7.x86_64.img
+/boot/initramfs-3.10.0-1160.el7.x86_64.img
+/proc/kcore
+find: ‘/proc/25248/task/25248/fd/5’: No such file or directory
+find: ‘/proc/25248/task/25248/fdinfo/5’: No such file or directory
+find: ‘/proc/25248/fd/6’: No such file or directory
+find: ‘/proc/25248/fdinfo/6’: No such file or directory
+^C
 ```
 
