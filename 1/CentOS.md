@@ -275,4 +275,71 @@ rm: cannot remove ‘attrtest’: Operation not permitted
 rm: cannot remove ‘attrtest’: Operation not permitted
 /tmp chattr -i attrtest
 /tmp rm -f attrtest
+/tmp touch aaaaa
+/tmp lsattr aaaaa
+---------------- aaaaa
+/tmp chattr +aiS aaaaa
+/tmp lsattr aaaaa
+--S-ia---------- aaaaa
+```
+
+#### 文件特殊权限
+
+SUID, SGID, SBIT
+
+```text
+/tmp ls -ld /tmp; ls -l /usr/bin/passwd
+drwxrwxrwt. 38 root root 4096 Jun  6 21:21 /tmp
+-rwsr-xr-x. 1 root root 27856 Apr  1  2020 /usr/bin/passwd
+/tmp ls -l /usr/bin/locate
+-rwx--s--x. 1 root slocate 40520 Apr 11  2018 /usr/bin/locate
+/tmp touch t1
+/tmp chmod 4755 t1
+/tmp ll t1
+-rwsr-xr-x. 1 root root 0 Jun  6 21:30 t1
+/tmp chmod 6755 t1
+/tmp ll t1
+-rwsr-sr-x. 1 root root 0 Jun  6 21:30 t1
+/tmp chmod 1755 t1
+/tmp ll t1
+-rwxr-xr-t. 1 root root 0 Jun  6 21:30 t1
+/tmp chmod 7666 t1
+/tmp ll t1
+-rwSrwSrwT. 1 root root 0 Jun  6 21:30 t1
+```
+
+#### which
+
+寻找可执行文件
+
+```text
+/tmp which ifconfig
+/usr/sbin/ifconfig
+/tmp which which
+which: shell built-in command
+/tmp which history
+history: aliased to omz_history
+/tmp which -a which
+which: shell built-in command
+/usr/bin/which
+/tmp which -a history
+history: aliased to omz_history
+history: shell built-in command
+```
+
+#### 文件文件名的搜寻
+
+再来谈一谈怎么搜寻文件吧！在 Linux 下面也有相当优异的搜寻指令呦！通常 find 不很常用的！因为速度慢之外，也很操硬盘！一般我们都是先使用 whereis 或者是 locate 来检查，如果真的找不到了，才以 find 来搜寻呦！为什么呢？因为 whereis 只找系统中某些特定目录下面的文件而已，locate 则是利用数据库来搜寻文件名，当然两者就相当的快速，并且没有实际的搜寻硬盘内的文件系统状态，比较省时间啦！
+
+##### whereis
+
+由一些特定的目录中寻找文件文件名
+
+```text
+/tmp whereis ifconfg
+ifconfg:#
+/tmp whereis passwd
+passwd: /usr/bin/passwd /etc/passwd /usr/share/man/man1/passwd.1.gz /usr/share/man/man5/passwd.5.gz
+/tmp whereis -m passwd
+passwd: /usr/share/man/man1/passwd.1.gz /usr/share/man/man5/passwd.5.gz
 ```
