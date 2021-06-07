@@ -1,5 +1,11 @@
 # 零散的经验
 
+## Mac install [tldr](https://github.com/tldr-pages/tldr)
+
+```shell
+brew install tldr
+```
+
 ## [文档标记语言的比较及选择](https://en.wikipedia.org/wiki/Comparison_of_document-markup_languages)
 
 从 Wikipedia 可以看到 [Markdown](https://en.wikipedia.org/wiki/Markdown) 最为流行，但确实目前是一个静态的标准。像 Github、Gitlab、Stack Overflow 都支持了带有各自风味的 Common Markdown, 因为无法统一这个标准本身。
