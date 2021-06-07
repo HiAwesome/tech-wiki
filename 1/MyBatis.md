@@ -4,6 +4,7 @@
 
 * [MySQL LIMIT](https://www.mysqltutorial.org/mysql-limit.aspx)
 * [几种常见mybatis分页实现](https://blog.csdn.net/feinifi/article/details/88769101)
+* [Mybatis PageHelper PageInfo](https://github.com/pagehelper/Mybatis-PageHelper/blob/master/src/main/java/com/github/pagehelper/PageInfo.java)
 
 ### Mybatis OGNL Expression
 
