@@ -55,6 +55,8 @@ o.s.MyBenchmark.spring        avgt      100   0.627        0.020  us/op
 
 统计报告中 Units 单位为微秒/次，由 Score 项可以看出，基于 ASM 的 cglib BeanCopier 拷贝速度基本和手写 get/set 方法的速度无异，其次的就是基于 javassist 的 Orika 了，Orika 的速度是 spring BeanUtils 的两倍，Dozer 的 20 倍，Apache BeanUtils 的 120 倍。
 
+结论：默认使用 [Spring BeanUtils](https://github.com/spring-projects/spring-framework/blob/main/spring-beans/src/main/java/org/springframework/beans/BeanUtils.java), 可以增加依赖时使用 [Mapstruct](https://github.com/mapstruct/mapstruct).
+
 ## Java 枚举是自动可序列化的
 
 * [Java Enums Are Inherently Serializable](https://www.infoworld.com/article/2072870/java-enums-are-inherently-serializable.html)
