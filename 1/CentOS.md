@@ -532,3 +532,35 @@ find: ‘/proc/25248/fdinfo/6’: No such file or directory
 ^C
 ```
 
+##### uuidgen
+
+```text
+~/test tldr uuidgen
+
+  uuidgen
+
+  Generate unique identifiers (UUIDs).
+  See also uuid.
+  More information: https://manned.org/uuidgen.
+
+  - Create a random UUIDv4:
+    uuidgen --random
+
+  - Create a UUIDv1 based on the current time:
+    uuidgen --time
+
+  - Create a UUIDv5 of the name with a specified namespace prefix:
+    uuidgen --sha1 --namespace @dns|@url|@oid|@x500 --name object_name
+
+
+See also: uuid
+
+~/test uuidgen
+b0ed356a-d435-411a-bb8f-2675f105a09f
+~/test uuidgen
+4d960056-6894-4849-a0a6-905150a16eee
+~/test uuidgen -t
+68e04460-cacd-11eb-9b18-000c296448c5
+~/test uuidgen -t
+69c56536-cacd-11eb-ad57-000c296448c5
+```
