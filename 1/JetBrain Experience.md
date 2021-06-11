@@ -1,5 +1,7 @@
 # Jetbrain Experience
 
+### [2021.1.2 javax.net.ssl.SSLHandshakeException](https://youtrack.jetbrains.com/issue/DBE-13313#focus=Comments-27-4922190.0-0)
+
 ## [Official documents](https://www.jetbrains.com/help/idea/discover-intellij-idea.html)
 
 ### [Write and edit source code: LightEdit mode](https://www.jetbrains.com/help/idea/lightedit-mode.html)
