@@ -114,10 +114,17 @@
    * type   :#,#s/old/new/g    where #,# are the line numbers of the range of lines where the substitution is to be done.
    * Type   :%s/old/new/g      to change every occurrence in the whole file.
    * Type   :%s/old/new/gc     to find every occurrence in the whole file, with a prompt whether to substitute or not.
+* CTRL-O takes you back to older positions, CTRL-I to newer positions.
+* Lesson 6.5: SET OPTION
+    * Set the 'ic' (Ignore case) option by entering:   :set ic
+    * Set the 'hlsearch' and 'incsearch' options:  :set hls is
+    * To disable ignoring case enter:  :set noic
+    * To remove the highlighting of matches enter:   :nohlsearch
+    * If you want to ignore case for just one search command, use \c in the phrase:  /ignore\c  <ENTER>
 
 #### 杂项
 
-* 光标回到上个位置：Ctrl + o
+* [Copying and Moving Text -- Yank, Delete, and Put](https://docs.oracle.com/cd/E19455-01/806-2902/editorvi-53/index.html): Many word-processors allow you to "copy and paste" and "cut and paste" lines of text. The vi editor also includes these features. The vi command-mode equivalent of "copy and paste" is yank and put; the equivalent of "cut and paste" is delete and put. The methods for copying or moving small blocks of text in vi involves using a combination of the yank, delete, and put commands.
 
 ## 20200605
 
