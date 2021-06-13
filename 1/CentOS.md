@@ -104,7 +104,10 @@
 
 #### vimtutor
 
-`vimtutor` 是一个 Vim 安装时自带的教程。 NOTE: As you go through this tutor, do not try to memorize, learn by usage.
+`vimtutor` 是一个 Vim 安装时自带的教程。 
+
+* NOTE: As you go through this tutor, do not try to memorize, learn by usage.
+* NOTE: Remember that you should be learning by doing, not memorization.
 
 #### 杂项
 
