@@ -66,7 +66,7 @@
 
 #### 编辑
 
-所有你需要用鼠标做的事，你现在都可以用键盘：采用编辑命令和移动命令的组合来完成。这就是 Vim 的界面开始看起来像一个程序语言的时候。Vim 的编辑命令也被称为"动词"， 因为动词可以施动于名词。
+所有你需要用鼠标做的事，你现在都可以用键盘：采用编辑命令和移动命令的组合来完成。这就是 Vim 的界面开始看起来像一个程序语言的时候。Vim 的编辑命令也被称为"动词"， 因为动词可以施动于名词。Many commands that change text are made from an operator and a motion. The format for a delete command with the  d  delete operator is as follows: `d motion` Where: `d` is the delete operator. `motion` is what the operator will operate on (listed below).
 
 * i 进入插入模式, 但是对于操纵/编辑文本，不单想用退格键完成
 * O / o 在之上/之下插入行
