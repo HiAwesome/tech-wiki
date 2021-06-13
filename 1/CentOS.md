@@ -106,6 +106,10 @@
 
 `vimtutor` 是一个 Vim 安装时自带的教程。 NOTE: As you go through this tutor, do not try to memorize, learn by usage.
 
+#### 杂项
+
+* 光标回到上个位置：Ctrl + o
+
 ## 20200605
 
 ### Keyboard & Mouse
