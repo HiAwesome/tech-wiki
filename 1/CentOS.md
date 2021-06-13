@@ -83,8 +83,8 @@
 #### 正则替换
 
 * :n1,n2s/word1/word2/g：n1 与 n2 为数字。在第 n1 与 n2 列之间寻找 word1 这个字串，并将该字串取代为 word2举例来说，在 100 到 200 列之间搜寻 vbird 并取代为 VBIRD 则：":100,200s/vbird/VBIRD/g"。
-* :1,$s/word1/word2/g：从第一列到最后一列寻找 word1 字串，并将该字串取代为 word2。
-* :1,$s/word1/word2/gc：从第一列到最后一列寻找 word1 字串，并将该字串取代为 word2 且在取代前显示提示字符给使用者确认（confirm）是否需要取代！
+* :1,$s/word1/word2/g：从第一列到最后一列寻找 word1 字串，并将该字串取代为 word2，使用 :%s/word1/word2/g 更好。
+* :1,$s/word1/word2/gc：从第一列到最后一列寻找 word1 字串，并将该字串取代为 word2 且在取代前显示提示字符给使用者确认（confirm）是否需要取代，使用 :%s/word1/word2/gc 更好。
 
 #### 计数
 
@@ -108,6 +108,12 @@
 
 * NOTE: As you go through this tutor, do not try to memorize, learn by usage.
 * NOTE: Remember that you should be learning by doing, not memorization.
+* Type CTRL-G to show your location in the file and the file status. Type  G  to move to a line in the file.
+* Lesson 4.3: MATCHING PARENTHESES SEARCH: Type  %  to find a matching ),], or } . NOTE: This is very useful in debugging a program with unmatched parentheses!
+* Lesson 4.4: THE SUBSTITUTE COMMAND: To change every occurrence of a character string between two lines,
+   * type   :#,#s/old/new/g    where #,# are the line numbers of the range of lines where the substitution is to be done.
+   * Type   :%s/old/new/g      to change every occurrence in the whole file.
+   * Type   :%s/old/new/gc     to find every occurrence in the whole file, with a prompt whether to substitute or not.
 
 #### 杂项
 
