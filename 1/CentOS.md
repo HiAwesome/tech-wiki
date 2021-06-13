@@ -119,7 +119,7 @@
     * Set the 'ic' (Ignore case) option by entering:   :set ic
     * Set the 'hlsearch' and 'incsearch' options:  :set hls is
     * To disable ignoring case enter:  :set noic
-    * To remove the highlighting of matches enter:   :nohlsearch
+    * To remove the highlighting of matches enter:   :nohlsearch or :set nohls
     * If you want to ignore case for just one search command, use \c in the phrase:  /ignore\c  <ENTER>
 
 #### 杂项
