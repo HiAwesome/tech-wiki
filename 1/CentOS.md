@@ -129,6 +129,36 @@
 * [How do you search through Vim's command history?](https://stackoverflow.com/a/50283189): Press Ctrl+F in command mode to open the command history window. Then, you can use `/` , `?` , and other search commands. Press Enter to execute a command from the history. For more about the command history window, see [:h cmdwin](https://vimhelp.org/cmdline.txt.html) .
 * [What is Vim recording and how can it be disabled?](https://stackoverflow.com/a/1527824): You start recording by `q``<letter>` and you can end it by typing `q` again. Recording is a really useful feature of Vim. It records everything you type. You can then replay it simply by typing `@``<letter>`. Record search, movement, replacement... One of the best feature of Vim IMHO.
 
+#### 多文件编辑
+
+一般结合 vim 第一步打开多个文件使用：`vim hhhh.txt aaaaa.txt`
+
+* :n 编辑下一个文件
+* :N 编辑上一个文件
+* :files 列出目前这个 vim 的打开的所有文件
+
+#### 多窗口功能
+
+sp 为水平分割，vs 为垂直分割，详情参考 [vimhelp: window](https://vimhelp.org/windows.txt.html#window).
+
+* :sp \[filename\] 打开一个新窗口，如果有加 filename，表示在新窗口打开一个新文件，否则表示两个窗口为同一个文件内容（同步显示）。
+* ctrl+w+j 或 ctrl+w+↓ 按键的按法是：先按下 ctrl 不放，再按下 w 后放开所有的按键，然后再按下 j （或向下方向键），则光标可移动到下方的窗口。
+* ctrl+w+k 或 ctrl+w+↑ 同上，不过光标移动到上面的窗口。
+* ctrl+w+q 其实就是 :q 结束离开啦！举例来说，如果我想要结束下方的窗口，那么利用 ctrl+w+↓ 移动到下方窗口后，按下 :q 即可离开，也可以按下 ctrl+w+q 啊！
+
+#### vim 的文字补全功能
+
+试了一下不好用，应该要结合编程方言设定，频繁报错 `option omnifunc is not set`
+
+* ctrl+x -> ctrl+n 通过目前正在编辑的这个"文件的内容文字"作为关键字，予以补齐
+* ctrl+x -> ctrl+f 以当前目录内的"文件名"作为关键字，予以补齐
+* ctrl+x -> ctrl+o 以扩展名作为语法补充，以 vim 内置的关键字，予以补齐
+
+#### vim 的环境设置参数
+
+* :set backup 是否自动储存备份文件？一般是 nobackup 的，如果设置 backup 的话，那么当你更动任何一个文件时，则原始文件会被另存成一个文件名为 filename~ 的文件。举例来说，我们编辑 hosts，设置 :setbackup，那么当更动 hosts 时，在同目录下，就会产生 hosts~ 文件名的文件，记录原始的 hosts 文件内容。
+* :set backspace=(012) 一般来说，如果我们按下 i 进入编辑模式后，可以利用倒退键（backspace）来删除任意字符的。但是，某些 distribution 则不许如此。此时，我们就可以通过 backspace 来设置啰～当 backspace 为 2 时，就是可以删除任意值；0 或 1 时，仅可删除刚刚输入的字符，而无法删除原本就已经存在的文字了！
+
 ## 20200605
 
 ### Keyboard & Mouse
