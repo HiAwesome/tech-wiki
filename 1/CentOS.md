@@ -88,7 +88,7 @@
 
 #### 计数
 
-你可以用一个计数来结合“名词”和“动词”，这会执行指定操作若干次。
+你可以用一个计数来结合“名词”和“动词”，这会执行指定操作若干次。USING A COUNT FOR A MOTION, Typing a number before a motion repeats it that many times.
 
 * 3w 向前移动三个词
 * 5j 向下移动5行
