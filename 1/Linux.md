@@ -1,5 +1,46 @@
 # Linux
 
+### [如何清理 Linux 服务器磁盘空间](https://blog.csdn.net/u012660464/article/details/78923011)
+
+* df -h , 这个命令用于查看服务器空间
+* du -h --max-depth=1 , 这个命令用于查看当前目录，哪个文件占用最大
+* du -sh * , 这个命令也用于查看当前目录下各文件及文件夹占用大小
+* cp /dev/null nohup.out , 将 nohup.out 置空
+* rm -rf mplogs , 删除 mplogs 目录
+
+### [Linux 查看文件修改时间](https://blog.csdn.net/caianye/article/details/7712194)
+
+Linux 下查看文件时，ls –l 缺省是不显示秒的：
+
+```text
+$ ls -l
+total 0
+-rw-r--r-- 1 gps gps 0 2012-06-12 16:21 README.txt
+-rw-r--r-- 1 gps gps 0 2012-06-12 16:21 test.txt
+```
+
+要显示秒（实际更精确），可以用 –full-time 参数：
+
+```text
+$ ls --full-time
+total 0
+-rw-r--r-- 1 gps gps 0 2012-06-12 16:21:15.550557727 +0800 README.txt
+-rw-r--r-- 1 gps gps 0 2012-06-12 16:21:23.720354220 +0800 test.txt
+```
+
+要显示更多信息，用 stat 命令：
+
+```text
+$ stat test.txt
+  File: `test.txt'
+  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+Device: 801h/2049d      Inode: 4980751     Links: 1
+Access: (0644/-rw-r--r--)  Uid: ( 1000/     gps)   Gid: ( 1000/     gps)
+Access: 2012-06-12 16:21:23.720354220 +0800
+Modify: 2012-06-12 16:21:23.720354220 +0800
+Change: 2012-06-12 16:21:23.720354220 +0800
+```
+
 ### [Linux 向命令传入一个看上去像标志参数的普通参数](https://missing-semester-cn.github.io/2020/potpourri/)
 
 有的时候你可能需要向工具传入一个 看上去 像标志参数的普通参数，比如：
