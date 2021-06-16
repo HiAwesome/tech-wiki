@@ -1,5 +1,11 @@
 # 零散的经验
 
+### [Failed to watch directory: bad file descriptor On MacOS](https://github.com/grafana/grafana/issues/29121#issuecomment-729020013)
+
+```shell
+ulimit -S -n 2048
+```
+
 ## Mac install [tldr](https://github.com/tldr-pages/tldr)
 
 ```shell
