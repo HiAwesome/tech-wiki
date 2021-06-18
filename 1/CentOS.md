@@ -29,6 +29,13 @@
 * `head`命令 -n 选项后面的参数较有趣，如果接的是负数，例如上面范例的 -n -100 时，代表列前的所有行数，但不包括后面100行。举例来说 CentOS 7.1 的 /etc/mandb.conf 共有131行，则上述的指令`head -n -100 /etc/man_db.conf`就会列出前面 31 行，后面 100 行不会打印出来 了。
 * `tail`命令，当下达`tail -n +100 /etc/man_db.conf`代表该文件从 100 行以后都会被列出来，同样的，在 man_db.conf 共有 131 行，因此第 100~131 行就会被列出来啦！前面的 99 行都不会被显示出来喔！
 * 文件隐藏属性：`chattr [+-=][ASacdistu] (file|dir)`, 常见的包括只能新增数据的 +a 与完全不能更动文件的 +i 属性。
+* ctrl+u/ctrl+k: 分别是从光标处向前删除指令串 （ctrl+u） 及向后删除指令串 （ctrl+k）。
+* ctrl+a/ctrl+e: 分别是让光标移动到整个指令串的最前面 （ctrl+a） 或最后面 （ctrl+e）。
+* $:(关于本 shell 的 PID), 想要知道我们的 shell 的PID，就可以用 echo $$ 即可！出现的数字就是你的 PID 号码。
+* ?:(关于上个执行指令的回传值), 一般来说，如果成功的执行该指令，则会回传一个 0 值，如果执行过程发生错误，就会回传"错误代码"才对！一般就是以非为 0 的数值来取代。
+* bash 的进站与欢迎讯息：/etc/issue, /etc/motd
+
+
 
 ### 学习 VI 的理由
 
@@ -692,4 +699,75 @@ b0ed356a-d435-411a-bb8f-2675f105a09f
 68e04460-cacd-11eb-9b18-000c296448c5
 ~/test uuidgen -t
 69c56536-cacd-11eb-ad57-000c296448c5
+```
+
+##### RANDOM
+
+在 BASH 的环境下 RANDOM 变量的内容介于 0~32767 之间。
+
+```text
+~ echo $RANDOM
+2066
+~ echo $RANDOM
+2400
+~ echo $RANDOM
+8550
+~ echo $RANDOM
+29081
+~ echo $RANDOM
+12267
+```
+
+##### source
+
+读入环境配置文件的指令，利用 source 或小数点（.）都可以将配置文件的内容读进来目前的 shell 环境中！
+
+```text
+~ vim .zshrc
+~ . .zshrc
+.: no such file or directory: .zshrc
+~ . ~/.zshrc
+~ echo $assss
+asdfasdf
+```
+
+##### 万用字符与特殊符号
+
+* &: 工作控制（job control）：将指令变成背景下工作
+* \>, >>: 数据流重导向：输出导向，分别是"取代"与"累加"
+* <, <<: 数据流重导向：输入导向
+* '': 单引号，不具有变量置换的功能（$ 变为纯文本）
+* "": 具有变量置换的功能！（$ 可保留相关功能）
+* \`: 两个"\`"中间为可以先执行的指令，亦可使用 $()
+* (): 在中间为子 shell 的起始与结束
+* {}: 在中间为命令区块的组合！
+
+```text
+# 范例一：找出 /etc/ 下面以 cron 为开头的文件名
+~ ll -d /etc/cron*
+drwxr-xr-x. 2 root root  54 Jun  1 00:11 /etc/cron.d
+...
+
+# 范例二：找出 /etc/ 下面文件名“刚好是五个字母”的文件名
+~ ll -d /etc/?????
+drwxr-x---. 3 root root   83 Jun  1 00:05 /etc/audit
+...
+
+# 范例三：找出 /etc/ 下面文件名含有数字的文件名
+~ ll -d /etc/*[0-9]*
+-rw-r--r--. 1 root root 5.6K Nov 16  2020 /etc/DIR_COLORS.256color
+...
+
+# 范例四：找出 /etc/ 下面，文件名开头非为小写字母的文件名：
+~ ll -d /etc/[^a-z]*
+-rw-r--r--. 1 root root 5.0K Nov 16  2020 /etc/DIR_COLORS
+...
+
+# 范例五：将范例四找到的文件复制到 /tmp/upper 中
+~ mkdir /tmp/upper; cp -a /etc/[^a-z]* /tmp/upper
+~ ll -d /tmp/upper
+drwxr-xr-x. 6 root root 206 Jun 18 23:33 /tmp/upper
+~ ll -d /tmp/upper/*
+-rw-r--r--. 1 root root 5.0K Nov 16  2020 /tmp/upper/DIR_COLORS
+...
 ```
