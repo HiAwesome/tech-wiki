@@ -34,7 +34,9 @@
 * $:(关于本 shell 的 PID), 想要知道我们的 shell 的PID，就可以用 echo $$ 即可！出现的数字就是你的 PID 号码。
 * ?:(关于上个执行指令的回传值), 一般来说，如果成功的执行该指令，则会回传一个 0 值，如果执行过程发生错误，就会回传"错误代码"才对！一般就是以非为 0 的数值来取代。
 * bash 的进站与欢迎讯息：/etc/issue, /etc/motd
-
+* cmd1 && cmd2: 1. 若 cmd1 执行完毕且正确执行（$?=0），则开始执行 cmd2。 2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。
+* cmd1 || cmd2: 1. 若 cmd1 执行完毕且正确执行（$?=0），则 cmd2 不执行。 2. 若 cmd1 执 行完毕且为错误 （$?≠0），则开始执行 cmd2。
+* 管线命令（pipe）: 1. 管线命令仅会处理 standard output，对于 standard error output 会予以忽略 2. 管线命令必须要能够接受来自前一个指令的数据成为 standard input 继续处理才行。
 
 
 ### 学习 VI 的理由
@@ -771,3 +773,40 @@ drwxr-xr-x. 6 root root 206 Jun 18 23:33 /tmp/upper
 -rw-r--r--. 1 root root 5.0K Nov 16  2020 /tmp/upper/DIR_COLORS
 ...
 ```
+
+##### cut
+
+这个指令可以将一段讯息的某一段给他“切”出来～ 处理的讯息是 以“行”为单位喔！
+
+```text
+~ echo ${PATH}
+/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# 范例一：将 PATH 变量取出，我要找出第五个路径。
+~ echo ${PATH} | cut -d ':' -f 5
+/usr/sbin
+
+# 那么如果想要列出第 3 与第 5 呢？，就是这样：
+~ echo ${PATH} | cut -d ':' -f 3,5
+/sbin:/usr/sbin
+
+~ last
+root     pts/2        moqi-13mbp       Fri Jun 18 23:30   still logged in
+root     pts/2        moqi-13mbp       Fri Jun 18 23:11 - 23:27  (00:16)
+root     pts/1        moqi-13mbp       Fri Jun 18 22:59 - 23:31  (00:31)
+
+# 范例三：用 last 将显示的登陆者的信息中，仅留下使用者大名
+~ last | cut -d ' ' -f 1
+root
+root
+root
+```
+
+
+
+
+
+
+
+
+
