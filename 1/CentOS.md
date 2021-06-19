@@ -37,6 +37,12 @@
 * cmd1 && cmd2: 1. 若 cmd1 执行完毕且正确执行（$?=0），则开始执行 cmd2。 2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。
 * cmd1 || cmd2: 1. 若 cmd1 执行完毕且正确执行（$?=0），则 cmd2 不执行。 2. 若 cmd1 执 行完毕且为错误 （$?≠0），则开始执行 cmd2。
 * 管线命令（pipe）: 1. 管线命令仅会处理 standard output，对于 standard error output 会予以忽略 2. 管线命令必须要能够接受来自前一个指令的数据成为 standard input 继续处理才行。
+* 虽然 col 有他特殊的用途，不过，很多时候，他可以用来简单的处理将 tab 按键取代成为空白键！例如：cat /etc/man_db.conf | col -x
+
+
+
+
+
 
 
 ### 学习 VI 的理由
@@ -801,6 +807,228 @@ root
 root
 root
 ```
+
+##### sort
+
+```text
+# 范例一：个人帐号都记录在 /etc/passwd 下，请将帐号进行排序。
+~ cat /etc/passwd | sort
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+bin:x:1:1:bin:/bin:/sbin/nologin
+chrony:x:992:987::/var/lib/chrony:/sbin/nologin
+...
+
+# 范例二：/etc/passwd 内容是以 : 来分隔的，我想以第三栏来排序，该如何？
+~ cat /etc/passwd | sort -t ':' -k 3
+root:x:0:0:root:/root:/usr/local/bin/zsh
+moqi:x:1000:1000:centos7:/home/moqi:/bin/bash
+qemu:x:107:107:qemu user:/:/sbin/nologin
+usbmuxd:x:113:113:usbmuxd user:/:/sbin/nologin
+...
+
+# 范例三：利用 last ，将输出的数据仅取帐号，并加以排序
+~ last | cut -d ' ' -f 1 | sort
+
+moqi
+moqi
+...
+```
+
+##### uniq
+
+```text
+# 范例一：使用 last 将帐号列出，仅取出帐号栏，进行排序后仅取出一位；
+~ last | cut -d ' ' -f 1 | sort | uniq
+
+moqi
+moqi1
+reboot
+root
+wtmp
+~
+
+# 范例二：承上题，如果我还想要知道每个人的登陆总次数呢？
+~ last | cut -d ' ' -f 1 | sort | uniq -c
+      1
+     40 moqi
+      2 moqi1
+     12 reboot
+     20 root
+      1 wtmp
+```
+
+##### wc
+
+```text
+# 范例一：那个 /etc/man_db.conf 里面到底有多少相关字、行、字符数？
+~ cat /etc/man_db.conf| wc
+    131     723    5171
+# 输出的三个数字中，分别代表： “行、字数、字符数”
+
+~ cat /etc/man_db.conf| wc -l
+131
+~ cat /etc/man_db.conf| wc -w
+723
+~ cat /etc/man_db.conf| wc -m
+5171
+```
+
+##### 双向重导向: tee
+
+tee 会同时将数据流分送到文件去与屏幕(screen); 而输出到屏幕的，其实就是 stdout, 那就可以让下个指令继续处理喔！
+
+```text
+# 这个范例则是将 ls 的数据存一份到 ~/homefile ，同时屏幕也有输出讯息！
+~ ls -l /home | tee ~/homefile | more
+total 8
+drwx------. 15 moqi moqi 4096 Jun  5 21:12 moqi
+drwx--x--x. 15 1001 1001 4096 Jun  5 09:37 moqi1
+
+# 要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将讯息累加。
+~ ls -l /home | tee -a ~/homefile | more
+total 8
+drwx------. 15 moqi moqi 4096 Jun  5 21:12 moqi
+drwx--x--x. 15 1001 1001 4096 Jun  5 09:37 moqi1
+
+~ cat homefile
+total 8
+drwx------. 15 moqi moqi 4096 Jun  5 21:12 moqi
+drwx--x--x. 15 1001 1001 4096 Jun  5 09:37 moqi1
+total 8
+drwx------. 15 moqi moqi 4096 Jun  5 21:12 moqi
+drwx--x--x. 15 1001 1001 4096 Jun  5 09:37 moqi1
+```
+
+##### tr
+
+tr 可以用来删除一段讯息当中的文字，或者是进行文字讯息的替换！
+
+```text
+# 范例一：将 last 输出的讯息中，所有的小写变成大写字符：
+~ last | tr '[a-z]' '[A-Z]'
+ROOT     PTS/0        MOQI-13MBP       SAT JUN 19 14:27   STILL LOGGED IN
+ROOT     PTS/2        MOQI-13MBP       FRI JUN 18 23:30   STILL LOGGED IN
+ROOT     PTS/2        MOQI-13MBP       FRI JUN 18 23:11 - 23:27  (00:16)
+ROOT     PTS/1        MOQI-13MBP       FRI JUN 18 22:59 - 23:31  (00:31)
+...
+
+# 范例二：将 /etc/passwd 输出的讯息中，将冒号(:)删除
+~ cat /etc/passwd | tr -d ':'
+rootx00root/root/usr/local/bin/zsh
+binx11bin/bin/sbin/nologin
+daemonx22daemon/sbin/sbin/nologin
+admx34adm/var/adm/sbin/nologin
+lpx47lp/var/spool/lpd/sbin/nologin
+syncx50sync/sbin/bin/sync
+...
+```
+
+##### join
+
+join 看字面上的意义（加入/参加）就可以知道，他是在处理两个文件之间的数据， 而且，主要是在处理“两个文件当中，有"相同数据"的那一行，才将他加在一起”的意思。
+
+```text
+~ head -n 3 /etc/passwd /etc/shadow
+==> /etc/passwd <==
+root:x:0:0:root:/root:/usr/local/bin/zsh
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+
+==> /etc/shadow <==
+root:$1$lnW3mJMQ$pYVFKu7KTxcPxy8JfJ5rD.::0:99999:7:::
+bin:*:18353:0:99999:7:::
+daemon:*:18353:0:99999:7:::
+
+# 范例一：用 root 的身份，将 /etc/passwd 与 /etc/shadow 相关数据整合成一栏
+~ join -t ':' /etc/passwd /etc/shadow | head -n 3
+root:x:0:0:root:/root:/usr/local/bin/zsh:$1$lnW3mJMQ$pYVFKu7KTxcPxy8JfJ5rD.::0:99999:7:::
+bin:x:1:1:bin:/bin:/sbin/nologin:*:18353:0:99999:7:::
+daemon:x:2:2:daemon:/sbin:/sbin/nologin:*:18353:0:99999:7:::
+
+# 同样的，相同的字段部分被移动到最前面了！所以第二个文件的内容就没再显示。
+~ join -t ':' -1 4 /etc/passwd -2 3 /etc/group | head -n 3
+join: /etc/passwd:6: is not sorted: sync:x:5:0:sync:/sbin:/bin/sync
+join: /etc/group:11: is not sorted: wheel:x:10:moqi
+0:root:x:0:root:/root:/usr/local/bin/zsh:root:x:
+1:bin:x:1:bin:/bin:/sbin/nologin:bin:x:
+2:daemon:x:2:daemon:/sbin:/sbin/nologin:daemon:x:
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
