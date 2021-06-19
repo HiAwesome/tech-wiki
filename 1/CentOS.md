@@ -40,9 +40,24 @@
 * 虽然 col 有他特殊的用途，不过，很多时候，他可以用来简单的处理将 tab 按键取代成为空白键！例如：cat /etc/man_db.conf | col -x
 
 
+### 正则表达式
 
+##### 正则表达式与万用字符区别
 
+再次强调:“正则表达式的特殊字符”与一般在命令行输入指令的“万用字符”并不相同， 例如， 在万用字符当中的 代表的是“ 0 ~ 无限多个字符”的意思，但是在正则表达式当中， 则是“重复 0 到无穷多个的前一个 RE 字符”的意思~使用的意义并不相同，不要搞混了!
+举例来说，不支持正则表达式的 ls 这个工具中，若我们使用 “ls -l ” 代表的是任意文件名的文 件，而 “ls -l a ”代表的是以 a 为开头的任何文件名的文件， 但在正则表达式中，我们要找到 含有以 a 为开头的文件，则必须要这样:(需搭配支持正则表达式的工具)
+`ls | grep -n '^a.*'`
+例题:以 ls -l 配合 grep 找出 /etc/ 下面文件类型为链接文件属性的文件名答:由于 ls -l 列出 链接文件时标头会是“ lrwxrwxrwx ”，因此使用如下的指令即可找出结果:
+`> ls -l /etc | grep '^l'`
+若仅想要列出几个文件，再以“ |wc -l ” 来累加处理即可。
 
+##### 延伸正则表达式
+
+```text
+grep -v '^$' regular_express.txt | grep -v '^#'
+=====>
+egrep -v '^$|^#' regular_express.txt
+```
 
 
 ### 学习 VI 的理由
@@ -1070,7 +1085,145 @@ id bin ?...y
 
 上面这个例子是说：“我将 /home 里面的文件给他打包，但打包的数据不是纪录到文件，而是传送到 stdout；经过管线后，将 tar -cvf - /home 传送给后面的 tar -xvf - ”。后面的这个 - 则是取用前一个指令的 stdout，因此，我们就不需要使用 filename 了！这是很常见的例子喔！注意注意！
 
+##### sed
 
+sed 本身也是一个管线命令，可以分析 standard input 的啦！而且 sed 还可以将数据进行取代、删除、新增、撷取特定行等等的功能呢！
+
+```text
+# 范例一：将 /etc/passwd 的内容列出并且打印行号，同时，请将第 2~5 行删除！
+~ nl /etc/passwd | sed '2,5d'
+     1	root:x:0:0:root:/root:/usr/local/bin/zsh
+     6	sync:x:5:0:sync:/sbin:/bin/sync
+     7	shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+     8	halt:x:7:0:halt:/sbin:/sbin/halt
+     9	mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+    10	operator:x:11:0:operator:/root:/sbin/nologin
+    11	games:x:12:100:games:/usr/games:/sbin/nologin
+...
+# 如果题型变化一下，举例来说，如果只要删除第 2 行，可以使用“ nl /etc/passwd | sed '2d' ”来 达成，
+# 至于若是要删除第 3 到最后一行，则是“ nl /etc/passwd | sed '3,$d' ”的啦，那个钱字 号“ $ ”代表最后一行！
+
+# 范例二：承上题，在第二行后（亦即是加在第三行）加上“drink tea?”字样！
+~ nl /etc/passwd | sed '2a drink tea' | head -n 5
+     1	root:x:0:0:root:/root:/usr/local/bin/zsh
+     2	bin:x:1:1:bin:/bin:/sbin/nologin
+drink tea
+     3	daemon:x:2:2:daemon:/sbin:/sbin/nologin
+     4	adm:x:3:4:adm:/var/adm:/sbin/nologin
+# 在 a 后面加上的字串就已将出现在第二行后面啰！那如果是要在第二行前呢？
+# nl /etc/passwd | sed '2i drink tea' 就对啦！就是将“ a ”变成“ i ”即可。
+
+# 范例三：在第二行后面加入两行字，例如“Drink tea or .....”与“drink beer?”
+~ nl /etc/passwd | sed '2a drink tea or .....\
+pipe quote> drink beer ?' | head -n 10
+     1	root:x:0:0:root:/root:/usr/local/bin/zsh
+     2	bin:x:1:1:bin:/bin:/sbin/nologin
+drink tea or .....
+drink beer ?
+     3	daemon:x:2:2:daemon:/sbin:/sbin/nologin
+     4	adm:x:3:4:adm:/var/adm:/sbin/nologin
+     5	lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+     6	sync:x:5:0:sync:/sbin:/bin/sync
+     7	shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+     8	halt:x:7:0:halt:/sbin:/sbin/halt
+     
+# 范例四：我想将第2-5行的内容取代成为“No 2-5 number”呢？
+~ nl /etc/passwd | sed '2,5c No 2-5 number' | head -n 10
+     1	root:x:0:0:root:/root:/usr/local/bin/zsh
+No 2-5 number
+     6	sync:x:5:0:sync:/sbin:/bin/sync
+     7	shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+     8	halt:x:7:0:halt:/sbin:/sbin/halt
+     9	mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+    10	operator:x:11:0:operator:/root:/sbin/nologin
+    11	games:x:12:100:games:/usr/games:/sbin/nologin
+    12	ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+    13	nobody:x:99:99:Nobody:/:/sbin/nologin
+    
+# 范例五：仅列出 /etc/passwd 文件内的第 5-7 行
+~ nl /etc/passwd | sed -n '5,7p'
+     5	lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+     6	sync:x:5:0:sync:/sbin:/bin/sync
+     7	shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+
+# 获取网络配置
+~ /sbin/ifconfig ens33
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.50.200  netmask 255.255.255.0  broadcast 192.168.50.255
+        inet6 fe80::20c:29ff:fe64:48c5  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:64:48:c5  txqueuelen 1000  (Ethernet)
+        RX packets 316235  bytes 131479504 (125.3 MiB)
+        RX errors 0  dropped 42  overruns 0  frame 0
+        TX packets 114444  bytes 18101352 (17.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+# 过滤 inet 行
+~ /sbin/ifconfig ens33 | grep 'inet '
+        inet 192.168.50.200  netmask 255.255.255.0  broadcast 192.168.50.255
+
+# 替换 IP 前面为空
+~ /sbin/ifconfig ens33 | grep 'inet ' | sed 's/^.*inet //g'
+192.168.50.200  netmask 255.255.255.0  broadcast 192.168.50.255
+
+# 替换 IP 后面为空
+~ /sbin/ifconfig ens33 | grep 'inet ' | sed 's/^.*inet //g' | sed 's/ *netmask.*$//g'
+192.168.50.200
+
+# 范例六：利用 sed 将 regular_express.txt 内每一行结尾若为 . 则换成 !
+~ sed -i 's/\.$/\!/g' regular_express.txt
+~ cat regular_express.txt
+"Open Source" is a good mechanism to develop programs!
+apple is my favorite food!
+Football game is not use feet only!
+this dress doesn't fit me!
+However, this dress is about $ 3183 dollars.
+GNU is free air not free beer.
+Her hair is very beauty.
+I can't finish the test.
+Oh! The soup taste good.
+motorcycle is cheap than car!
+This window is clear!
+the symbol '*' is represented as start!
+Oh!	My god!
+The gd software is a library for drafting programs.
+You are the best is mean you are the no. 1!
+The world <Happy> is the same with "glad"!
+I like dog!
+google is the best tools for search keyword!
+goooooogle yes!
+go! go! Let's go!
+# I am VBird
+
+# 范例七：利用 sed 直接在 regular_express.txt 最后一行加入“# This is a test”
+~ sed -i '$a #This is a test' regular_express.txt
+~ cat regular_express.txt
+"Open Source" is a good mechanism to develop programs!
+apple is my favorite food!
+Football game is not use feet only!
+this dress doesn't fit me!
+However, this dress is about $ 3183 dollars.
+GNU is free air not free beer.
+Her hair is very beauty.
+I can't finish the test.
+Oh! The soup taste good.
+motorcycle is cheap than car!
+This window is clear!
+the symbol '*' is represented as start!
+Oh!	My god!
+The gd software is a library for drafting programs.
+You are the best is mean you are the no. 1!
+The world <Happy> is the same with "glad"!
+I like dog!
+google is the best tools for search keyword!
+goooooogle yes!
+go! go! Let's go!
+# I am VBird
+
+#This is a test
+
+# sed 的“ -i ”选项可以直接修改文件内容，这功能非常有帮助！举例来说，如果你有一个 100 万行的文件，你要在第 100 行加某些文字，
+# 此时使用 vim 可能会疯掉！因为文件太大了！那怎办？就利用 sed 啊！通过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订！
+```
 
 
 
