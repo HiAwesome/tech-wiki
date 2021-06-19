@@ -1,5 +1,13 @@
 # 零散的经验
 
+### [I18n g11n K8s i22y 这样的缩写起源于何处？](https://www.zhihu.com/question/39756710/answer/82930540)
+
+根据上述维基页面的说明，世界上第一个“首字母+字母个数+尾字母”形式的缩写是S12n，全称是Scherpenhuizen，是一个员工的姓氏。缩写的原因是姓氏太长，超过了用户名的限制。
+
+[Wikipedia: Numeronym](https://en.wikipedia.org/wiki/Numeronym).
+
+对于无法使用首字母缩写的英文元素衍生出的一种缩写形式，最有名的有这几个：i18n – internationalization; K8s – Kubernetes.
+
 ### [Failed to watch directory: bad file descriptor On MacOS](https://github.com/grafana/grafana/issues/29121#issuecomment-729020013)
 
 ```shell
