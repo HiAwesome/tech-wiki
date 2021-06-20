@@ -1677,10 +1677,86 @@ I dont konw what your choice is
 ```text
 /path/to/scriptname opt1 opt2 opt3 opt4
       $0             $1   $2   $3   $4
+      
+$#: 代表后接的参数“个数”，以上表为例这里显示为“4”；
+$@: 代表“ "$1" "$2" "$3" "$4" ”之意，每个变量是独立的（用双引号括起来）；
+$*: 代表“ "$1<u>c</u>$2<u>c</u>$3<u>c</u>$4" ”，其中 <u>c</u> 为分隔字符，默认为空白键， 所以本例中代表“ "$1 $2 $3 $4" ”之意。
 ```
 
+* 程序的文件名为何？
+* 共有几个参数？
+* 若参数的个数小于 2 则告知使用者参数数量太少
+* 全部的参数内容为何？
+* 第一个参数为何？
+* 第二个参数为何
 
+```text
+~ cat how_paras.sh
+#!/bin/bash
+# Program:
+#	Program shows the script name, parameters...
 
+export PATH
+
+echo "The script name is ==> ${0}"
+echo "Total parameter number is ==> $#"
+[ "$#" -lt 2 ] && echo "The number of parameter is less than 2\. Stop here." && exit 0
+echo "Your whold parameter is ==> '$@'"
+echo "The 1st parameter is ==> ${1}"
+echo "The 2st parameter is ==> ${2}"
+
+~ chmod a+x how_paras.sh
+~ ./how_paras.sh as asd asd asd asd asd as
+The script name is ==> ./how_paras.sh
+Total parameter number is ==> 7
+Your whold parameter is ==> 'as asd asd asd asd asd as'
+The 1st parameter is ==> as
+The 2st parameter is ==> asd
+~ ./how_paras.sh as a
+The script name is ==> ./how_paras.sh
+Total parameter number is ==> 2
+Your whold parameter is ==> 'as a'
+The 1st parameter is ==> as
+The 2st parameter is ==> a
+~ ./how_paras.sh as
+The script name is ==> ./how_paras.sh
+Total parameter number is ==> 1
+The number of parameter is less than 2\. Stop here.
+```
+
+shift：造成参数变量号码偏移
+
+```text
+~ cat shift_how_paras.sh
+#!/bin/bash
+# Program:
+#	Program shows the script name, parameters...
+
+export PATH
+
+echo "The script name is ==> ${0}"
+echo "Total parameter number is ==> $#"
+shift
+
+[ "$#" -lt 2 ] && echo "The number of parameter is less than 2\. Stop here." && exit 0
+echo "Your whold parameter is ==> '$@'"
+shift 3
+
+echo "The 1st parameter is ==> ${1}"
+echo "The 2st parameter is ==> ${2}"
+
+# 验证
+~ ./shift_how_paras.sh one two three four five six
+The script name is ==> ./shift_how_paras.sh
+Total parameter number is ==> 6
+Your whold parameter is ==> 'two three four five six'
+The 1st parameter is ==> five
+The 2st parameter is ==> six
+
+# 那个 shift 会移动变量，而且 shift 后面可以接数字，代表拿掉最前面的几个参数的意思。
+# 上面的执行结果中，第一次进行 shift 后他的显示情况是“ one two three four five six”，所以就剩下五个啦！
+# 第二次直接拿掉三个，就变成“ two three four five six ”啦！ 这样这个案例可以了解了吗？理解了 shift 的功能了吗？
+```
 
 
 
