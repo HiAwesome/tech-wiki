@@ -1398,7 +1398,129 @@ patching file passwd.old
 ...
 ```
 
+##### shell
 
+```text
+# hello world
+#!/bin/bash
+# Program:
+#        This program shows "Hello world!" in your screen.
+# History:
+# 20210620	moqi	First release
+PATH=${PATH}
+export PATH
+echo -e "Hello world! \a \n"
+exit 0
+
+# showname
+#!/bin/bash
+read -p "Please input your first name: " firstname
+read -p "Please input your second name: " secondname
+echo -e "\nYour full name is: ${firstname} ${secondname}"
+
+# 利用 date 进行文件的创建
+~ cat create_3_filename.sh
+#!/bin/bash
+echo -e "I will use 'touch' command to create 3 files."
+read -p "Please input your filename: " fileuser
+
+filename=${fileuser:-"filename"}
+
+date1=$(date --date='2 days ago' +%Y%m%d)
+date2=$(date --date='1 days ago' +%Y%m%d)
+date3=$(date +%Y%m%d)
+file1=${filename}${date1}
+file2=${filename}${date2}
+file3=${filename}${date3}
+
+touch "${file1}"
+touch "${file2}"
+touch "${file3}"
+
+# 数值运算: 简单的加减乘除
+~ cat multiplaying.sh
+#!/bin/bash
+echo -e "You SHOULD input 2 numbers, I will multiplying them! \n"
+read -p "first number: " firstnum
+read -p "second number: " secondnum
+
+total=$((${firstnum}*${secondnum}))
+
+echo -e "\nThe result of ${firstnum} x ${secondnum} is ==> ${total}"
+~ ./multiplaying.sh
+You SHOULD input 2 numbers, I will multiplying them!
+
+first number: 10
+second number: 200
+
+The result of 10 x 200 is ==> 2000
+
+# 双引号中可带空格
+~ echo $((13 % 3))
+1
+
+# 需要小数点计算时使用 bc
+~ echo "123.123*55.9" | bc
+6882.575
+
+# 数值运算：通过 bc 计算 pi
+~ vim cal_pi.sh
+~ cat cal_pi.sh
+#!/bin/bash
+echo -e "This program will calculate pi value. \n"
+echo -e "You should input a float number to calculate pi value.\n"
+
+read -p "The scale number (10~10000)?" checking
+num=${checking:-"10"}
+
+echo -e "Starting calculte pi value. Be patient."
+time echo "scale=${num}; 4*a(1)" | bc -lq
+~ chmod a+x cal_pi.sh
+~ ./cal_pi.sh
+This program will calculate pi value.
+
+You should input a float number to calculate pi value.
+
+The scale number (10~10000)?10
+Starting calculte pi value. Be patient.
+3.1415926532
+
+real	0m0.006s
+user	0m0.005s
+sys	0m0.003s
+~ ./cal_pi.sh
+This program will calculate pi value.
+
+You should input a float number to calculate pi value.
+
+The scale number (10~10000)?100
+Starting calculte pi value. Be patient.
+3.141592653589793238462643383279502884197169399375105820974944592307\
+8164062862089986280348253421170676
+
+real	0m0.011s
+user	0m0.005s
+sys	0m0.008s
+~ ./cal_pi.sh
+This program will calculate pi value.
+
+You should input a float number to calculate pi value.
+
+The scale number (10~10000)?5000
+Starting calculte pi value. Be patient.
+3.14159265358979323846264338327950288419716939937.......
+
+real	0m17.249s
+user	0m17.260s
+sys	0m0.009s
+
+
+```
+
+script 的执行方式差异 （source, sh script, ./script）
+
+* 利用直接执行的方式来执行 script: 子程序 bash 内的所有数据便被移除
+* 利用 source 来执行脚本：在父程序中执行: 各项动作都会在原本的 bash 内生效
 
 
 
