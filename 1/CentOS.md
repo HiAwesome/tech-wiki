@@ -191,6 +191,32 @@ sp 为水平分割，vs 为垂直分割，详情参考 [vimhelp: window](https:/
 
 ## 20200605
 
+### 设定 UTF-8
+
+```text
+~(master ✗) cat /etc/locale.conf
+LANG="zh_CN.UTF-8"
+LC_ALL="zh_CN.UTF-8"
+
+~(master ✗) source /etc/locale.conf
+
+~(master ✗) locale
+LANG=zh_CN.UTF-8
+LC_CTYPE="zh_CN.UTF-8"
+LC_NUMERIC="zh_CN.UTF-8"
+LC_TIME="zh_CN.UTF-8"
+LC_COLLATE="zh_CN.UTF-8"
+LC_MONETARY="zh_CN.UTF-8"
+LC_MESSAGES="zh_CN.UTF-8"
+LC_PAPER="zh_CN.UTF-8"
+LC_NAME="zh_CN.UTF-8"
+LC_ADDRESS="zh_CN.UTF-8"
+LC_TELEPHONE="zh_CN.UTF-8"
+LC_MEASUREMENT="zh_CN.UTF-8"
+LC_IDENTIFICATION="zh_CN.UTF-8"
+LC_ALL=zh_CN.UTF-8
+```
+
 ### Keyboard & Mouse
 
 设置 CentOS 7 的键盘映射，从标准的 `Profile - Default` 复制一份命名为 `Profile - CentOS7`, 然后将 `Key Mappings` -> `Virtual Machine Shortcut` 的部分全部带上 `Shift`, 例如 `Control - C` 变更为 `Shift - Control - C`.
@@ -1758,7 +1784,11 @@ The 2st parameter is ==> six
 # 第二次直接拿掉三个，就变成“ two three four five six ”啦！ 这样这个案例可以了解了吗？理解了 shift 的功能了吗？
 ```
 
+###### 条件判断式
 
+```text
+[ "${yn}" == "Y" -o "${yn}" == "y" ] 上式可替换为 [ "${yn}" == "Y" ] || [ "${yn}" == "y" ]
+```
 
 
 
