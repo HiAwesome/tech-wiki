@@ -1522,14 +1522,162 @@ script 的执行方式差异 （source, sh script, ./script）
 * 利用直接执行的方式来执行 script: 子程序 bash 内的所有数据便被移除
 * 利用 source 来执行脚本：在父程序中执行: 各项动作都会在原本的 bash 内生效
 
+###### 利用 test 指令的测试功能
+
+```text
+~ test -e /dmdmdmd && echo "exist" || echo "not exist"
+not exist
+~ test -e passwd && echo "exist" || echo "not exist"
+exist
+~ test -e passwdxiba && echo "exist" || echo "not exist"
+not exist
+```
+
+测试的标志
+
+* -e: 该“文件名”是否存在？（常用）
+* -f: 该“文件名”是否存在且为文件（file）？（常用）
+* -d: 该“文件名”是否存在且为目录（directory）？（常 用）
+
+关于文件的权限侦测，如 test -r filename 表示可读否 （但 root 权限常有例外）
+
+* -r: 侦测该文件名是否存在且具有“可读”的权限？
+* -w: 侦测该文件名是否存在且具有“可写”的权限？
+* -x: 侦测该文件名是否存在且具有“可执行”的权限？
+* -s: 侦测该文件名是否存在且为“非空白文件”？
+
+两个文件之间的比较，如： test file1 -nt file2
+
+* -nt: （newer than）判断 file1 是否比 file2 新
+* -ot: （newer than）判断 file1 是否比 file2 旧
+* -ef: 判断 file1 与 file2 是否为同一文件，可用在判断 hard link 的判定上。主要意义在判定，两个文件是否均指向同一个 inode 哩！
+
+判定字串的数据
+
+* test -z string: 判定字串是否为 0 ？若 string 为空字串，则为 true
+* test -n string: 判定字串是否非为 0 ？若 string 为空字串，则为 false。 -n 亦可省略
+* test str1 == str2: 判定 str1 是否等于 str2 ，若相等，则回传 true
+* test str1 != str2: 判定 str1 是否不等于 str2 ，若相等，则回传 false
+
+多重条件判定，例如： test -r filename -a -x filename
+
+* -a:（and）两状况同时成立！例如 test -r file -a -x file，则 file 同时具有 r 与 x 权限时，才回传 true。
+* -o:（or）两状况任何一个成立！例如 test -r file -o -x file，则 file 具有 r 或 x 权限时，就可回传 true。
+* !: 反相状态，如 test ! -x file ，当 file 不具有 x 时，回 传 true。
+
+```text
+让使用者输入一个 文件名，我们判断：
+1. 这个文件是否存在，若不存在则给予一个“Filename does not exist”的讯息，并中断程序； 
+2. 若这个文件存在，则判断他是个文件或目录，结果输出“Filename is regular file” 或 “Filename is directory”
+3. 判断一下，执行者的身份对这个文件或目录所拥有的权限，并输出权限数据！
+~ cat file_perm.sh
+#!/bin/bash
+# Program:
+#	User input a filename, program will check the flowing:
+#	1. exist? 2. file/directory? 3. file permissions
+
+export PATH
+
+echo -e "Please input a filename, I will check the filename's type and permission. \n\n"
+read -p "Input a filename: " filename
+
+test -z ${filename} && echo "You MUST input a filename." && exit 0
+
+test ! -e ${filename} && echo "The filename '${filename}' DO NOT exist" && exit 0
+
+test -f ${filename} && filetype="regulare file"
+test -d ${filename} && filetype="directory"
+test -r ${filename} && perm="readable"
+test -w ${filename} && perm="${perm} writable"
+test -x ${filename} && perm="${perm} executable"
+
+echo "The filename: ${filename} is a ${filetype}"
+echo "And the permissions for you are: ${perm}"
+
+~ ./file_perm.sh
+Please input a filename, I will check the filename's type and permission.
 
 
+Input a filename: xixixi20210618
+The filename: xixixi20210618 is a regulare file
+And the permissions for you are: readable writable
+~ ./file_perm.sh
+Please input a filename, I will check the filename's type and permission.
 
 
+Input a filename: showname.sh
+The filename: showname.sh is a regulare file
+And the permissions for you are: readable writable executable
+~ ./file_perm.sh
+Please input a filename, I will check the filename's type and permission.
 
 
+Input a filename: moqi
+The filename: moqi is a directory
+And the permissions for you are: readable writable executable
+```
 
+###### 利用判断符号 \[\]
 
+```text
+~ [ -z "${HOME}" ]; echo $?
+1
+~ [ -z "${HOME123}" ]; echo $?
+0
+```
+
+使用中括号必须要特别注意，因为中括号用在很多地方，包括万用字符与正则表达式等等，所以如果要在 bash 的语法当中使用中括号作为 shell 的判断式时，必须要注意中括号的两端需要有空白字符来分隔喔！
+
+```text
+[ "$HOME" == "$MAIL" ]
+[□"$HOME"□==□"$MAIL"□] 
+ ↑       ↑  ↑       ↑
+```
+
+1. 当执行一个程序的时候，这个程序会让使用者选择 Y 或 N ，
+2. 如果使用者输入 Y 或 y 时，就显示“ OK, continue ”
+3. 如果使用者输入 n 或 N 时，就显示“ Oh, interrupt ！”
+4. 如果不是 Y/y/N/n 之内的其他字符，就显示“ I don't know what your choice is ”
+
+```text
+~ cat ans_yn.sh
+#!/bin/bash
+# Program:
+#	This program shows the user's choice
+
+export PATH
+
+read -p "Please input (Y/N):" yn
+[ "${yn}" == "Y" -o "${yn}" == "y" ] && echo "OK, continue" && exit 0
+[ "${yn}" == "N" -o "${yn}" == "n" ] && echo "Oh, interrpt!" && exit 0
+
+echo "I dont konw what your choice is" && exit 0
+
+~ ./ans_yn.sh
+Please input (Y/N):y
+OK, continue
+~ ./ans_yn.sh
+Please input (Y/N):Y
+OK, continue
+~ ./ans_yn.sh
+Please input (Y/N):N
+Oh, interrpt!
+~ ./ans_yn.sh
+Please input (Y/N):n
+Oh, interrpt!
+~ ./ans_yn.sh
+Please input (Y/N):asfd
+I dont konw what your choice is
+```
+
+###### Shell script 的默认变量（$0, $1...）
+
+其实 script 针对参数已经有设置好一些变量名称了
+
+```text
+/path/to/scriptname opt1 opt2 opt3 opt4
+      $0             $1   $2   $3   $4
+```
 
 
 
