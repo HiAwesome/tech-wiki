@@ -1225,12 +1225,178 @@ go! go! Let's go!
 # 此时使用 vim 可能会疯掉！因为文件太大了！那怎办？就利用 sed 啊！通过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订！
 ```
 
+##### awk: 好用的数据处理工具
 
 
+```text
+# awk 通常运行的模式是这样的：
+awk '条件类型1{动作1} 条件类型2{动作2} ...' filename
+
+# 仅取出前五行
+~ last -n 5
+root     pts/1        moqi-13mbp       Sun Jun 20 10:30   still logged in
+root     pts/0        moqi-13mbp       Sat Jun 19 23:51   still logged in
+root     pts/0        moqi-13mbp       Sat Jun 19 14:27 - 23:17  (08:50)
+root     pts/2        moqi-13mbp       Fri Jun 18 23:30 - 19:20  (19:49)
+root     pts/2        moqi-13mbp       Fri Jun 18 23:11 - 23:27  (00:16)
+
+wtmp begins Tue Jun  1 00:05:25 2021
+
+# 若我想要取出帐号与登陆者的 IP，且帐号与 IP 之间以 [tab] 隔开，则会变成这样
+~ last -n 5 | awk '{print $1 "\t" $3}'
+root	moqi-13mbp
+root	moqi-13mbp
+root	moqi-13mbp
+root	moqi-13mbp
+root	moqi-13mbp
+
+wtmp	Tue
+
+# 那么 awk 怎么知道我到底这个数据有几行？
+# NF: 每一行 （$0） 拥有的字段总数
+# NR: 目前 awk 所处理的是“第几行”数据
+# FS: 目前的分隔字符，默认是空白键
+
+# 注意喔，在 awk 内的 NR, NF 等变量要用大写，不需要有钱字号 $ 啦！
+~ last -n 5 | awk '{print $1 "\t lines: " NR "\t columns: " NF}'
+root	 lines: 1	 columns: 10
+root	 lines: 2	 columns: 10
+root	 lines: 3	 columns: 10
+root	 lines: 4	 columns: 10
+root	 lines: 5	 columns: 10
+	 lines: 6	 columns: 0
+wtmp	 lines: 7	 columns: 7
+
+# 第三栏小于 10 以下的数据，并且仅列出帐号与第三栏， 那么可以这样做
+~ cat /etc/passwd | awk '{FS=":"} $3 < 10 {print $1 "\t " $3}'
+root:x:0:0:root:/root:/usr/local/bin/zsh
+bin	 1
+daemon	 2
+adm	 3
+lp	 4
+sync	 5
+shutdown	 6
+halt	 7
+mail	 8
+
+# 可以预先设置 awk 的变量啊！ 利用 BEGIN 这个关键字
+~ cat /etc/passwd | awk 'BEGIN {FS=":"} $3 < 10 {print $1 "\t " $3}'
+root	 0
+bin	 1
+daemon	 2
+adm	 3
+lp	 4
+sync	 5
+shutdown	 6
+halt	 7
+mail	 8
+```
+
+* awk 的指令间隔：所有 awk 的动作，亦即在 {} 内的动作，如果有需要多个指令辅助时，可利用分号“;”间隔，或者直接以回车按键来隔开每个指令。
+* 逻辑运算当中，如果是“等于”的情况，则务必使用两个等号“==”！
+* 格式化输出时，在 printf 的格式设置当中，务必加上 \n，才能进行分行！
+* 与 bash shell 的变量不同，在 awk 当中，变量可以直接使用，不需加上 $ 符号。
+
+##### 文件比对工具: diff
+
+diff 就是用在比对两个文件之间的差异的，并且是以行为单位来比对的！
+
+```text
+# 范例一：比对 passwd.old 与 passwd.new 的差异：
+/tmp/testpw diff passwd.old passwd.new
+# 左边第四行被删除 （d） 掉了，基准是右边的第三行
+4d3
+# 这边列出左边文件被删除的那一行内容
+< adm:x:3:4:adm:/var/adm:/sbin/nologin
+# 左边文件的第六行被改变 (c) 成右边文件的第五行
+6c5
+# 左边文件第六行内容
+< sync:x:5:0:sync:/sbin:/bin/sync
+---
+# 右边文件第五行内容
+> no six line
+
+# 可以将两个目录比对一下
+/tmp/testpw diff /etc/rc0.d /etc/rc5.d
+Only in /etc/rc0.d: K90network
+Only in /etc/rc5.d: S10network
+```
+
+##### 文件比对工具: cmp
+
+cmp 主要也是在比对两个文件，他主要利用“字节”单位去比对，因此，当然也可以比对 binary file.
+
+```text
+/tmp/testpw cmp passwd.old passwd.new
+passwd.old passwd.new differ: char 115, line 4
+```
+
+##### patch
+
+先比较先旧版本的差异，并将差异档制作成为补丁文件，再由补丁文件更新旧文件。
+
+```text
+# 范例一：以 /tmp/testpw 内的 passwd.old 与 passwd.new 制作补丁文件
+/tmp/testpw diff -Naur passwd.old passwd.new > passwd.patch
+/tmp/testpw cat passwd.patch
+# 新旧文件的信息
+--- passwd.old	2021-06-20 10:56:18.354023751 +0800
++++ passwd.new	2021-06-20 10:56:49.416751063 +0800
+# 新旧文件要修改数据的界定范围，旧文件在 1-9 行，新文件在 1-8 行
+@@ -1,9 +1,8 @@
+ root:x:0:0:root:/root:/usr/local/bin/zsh
+ bin:x:1:1:bin:/bin:/sbin/nologin
+ daemon:x:2:2:daemon:/sbin:/sbin/nologin
+# 左侧文件删除
+-adm:x:3:4:adm:/var/adm:/sbin/nologin
+ lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+# 左侧文件删除
+-sync:x:5:0:sync:/sbin:/bin/sync
+# 右侧新文件加入
++no six line
+ shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+ halt:x:7:0:halt:/sbin:/sbin/halt
+ mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+ 
+# 范例二：将刚刚制作出来的 patch file 用来更新旧版数据
+/tmp/testpw patch -p0 < passwd.patch
+patching file passwd.old
+/tmp/testpw ll passwd*
+-rw-r--r--. 1 root root 2.3K Jun 20 10:56 passwd.new
+-rw-r--r--. 1 root root 2.3K Jun 20 11:07 passwd.old
+-rw-r--r--. 1 root root  489 Jun 20 11:04 passwd.patch
+
+# 范例三：恢复旧文件的内容
+/tmp/testpw patch -R -p0 < passwd.patch
+patching file passwd.old
+/tmp/testpw ll passwd*
+-rw-r--r--. 1 root root 2.3K Jun 20 10:56 passwd.new
+-rw-r--r--. 1 root root 2.3K Jun 20 11:09 passwd.old
+-rw-r--r--. 1 root root  489 Jun 20 11:04 passwd.patch
+/tmp/testpw diff passwd.old passwd.new
+4d3
+< adm:x:3:4:adm:/var/adm:/sbin/nologin
+6c5
+< sync:x:5:0:sync:/sbin:/bin/sync
+---
+> no six line
+```
+
+##### 文件打印准备: pr
+
+```text
+/tmp/testpw pr /etc/man_db.conf
+2018-10-31 04:26                 /etc/man_db.conf                 Page 1
+...
 
 
+2018-10-31 04:26                 /etc/man_db.conf                 Page 2
+...
 
 
+2018-10-31 04:26                 /etc/man_db.conf                 Page 3
+...
+```
 
 
 
