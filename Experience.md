@@ -1,5 +1,7 @@
 # 零散的经验
 
+#### [iTerm2 v3 conversion of tabs to spaces on paste](https://stackoverflow.com/a/38063352)
+
 ### [I18n g11n K8s i22y 这样的缩写起源于何处？](https://www.zhihu.com/question/39756710/answer/82930540)
 
 根据上述维基页面的说明，世界上第一个“首字母+字母个数+尾字母”形式的缩写是S12n，全称是Scherpenhuizen，是一个员工的姓氏。缩写的原因是姓氏太长，超过了用户名的限制。

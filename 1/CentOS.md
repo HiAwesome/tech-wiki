@@ -221,27 +221,32 @@ sp 为水平分割，vs 为垂直分割，详情参考 [vimhelp: window](https:/
 ### 设定 UTF-8
 
 ```text
+~(master ✗) cat ~/.zshrc
+...
+# for lang
+export LANG="zh_CN.utf-8"
+export LC_ALL="en_US.utf-8"
 ~(master ✗) cat /etc/locale.conf
-LANG="zh_CN.UTF-8"
-LC_ALL="zh_CN.UTF-8"
+LANG="zh_CN.utf-8"
+LC_ALL="en_US.utf-8"
 
 ~(master ✗) source /etc/locale.conf
 
 ~(master ✗) locale
-LANG=zh_CN.UTF-8
-LC_CTYPE="zh_CN.UTF-8"
-LC_NUMERIC="zh_CN.UTF-8"
-LC_TIME="zh_CN.UTF-8"
-LC_COLLATE="zh_CN.UTF-8"
-LC_MONETARY="zh_CN.UTF-8"
-LC_MESSAGES="zh_CN.UTF-8"
-LC_PAPER="zh_CN.UTF-8"
-LC_NAME="zh_CN.UTF-8"
-LC_ADDRESS="zh_CN.UTF-8"
-LC_TELEPHONE="zh_CN.UTF-8"
-LC_MEASUREMENT="zh_CN.UTF-8"
-LC_IDENTIFICATION="zh_CN.UTF-8"
-LC_ALL=zh_CN.UTF-8
+LANG=zh_CN.utf-8
+LC_CTYPE="en_US.utf-8"
+LC_NUMERIC="en_US.utf-8"
+LC_TIME="en_US.utf-8"
+LC_COLLATE="en_US.utf-8"
+LC_MONETARY="en_US.utf-8"
+LC_MESSAGES="en_US.utf-8"
+LC_PAPER="en_US.utf-8"
+LC_NAME="en_US.utf-8"
+LC_ADDRESS="en_US.utf-8"
+LC_TELEPHONE="en_US.utf-8"
+LC_MEASUREMENT="en_US.utf-8"
+LC_IDENTIFICATION="en_US.utf-8"
+LC_ALL=en_US.utf-8
 ```
 
 ### Keyboard & Mouse
@@ -1914,7 +1919,9 @@ Wheel 一词在 1960 年代发布的 TENEX（后称TOPS-20）操作系统中首�
 
 1980 年代，随着 TENEX/TOPS-20 用户转用 Unix，Wheel 一词成为 Unix 文化的一部分。
 
+##### pwck
 
+这个指令在检查 /etc/passwd 这个帐号配置文件内的信息，与实际的主文件夹是否存在等信息， 还可以比对 /etc/passwd /etc/shadow 的信息是否一致，相对应的群组检查可以使用 grpck 这个指令。
 
 
 
