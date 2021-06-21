@@ -1868,9 +1868,51 @@ IPv6_regex="^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:
 ~(master ✔) echo 'Nice2MeetU' | passwd --stdin vbird2
 Changing password for user vbird2.
 passwd: all authentication tokens updated successfully.
+
+# 管理 vbird2 的密码使具有 60 天变更、密码过期 10 天后帐号失效的设置
+~(master ✔) passwd -S vbird2
+vbird2 PS 2021-06-21 0 99999 7 -1 (Password set, MD5 crypt.)
+~(master ✔) passwd -x 60 -i 10 vbird2
+Adjusting aging data for user vbird2.
+passwd: Success
+~(master ✔) passwd -S vbird2
+vbird2 PS 2021-06-21 0 60 7 10 (Password set, MD5 crypt.)
+
+# chage 有一个功能很不错喔！如果你想要让“使用者在第一次登陆时，
+# 强制她们一定要更改密码后才能够使用系统资源”，可以利用如下的方法来处理的！
+~(master ✔) clear
+~(master ✔) useradd agetest
+~(master ✔) echo 'agetest999000' | passwd --stdin agetest
+Changing password for user agetest.
+passwd: all authentication tokens updated successfully.
+~(master ✔) chage -d 0 agetest
+~(master ✔) chage -l agetest | head -n 3
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+-------------------
+~ ssh agetest@centos7
+agetest@centos7's password:
+You are required to change your password immediately (root enforced)
+Last login: Mon Jun 21 22:58:46 2021
+WARNING: Your password has expired.
+You must change your password now and login again!
+更改用户 agetest 的密码 。
+为 agetest 更改 STRESS 密码。
+（当前）UNIX 密码：
+新的 密码：
+重新输入新的 密码：
+passwd：所有的身份验证令牌已经成功更新。
+Connection to centos7 closed.
 ```
 
+##### [Where did the “wheel” group get its name?](https://unix.stackexchange.com/a/1271)
 
+[Wheel: Wikipedia](https://zh.wikipedia.org/wiki/Wheel_(%E9%9B%BB%E8%85%A6%E7%A7%91%E5%AD%B8%E8%A1%93%E8%AA%9E))
+
+Wheel 一词在 1960 年代发布的 TENEX（后称TOPS-20）操作系统中首次出现，源于意为“权力重大者”的英文俚语“big wheel”。
+
+1980 年代，随着 TENEX/TOPS-20 用户转用 Unix，Wheel 一词成为 Unix 文化的一部分。
 
 
 
