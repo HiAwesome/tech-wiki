@@ -1859,7 +1859,16 @@ IPv6_regex="^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:
 1. ping github.com, if ping failed. it is DNS error.
 2. sudo vim /etc/resolv.conf, the add: nameserver 8.8.8.8 nameserver 8.8.4.4
 
+#### Linux 账号管理
 
+与一般使用者不同的是，root 并不需要知道旧密码就能够帮使用者或 root 自己创建新密码！
+
+```text
+# root 为 vbird2 用户设定密码为 Nice2MeetU
+~(master ✔) echo 'Nice2MeetU' | passwd --stdin vbird2
+Changing password for user vbird2.
+passwd: all authentication tokens updated successfully.
+```
 
 
 
