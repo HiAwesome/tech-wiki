@@ -1,6 +1,6 @@
 # CentOS
 
-环境： Cent OS 7 on Vmware Fusion.
+环境： Cent OS 7 on Vmware Fusion. root password: 0987UUUU
 
 ### [查看centos版本](https://www.huaweicloud.com/articles/5c9e7d7cb676f3baad1d5bee5bec28e0.html)
 
