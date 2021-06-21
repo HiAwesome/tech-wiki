@@ -2,6 +2,33 @@
 
 环境： Cent OS 7 on Vmware Fusion.
 
+### [查看centos版本](https://www.huaweicloud.com/articles/5c9e7d7cb676f3baad1d5bee5bec28e0.html)
+
+```shell
+# cat /etc/os-release
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+# cat /etc/redhat-release
+CentOS Linux release 7.7.1908 (Core)
+
+# rpm -q centos-release
+centos-release-7-7.1908.0.el7.centos.x86_64
+```
+
 ## Tips
 
 * su - 可以切换到 root 账号，效果同 sudo su
