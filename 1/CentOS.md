@@ -1817,6 +1817,28 @@ The 2st parameter is ==> six
 [ "${yn}" == "Y" -o "${yn}" == "y" ] 上式可替换为 [ "${yn}" == "Y" ] || [ "${yn}" == "y" ]
 ```
 
+###### shell script 的追踪与 debug
+
+```text
+bash [-nvx] scripts.sh
+选项与参数：
+-n ：不要执行 script，仅查询语法的问题；
+-v ：再执行 sccript 前，先将 scripts 的内容输出到屏幕上；
+-x ：将使用到的 script 内容显示到屏幕上，这是很有用的参数！
+
+~/shs(master ✔) bash -x show_animal.sh
++ export PATH
++ for animal in dog cat elephant
++ echo 'There are dogs... '
+There are dogs...
++ for animal in dog cat elephant
++ echo 'There are cats... '
+There are cats...
++ for animal in dog cat elephant
++ echo 'There are elephants... '
+There are elephants...
+```
+
 ##### IP regular expression
 
 ```text
