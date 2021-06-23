@@ -1,6 +1,6 @@
 # CentOS
 
-环境： Cent OS 7 on Vmware Fusion.
+环境： Cent OS 7 on Vmware Fusion. root password: 0987UUUU
 
 ### [查看centos版本](https://www.huaweicloud.com/articles/5c9e7d7cb676f3baad1d5bee5bec28e0.html)
 
@@ -221,27 +221,32 @@ sp 为水平分割，vs 为垂直分割，详情参考 [vimhelp: window](https:/
 ### 设定 UTF-8
 
 ```text
+~(master ✗) cat ~/.zshrc
+...
+# for lang
+export LANG="zh_CN.utf-8"
+export LC_ALL="en_US.utf-8"
 ~(master ✗) cat /etc/locale.conf
-LANG="zh_CN.UTF-8"
-LC_ALL="zh_CN.UTF-8"
+LANG="zh_CN.utf-8"
+LC_ALL="en_US.utf-8"
 
 ~(master ✗) source /etc/locale.conf
 
 ~(master ✗) locale
-LANG=zh_CN.UTF-8
-LC_CTYPE="zh_CN.UTF-8"
-LC_NUMERIC="zh_CN.UTF-8"
-LC_TIME="zh_CN.UTF-8"
-LC_COLLATE="zh_CN.UTF-8"
-LC_MONETARY="zh_CN.UTF-8"
-LC_MESSAGES="zh_CN.UTF-8"
-LC_PAPER="zh_CN.UTF-8"
-LC_NAME="zh_CN.UTF-8"
-LC_ADDRESS="zh_CN.UTF-8"
-LC_TELEPHONE="zh_CN.UTF-8"
-LC_MEASUREMENT="zh_CN.UTF-8"
-LC_IDENTIFICATION="zh_CN.UTF-8"
-LC_ALL=zh_CN.UTF-8
+LANG=zh_CN.utf-8
+LC_CTYPE="en_US.utf-8"
+LC_NUMERIC="en_US.utf-8"
+LC_TIME="en_US.utf-8"
+LC_COLLATE="en_US.utf-8"
+LC_MONETARY="en_US.utf-8"
+LC_MESSAGES="en_US.utf-8"
+LC_PAPER="en_US.utf-8"
+LC_NAME="en_US.utf-8"
+LC_ADDRESS="en_US.utf-8"
+LC_TELEPHONE="en_US.utf-8"
+LC_MEASUREMENT="en_US.utf-8"
+LC_IDENTIFICATION="en_US.utf-8"
+LC_ALL=en_US.utf-8
 ```
 
 ### Keyboard & Mouse
@@ -1817,6 +1822,28 @@ The 2st parameter is ==> six
 [ "${yn}" == "Y" -o "${yn}" == "y" ] 上式可替换为 [ "${yn}" == "Y" ] || [ "${yn}" == "y" ]
 ```
 
+###### shell script 的追踪与 debug
+
+```text
+bash [-nvx] scripts.sh
+选项与参数：
+-n ：不要执行 script，仅查询语法的问题；
+-v ：再执行 sccript 前，先将 scripts 的内容输出到屏幕上；
+-x ：将使用到的 script 内容显示到屏幕上，这是很有用的参数！
+
+~/shs(master ✔) bash -x show_animal.sh
++ export PATH
++ for animal in dog cat elephant
++ echo 'There are dogs... '
+There are dogs...
++ for animal in dog cat elephant
++ echo 'There are cats... '
+There are cats...
++ for animal in dog cat elephant
++ echo 'There are elephants... '
+There are elephants...
+```
+
 ##### IP regular expression
 
 ```text
@@ -1837,11 +1864,64 @@ IPv6_regex="^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:
 1. ping github.com, if ping failed. it is DNS error.
 2. sudo vim /etc/resolv.conf, the add: nameserver 8.8.8.8 nameserver 8.8.4.4
 
+#### Linux 账号管理
 
+与一般使用者不同的是，root 并不需要知道旧密码就能够帮使用者或 root 自己创建新密码！
 
+```text
+# root 为 vbird2 用户设定密码为 Nice2MeetU
+~(master ✔) echo 'Nice2MeetU' | passwd --stdin vbird2
+Changing password for user vbird2.
+passwd: all authentication tokens updated successfully.
 
+# 管理 vbird2 的密码使具有 60 天变更、密码过期 10 天后帐号失效的设置
+~(master ✔) passwd -S vbird2
+vbird2 PS 2021-06-21 0 99999 7 -1 (Password set, MD5 crypt.)
+~(master ✔) passwd -x 60 -i 10 vbird2
+Adjusting aging data for user vbird2.
+passwd: Success
+~(master ✔) passwd -S vbird2
+vbird2 PS 2021-06-21 0 60 7 10 (Password set, MD5 crypt.)
 
+# chage 有一个功能很不错喔！如果你想要让“使用者在第一次登陆时，
+# 强制她们一定要更改密码后才能够使用系统资源”，可以利用如下的方法来处理的！
+~(master ✔) clear
+~(master ✔) useradd agetest
+~(master ✔) echo 'agetest999000' | passwd --stdin agetest
+Changing password for user agetest.
+passwd: all authentication tokens updated successfully.
+~(master ✔) chage -d 0 agetest
+~(master ✔) chage -l agetest | head -n 3
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+-------------------
+~ ssh agetest@centos7
+agetest@centos7's password:
+You are required to change your password immediately (root enforced)
+Last login: Mon Jun 21 22:58:46 2021
+WARNING: Your password has expired.
+You must change your password now and login again!
+更改用户 agetest 的密码 。
+为 agetest 更改 STRESS 密码。
+（当前）UNIX 密码：
+新的 密码：
+重新输入新的 密码：
+passwd：所有的身份验证令牌已经成功更新。
+Connection to centos7 closed.
+```
 
+##### [Where did the “wheel” group get its name?](https://unix.stackexchange.com/a/1271)
+
+[Wheel: Wikipedia](https://zh.wikipedia.org/wiki/Wheel_(%E9%9B%BB%E8%85%A6%E7%A7%91%E5%AD%B8%E8%A1%93%E8%AA%9E))
+
+Wheel 一词在 1960 年代发布的 TENEX（后称TOPS-20）操作系统中首次出现，源于意为“权力重大者”的英文俚语“big wheel”。
+
+1980 年代，随着 TENEX/TOPS-20 用户转用 Unix，Wheel 一词成为 Unix 文化的一部分。
+
+##### pwck
+
+这个指令在检查 /etc/passwd 这个帐号配置文件内的信息，与实际的主文件夹是否存在等信息， 还可以比对 /etc/passwd /etc/shadow 的信息是否一致，相对应的群组检查可以使用 grpck 这个指令。
 
 
 
