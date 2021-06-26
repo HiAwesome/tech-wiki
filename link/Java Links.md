@@ -1,5 +1,9 @@
 # 与 Java 有关的链接
 
+#### [Lombok Builder with Default Value](https://www.baeldung.com/lombok-builder-default-value)
+
+#### [Lombok @Builder with Inheritance](https://www.baeldung.com/lombok-builder-inheritance)
+
 #### [Check If a String Is Numeric in Java](https://www.baeldung.com/java-check-string-number)
 
 ### [What is the difference between introspection and reflection?](https://stackoverflow.com/a/25199156)
