@@ -179,7 +179,7 @@ egrep -v '^$|^#' regular_express.txt
     * To remove the highlighting of matches enter:   :nohlsearch or :set nohls
     * If you want to ignore case for just one search command, use \c in the phrase:  /ignore\c  <ENTER>
 * When typing a  :  command, press CTRL-D to see possible completions. Press <TAB> to use one completion.
-  
+
 #### 杂项
 
 * [Copying and Moving Text -- Yank, Delete, and Put](https://docs.oracle.com/cd/E19455-01/806-2902/editorvi-53/index.html): Many word-processors allow you to "copy and paste" and "cut and paste" lines of text. The vi editor also includes these features. The vi command-mode equivalent of "copy and paste" is yank and put; the equivalent of "cut and paste" is delete and put. The methods for copying or moving small blocks of text in vi involves using a combination of the yank, delete, and put commands.
