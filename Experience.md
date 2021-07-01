@@ -1,5 +1,10 @@
 # 零散的经验
 
+#### Git blame
+
+* [Bitbucket: Git blame](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-blame)
+* [Git blame documentation](https://git-scm.com/docs/git-blame)
+
 #### [iTerm2 v3 conversion of tabs to spaces on paste](https://stackoverflow.com/a/38063352)
 
 ### [I18n g11n K8s i22y 这样的缩写起源于何处？](https://www.zhihu.com/question/39756710/answer/82930540)
