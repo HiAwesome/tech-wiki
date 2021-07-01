@@ -1,5 +1,7 @@
 # 零散的经验
 
+##### [在 Mac 上放大鼠标指针](https://support.apple.com/zh-cn/guide/mac-help/mchlp2920/mac)
+
 #### Git blame
 
 * [Bitbucket: Git blame](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-blame)
