@@ -1848,6 +1848,7 @@ There are elephants...
 
 ```text
 # from centos7 /etc/init.d/netconsole
+# sed -n 77,81p /etc/init.d/netconsole
 
 # IPv6 regex also covers 4to6, zero-compressed, and link-local addresses with zone-index addresses.
 # It should also cover IPv4-embedded, IPv4-mapped, and IPv4-translated IPv6 addresses.
