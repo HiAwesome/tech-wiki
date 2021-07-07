@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+#### [Java - 生成随机字符串](https://www.baeldung.com/java-random-string)
+
 #### [Lombok Builder with Default Value](https://www.baeldung.com/lombok-builder-default-value)
 
 #### [Lombok @Builder with Inheritance](https://www.baeldung.com/lombok-builder-inheritance)
