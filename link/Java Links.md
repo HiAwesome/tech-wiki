@@ -1,5 +1,15 @@
 # 与 Java 有关的链接
 
+#### [Introduction to the Java 8 Date/Time API](https://www.baeldung.com/java-8-date-time-intro)
+
+```java
+// 使用 TimeUnit 完成毫秒到秒的转换
+long millis = System.currentTimeMillis();
+System.out.println("millis = " + millis);
+long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+System.out.println("seconds = " + seconds);
+```
+
 #### [How Numeric literal with underscore works in java and why it was added as part of jdk 1.7](https://stackoverflow.com/a/19806674/7379661)
 
 This is used to group the digits in your numeric (say for example for credit card etc)
