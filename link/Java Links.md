@@ -12,19 +12,23 @@ From [Oracle Website](http://docs.oracle.com/javase/7/docs/technotes/guides/lang
 
 To conclude, it's just for a sake of readability.
 
+```java
+String hexString = Long.toHexString(1099595516468L);
+System.out.println("hexString = " + hexString);
+
+long defineUseHexFormat = 0x010005000a34L;
+System.out.println("defineUseHexFormat = " + defineUseHexFormat);
+```
+
 #### [Java - 生成随机字符串](https://www.baeldung.com/java-random-string)
 
 ```java
-@Test
-public void givenUsingApache_whenGeneratingRandomStringBounded_thenCorrect() {
- 
-    int length = 10;
-    boolean useLetters = true;
-    boolean useNumbers = false;
-    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+int length = 10;
+boolean useLetters = true;
+boolean useNumbers = false;
+String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
 
-    System.out.println(generatedString);
-}
+System.out.println(generatedString);
 ```
 
 #### [Lombok Builder with Default Value](https://www.baeldung.com/lombok-builder-default-value)
