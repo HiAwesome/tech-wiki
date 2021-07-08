@@ -1,5 +1,12 @@
 # 与 Java 有关的链接
 
+### [Groovy 3.0 Release Notes](https://groovy-lang.org/releasenotes/groovy-3.0.html)
+
+较为重要的升级理由：
+
+> * lambda expressions, e.g. stream.map(e → e + 1)
+> * method references and constructor references
+
 #### [Introduction to the Java 8 Date/Time API](https://www.baeldung.com/java-8-date-time-intro)
 
 ```java
