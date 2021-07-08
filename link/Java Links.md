@@ -1,12 +1,47 @@
 # 与 Java 有关的链接
 
+#### [How Numeric literal with underscore works in java and why it was added as part of jdk 1.7](https://stackoverflow.com/a/19806674/7379661)
+
+This is used to group the digits in your numeric (say for example for credit card etc)
+
+From [Oracle Website](http://docs.oracle.com/javase/7/docs/technotes/guides/language/underscores-literals.html):
+
+>In Java SE 7 and later, any number of underscore characters (_) can appear anywhere between digits in a numerical literal. This feature enables you, for example, to separate groups of digits in numeric literals, which can improve the readability of your code.
+>
+>For instance, if your code contains numbers with many digits, you can use an underscore character to separate digits in groups of three, similar to how you would use a punctuation mark like a comma, or a space, as a separator.
+
+To conclude, it's just for a sake of readability.
+
 #### [Java - 生成随机字符串](https://www.baeldung.com/java-random-string)
+
+```java
+@Test
+public void givenUsingApache_whenGeneratingRandomStringBounded_thenCorrect() {
+ 
+    int length = 10;
+    boolean useLetters = true;
+    boolean useNumbers = false;
+    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+
+    System.out.println(generatedString);
+}
+```
 
 #### [Lombok Builder with Default Value](https://www.baeldung.com/lombok-builder-default-value)
 
 #### [Lombok @Builder with Inheritance](https://www.baeldung.com/lombok-builder-inheritance)
 
 #### [Check If a String Is Numeric in Java](https://www.baeldung.com/java-check-string-number)
+
+```text
+Benchmark                                     Mode  Cnt      Score     Error  Units
+Benchmarking.usingCoreJava                    avgt   20  10162.872 ± 798.387  ns/op
+Benchmarking.usingNumberUtils_isCreatable     avgt   20   1703.243 ± 108.244  ns/op
+Benchmarking.usingNumberUtils_isParsable      avgt   20   1589.915 ± 203.052  ns/op
+Benchmarking.usingRegularExpressions          avgt   20   7168.761 ± 344.597  ns/op
+Benchmarking.usingStringUtils_isNumeric       avgt   20   1071.753 ±   8.657  ns/op
+Benchmarking.usingStringUtils_isNumericSpace  avgt   20   1157.722 ±  24.139  ns/op
+```
 
 ### [What is the difference between introspection and reflection?](https://stackoverflow.com/a/25199156)
 
