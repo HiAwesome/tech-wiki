@@ -79,11 +79,11 @@ Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Proto
 
 ## 代理
 
-* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 6152。最后测试访问 Google 成功即可。
-* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:6152 && npm config set https-proxy https://localhost:6152 即可。
+* JetBrains 挂代理：Preferences -> Appearance & Behavior -> System Settings -> Http Proxy: 选中 Manual proxy configuration -> HTTP，然后输入 Host 和 Port 分别是 127.0.0.1 和 8888。最后测试访问 Google 成功即可。
+* [npm 加上代理](https://www.jhipster.tech/configuring-a-corporate-proxy/), npm config set proxy https://localhost:8888 && npm config set https-proxy https://localhost:8888 即可。
 * Maven 设定使用代理
   * 在 Maven 的 setting 中设定 proxies 属性，参考 [Configuring a proxy](https://maven.apache.org/guides/mini/guide-proxies.html) 。
-  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=6152
+  * IDEA 中为单个项目配置代理需要为 Maven -> Importing -> VM options for importer 设定 -DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=8888
   * 当有项目依赖不需要代理时，在 IDEA 中 Maven -> Importing -> VM options for importer 设定 -DproxySet=false 
     ```xml
     <proxies>
@@ -93,7 +93,7 @@ Java 应用可以远程 Debug 借助了 JDWP 协议，即 [Java Debug Wire Proto
             <active>true</active>
             <protocol>http</protocol>
             <host>127.0.0.1</host>
-            <port>6152</port>
+            <port>8888</port>
         </proxy>
     </proxies>
     ``` 

@@ -171,12 +171,12 @@ ssh config 无需特殊配置即可使用。
 
 ```
 Host github.com *.github.com
-    ProxyCommand nc -v -x 127.0.0.1:6152 %h %p
+    ProxyCommand nc -v -x 127.0.0.1:8888 %h %p
     HostName github.com
     User git
 
 Host gitlab.com *.gitlab.com
-    ProxyCommand nc -v -x 127.0.0.1:6152 %h %p
+    ProxyCommand nc -v -x 127.0.0.1:8888 %h %p
     HostName gitlab.com
     User git
 ```
@@ -186,11 +186,11 @@ Host gitlab.com *.gitlab.com
 ```
 # proxy for github
 [http "https://github.com"]
-    proxy = http://127.0.0.1:6152
+    proxy = http://127.0.0.1:8888
     sslVerify = false
 # proxy for gitlab
 [http "https://gitlab.com"]
-    proxy = http://127.0.0.1:6152
+    proxy = http://127.0.0.1:8888
     sslVerify = false
 ```
 
@@ -334,7 +334,7 @@ From: Support.Apple, 参考["Device Timed Out" error in Sidecar](https://discuss
 
 ## homebrew through proxy
 
-ALL_PROXY=http://127.0.0.1:6152 brew upgrade
+ALL_PROXY=http://127.0.0.1:8888 brew upgrade
 参考: [Homebrew behind proxy](https://github.com/Homebrew/legacy-homebrew/issues/11114#issuecomment-62933075)
 
 ## the mercurial clone through proxy

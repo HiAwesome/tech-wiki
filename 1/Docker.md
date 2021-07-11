@@ -34,7 +34,7 @@
 
 ## Mac Docker Proxies Config
 
-目前 Mac 使用 Surge 代理，设定 Docker 代理中 Web Server(HTTP), Secure Web Server(HTTPS) 皆为 http://127.0.0.1:6152 实测 Docker Desktop 携带的 K8s 可正常启动。
+目前 Mac 使用 Surge 代理，设定 Docker 代理中 Web Server(HTTP), Secure Web Server(HTTPS) 皆为 http://127.0.0.1:8888 实测 Docker Desktop 携带的 K8s 可正常启动。
 
 ## Docker Use Aliyun Registry Mirrors
 
