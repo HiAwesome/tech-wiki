@@ -1,5 +1,125 @@
 # Linux
 
+#### [Common Linux Text Search](https://www.baeldung.com/linux/common-text-search)
+
+```text
+Linux is a great system.
+Learning linux is very interesting.
+
+This Linux system has 17 users.
+The uptime of this linux system: 77 hours.
+
+File report
+There are 100 directories under */*.
+There are 250 files under */opt*. 
+There are 300 files under */home/root*.
+There are 20 mountpoints.
+```
+
+```shell
+# Basic String Search
+~/Downloads grep 'linux' input.txt
+Learning linux is very interesting.
+The uptime of this linux system: 77 hours.
+~/Downloads abc=linux
+~/Downloads print "$abc"
+linux
+~/Downloads grep "$abc" input.txt
+Learning linux is very interesting.
+The uptime of this linux system: 77 hours.
+
+# Case-Insensitive Search
+~/Downloads grep -i 'linux' input.txt
+Linux is a great system.
+Learning linux is very interesting.
+This Linux system has 17 users.
+The uptime of this linux system: 77 hours.
+
+# Whole-Word Search
+~/Downloads grep -w 'is' input.txt
+Linux is a great system.
+Learning linux is very interesting.
+
+# Fixed String Search
+~/Downloads grep -F '*/opt*' input.txt
+There are 250 files under */opt*.
+~/Downloads grep '\*/opt\*' input.txt
+There are 250 files under */opt*.
+
+# Inverting the Search
+~/Downloads grep -v '[0-9]' input.txt
+Linux is a great system.
+Learning linux is very interesting.
+
+
+File report
+
+# Inverting the Search: with -P
+# Mac OS have not this parameter.
+[Linux] grep -vP '\d' input.txt
+Linux is a great system.
+Learning linux is very interesting.
+
+
+File report
+[Linux] man grep | grep -- -P
+-P, --perl-regexp
+      Interpret PATTERN as a Perl regular expression.  This is highly experimental and grep -P may warn of unimplemented features.  
+
+# Print Only the Matched Parts
+~/Downloads grep -o '/[^/*]*' input.txt
+/
+/opt
+/home
+/root
+
+# Print Additional Context Lines Before or After Match
+# -B (before a match), -A (after a match), and -C (before and after a match).
+~/Downloads grep -A3 'report' input.txt
+File report
+There are 100 directories under */*.
+There are 250 files under */opt*.
+There are 300 files under */home/root*.
+
+# Count the Matching Lines
+~/Downloads grep -Fc 'are' input.txt
+4
+~/Downloads grep -Fc '*' input.txt
+3
+~/Downloads grep -Fc '7' input.txt
+2
+~ man grep | grep -A1 -- -c,
+     -c, --count
+             Only a count of selected lines is written to standard output.
+--
+             each file processed.  This option is ignored if -c, -L, -l, or -q
+             is specified.
+             
+# Recurisively Search directory
+~/Downloads grep -Rl 'boot' /var/log
+/var/log/cron
+/var/log/daily.out
+~ man grep | grep -A 1 -- -R,
+     -R, -r, --recursive
+             Recursively search subdirectories listed.
+~ man grep | grep -A 1 -- -l,
+     -l, --files-with-matches
+             Only the names of files containing selected lines are written to
+--
+             each file processed.  This option is ignored if -c, -L, -l, or -q
+             is specified.
+```
+
+#### [What’s Difference Between Grep, Egrep and Fgrep in Linux?](https://www.tecmint.com/difference-between-grep-egrep-and-fgrep-in-linux/)
+
+#### [grep the man page of a command for hyphenated options](https://unix.stackexchange.com/a/324150)
+
+If you want to grep for a pattern beginning with a hyphen, use -- before the pattern you specify.
+
+```shell
+man find | grep -- -type
+```
+
 ### [如何清理 Linux 服务器磁盘空间](https://blog.csdn.net/u012660464/article/details/78923011)
 
 * df -h , 这个命令用于查看服务器空间
