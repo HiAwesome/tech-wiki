@@ -1,5 +1,15 @@
 # 与 Java 有关的链接
 
+#### [How the JVM Locates, Loads, and Runs Libraries](https://blogs.oracle.com/javamagazine/java-jvm-class-loaders)
+
+#### [Escape Analysis in the HotSpot JIT Compiler](https://blogs.oracle.com/javamagazine/java-escape-analysis-optimization)
+
+#### [Project Lombok: Clean, Concise Code](https://blogs.oracle.com/javamagazine/java-lombok-annotation)
+
+#### [For Faster Java Collections, Make Them Lazy](https://blogs.oracle.com/javamagazine/java-lazy-collections-arraylist-hashmap)
+
+#### [Annotations: An Inside Look: How annotations work, how best to use them, and how to write your own](https://blogs.oracle.com/javamagazine/java-annotations-inside-look)
+
 ## [Baeldung Java](https://www.baeldung.com/category/java/)
 
 ### [Spock Framework 2.0 Release Notes](https://spockframework.org/spock/docs/2.0/release_notes.html)
