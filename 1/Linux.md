@@ -120,6 +120,36 @@ If you want to grep for a pattern beginning with a hyphen, use -- before the pat
 man find | grep -- -type
 ```
 
+#### [Count Occurrences of a Char in a Text File in Linux](https://www.baeldung.com/linux/count-occurrences-of-char-in-text)
+
+The tr command is the fastest of the three to get the character count in large files.
+
+```shell
+$ ls -lah large.txt 
+-rw-r--r--. 1 root root 1.1G Jun 12 10:53 large.txt
+
+$ time grep -o 'e' large.txt | wc -l
+82256735
+
+real	0m40.733s
+user	0m39.649s
+sys	0m0.714s
+
+$ time tr -c -d 'e' &lt; large.txt | wc -c
+82256735
+
+real	0m2.542s
+user	0m1.892s
+sys	0m0.433s
+
+$ time awk -Fe '{s+=(NF-1)} END {print s}' large.txt 
+82256735
+
+real	0m11.080s
+user	0m9.589s
+sys	0m0.933s
+```
+
 ### [如何清理 Linux 服务器磁盘空间](https://blog.csdn.net/u012660464/article/details/78923011)
 
 * df -h , 这个命令用于查看服务器空间
