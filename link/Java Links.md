@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+#### [Concurrency and parallelism in Java](https://medium.com/@peterlee2068/concurrency-and-parallelism-in-java-f625bc9b0ca4)
+
 #### [How the JVM Locates, Loads, and Runs Libraries](https://blogs.oracle.com/javamagazine/java-jvm-class-loaders)
 
 #### [Escape Analysis in the HotSpot JIT Compiler](https://blogs.oracle.com/javamagazine/java-escape-analysis-optimization)
