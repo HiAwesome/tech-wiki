@@ -1,5 +1,18 @@
 # 零散的经验
 
+##### Sublime Default Preferences
+
+```json
+{
+	"theme": "Default.sublime-theme",
+	"color_scheme": "Packages/Color Scheme - Default/Breakers.sublime-color-scheme",
+	"font_size": 20,
+	"update":false,
+	"auto_update":false,
+	"update_check":false
+}
+```
+
 ##### [在 Mac 上放大鼠标指针](https://support.apple.com/zh-cn/guide/mac-help/mchlp2920/mac)
 
 #### Git blame
