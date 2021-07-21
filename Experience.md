@@ -1,5 +1,9 @@
 # 零散的经验
 
+##### use plantuml in java code
+
+find [Calling PlantUML from Jav](https://plantuml.com/api).
+
 ##### Sublime Default Preferences
 
 ```json
