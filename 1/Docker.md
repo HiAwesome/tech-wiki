@@ -1,5 +1,11 @@
 # Docker
 
+#### 查看 docker 中所有的 deployment
+
+```shell
+docker ps -q | xargs docker inspect | grep DEPLOYMENT
+```
+
 ## [Youtube Video, 20160601: Docker for Java Developers](https://www.youtube.com/watch?v=IgJXYU3GOM4)
 
 ## Docker Troubleshoot
