@@ -1,5 +1,19 @@
 # Maven
 
+### [Profiles on Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
+
+How can I tell which profiles are in effect during a build?
+
+```shell
+mvn help:active-profiles
+```
+
+show all profile:
+
+```shell
+mvn help:all-profiles
+```
+
 ### Optional Dependency in Maven
 
 * [Maven: Optional Dependencies and Dependency Exclusions](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
