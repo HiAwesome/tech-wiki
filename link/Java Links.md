@@ -151,26 +151,6 @@ o.s.MyBenchmark.spring        avgt      100   0.627        0.020  us/op
 
 * [Converting Iterable to Collection in Java](https://www.baeldung.com/java-iterable-to-collection)
 
-## Maven
-
-### [IntelliJ IDEA: Maven dependencies](https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html)
-
-### [Maven Deploy to Nexus](https://www.baeldung.com/maven-deploy-nexus)
-
-### Optional Dependency in Maven
-
-* [Maven: Optional Dependencies and Dependency Exclusions](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
-* [Baeldung: Optional Dependency in Maven](https://www.baeldung.com/maven-optional-dependency)
-
-### [Understanding Apache Maven - The Series](https://cguntur.me/2020/05/20/understanding-apache-maven-the-series/)
-
-### 使用 surefire 插件时设定快速失败
-
-* [最小可用方案: mvn test | grep -w 'Running\|Tests'](https://stackoverflow.com/a/33739500)
-* [Is there a way to “fail fast” for junit with the maven surefire plugin?](https://stackoverflow.com/questions/1923857/is-there-a-way-to-fail-fast-for-junit-with-the-maven-surefire-plugin/32640471)
-* [Allow "fail fast" or stop running on first failure](https://issues.apache.org/jira/browse/SUREFIRE-580)
-* [Skipping Tests After First Failure](https://maven.apache.org/surefire/maven-surefire-plugin/examples/skip-after-failure.html)
-* [maven-surefire-plugin: skipAfterFailureCount](http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#skipAfterFailureCount)
 
 ## Postman
 
