@@ -54,6 +54,22 @@
 >   * 手动往往就意味着低效和错误，因此需要找到一种方法，使它能够自动地应对构建环境的差异。
 > * Maven插件：
 >   * 如果想要配置Maven自动为所有Java文件的头部添加许可证声明，那么可以通过关键字maven plugin license找到maven-license-plugin[3]，这个托管在Googlecode上的项目完全能够满足我的需求。
+> * Maven插件项目的POM有两个特殊的地方:
+>   * 它的packaging必须为maven-plugin，这种特殊的打包类型能控制Maven为其在生命周期阶段绑定插件处理相关的目标，例如在compile阶段，Maven需要为插件项目构建一个特殊插件描述符文件。
+>   * 一个artifactId为maven-plugin-api的依赖，该依赖中包含了插件开发所必需的类。
+> Mojo标注：
+>   * 每个Mojo都必须使用@Goal标注来注明其目标名称，否则Maven将无法识别该目标。
+>   * @requiresProject<true/false> 表示该目标是否必须在一个Maven项目中运行，默认为true。大部分插件目标都需要依赖一个项目才能执行，但有一些例外。例如maven-help-plugin的system目标，它用来显示系统属性和环境变量信息，不需要实际项目，因此使用了@requiresProject false标注。另外，maven-archetype-plugin的generate目标也是一个很好的例子。
+> * Maven支持种类多样的Mojo参数，包括单值的boolean、int、float、String、Date、File和URL，多值的数组、Collection、Map、Properties等。
+> * 错误处理和日志：
+>   * 如果Maven执行插件目标的时候遇到MojoFailureException，就会显示“BUILDFAILURE”的错误信息，这种异常表示Mojo在运行时发现了预期的错误。例如maven-surefire-plugin运行后若发现有失败的测试就会抛出该异常。
+>   * 如果Maven执行插件目标的时候遇到MojoExecutationException，就会显示“BUILD ERROR”的错误信息。这种异常表示Mojo在运行时发现了未预期的错误。
+> * 测试Maven插件：Maven社区有一个用来帮助插件集成测试的插件，它就是maven-invoker-plugin。该插件能够用来在一组项目上执行Maven，并检查每个项目的构建是否成功，最后，它还可以执行BeanShell或者Groovy脚本来验证项目构建的输出。
+> * Maven Archetype Plugin: Archetype并不是Maven的核心特性，它也是通过插件来实现的，这一插件就是 [maven-archetype-plugin](（http://maven.apache.org/archetype/maven-archetype-plugin/) 。尽管它只是一个插件，但由于其使用范围非常广泛，主要的IDE（如Eclipse、NetBeans和IDEA）在集成Maven的时候都着重集成了archetype特性，以方便用户快速地创建Maven项目。
+> * 编写Archetype: 也许你所在组织的一些项目都使用同样的框架和项目结构，为一个个项目重复同样的配置及同样的目录结构显然是难以让人接受的。更好的做法是创建一个属于自己的Archetype，这个Archetype包含了一些通用的POM配置、目录结构，甚至是Java类及资源文件，然后在创建项目的时候，就可以直接使用该Archetype，并提供一些基本参数，如groupId、artifactId、version，maven-archetype-plugin会处理其他原本需要手工处理的劳动。这样不仅节省了时间，也降低了错误配置发生的概率。
+> * 默认情况下，maven-archetype-plugin要求用户在使用Archetype生成项目的时候必须提供4个参数：groupId、artifactId、version和package。除此之外，用户在编写Archetype的时候可以要求额外的参数。
+> * 什么是Archetype Catalog: 当用户以不指定Archetype坐标的方式使用maven-archetype-plugin的时候，会得到一个Archetype列表供选择，这个列表的信息来源于一个名为archetype-catalog.xml的文件。
+> * 生成本地仓库的Archetype Catalog: maven-archetype-plugin提供了一个名为crawl的目标，用户可以用它来遍历本地Maven仓库的内容并自动生成archetype-catalog.xml文件。
 
 ### [Profiles on Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
 
