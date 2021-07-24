@@ -1,5 +1,6 @@
 # 散装语录
 
+* 亚马逊公司有一项规定，如果要开会，必须先有会议文档，没有文档，就取消会议。会议开始后，所有人先花几分钟看文档，然后再开始讨论文档列出的问题。  ——[《亚马逊的文档文化》](https://www.justingarrison.com/blog/2021-03-15-the-document-culture-of-amazon/)
 * 与其编写 Javadoc 注释，不如为方法和变量起好名字，使得它们可以解释编码意图，成为自文档的代码（self-documenting code）。  ——[《论代码注释》](https://henrikwarne.com/2021/06/15/on-comments-in-code/)
 * 很多人喜欢向后兼容的软件，但是这意味着，软件需要保留它的错误。在以前版本犯下的设计错误，以后就必须一直兼容，不能废除。  ——[《承诺向后兼容，就是承诺保留错误》](https://utcc.utoronto.ca/~cks/space/blog/tech/MistakesAndBackwardCompatibility)
 * 许多 AI 研究人员追求的目标是开发与人类智能原理相同的人工智能，但是这永远不可能实现，因为人的思维基本上没有算法。    ——[《为什么将无法实现通用人工智能》](https://www.nature.com/articles/s41599-020-0494-4)
