@@ -52,6 +52,8 @@
 >   * Java系统属性：所有Java系统属性都可以使用Maven属性引用，例如＄{user.home}指向了用户目录。用户可以使用mvn help：system查看所有的Java系统属性。 
 >   * 在一个多模块项目中，模块之间的依赖比较常见，这些模块通常会使用同样的groupId和version。因此这个时候就可以使用POM属性。
 >   * 手动往往就意味着低效和错误，因此需要找到一种方法，使它能够自动地应对构建环境的差异。
+> * Maven插件：
+>   * 如果想要配置Maven自动为所有Java文件的头部添加许可证声明，那么可以通过关键字maven plugin license找到maven-license-plugin[3]，这个托管在Googlecode上的项目完全能够满足我的需求。
 
 ### [Profiles on Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
 
