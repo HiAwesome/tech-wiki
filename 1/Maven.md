@@ -1,5 +1,13 @@
 # Maven
 
+### dependency
+
+> 使用 dependency:list 和 dependency：tree 可以帮助我们详细了解项目中所有依赖的具体信息，在此基础上，还有 dependency:analyze 工具可以帮助分析当前项目的依赖。
+>
+> 该结果中重要的是两个部分。首先是 Used undeclared dependencies，意指项目中使用到的，但是没有显式声明的依赖，这里是spring-context。这种依赖意味着潜在的风险，当前项目直接在使用它们，例如有很多相关的 Java import 声明，而这种依赖是通过直接依赖传递进来的，当升级直接依赖的时候，相关传递性依赖的版本也可能发生变化，这种变化不易察觉，但是有可能导致当前项目出错。例如由于接口的改变，当前项目中的相关代码无法编译。这种隐藏的、潜在的威胁一旦出现，就往往需要耗费大量的时间来查明真相。因此，显式声明任何项目中直接用到的依赖。
+>
+> 结果中还有一个重要的部分是Unused declared dependencies，意指项目中未使用的，但显式声明的依赖，这里有spring-core和spring-beans。需要注意的是，对于这样一类依赖，我们不应该简单地直接删除其声明，而是应该仔细分析。由于dependency：analyze只会分析编译主代码和测试代码需要用到的依赖，一些执行测试和运行时需要的依赖它就发现不了。很显然，该例中的spring-core和spring-beans是运行Spring Framework项目必要的类库，因此不应该删除依赖声明。当然，有时候确实能通过该信息找到一些没用的依赖，但一定要小心测试。
+
 ### [Profiles on Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
 
 How can I tell which profiles are in effect during a build?
