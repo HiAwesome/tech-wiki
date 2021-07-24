@@ -5,6 +5,7 @@
 How can I tell which profiles are in effect during a build?
 
 ```shell
+# must on pom.xml dir
 mvn help:active-profiles
 ```
 
