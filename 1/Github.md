@@ -2,7 +2,8 @@
 
 ## [Github Advanced Search](https://github.com/search/advanced)
 
-* **[搜索代码](https://docs.github.com/cn/github/searching-for-information-on-github/searching-on-github/searching-code)**
+* **[举例: JSON.parseObject extension:java](https://github.com/search?q=JSON.parseObject+extension%3Ajava&type=Code)**
+* [搜索代码](https://docs.github.com/cn/github/searching-for-information-on-github/searching-on-github/searching-code)
 * [搜索仓库](https://docs.github.com/cn/github/searching-for-information-on-github/searching-on-github/searching-for-repositories)
 * [搜索包](https://docs.github.com/cn/github/searching-for-information-on-github/searching-on-github/searching-code)
 * [在 forks 中搜索](https://docs.github.com/cn/github/searching-for-information-on-github/searching-on-github/searching-in-forks)
