@@ -8,9 +8,9 @@
 * [Hive 倾斜表](/database/Hive%20倾斜表.md)
 * [Presto 函数整理](/database/Presto%20函数整理.md)
 * [JetBrain Experience](1/JetBrain%20Experience.md)
-* [正则表达式](1/正则表达式.md)
-* [程序员](1/程序员.md)
-* [单元测试](1/单元测试.md)
+* [Regular Expression](1/Regular Expression.md)
+* [Programmer](1/Programmer.md)
+* [UnitTest](1/UnitTest.md)
 * [Experience](Experience.md)
 
 # Link
