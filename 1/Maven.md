@@ -1,12 +1,57 @@
 # Maven
 
-### dependency
+## [Maven 实战](https://book.douban.com/subject/5345682/)
 
-> 使用 dependency:list 和 dependency：tree 可以帮助我们详细了解项目中所有依赖的具体信息，在此基础上，还有 dependency:analyze 工具可以帮助分析当前项目的依赖。
->
-> 该结果中重要的是两个部分。首先是 Used undeclared dependencies，意指项目中使用到的，但是没有显式声明的依赖，这里是spring-context。这种依赖意味着潜在的风险，当前项目直接在使用它们，例如有很多相关的 Java import 声明，而这种依赖是通过直接依赖传递进来的，当升级直接依赖的时候，相关传递性依赖的版本也可能发生变化，这种变化不易察觉，但是有可能导致当前项目出错。例如由于接口的改变，当前项目中的相关代码无法编译。这种隐藏的、潜在的威胁一旦出现，就往往需要耗费大量的时间来查明真相。因此，显式声明任何项目中直接用到的依赖。
->
-> 结果中还有一个重要的部分是Unused declared dependencies，意指项目中未使用的，但显式声明的依赖，这里有spring-core和spring-beans。需要注意的是，对于这样一类依赖，我们不应该简单地直接删除其声明，而是应该仔细分析。由于dependency：analyze只会分析编译主代码和测试代码需要用到的依赖，一些执行测试和运行时需要的依赖它就发现不了。很显然，该例中的spring-core和spring-beans是运行Spring Framework项目必要的类库，因此不应该删除依赖声明。当然，有时候确实能通过该信息找到一些没用的依赖，但一定要小心测试。
+> * mvn help:system 。该命令会打印出所有的 Java 系统属性和环境变量，这些信息对我们日常的编程工作很有帮助。
+> * 默认情况下，~/.m2目录下除了repository仓库之外就没有其他目录和文件了，不过大多数Maven用户需要复制M2_HOME/conf/settings.xml文件到~/.m2/settings.xml。推荐使用用户范围的settings.xml，主要是为了避免无意识地影响到系统中的其他用户。如果有切实的需求，需要统一系统中所有用户的settings.xml配置，当然应该使用全局范围的settings.xml。
+> * 没有任何实际的Java代码，我们就能够定义一个Maven项目的POM，这体现了Maven的一大优点，它能让项目对象模型最大程度地与实际代码相独立，我们可以称之为解耦，或者正交性。这在很大程度上避免了Java代码和POM代码的相互影响。
+> * 在Maven执行测试（test）之前，它会先自动执行项目主资源处理、主代码编译、测试资源处理、测试代码编译等工作，这是Maven生命周期的一个特性。
+> * 依赖调解: 路径最近者优先；第一声明者优先。
+> * 最后，关于可选依赖需要说明的一点是，在理想的情况下，是不应该使用可选依赖的。前面我们可以看到，使用可选依赖的原因是某一个项目实现了多个特性，在面向对象设计中，有个单一职责性原则，意指一个类应该只有一项职责，而不是糅合太多的功能。这个原则在规划Maven项目的时候也同样适用。
+> * 优化依赖：在这些工作之后，最后得到的那些依赖被称为已解析依赖（Resolved Dependency）。当这些依赖经Maven解析后，就会构成一个依赖树，通过这棵依赖树就能很清楚地看到某个依赖是通过哪条传递路径引入的。使用 dependency:list 和 dependency：tree 可以帮助我们详细了解项目中所有依赖的具体信息，在此基础上，还有 dependency:analyze 工具可以帮助分析当前项目的依赖。
+>   * 该结果中重要的是两个部分。首先是 Used undeclared dependencies，意指项目中使用到的，但是没有显式声明的依赖，这里是spring-context。这种依赖意味着潜在的风险，当前项目直接在使用它们，例如有很多相关的 Java import 声明，而这种依赖是通过直接依赖传递进来的，当升级直接依赖的时候，相关传递性依赖的版本也可能发生变化，这种变化不易察觉，但是有可能导致当前项目出错。例如由于接口的改变，当前项目中的相关代码无法编译。这种隐藏的、潜在的威胁一旦出现，就往往需要耗费大量的时间来查明真相。因此，显式声明任何项目中直接用到的依赖。
+>   * 结果中还有一个重要的部分是Unused declared dependencies，意指项目中未使用的，但显式声明的依赖，这里有spring-core和spring-beans。需要注意的是，对于这样一类依赖，我们不应该简单地直接删除其声明，而是应该仔细分析。由于dependency：analyze只会分析编译主代码和测试代码需要用到的依赖，一些执行测试和运行时需要的依赖它就发现不了。很显然，该例中的spring-core和spring-beans是运行Spring Framework项目必要的类库，因此不应该删除依赖声明。当然，有时候确实能通过该信息找到一些没用的依赖，但一定要小心测试。
+> * 从仓库解析依赖的机制：最后，用户还可以从命令行加入参数-U，强制检查更新，使用参数后，Maven就会忽略<updatePolicy>的配置。
+> * 何为生命周期：Maven的生命周期是抽象的，这意味着生命周期本身不做任何实际的工作，在Maven的设计中，实际的任务（如编译源代码）都交由插件来完成。生命周期抽象了构建的各个步骤，定义了它们的次序，但没有提供具体实现。每个构建步骤都可以绑定一个或者多个插件行为，而且Maven为大多数构建步骤编写并绑定了默认插件。
+>   * Maven拥有三套相互独立的生命周期，它们分别为clean、default和site。clean生命周期的目的是清理项目，default生命周期的目的是构建项目，而site生命周期的目的是建立项目站点。
+>   * 每个生命周期包含一些阶段（phase），这些阶段是有顺序的，并且后面的阶段依赖于前面的阶段，用户和Maven最直接的交互方式就是调用这些生命周期阶段。以clean生命周期为例，它包含的阶段有pre-clean、clean和post-clean。当用户调用pre-clean的时候，只有pre-clean阶段得以执行；当用户调用clean的时候，pre-clean和clean阶段会得以顺序执行；当用户调用post-clean的时候，pre-clean、clean和post-clean会得以顺序执行。
+> * 命令行与生命周期：
+>   * mvn clean：该命令调用clean生命周期的clean阶段。实际执行的阶段为clean生命周期的pre-clean和clean阶段。
+>   * mvn test：该命令调用default生命周期的test阶段。实际执行的阶段为default生命周期的validate、initialize等，直到test的所有阶段。这也解释了为什么在执行测试的时候，项目的代码能够自动得以编译。
+>   * mvn clean install：该命令调用clean生命周期的clean阶段和default生命周期的install阶段。实际执行的阶段为clean生命周期的pre-clean、clean阶段，以及default生命周期的从validate至install的所有阶段。该命令结合了两个生命周期，在执行真正的项目构建之前清理项目是一个很好的实践。
+>   * mvn clean deploy site-deploy：该命令调用clean生命周期的clean阶段、default生命周期的deploy阶段，以及site生命周期的site-deploy阶段。实际执行的阶段为clean生命周期的pre-clean、clean阶段，default生命周期的所有阶段，以及site生命周期的所有阶段。该命令结合了Maven所有三个生命周期，且deploy为default生命周期的最后一个阶段，site-deploy为site生命周期的最后一个阶段。
+> * 插件目标：对于插件本身，为了能够复用代码，它往往能够完成多个任务。
+>   * maven-dependency-plugin有十多个目标，每个目标对应了一个功能，上述提到的几个功能分别对应的插件目标为dependency：analyze、dependency：tree和dependency：list。这是一种通用的写法，冒号前面是插件前缀，冒号后面是该插件的目标。类似地，还可以写出compiler：compile（这是maven-compiler-plugin的compile目标）和surefire：test（这是maven-surefire-plugin的test目标）。
+> * 插件绑定：Maven的生命周期与插件相互绑定，用以完成实际的构建任务。具体而言，是生命周期的阶段与插件的目标相互绑定，以完成某个具体的构建任务。
+> * 从命令行调用插件：为了达到该目的，Maven引入了目标前缀的概念，help是maven-help-plugin的目标前缀，dependency是maven-dependency-plugin的前缀，有了插件前缀，Maven就能找到对应的artifactId。不过，除了artifactId，Maven还需要得到groupId和version才能精确定位到某个插件。
+> * 插件仓库：值得一提的是，Maven会区别对待依赖的远程仓库与插件的远程仓库。不同于repositories及其repository子元素，插件的远程仓库使用pluginRepositories和pluginRepository配置。
+> * 插件的默认groupId：在POM中配置插件的时候，如果该插件是Maven的官方插件（即如果其groupId为org.apache.maven.plugins），就可以省略groupId配置。笔者不推荐使用Maven的这一机制，虽然这么做可以省略一些配置，但这样的配置会让团队中不熟悉Maven的成员感到费解，况且能省略的配置也就仅仅一行而已。
+> * 依赖管理：Maven提供的dependencyManagement元素既能让子模块继承到父模块的依赖配置，又能保证子模块依赖使用的灵活性。使用这种依赖管理机制似乎不能减少太多的POM配置，不过笔者还是强烈推荐采用这种方法。其主要原因在于在父POM中使用dependencyManagement声明依赖能够统一项目范围中依赖的版本，当依赖版本在父POM中声明之后，子模块在使用依赖的时候就无须声明版本，也就不会发生多个子模块使用依赖版本不一致的情况。这可以帮助降低依赖冲突的几率。
+> * import的依赖范围，推迟到现在介绍是因为该范围的依赖只在dependencyManagement元素下才有效果，使用该范围的依赖通常指向一个POM，作用是将目标POM中的dependencyManagement配置导入并合并到当前POM的dependencyManagement元素中。
+> * 聚合与继承的关系：聚合与继承其实是两个概念，其目的完全是不同的。前者主要是为了方便快速构建项目，后者主要是为了消除重复配置。
+>   * 对于聚合模块来说，它知道有哪些被聚合的模块，但那些被聚合的模块不知道这个聚合模块的存在。
+>   * 对于继承关系的父POM来说，它不知道有哪些子模块继承于它，但那些子模块都必须知道自己的父POM是什么。
+>   * 如果非要说这两个特性的共同点，那么可以看到，聚合POM与继承关系中的父POM的packaging都必须是pom，同时，聚合模块与继承关系中的父模块除了POM之外都没有实际的内容。
+>   * 在现有的实际项目中，读者往往会发现一个POM既是聚合POM，又是父POM，这么做主要是为了方便。
+> * Maven设定核心插件的原因是防止由于插件版本的变化而造成构建不稳定。
+> * 反应堆：在一个多模块的Maven项目中，反应堆（Reactor）是指所有模块组成的一个构建结构。对于单模块的项目，反应堆就是该模块本身，但对于多模块项目来说，反应堆就包含了各模块之间继承与依赖的关系，从而能够自动计算出合理的模块构建顺序。模块间的依赖关系会将反应堆构成一个有向非循环图（Directed Acyclic Graph，DAG）。
+> * 裁剪反应堆：
+>   * -am，--also-make同时构建所列模块的依赖模块
+>   * -amd-also-make-dependents同时构建依赖于所列模块的模块
+>   * -pl，--projects<arg>构建指定的模块，模块间用逗号分隔
+>   * -rf-resume-from<arg>从指定的模块恢复反应堆
+>   * 在开发过程中，灵活应用上述4个参数，可以帮助我们跳过无须构建的模块，从而加速构建。在项目庞大、模块特别多的时候，这种效果就会异常明显。
+> * 何为版本管理：
+>   * 所有自动化测试应当全部通过。毫无疑问，失败的测试代表了需要修复的问题，因此发布版本之前应该确保所有测试都能得以正确执行。
+>   * 项目没有配置任何快照版本的依赖。快照版本的依赖意味着不同时间的构建可能会引入不同内容的依赖，这显然不能保证多次构建能够生成同样的结果。
+>   * 项目没有配置任何快照版本的插件。快照版本的插件配置可能会在不同时间引入不容内容的Maven插件，从而影响Maven的行为，破坏构建的稳定性。
+>   * 项目所包含的代码已经全部提交到版本控制系统中。项目已经发布了，可源代码却不在版本控制系统中，甚至丢失了。这意味着项目丢失了某个时刻的状态，因此这种情况必须避免，版本发布的时候必须确保所有的源代码都已经提交了。
+> * Maven为了支持构建的灵活性，内置了三大特性，即属性、Profile和资源过滤。
+> * Maven属性：
+>   * 内置属性：主要有两个常用内置属性——＄{basedir}表示项目根目录，即包含pom.xml文件的目录；＄{version}表示项目版本。
+>   * Java系统属性：所有Java系统属性都可以使用Maven属性引用，例如＄{user.home}指向了用户目录。用户可以使用mvn help：system查看所有的Java系统属性。 
+>   * 在一个多模块项目中，模块之间的依赖比较常见，这些模块通常会使用同样的groupId和version。因此这个时候就可以使用POM属性。
+>   * 手动往往就意味着低效和错误，因此需要找到一种方法，使它能够自动地应对构建环境的差异。
 
 ### [Profiles on Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
 
