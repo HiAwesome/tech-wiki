@@ -14,8 +14,9 @@
 > * 难道你不讨厌给不同的项目安装新的运行时环境? Gradle包装器是救星!它允许你在任何需要运行构建的机器上从一个指定的仓库下载和安装一个 Gradle 运行时的新拷贝。这个过程是在第一次构建执行时自动触发的。包装器对于给一个发布团队分享你的构建或者在持续集成服务器上运行构建是非常有用的。
 > * 如果想要深入了解持续交付和所有相关方面的内容,我推荐 Jez Humble 和 David Farley 所著的 Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation(Addison Wesley, 2010)
 > * 每个 Gradle 构建都是以一个脚本开始的。 Gradle构建脚本默认的名字是 build.gradle。当在 shell 中执行 gradle 命令时, Gradle 会去寻找名字是 bui1d.gradle 的文件。如果找不到, 就会显示一个帮助信息。
-> *
-> *
+> * 任务通常只会执行一次, 无论它们是在命令行中指定的还是作为另一个任务的依赖。
+> * 任务名字缩写: Grade 最有用的特性之一就是能够以驼峰式的缩写在命令行上运行任务。（简单任务使用，复杂任务不适合）
+> * 在执行时排除一个任务：有时候你想要在构建运行时排除一个指定任务。 Gradle 提供了一个命令行选项-x来实现。
 > *
 > *
 > *
