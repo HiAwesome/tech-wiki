@@ -31,7 +31,11 @@ docker ps -q | xargs docker inspect | grep DEPLOYMENT
 
 ## Docker Image
 
-* [移除所有 tag 为 none 的 image](https://stackoverflow.com/a/50040332), docker images | grep none | awk '{ print $3; }' | xargs docker rmi
+###  [移除所有 tag 为 none 的 image](https://stackoverflow.com/a/50040332)
+
+```shell
+docker images | grep none | awk '{ print $3; }' | xargs docker rmi
+```
 
 ## Dockerfile
 
@@ -60,13 +64,17 @@ docker ps -q | xargs docker inspect | grep DEPLOYMENT
 
 #### [docker hub: postgres image](https://hub.docker.com/_/postgres)
 
+```shell
 docker run --name some-postgres -p 54321:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
 
 ### Docker with MySQL
 
 #### [docker hub: mysql image](https://hub.docker.com/_/mysql)
 
+```shell
 docker run --name moqimysql -p 34567:3306 -v /Users/moqi/Dropbox/docker_volume/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=moqi -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+```
 
 ### [Zombie docker container that can't be killed](https://stackoverflow.com/a/52493047)
 
