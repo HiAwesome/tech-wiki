@@ -1,5 +1,20 @@
 # Gradle
 
+## Gradle Majar Version
+
+发布版本越来越快。
+
+* [20210410: 7.0](https://github.com/gradle/gradle/releases/tag/v7.0.0)
+* [20191109: 6.0](https://github.com/gradle/gradle/releases/tag/v6.0.0)
+* [20181126: 5.0](https://github.com/gradle/gradle/releases/tag/v5.0.0)
+* [20170614: 4.0](https://github.com/gradle/gradle/releases/tag/v4.0.0)
+* [20160919: 3.0](https://github.com/gradle/gradle/releases/tag/v3.0.0)
+* [20140620: 2.0](https://github.com/gradle/gradle/releases/tag/REL_2.0)
+* [20120612: 1.0](https://github.com/gradle/gradle/releases/tag/REL_1.0)
+* [20080422: 0.1](https://github.com/gradle/gradle/releases/tag/REL-0.1)
+
+## [实战 Gradle](https://book.douban.com/subject/26609447/)
+
 > * 你所需要的是一个可编程的工具，它能够让你以可执行和有序的任务来表达自动化需求。
 > * 要理解Ant的构建脚本, 你需要先了解一些命名规范。一个构建脚本由三个基本元素组成:一个project、多个target和可用的task。
 >   * 使用XML作为构建逻辑的定义语言相比于其他更简明的定义语言,会导致构建脚本过于臃肿和啰嗦。
