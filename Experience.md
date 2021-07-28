@@ -1,5 +1,11 @@
 # 零散的经验
 
+###### mac 'caps lock' 切换输入法失效
+
+按照规则是长按才触发大小写自身切换，但是目前在 IDEA 和 钉钉里，短按也会触发大小写切换而不是输入法切换。
+
+目前认为是系统升级到 11.5 的一个问题，后面查看，暂时设定切换输入法为其他按键组合。
+
 ##### use plantuml in java code
 
 find [Calling PlantUML from Jav](https://plantuml.com/api).
