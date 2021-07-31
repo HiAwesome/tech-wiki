@@ -61,5 +61,6 @@
 >   * 集成測试用来測试一个完整的组件或子系统。你想要确保多个类之间的交互是否按预期运行。集成测试的一个典型场景就是验证产品代码和数据库之间的交互。
 >   * 功能测试通常用于测试应用程序的端到端功能,包括从用户的角度与所有外部系统的交互。当我们谈论用户的角度时,通常指的是用户界面。
 > * 在项目中如何配置并行执行测试依赖于目标硬件和测试类型(CPU 或 IO 限制)。试着设置数量值以找到平衡点。 为了获得更多的关于如何找到最佳平衡点的信息, 建议你阅读 Venkat Subramaniam 所写的 Programming Concurency on the JVM (The Pragmatic Programmers, 2011)。
+> * 请注意 apply 方法调用时传入的 from 属性,它的值可以是任何类型的 URL, 比如 HTTP 地址 http:/myscripts.com/shared/cloudbeesgradle。以基于HTTP(S) 的方式暴露脚本插件是一个组织的部门间共享的较好办法。
 > * T
 
