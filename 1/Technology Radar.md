@@ -8,7 +8,7 @@
 
 在前端错误报告方面, Sentry 已经成了许多团队的默认选项。 Sentry 提供了一些便利的功能, 比如错误分组, 以及使用适当的参数定义错误过滤规则, 可以极大地帮助处理来自终端用户设备的大量错误。通过将 Sentry 集成到持续交付流水线中,你可以上传源码映射文件, 从而更高效地调试错误, 并能很容易追踪到是在哪个版本的软件中产生了这些错误。我们很欣赏尽管 Sentry是个 SaaS 产品, 但它的源代码是公开的, 这样就可以免费用于一些较小的用例和自托管中。
 
-* [Sentry on Radar](https://www.thoughtworks.com/radar/tools/sentry), 2018 年 5 月进入评估阶段，202010 年 10 月进入试验阶段，2021 年 4 月进入采纳阶段。
+* [Sentry on Radar](https://www.thoughtworks.com/radar/tools/sentry), 2018 年 5 月进入评估阶段，2020 年 10 月进入试验阶段，2021 年 4 月进入采纳阶段。
 * [Self-Hosted Sentry](https://develop.sentry.dev/self-hosted/), 私有化部署，docker compose 即可。
 * [sentry 的作用和使用场景?](https://www.zhihu.com/question/23922181)
   > 我们主要用Sentry来做下面这几件事情：
