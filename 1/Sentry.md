@@ -1,5 +1,7 @@
 # [Sentry](https://sentry.io/welcome/)
 
+#### 基本介绍
+
 在前端错误报告方面, Sentry 已经成了许多团队的默认选项。 Sentry 提供了一些便利的功能, 比如错误分组, 以及使用适当的参数定义错误过滤规则, 可以极大地帮助处理来自终端用户设备的大量错误。通过将 Sentry 集成到持续交付流水线中,你可以上传源码映射文件, 从而更高效地调试错误, 并能很容易追踪到是在哪个版本的软件中产生了这些错误。我们很欣赏尽管 Sentry是个 SaaS 产品, 但它的源代码是公开的, 这样就可以免费用于一些较小的用例和自托管中。
 
 * [Sentry on Radar](https://www.thoughtworks.com/radar/tools/sentry), 2018 年 5 月进入评估阶段，2020 年 10 月进入试验阶段，2021 年 4 月进入采纳阶段。
@@ -29,3 +31,18 @@
 * 如果后端系统使用，主动控制错误报告的 qps 较低，对生产影响较小。但性能监控对生产环境影响较大，而且功能上与 Grafana 有一定的重合，所以不推荐后端使用性能监控。
 * 所有权规则可以比较方便的对问题进行路由。
 * 在同类产品中较为突出。
+
+#### 延伸阅读
+
+* [Dapper，大规模分布式系统的跟踪系统](http://bigbully.github.io/Dapper-translation/)
+* [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf)
+* [分布式调用跟踪](https://github.com/HiAwesome/micro_services_arch/blob/master/distributed_trace.md)
+* [从谷歌Dapper到阿里EagleEye看分布式链路追踪](https://zhuanlan.zhihu.com/p/163806366)
+* [Spring Cloud Sleuth](https://github.com/spring-cloud/spring-cloud-sleuth)
+* [Meiturn Cat](https://github.com/dianping/cat)
+* [Apache skywalking](https://github.com/apache/skywalking)
+* [凤凰架构: 可观测性](https://icyfenix.cn/distribution/observability/)
+  * [凤凰架构: 事件日志](https://icyfenix.cn/distribution/observability/logging.html)
+  * [凤凰架构: 链路追踪](https://icyfenix.cn/distribution/observability/tracing.html)
+  * [凤凰架构: 聚合度量](https://icyfenix.cn/distribution/observability/metrics.html)
+* T
