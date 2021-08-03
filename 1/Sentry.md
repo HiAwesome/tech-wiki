@@ -57,7 +57,7 @@ Sentry 的成功在一定程度上说明了实时的错误追踪对于辅助解�
 * [分布式调用跟踪](https://github.com/HiAwesome/micro_services_arch/blob/master/distributed_trace.md)
 * [从谷歌Dapper到阿里EagleEye看分布式链路追踪](https://zhuanlan.zhihu.com/p/163806366)
 * [Spring Cloud Sleuth](https://github.com/spring-cloud/spring-cloud-sleuth)
-* [Meiturn Cat](https://github.com/dianping/cat)
+* [Meituan Cat](https://github.com/dianping/cat)
 * [Apache skywalking](https://github.com/apache/skywalking)
 * [凤凰架构: 可观测性](https://icyfenix.cn/distribution/observability/)
   * [凤凰架构: 事件日志](https://icyfenix.cn/distribution/observability/logging.html)
