@@ -78,7 +78,7 @@
 
 * [Baeldung: The BeanDefinitionOverrideException in Spring Boot](https://www.baeldung.com/spring-boot-bean-definition-override-exception)
 
-## [Field injection is not recommended]()
+## [Field injection is not recommended](https://blog.marcnuri.com/field-injection-is-not-recommended)
 
 * [Field Dependency Injection Considered Harmful](https://www.vojtechruzicka.com/field-dependency-injection-considered-harmful/)
 * [What exactly is Field Injection and how to avoid it?](https://stackoverflow.com/a/39892204)
