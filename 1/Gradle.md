@@ -1,6 +1,6 @@
 # Gradle
 
-## Gradle Majar Version
+## Gradle Major Version
 
 发布版本越来越快。
 
