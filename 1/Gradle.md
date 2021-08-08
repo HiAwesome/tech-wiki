@@ -65,3 +65,18 @@
 > * 测试定制的 task: Gradle 的 API 提供的测试工具允许你在真实的工作环境中测试定制的task和插件。它的思想是提供一个假的 Gradle Project实例, 它暴露了和你在构建脚本中使用的 Pro]ect 对象一样的方法和属性。该 Project 实例是通过 org.gradle.testfixtures.Projectbuilder 类的 build 方法提供的, 而且可以被任何测试类使用。
 > * 插件能力vs约定：作为一个插件的开发者, 你常常会徘徊于插件提供的能力和约定两条线上方面, 你可能想要加强另一个项目的功能;比如, 通过task。另一方面, 你想要引入约定帮助用户做出有意义的决定;比如, 标准化的项目布局。如果约定强制和武断地对使用该插件的项目做出了结构上的要求, 那么通过创建两个不同的插件, 将基本功能和约定分离就是一种合理的做法:一个基础插件包含了所提供的能力, 而另一个插件则应用该基础插件并根据约定预配置这些能力。这种方法被Java插件所使用, Java插件继承自Java基础插件。
 
+## 实战升级
+
+### 用到的链接
+
+* [Exclusions declared in a dependency's pom should work as they do in Maven](https://github.com/gradle/gradle/issues/1473)
+* [dependency management + spring boot + solr + log4j + junit = error?](https://github.com/spring-gradle-plugins/dependency-management-plugin/issues/59)
+* [Gradle 依赖排除](https://www.zhyea.com/2018/02/08/gradle-exclude-dependencies.html)
+
+### 目前未解决的问题
+
+```text
+Processing of ********log4j-1.2.16.pom failed: maven-antrun-plugin scope for junit:junit:jar must be one of [compile, runtime, system] but is 'test'. in log4j:log4j:1.2.16
+```
+
+log4j:log4j:1.2.16 版本有问题，做全局强制指定版本未成功。
