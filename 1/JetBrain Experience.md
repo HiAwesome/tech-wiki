@@ -1,5 +1,13 @@
 # Jetbrain Experience
 
+### Source code does not match the bytecode
+
+* [Library source does not match the bytecode for class](https://stackoverflow.com/a/41952613/7379661)
+* [Can't step into code in debugger](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001209459-Can-t-step-into-code-in-debugger)
+* ['Source code does not match the bytecode' when debugging on a device](https://stackoverflow.com/a/40566459/7379661)
+* [Library source does not match the byte code](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360004423239-Library-source-does-not-match-the-byte-code)
+* [Intellij library source does not match the bytecode for class *](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000624880-Intellij-library-source-does-not-match-the-bytecode-for-class-)
+
 ### [2021.1.2 javax.net.ssl.SSLHandshakeException](https://youtrack.jetbrains.com/issue/DBE-13313#focus=Comments-27-4922190.0-0)
 
 ## [Official documents](https://www.jetbrains.com/help/idea/discover-intellij-idea.html)
