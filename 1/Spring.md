@@ -60,11 +60,9 @@
 * [Stack Overflow: Using annotation @Sql, is it possible to execute scripts in Class level before Method level?](https://stackoverflow.com/a/32892436)
 * [Stack Overflow: Using JUnit Categories with Maven Failsafe plugin](https://stackoverflow.com/a/18373848)
 * [Baeldung: Testing in Spring Boot](https://www.baeldung.com/spring-boot-testing)
-* [Baeldung: Testing with Spring and Spock](https://www.baeldung.com/spring-spock-testing)
 * [Baeldung: Quick Guide on Loading Initial Data with Spring Boot](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
 * [Baeldung: Spring JdbcTemplate Unit Testing](https://www.baeldung.com/spring-jdbctemplate-testing)
 * [How unit test insert record in spring (no delete method)](https://stackoverflow.com/a/51277993)
-* [Testing with Spring and Spock](https://www.baeldung.com/spring-spock-testing)
 
 ### HikariCP
 

@@ -14,13 +14,6 @@
 
 ## [Baeldung Java](https://www.baeldung.com/category/java/)
 
-### [Spock Framework 2.0 Release Notes](https://spockframework.org/spock/docs/2.0/release_notes.html)
-
-较为重要的升级理由：
-
-> * Support for Groovy 3
-> * Spock now supports Parallel Execution on the spec and feature level, with powerful tools for shared resource access.
-
 ### [Groovy 3.0 Release Notes](https://groovy-lang.org/releasenotes/groovy-3.0.html)
 
 较为重要的升级理由：
