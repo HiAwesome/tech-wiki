@@ -1,5 +1,6 @@
 # 散装语录
 
+* 软件项目和其他工程项目有一个重要区别，就是项目执行期间可能发生重大变更。举例来说，如果你正在建造一架民航飞机，没人会在造到一半时告诉你，他们希望这架飞机能够飞出大气层，进入太空。但在软件项目中，这是可能的，IT 公司的特点就是业务逻辑一切皆有可能，如果你建造的东西会飞，那么需求方就会觉得，它应该能飞到任何想去的地方。  ——[复杂项目 101](https://vadimkravcenko.com/en/dealing-with-complex-projects/)
 * 年轻时，我犯的最大错误，就是没有及时离职。我以为我必须向公司证明自己，然后再离开，但这其实没有任何意义。你不欠雇主任何东西，不必向雇主证明任何事情。他们对你丝毫没有忠诚度，对你做对或做错、是聪明还是愚蠢，毫不在意。 把时间用在你最终不会引以为豪的东西上面，是一件可怕的事情，浪费了你在地球上的短暂旅程。  ——[Hacker News 读者](https://news.ycombinator.com/item?id=27565815)
 * 可能永远不会有 Python 4.0，我们被 Python 2 升级到 Python 3 搞怕了。  ——[Guido](https://www.techrepublic.com/article/programming-languages-why-python-4-0-will-probably-never-arrive-according-to-its-creator/)
 * 亚马逊公司有一项规定，如果要开会，必须先有会议文档，没有文档，就取消会议。会议开始后，所有人先花几分钟看文档，然后再开始讨论文档列出的问题。  ——[《亚马逊的文档文化》](https://www.justingarrison.com/blog/2021-03-15-the-document-culture-of-amazon/)
