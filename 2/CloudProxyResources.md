@@ -1,6 +1,6 @@
 # 云服务商代理
 
-## [阿里云 公共代理库](https://help.aliyun.com/document_detail/102512.html)
+## [阿里云 云效 Maven](https://maven.aliyun.com/mvn/guide)
 
 ### Maven
 
