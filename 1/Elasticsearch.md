@@ -13,3 +13,4 @@
 * [精确值查找](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_exact_values.html)
 * [Term Query](https://www.elastic.co/guide/en/elasticsearch/reference/7.14/query-dsl-term-query.html#query-dsl-term-query)
 * [Mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html)
+* [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.14/query-dsl.html)
