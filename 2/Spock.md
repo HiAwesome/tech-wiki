@@ -17,6 +17,7 @@
 #### Update to 2.0 data links
 
 * [spock 2.0 migration guide](https://spockframework.org/spock/docs/2.0/migration_guide.html)
+* [spock 2.0 interaction-based-testing](https://spockframework.org/spock/docs/2.0/interaction_based_testing.html#interaction-based-testing)
 * [maven surefire plugin spock](https://maven.apache.org/surefire/maven-surefire-plugin/examples/spock.html)
 * [mvnrepository: surefire-junit47](https://mvnrepository.com/artifact/org.apache.maven.surefire/surefire-junit47)
 * [mvnrepository: maven-surefire-plugin](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin)
