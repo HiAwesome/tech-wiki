@@ -37,4 +37,4 @@
 **[parallel-execution](https://spockframework.org/spock/docs/2.0/parallel_execution.html#parallel-execution)**
 
 * 对于有事务状态的集成测试来说，在不使用 ResourceLock 的情况下无法保证影响结果的正确性，而且速度不会提高，不推荐。
-* 对于完全分隔的单测而言，并行执行可以加快速度，具体数据待测试。
+* 对于完全分隔的单测而言，并行执行默认启动核心数的线程可以加快速度，具体数据待测试。
