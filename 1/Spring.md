@@ -4,6 +4,8 @@
 
 ### [Spring Native](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/)
 
+* [Docker image names are not allowed to have upper-case characters](https://github.com/spring-projects/spring-boot/issues/21922#issuecomment-644929521)
+
 #### [Improve native image build error message](https://github.com/quarkusio/quarkus/issues/1140)
 
 结论：碰到这个错误时增加 Docker 引擎的内存
