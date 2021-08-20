@@ -4,6 +4,19 @@
 
 ### [Spring Native](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/)
 
+#### [Improve native image build error message](https://github.com/quarkusio/quarkus/issues/1140)
+
+结论：碰到这个错误时增加 Docker 引擎的内存
+
+```text
+    [creator]     Error: Image build request failed with exit status 137
+    [creator]     unable to invoke layer creator
+    [creator]     unable to contribute native-image layer
+    [creator]     error running build
+    [creator]     exit status 137
+    [creator]     ERROR: failed to build: exit status 1
+```
+
 #### [Environment 用户自定义类导致 Springboot 启动失败](https://www.javazhiyin.com/59321.html)
 
 ### [Validation in Spring Boot](https://www.baeldung.com/spring-boot-bean-validation)
@@ -96,7 +109,7 @@
 
 Spring Security JDBC Authentication 默认建表语句和测试数据：
 
-```mysql-sql
+```text
 -- schema.sql
 
 CREATE TABLE users (
@@ -116,7 +129,7 @@ CREATE UNIQUE INDEX ix_auth_username
   on authorities (username,authority);
 ```
 
-```mysql-sql
+```text
 -- data.sql
 
 INSERT INTO users (username, password, enabled)
