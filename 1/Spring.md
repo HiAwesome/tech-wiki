@@ -11,12 +11,12 @@
 结论：碰到这个错误时增加 Docker 引擎的内存
 
 ```text
-    [creator]     Error: Image build request failed with exit status 137
-    [creator]     unable to invoke layer creator
-    [creator]     unable to contribute native-image layer
-    [creator]     error running build
-    [creator]     exit status 137
-    [creator]     ERROR: failed to build: exit status 1
+[creator]     Error: Image build request failed with exit status 137
+[creator]     unable to invoke layer creator
+[creator]     unable to contribute native-image layer
+[creator]     error running build
+[creator]     exit status 137
+[creator]     ERROR: failed to build: exit status 1
 ```
 
 #### [Environment 用户自定义类导致 Springboot 启动失败](https://www.javazhiyin.com/59321.html)
