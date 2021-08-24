@@ -2,6 +2,14 @@
 
 环境： Cent OS 7 on Vmware Fusion. root password: 0987UUUU
 
+### [How can I display the absolute path in bash prompt?](https://superuser.com/a/285254)
+
+Put in your home `.bashrc`
+
+```shell
+PS1='\u@\h:\w\$ '
+```
+
 ### [查看centos版本](https://www.huaweicloud.com/articles/5c9e7d7cb676f3baad1d5bee5bec28e0.html)
 
 ```shell
