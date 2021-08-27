@@ -1,5 +1,7 @@
 # Linux
 
+#### [Why does man print “gimme gimme gimme” at 00:30?](https://unix.stackexchange.com/questions/405783/why-does-man-print-gimme-gimme-gimme-at-0030)
+
 #### [Common Linux Text Search](https://www.baeldung.com/linux/common-text-search)
 
 ```text
