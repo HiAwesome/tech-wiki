@@ -1,5 +1,15 @@
 # 与 Java 有关的链接
 
+#### [Apache HttpClient timeout](https://stackoverflow.com/a/63790234/7379661)
+
+> Difference between the three timeouts in Apache HttpClient :
+>
+> `connectTimeout` max time to establish a connection with remote host/server.
+>
+> `connectionRequestTimeout` time to wait for getting a connection from the connection manager/pool. (HttpClient maintains a connection pool to manage the connections. Similar to database connection pool)
+>
+> `socketTimeout` max time gap between two consecutive data packets while transferring data from server to client.
+
 #### [Concurrency and parallelism in Java](https://medium.com/@peterlee2068/concurrency-and-parallelism-in-java-f625bc9b0ca4)
 
 #### [How the JVM Locates, Loads, and Runs Libraries](https://blogs.oracle.com/javamagazine/java-jvm-class-loaders)
