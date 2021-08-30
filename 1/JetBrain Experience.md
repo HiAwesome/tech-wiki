@@ -1,5 +1,9 @@
 # Jetbrain Experience
 
+### [Class Diagram](https://www.jetbrains.com/help/idea/class-diagram.html)
+
+**Properties 是参数为空且直接返回的 Methods.**
+
 ### Source code does not match the bytecode
 
 * [Library source does not match the bytecode for class](https://stackoverflow.com/a/41952613/7379661)
