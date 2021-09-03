@@ -1,5 +1,7 @@
 # 散装语录
 
+* 写一本技术书籍，报酬寥寥无几，很可能除了荣誉，你得不到任何东西。  ——[自出版技术书籍](https://css-tricks.com/so-you-want-to-self-publish-books-and-courses-on-programming/)
+* 我从互联网上得到的最好的经验之一，就是永远不要复制和粘贴不是自己编写的代码。如果你一定要复制，那就照着它逐字输入，逼着自己思考，这些代码实际上是什么意思。  ——[HN News Reader](https://news.ycombinator.com/item?id=27534343)
 * 软件项目和其他工程项目有一个重要区别，就是项目执行期间可能发生重大变更。举例来说，如果你正在建造一架民航飞机，没人会在造到一半时告诉你，他们希望这架飞机能够飞出大气层，进入太空。但在软件项目中，这是可能的，IT 公司的特点就是业务逻辑一切皆有可能，如果你建造的东西会飞，那么需求方就会觉得，它应该能飞到任何想去的地方。  ——[复杂项目 101](https://vadimkravcenko.com/en/dealing-with-complex-projects/)
 * 年轻时，我犯的最大错误，就是没有及时离职。我以为我必须向公司证明自己，然后再离开，但这其实没有任何意义。你不欠雇主任何东西，不必向雇主证明任何事情。他们对你丝毫没有忠诚度，对你做对或做错、是聪明还是愚蠢，毫不在意。 把时间用在你最终不会引以为豪的东西上面，是一件可怕的事情，浪费了你在地球上的短暂旅程。  ——[Hacker News 读者](https://news.ycombinator.com/item?id=27565815)
 * 可能永远不会有 Python 4.0，我们被 Python 2 升级到 Python 3 搞怕了。  ——[Guido](https://www.techrepublic.com/article/programming-languages-why-python-4-0-will-probably-never-arrive-according-to-its-creator/)
@@ -8,7 +10,7 @@
 * 很多人喜欢向后兼容的软件，但是这意味着，软件需要保留它的错误。在以前版本犯下的设计错误，以后就必须一直兼容，不能废除。  ——[《承诺向后兼容，就是承诺保留错误》](https://utcc.utoronto.ca/~cks/space/blog/tech/MistakesAndBackwardCompatibility)
 * 许多 AI 研究人员追求的目标是开发与人类智能原理相同的人工智能，但是这永远不可能实现，因为人的思维基本上没有算法。    ——[《为什么将无法实现通用人工智能》](https://www.nature.com/articles/s41599-020-0494-4)
 * 40年前算法很重要，大部分程序员都需要懂，因为硬件差，必须靠算法保证性能。但是今天只剩下不到1%的程序员直接跟算法打交道，其他人都使用现成的软件包，或从大公司购买算法，算法已成为一种商品，普通程序员不再需要自己生产了，也不需要有很深入的了解。    ——[《算法现在是商品》](https://web.archive.org/web/20200708094431/http://shape-of-code.coding-guidelines.com/2020/07/05/algorithms-are-now-commodities/)
-* 在软件行业，很多人对敏捷开发的理解就是，最短时间内提供最大价值的所有方法。 ——[推特用户](https://twitter.com/dancres/status/1198130975902797824?s=20)
+* 在软件行业，很多人对敏捷开发的理解就是，最短时间内提供最大价值的所有方法。  ——[推特用户](https://twitter.com/dancres/status/1198130975902797824?s=20)
 * 一个项目有太多的工程师是一个严重的问题。产品经理可能想增加更多的工程师，并行完成工作任务。但是实际上，任何一个项目的并行任务的数量都是有限的。一旦项目工程师过多时，工程师的时间将从开发转向计划、同步和协调。 ——Nicholas C.Zakas
 * 你写下的任何代码，六个月后再去看，都像是别人写的。 ——Tom Cargill(贝尔实验室科学家)
 * 用代码行数测算软件开发进度 如同 按重量测算飞机的制造进度。——比尔.盖茨
