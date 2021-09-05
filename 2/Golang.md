@@ -9,3 +9,5 @@
 ```shell
 go test ./...
 ```
+
+### [Go module: mod commands](https://golang.org/ref/mod#mod-commands)
