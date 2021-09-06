@@ -1,5 +1,7 @@
 # 零散的经验
 
+#### [Too many open files error on Mac OS](https://discussions.apple.com/thread/251000125)
+
 ###### mac 'caps lock' 切换输入法失效 20210728
 
 按照规则是长按才触发大小写自身切换，但是目前在 IDEA 和 钉钉里，短按也会触发大小写切换而不是输入法切换。
