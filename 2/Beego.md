@@ -2,6 +2,8 @@
 
 ### Beego 生成路由问题
 
+#### [Can not generate routers when I upgrade beego version v1.12.2 or higher](https://github.com/beego/beego/issues/4762)
+
 #### [Beego Github Issues: commentsRouter](https://github.com/beego/beego/issues?q=commentsRouter)
 
 [fail to generate routers/commentsRouter_xxx.go file when the project outside of $GOPATH/src](https://github.com/beego/beego/issues/4330)
