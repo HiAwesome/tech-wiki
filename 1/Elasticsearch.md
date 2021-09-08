@@ -14,3 +14,5 @@
 * [Term Query](https://www.elastic.co/guide/en/elasticsearch/reference/7.14/query-dsl-term-query.html#query-dsl-term-query)
 * [Mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html)
 * [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/7.14/query-dsl.html)
+* [Delete Multiple indices in one HTTP Request](https://stackoverflow.com/a/44964893/7379661)
+
