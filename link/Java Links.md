@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+#### [Spark Java Info from Oracle](https://blogs.oracle.com/javamagazine/java-spark-web-microservices)
+
 #### [Apache HttpClient timeout](https://stackoverflow.com/a/63790234/7379661)
 
 > Difference between the three timeouts in Apache HttpClient :

@@ -1,5 +1,6 @@
 # 散装语录
 
+* 下面系統編程的人拼命在節省資源，拼命在優化效率，像是白手起家的第一代。 上面應用編程的人恣意消耗資源，隨手用隨手丟，十分浪費，像是被寵慣的富二代。  ——[Twitter](https://twitter.com/CaiXueYong/status/1417141803661234184?s=20)
 * 手机端开发者：一年一个小产品，十年后，“著作等身”。 后端开发者：去年在堆一坨屎山，今年在帮跑掉的团队擦屁股，十年后，一堆早已被人遗忘甚至根本没上过线的“产品”，和一堆除了自己外根本没人用的半成品轮子大哭脸…   后端：去年一年费尽心血做了一件超级困难的事情，那困难程度真是难以描述，超有成就感！  群众：哦哦哦，快给我们看看！ 后端：emm，好像没东西可看… 群众：怎么会，哪怕做了个服务也可以讲讲架构啊 后端：我对一个多年无人维护的史诗级程序做了一项兼容性变更，让这个程序可以和以前一模一样地运行…  ——[Twitter](https://twitter.com/aftergreatest/status/1420747406790979585?s=20)
 * It's okay to sit and do nothing all your life. But that should be your conscious choice, not an act of laziness or addiction. The same applies to hardwork. It's okay to work hard towards a goal. But that hardwork should be your conscious choice, not social conditioning.  ——[Twitter](https://twitter.com/KunalBSarkar/status/1421841677107417090?s=20)
 * 有时候需要提交一些东西让CI再跑一次的时候，可以使用“git commit --allow-empty”命令提交一个啥都没有的空提交。  ——[Twitter](https://twitter.com/lichuang/status/1422033007896981510?s=20)
