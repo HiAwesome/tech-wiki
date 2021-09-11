@@ -1,5 +1,9 @@
 # 散装语录
 
+* 手机端开发者：一年一个小产品，十年后，“著作等身”。 后端开发者：去年在堆一坨屎山，今年在帮跑掉的团队擦屁股，十年后，一堆早已被人遗忘甚至根本没上过线的“产品”，和一堆除了自己外根本没人用的半成品轮子大哭脸…   后端：去年一年费尽心血做了一件超级困难的事情，那困难程度真是难以描述，超有成就感！  群众：哦哦哦，快给我们看看！ 后端：emm，好像没东西可看… 群众：怎么会，哪怕做了个服务也可以讲讲架构啊 后端：我对一个多年无人维护的史诗级程序做了一项兼容性变更，让这个程序可以和以前一模一样地运行…  ——[Twitter](https://twitter.com/aftergreatest/status/1420747406790979585?s=20)
+* It's okay to sit and do nothing all your life. But that should be your conscious choice, not an act of laziness or addiction. The same applies to hardwork. It's okay to work hard towards a goal. But that hardwork should be your conscious choice, not social conditioning.  ——[Twitter](https://twitter.com/KunalBSarkar/status/1421841677107417090?s=20)
+* 有时候需要提交一些东西让CI再跑一次的时候，可以使用“git commit --allow-empty”命令提交一个啥都没有的空提交。  ——[Twitter](https://twitter.com/lichuang/status/1422033007896981510?s=20)
+* 得远离各种“简单”“零基础”教程，一定要讲清楚底层原理，了解原理才能控制结果和优化边际。不然就会陷入“按照步骤结果怎么还是失败 那么简单都没学会”的受挫感中，也不知道能怎么改进。  ——[Twitter](https://twitter.com/domina_manyu/status/1422788273882091520?s=20)
 * 写一本技术书籍，报酬寥寥无几，很可能除了荣誉，你得不到任何东西。  ——[自出版技术书籍](https://css-tricks.com/so-you-want-to-self-publish-books-and-courses-on-programming/)
 * 我从互联网上得到的最好的经验之一，就是永远不要复制和粘贴不是自己编写的代码。如果你一定要复制，那就照着它逐字输入，逼着自己思考，这些代码实际上是什么意思。  ——[HN News Reader](https://news.ycombinator.com/item?id=27534343)
 * 软件项目和其他工程项目有一个重要区别，就是项目执行期间可能发生重大变更。举例来说，如果你正在建造一架民航飞机，没人会在造到一半时告诉你，他们希望这架飞机能够飞出大气层，进入太空。但在软件项目中，这是可能的，IT 公司的特点就是业务逻辑一切皆有可能，如果你建造的东西会飞，那么需求方就会觉得，它应该能飞到任何想去的地方。  ——[复杂项目 101](https://vadimkravcenko.com/en/dealing-with-complex-projects/)
