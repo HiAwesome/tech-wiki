@@ -1,5 +1,7 @@
 # Git
 
+### [Git基本原理介绍](https://www.escapelife.site/posts/da89563c.html)
+
 ### [Git Hard reset of a single file](https://stackoverflow.com/a/7147320/7379661)
 
 ```shell

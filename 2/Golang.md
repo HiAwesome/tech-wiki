@@ -1,5 +1,7 @@
 # Golang
 
+#### [Ask HN: Good Go codebases to read? | Hacker News](https://news.ycombinator.com/item?id=14462125)
+
 ### [Using go modules](https://go.dev/blog/using-go-modules)
 
 #### [Our Software Dependency Problem](https://research.swtch.com/deps)
