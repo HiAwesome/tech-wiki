@@ -6,6 +6,12 @@
 LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(longValue), ZoneId.systemDefault());
 ```
 
+#### [AspectJ](https://www.baeldung.com/aspectj)
+
+* [Introduction to Spring AOP](https://www.baeldung.com/spring-aop)
+* [Introduction to Pointcut Expressions in Spring](https://www.baeldung.com/spring-aop-pointcut-tutorial)
+* [Unable to configure Spring AOP with Gradle](https://stackoverflow.com/a/48485017)
+
 #### [Spark Java Info from Oracle](https://blogs.oracle.com/javamagazine/java-spark-web-microservices)
 
 #### [Apache HttpClient timeout](https://stackoverflow.com/a/63790234/7379661)
