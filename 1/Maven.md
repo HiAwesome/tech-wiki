@@ -1,5 +1,9 @@
 # Maven
 
+### [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
+
+### [Maven Dependency Scopes](https://www.baeldung.com/maven-dependency-scopes)
+
 ## [Maven Home](https://maven.apache.org/index.html)
 
 ### [Maven Release History](https://maven.apache.org/docs/history.html)
