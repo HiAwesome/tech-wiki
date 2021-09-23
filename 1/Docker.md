@@ -1,5 +1,21 @@
 # Docker
 
+#### [Change Docker Root Dir on Red Hat Linux?](https://unix.stackexchange.com/questions/452368/change-docker-root-dir-on-red-hat-linux)
+
+Stop all running docker containers and then docker daemon. Move "/var/lib/docker" directory to the place where you want to have this data. For you it would be:
+
+```shell
+mv /var/lib/docker /data/
+```
+
+and then create symlink for this docker directory in /var/lib path:
+
+```shell
+ln -s /data/docker /var/lib/docker
+```
+
+Start docker daemon and containers.
+
 #### 查看 docker 中所有的 deployment
 
 ```shell
