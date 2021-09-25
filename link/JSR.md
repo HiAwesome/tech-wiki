@@ -1,5 +1,7 @@
 # JSR: Java Specification Requests
 
+### [JSR 305: Annotations for Software Defect Detection](https://jcp.org/en/jsr/detail?id=305)
+
 ### [JSR 166: Concurrency Utilities](https://www.jcp.org/en/jsr/detail?id=166)
 
 2.1 Please describe the proposed Specification:
