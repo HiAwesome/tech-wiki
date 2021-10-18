@@ -67,4 +67,6 @@ margin：即外边距，围绕元素外部的空间。
   * Border box: 边框盒包裹内容和内边距。大小通过 border 相关属性设置。
   * Margin box: 这是最外面的区域，是盒子和其他元素之间的空白区域。大小通过 margin 相关属性设置。
 * 注: margin 不计入实际大小 —— 当然，它会影响盒子在页面所占空间，但是影响的是盒子外部空间。盒子的范围到边框为止 —— 不会延伸到margin。
+* 如果你希望所有元素都使用替代模式，而且确实很常用，设置 box-sizing 在 \<html\> 元素上，然后设置所有元素继承该属性，正如下面的例子。如果想要深入理解，请看 [the CSS Tricks article on box-sizing](https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/). 
+* 注： 一个有趣的历史记录 ——Internet Explorer默认使用替代盒模型，没有可用的机制来切换。（译者注：IE8+ 支持使用box-sizing 进行切换 ）
 * 
