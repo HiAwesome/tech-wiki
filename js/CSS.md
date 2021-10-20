@@ -136,6 +136,11 @@ margin：即外边距，围绕元素外部的空间。
   * lowercase: 将所有文本转为小写。
   * capitalize: 转换所有单词让其首字母大写。
   * full-width: 将所有字形转换成全角，即固定宽度的正方形，类似于等宽字体，允许拉丁字符和亚洲语言字形（如中文，日文，韩文）对齐。
+* 文本对齐: [text-align](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align) 属性用来控制文本如何和它所在的内容盒子对齐。可用值如下，并且在与常规文字处理器应用程序中的工作方式几乎相同：
+  * left: 左对齐文本。
+  * right: 右对齐文本。
+  * center: 居中文字
+  * justify: 使文本展开，改变单词之间的差距，使所有文本行的宽度相同。你需要仔细使用，它可以看起来很可怕。特别是当应用于其中有很多长单词的段落时。如果你要使用这个，你也应该考虑一起使用别的东西，比如 [hyphens](https://developer.mozilla.org/zh-CN/docs/Web/CSS/hyphens), 打破一些更长的词语。
 * 
 
 
