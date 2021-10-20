@@ -145,6 +145,7 @@ margin：即外边距，围绕元素外部的空间。
   * [start](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-start) 属性允许你从1 以外的数字开始计数。
   * [reversed](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-reversed) 属性将启动列表倒计数。
   * [value](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-value) 属性允许设置列表项指定数值
+* 注意: 你不仅仅只限于上述属性来把样式应用到你的链接上，你可以用任何你喜欢的属性，就是不要搞得太疯狂！
 * 
 
 
