@@ -141,6 +141,10 @@ margin：即外边距，围绕元素外部的空间。
   * right: 右对齐文本。
   * center: 居中文字
   * justify: 使文本展开，改变单词之间的差距，使所有文本行的宽度相同。你需要仔细使用，它可以看起来很可怕。特别是当应用于其中有很多长单词的段落时。如果你要使用这个，你也应该考虑一起使用别的东西，比如 [hyphens](https://developer.mozilla.org/zh-CN/docs/Web/CSS/hyphens), 打破一些更长的词语。
+* 管理列表计数：有时，您可能想在有序列表上进行不同的计数方式。例如： 从1以外的数字开始，或向后倒数，或者按步或多于1计数。HTML和CSS有一些工具可以帮助您。
+  * [start](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-start) 属性允许你从1 以外的数字开始计数。
+  * [reversed](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-reversed) 属性将启动列表倒计数。
+  * [value](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol#attr-value) 属性允许设置列表项指定数值
 * 
 
 
