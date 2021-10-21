@@ -150,6 +150,7 @@ margin：即外边距，围绕元素外部的空间。
 * 使用在线字体服务：在线字体服务通常会为你存储和服务字体，这样你就不用担心写@font-face代码了，通常只需要在你的网站上插入一两行代码就可以让一切都运行。大多数这些服务都是基于订阅的，除了 [Google Fonts](https://www.google.com/fonts), 这是一个有用的免费服务，特别是对于快速的测试工作和编写演示。
 * 在css中实现页面布局的主要方法是设定display属性的值。此属性允许我们更改默认的显示方式。正常流中的所有内容都有一个display的值，用作元素的默认行为方式。例如，英文段落显示在一个段落的下面，这是因为它们的样式是display:block。如果在段落中的某个文本周围创建链接，则该链接将与文本的其余部分保持内联，并且不会打断到新行。这是因为\<a\>元素默认为display:inline。
 * Flexbox 是CSS 弹性盒子布局模块（[Flexible Box Layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout) Module）的缩写，它被专门设计出来用于创建横向或是纵向的一维页面布局。要使用flexbox，你只需要在想要进行flex布局的父元素上应用display: flex ，所有直接子元素都将会按照flex进行布局。
+* Flexbox用于设计横向或纵向的布局，而Grid布局则被设计用于同时在两个维度上把元素按行和列排列整齐。
 * 
 
 
