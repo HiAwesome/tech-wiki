@@ -152,6 +152,7 @@ margin：即外边距，围绕元素外部的空间。
 * Flexbox 是CSS 弹性盒子布局模块（[Flexible Box Layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout) Module）的缩写，它被专门设计出来用于创建横向或是纵向的一维页面布局。要使用flexbox，你只需要在想要进行flex布局的父元素上应用display: flex ，所有直接子元素都将会按照flex进行布局。
 * Flexbox用于设计横向或纵向的布局，而Grid布局则被设计用于同时在两个维度上把元素按行和列排列整齐。
 * 注意: 这两个例子只是展示了grid布局的冰山一角，要深入了解grid布局，请参阅我们的文章 [Grid Layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+* 粘性定位: 粘性定位(sticky positioning)是最后一种我们能够使用的定位方式。它将默认的静态定位(static positioning)和固定定位(fixed positioning)相混合。当一个元素被指定了position: sticky时，它会在正常布局流中滚动，直到它出现在了我们给它设定的相对于容器的位置，这时候它就会停止随滚动移动，就像它被应用了position: fixed一样。
 * 
 
 
