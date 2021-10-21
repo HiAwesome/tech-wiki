@@ -158,6 +158,7 @@ margin：即外边距，围绕元素外部的空间。
   2. 默认的，一个 [块级元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Block-level_elements) 的内容宽度是其父元素的100%，其高度与其内容高度一致. [内联元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Inline_elements) 的height width与内容一致。你无法设置内联元素的height width --- 它们就那样置于块级元素的内容里。 如果你想控制内联元素的尺寸，你需要为元素设置display: block; （或者，display: inline-block; inline-block 混合了inline 和 block的特性。)
   3. 这样解释了独立元素的布局，但是元素之间又是如何相互影响的呢？ 正常布局流（在布局介绍里提到过）是一套在浏览器视口内放置、组织元素的系统。默认的，块级元素按照基于其父元素的[书写顺序](https://developer.mozilla.org/zh-CN/docs/Web/CSS/writing-mode) (默认值: horizontal-tb)的块流动方向(block flow direction)放置 --- 每个块级元素会在上一个元素下面另起一行，它们会被设置好的margin 分隔。在英语，或者其他水平书写、自上而下模式里，块级元素是垂直组织的。
   4. 内联元素的表现有所不同 --- 它们不会另起一行；只要在其父级块级元素的宽度内有足够的空间，它们与其他内联元素、相邻的文本内容（或者被包裹的）被安排在同一行。如果空间不够，溢出的文本或元素将移到新的一行。如果两个相邻的元素都设置了margin 并且两个margin有重叠，那么更大的设置会被保留，小的则会消失 --- 这被称为外边距叠加，我们之前见到过。
+* 注意：任何有设计背景的人似乎都感到惊讶，CSS没有内置的网格系统，而我们似乎使用各种次优方法来创建网格状的设计。正如你将在本文的最后一部分中发现的那样，这将被改变，但是你可能需要知道在未来一段时间内创建网格的现有方法。
 * 
 
 
