@@ -2,6 +2,8 @@
 
 ### [JavaScript 错误参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Errors)
 
+### [JavaScript 标准内置对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects)
+
 ## JS 基础
 
 * API 是已经建立好的一套代码组件，可以让开发者实现原本很难甚至无法实现的程序。就像现成的家具套件之于家居建设，用一些已经切好的木板组装一个书柜，显然比自己设计，寻找合适的木材，裁切至合适的尺寸和形状，找到正确尺寸的螺钉，再组装成书柜要简单得多。 API 通常分为两类：浏览器 API 与第三方 API.
@@ -71,6 +73,18 @@
   }
   ```
 * [三元或条件运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) 是一个语法的小点，用于测试一个条件，并返回一个值/表达，如果它是true，另一个是false-这种情况下是有用的，并且可以占用比if...else块较少的代码块。
+* 重要: 使用 for 与所有循环一样，您必须确保初始化程序被迭代，以便最终达到退出条件。 如果没有，循环将永不停止，浏览器将强制它停止，否则会崩溃。 这被称为无限循环。
+* 注：还有其他循环类型/特性，这些特性在 高级/专门 的情况下是有用的，超出了本文的范围。如果您想进一步了解循环学习，请阅读我们的 [高级循环和迭代指南](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Loops_and_iteration).
+* 这个函数叫做匿名函数 — 它没有函数名! 它也不会自己做任何事情。 你通常将匿名函数与事件处理程序一起使用, 例如，如果单击相关按钮，以下操作将在函数内运行代码：
+  ```text
+  var myButton = document.querySelector('button');
+  
+  myButton.onclick = function() {
+    alert('hello');
+  }
+  ```
+* 匿名函数也称为函数表达式。函数表达式与函数声明有一些区别。函数声明会进行声明提升（declaration hoisting），而函数表达式不会。
+* 通常，返回值是用在函数在计算某种中间步骤。你想得到最终结果，其中包含一些值。那些值需要通过一个函数计算得到，然后返回结果可用于计算的下一个阶段。
 * 
 
 
