@@ -8,6 +8,8 @@
 
 ### [JS Class 类](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes)
 
+### [JS Learn Promises](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Promises)
+
 ### JS Books
 
 * [Secrets of the JavaScript Ninja](https://www.amazon.com/gp/product/193398869X/), 第6章 - 由John Resig和Bear Bibeault撰写的关于高级JavaScript概念和技术的好书。第6章很好地介绍了原型和继承的相关方面；您可以很容易地找到打印版本或在线副本。
@@ -233,8 +235,34 @@
 * [requestAnimationFrame()](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) 是一个专门的循环函数，旨在浏览器中高效运行动画。它基本上是现代版本的setInterval() —— 它在浏览器重新加载显示内容之前执行指定的代码块，从而允许动画以适当的帧速率运行，不管其运行的环境如何。 它是针对setInterval() 遇到的问题创建的，比如 setInterval()并不是针对设备优化的帧率运行，有时会丢帧。还有即使该选项卡不是活动的选项卡或动画滚出页面等问题。
 * 注意: 如果要执行某种简单的常规DOM动画, [CSS 动画](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations) 可能更快，因为它们是由浏览器的内部代码计算而不是JavaScript直接计算的。但是，如果您正在做一些更复杂的事情，并且涉及到在DOM中不能直接访问的对象(such as [2D Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) or [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) objects), requestAnimationFrame() 在大多数情况下是更好的选择。
 * 如前所述，我们没有为requestAnimationFrame();指定时间间隔；它只是在当前条件下尽可能快速平稳地运行它。如果动画由于某些原因而处于屏幕外浏览器也不会浪费时间运行它。另一方面setInterval()需要指定间隔。我们通过公式1000毫秒/60Hz得出17的最终值，然后将其四舍五入。四舍五入是一个好主意，浏览器可能会尝试运行动画的速度超过60fps，它不会对动画的平滑度有任何影响。如前所述，60Hz是标准刷新率。传递给 requestAnimationFrame() 函数的实际回调也可以被赋予一个参数（一个时间戳值），表示自 requestAnimationFrame() 开始运行以来的时间。这是很有用的，因为它允许您在特定的时间以恒定的速度运行，而不管您的设备有多快或多慢。
+* 使用箭头函数，你可以进一步简化代码：
+```text
+chooseToppings()
+.then(toppings =>
+  placeOrder(toppings)
+)
+.then(order =>
+  collectOrder(order)
+)
+.then(pizza =>
+  eatPizza(pizza)
+)
+.catch(failureCallback);
+```
+* 甚至这样：
+```text
+chooseToppings()
+.then(toppings => placeOrder(toppings))
+.then(order => collectOrder(order))
+.then(pizza => eatPizza(pizza))
+.catch(failureCallback);
+```
+* 这是有效的，因为使用箭头函数 () => x 是 ()=> {return x;}  的有效简写; 。
+* 你甚至可以这样做，因为函数只是直接传递它们的参数，所以不需要额外的函数层：`chooseToppings().then(placeOrder).then(collectOrder).then(eatPizza).catch(failureCallback);`
+* 最基本的，promise与事件监听器类似，但有一些差异：
+  * 一个promise只能成功或失败一次。它不能成功或失败两次，并且一旦操作完成，它就无法从成功切换到失败，反之亦然。
+  * 如果promise成功或失败并且你稍后添加成功/失败回调，则将调用正确的回调，即使事件发生在较早的时间。
 * 
-
 
 
 
