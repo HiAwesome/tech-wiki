@@ -192,6 +192,7 @@
   * parse(): 以文本字符串形式接受JSON对象作为参数，并返回相应的对象。
   * stringify(): 接收一个对象作为参数，返回一个对应的JSON字符串。
 * JavaScript 传统上是单线程的。即使有多个内核，也只能在单一线程上运行多个任务，此线程称为主线程（main thread）。经过一段时间，JavaScript获得了一些工具来帮助解决这种问题。通过 [Web workers](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API) 可以把一些任务交给一个名为worker的单独的线程，这样就可以同时运行多个JavaScript代码块。一般来说，用一个worker来运行一个耗时的任务，主线程就可以处理用户的交互（避免了阻塞）.
+* web workers相当有用，但是他们确实也有局限。主要的一个问题是他们不能访问 [DOM](https://developer.mozilla.org/zh-CN/docs/Glossary/DOM) — 不能让一个worker直接更新UI。我们不能在worker里面渲染1百万个蓝色圆圈，它基本上只能做算数的苦活。为了解决这些问题，浏览器允许我们异步运行某些操作。像 [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 这样的功能就允许让一些操作运行 (比如：从服务器上获取图片)，然后等待直到结果返回，再运行其他的操作。由于操作发生在其他地方，因此在处理异步操作的时候，主线程不会被阻塞。
 * 
 
 
