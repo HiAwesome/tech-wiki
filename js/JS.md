@@ -8,6 +8,8 @@
 
 ### [JS Class 类](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes)
 
+### [异步 JavaScript: 选择正确的方法](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Choosing_the_right_approach)
+
 ### [JS Learn Promises](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Promises)
 
 ### [JS Learn Async/Await](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Async_await)
@@ -326,6 +328,11 @@ chooseToppings()
     document.body.appendChild(image);
   });
   ```
+* 如果你想添加错误处理，你有几个选择。您可以将同步的 [try...catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) 结构和 async/await 一起使用 。如果你想使用我们上面展示的第二个（重构）代码版本，你最好继续混合方式并将 .catch() 块链接到 .then() 调用的末尾。
+* async / await 建立在 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 之上，因此它与promises提供的所有功能兼容。这包括[Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) –– 你完全可以通过调用 await Promise.all() 将所有结果返回到变量中，就像同步代码一样。在这里，通过使用await，我们能够在三个promise的结果都可用的时候，放入values数组中。这看起来非常像同步代码。我们需要将所有代码封装在一个新的异步函数displayContent() 中，尽管没有减少很多代码，但能够将大部分代码从 .then() 代码块移出，使代码得到了简化，更易读。 为了错误处理，我们在 displayContent() 调用中包含了一个 .catch() 代码块;这将处理两个函数中出现的错误。注意: 也可以在异步函数中使用同步 [finally](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch#finally%E5%9D%97) 代码块代替 [.finally()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally) 异步代码块，以显示操作如何进行的最终报告。
+* Async/await 让你的代码看起来是同步的，在某种程度上，也使得它的行为更加地同步。 await 关键字会阻塞其后的代码，直到promise完成，就像执行同步操作一样。它确实可以允许其他任务在此期间继续运行，但您自己的代码被阻塞。 这意味着您的代码可能会因为大量await的promises相继发生而变慢。每个await都会等待前一个完成，而你实际想要的是所有的这些promises同时开始处理（就像我们没有使用async/await时那样）。 有一种模式可以缓解这个问题——通过将 Promise 对象存储在变量中来同时开始它们，然后等待它们全部执行完毕。
+* 决定是否使用 async/await 时的一个考虑因素是支持旧浏览器。它们适用于大多数浏览器的现代版本，与promise相同; 主要的支持问题存在于Internet Explorer和Opera Mini。 如果你想使用async/await但是担心旧的浏览器支持，你可以考虑使用 [BabelJS](https://babeljs.io/) 库 —— 这允许你使用最新的JavaScript编写应用程序，让Babel找出用户浏览器需要的更改。在遇到不支持async/await 的浏览器时，Babel的 polyfill 可以自动提供适用于旧版浏览器的实现。
+* async/await提供了一种很好的，简化的方法来编写更易于阅读和维护的异步代码。即使浏览器支持在撰写本文时比其他异步代码机制更受限制，但无论是现在还是将来，都值得学习和考虑使用。
 * 
 
 
