@@ -8,6 +8,11 @@
 
 ### [JS Class 类](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes)
 
+### JS Books
+
+* [Secrets of the JavaScript Ninja](https://www.amazon.com/gp/product/193398869X/), 第6章 - 由John Resig和Bear Bibeault撰写的关于高级JavaScript概念和技术的好书。第6章很好地介绍了原型和继承的相关方面；您可以很容易地找到打印版本或在线副本。
+* [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/tree/1ed-zh-CN): this & Object Prototypes - 凯尔·辛普森（Kyle Simpson）的一系列优秀的JavaScript手册，第5章对原型的解释比我们在这里做的更详细。我们在本系列针对初学者的文章中提出了简化的观点，而凯尔深入学习，并提供了更为复杂但更准确的图景。
+
 ## JS 基础
 
 * API 是已经建立好的一套代码组件，可以让开发者实现原本很难甚至无法实现的程序。就像现成的家具套件之于家居建设，用一些已经切好的木板组装一个书柜，显然比自己设计，寻找合适的木材，裁切至合适的尺寸和形状，找到正确尺寸的螺钉，再组装成书柜要简单得多。 API 通常分为两类：浏览器 API 与第三方 API.
@@ -176,6 +181,13 @@
 * 正如前面课程所提到的，有些人认为JavaScript并不是真正的面向对象语言，在经典的面向对象语言中，您可能倾向于定义类对象,然后您可以简单地定义哪些类继承哪些类（参考 [C++ inheritance](https://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm) 里的一些简单的例子），JavaScript使用了另一套实现方式，继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 原型式继承 —— prototypal inheritance）。
 * 注：在这个例子里我们在创建一个新的对象实例时同时指派了继承的所有属性，但是注意您需要在构造器里将它们作为参数来指派，即使实例不要求它们被作为参数指派（比如也许您在创建对象的时候已经得到了一个设置为任意值的属性）
 * ECMAScript 2015 introduces [class syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) to JavaScript as a way to write reusable classes using easier, cleaner syntax, which is more similar to classes in C++ or Java. In this section we'll convert the Person and Teacher examples from prototypal inheritance to classes, to show you how it's done. Note: This modern way of writing classes is supported in all modern browsers, but it is still worth knowing about the underlying prototypal inheritance in case you work on a project that requires supporting a browser that doesn't support this syntax (most notably Internet Explorer).
+* 何时在 JavaScript 中使用继承？
+  * 特别是在读完这段文章内容之后，您也许会想 "天啊，这实在是太复杂了". 是的，您是对的，原型和继承代表了JavaScript这门语言里最复杂的一些方面，但是JavaScript的强大和灵活性正是来自于它的对象体系和继承方式，这很值得花时间去好好理解下它是如何工作的。 
+  * 在某种程度上来说，您一直都在使用继承 - 无论您是使用WebAPI的不同特性还是调用字符串、数组等浏览器内置对象的方法和属性的时候，您都在隐式地使用继承。 
+  * 就在自己代码中使用继承而言，您可能不会使用的非常频繁，特别是在小型项目中或者刚开始学习时 - 因为当您不需要对象和继承的时候，仅仅为了使用而使用它们只是在浪费时间而已。但是随着您的代码量的增大，您会越来越发现它的必要性。如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。 
+  * 注: 考虑到JavaScript的工作方式，由于原型链等特性的存在，在不同对象之间功能的共享通常被叫做 委托 - 特殊的对象将功能委托给通用的对象类型完成。这也许比将其称之为继承更为贴切，因为“被继承”了的功能并没有被拷贝到正在“进行继承”的对象中，相反它仍存在于通用的对象中。 
+  * 在使用继承时，建议您不要使用过多层次的继承，并仔细追踪定义方法和属性的位置。很有可能您的代码会临时修改了浏览器内置对象的原型，但您不应该这么做，除非您有足够充分的理由。过多的继承会在调试代码时给您带来无尽的混乱和痛苦。 
+  * 总之，对象是另一种形式的代码重用，就像函数和循环一样，有他们特定的角色和优点。如果您发现自己创建了一堆相关的变量和函数，还想一起追踪它们并将其灵活打包的话，对象是个不错的主意。对象在您打算把一个数据集合从一个地方传递到另一个地方的时候非常有用。这些都可以在不使用构造器和继承的情况下完成。如果您只是需要一个单一的对象实例，也许使用对象常量会好些，您当然不需要使用继承。
 * 
 
 
