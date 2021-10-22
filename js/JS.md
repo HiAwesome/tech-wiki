@@ -193,6 +193,9 @@
   * stringify(): 接收一个对象作为参数，返回一个对应的JSON字符串。
 * JavaScript 传统上是单线程的。即使有多个内核，也只能在单一线程上运行多个任务，此线程称为主线程（main thread）。经过一段时间，JavaScript获得了一些工具来帮助解决这种问题。通过 [Web workers](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API) 可以把一些任务交给一个名为worker的单独的线程，这样就可以同时运行多个JavaScript代码块。一般来说，用一个worker来运行一个耗时的任务，主线程就可以处理用户的交互（避免了阻塞）.
 * web workers相当有用，但是他们确实也有局限。主要的一个问题是他们不能访问 [DOM](https://developer.mozilla.org/zh-CN/docs/Glossary/DOM) — 不能让一个worker直接更新UI。我们不能在worker里面渲染1百万个蓝色圆圈，它基本上只能做算数的苦活。为了解决这些问题，浏览器允许我们异步运行某些操作。像 [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 这样的功能就允许让一些操作运行 (比如：从服务器上获取图片)，然后等待直到结果返回，再运行其他的操作。由于操作发生在其他地方，因此在处理异步操作的时候，主线程不会被阻塞。
+* Note: 这很重要请记住，[alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) 在演示阻塞效果的时候非常有用，但是在正式代码里面，它就是一个噩梦。
+* 在JavaScript代码中，你经常会遇到两种异步编程风格：老派 callbacks，新派 promise。
+* 异步callbacks 其实就是函数，只不过是作为参数传递给那些在后台执行的其他函数. 当那些后台运行的代码结束，就调用callbacks函数，通知你工作已经完成，或者其他有趣的事情发生了。使用callbacks 有一点老套，在一些老派但经常使用的API里面，你会经常看到这种风格。请注意，不是所有的回调函数都是异步的 — 有一些是同步的。一个例子就是使用 [Array.prototype.forEach()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) 来遍历数组。
 * 
 
 
