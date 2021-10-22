@@ -1,5 +1,6 @@
 # 散装语录
 
+* 现在的显示器越来越宽，甚至有宽度超过一米的带鱼屏，即使是普通的22-24英寸显示器，程序员也往往会把两个并排使用。专家认为，这样会增加头颈损伤和疼痛的概率。使用超宽显示器时，长期扭头看着左侧的屏幕，对颈椎非常不利。专家建议，32寸的显示器可能是最佳选择，如果必须使用超宽屏显示器，则最好增加屏幕与眼睛之间的距离，并且将活动窗口放置于屏幕的中间，**避免长时间向一侧扭头**。  ——[超宽显示器的问题](https://www.learnergo.com/lifestyle-ergo/2020/7/5/ultra-wide-monitors-a-pain-in-the-neck)
 * 大师并不是一开始就是大师。你把他们早期第一阶段的作品找出来看看，就会了解他们取得了多大的进步。  ——David Perell
 * 一个可运行的复杂系统，总是从一个简单系统演变而来的。似乎可以因此推断：从头开始设计一个复杂系统，永远不会奏效，必须从一个简单系统开始设计。  ——[galls-law-and-how-i-ignored-it](https://www.ivanmontilla.com/blog/galls-law-and-how-i-ignored-it)
 * 程序员没有必要局限在一种语言或工具。工具每天都在变化，只要新工具适合你的用例，就可以选择它。你的标准应该是，选择最能够快速有效地解决问题的任何语言或工具。  ——[what-tools-to-use-for-your-next-web](https://betterengineeringclub.substack.com/p/what-tools-to-use-for-your-next-web)
