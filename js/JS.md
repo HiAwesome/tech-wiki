@@ -196,6 +196,43 @@
 * Note: 这很重要请记住，[alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) 在演示阻塞效果的时候非常有用，但是在正式代码里面，它就是一个噩梦。
 * 在JavaScript代码中，你经常会遇到两种异步编程风格：老派 callbacks，新派 promise。
 * 异步callbacks 其实就是函数，只不过是作为参数传递给那些在后台执行的其他函数. 当那些后台运行的代码结束，就调用callbacks函数，通知你工作已经完成，或者其他有趣的事情发生了。使用callbacks 有一点老套，在一些老派但经常使用的API里面，你会经常看到这种风格。请注意，不是所有的回调函数都是异步的 — 有一些是同步的。一个例子就是使用 [Array.prototype.forEach()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) 来遍历数组。
+* promise 是表示异步操作完成或失败的对象。可以说，它代表了一种中间状态。 本质上，这是浏览器说“我保证尽快给您答复”的方式，因此得名“promise”。 这个概念需要练习来适应;它感觉有点像运行中的 [薛定谔的猫](https://zh.wikipedia.org/wiki/%E8%96%9B%E5%AE%9A%E8%B0%94%E7%8C%AB).这两种可能的结果都还没有发生，因此fetch操作目前正在等待浏览器试图在将来某个时候完成该操作的结果。
+* promises与旧式callbacks有一些相似之处。它们本质上是一个返回的对象，您可以将回调函数附加到该对象上，而不必将回调作为参数传递给另一个函数。 然而，Promise是专门为异步操作而设计的，与旧式回调相比具有许多优点:
+  * 您可以使用多个then()操作将多个异步操作链接在一起，并将其中一个操作的结果作为输入传递给下一个操作。这种链接方式对回调来说要难得多，会使回调以混乱的“末日金字塔”告终。 (也称为 [回调地狱](http://callbackhell.com/) )。 
+  * Promise总是严格按照它们放置在事件队列中的顺序调用。 
+  * 错误处理要好得多——所有的错误都由块末尾的一个.catch()块处理，而不是在“金字塔”的每一层单独处理。
+* 在最基本的形式中，JavaScript是一种同步的、阻塞的、单线程的语言，在这种语言中，一次只能执行一个操作。但web浏览器定义了函数和API，允许我们当某些事件发生时不是按照同步方式，而是异步地调用函数(比如，时间的推移，用户通过鼠标的交互，或者获取网络数据)。这意味着您的代码可以同时做几件事情，而不需要停止或阻塞主线程。 异步还是同步执行代码，取决于我们要做什么。 有些时候，我们希望事情能够立即加载并发生。例如，当将一些用户定义的样式应用到一个页面时，您希望这些样式能够尽快被应用。 但是，如果我们正在运行一个需要时间的操作，比如查询数据库并使用结果填充模板，那么最好将该操作从主线程中移开使用异步完成任务。随着时间的推移，您将了解何时选择异步技术比选择同步技术更有意义。
+* Note: 指定的时间（或延迟）不能保证在指定的确切时间之后执行，而是最短的延迟执行时间。在主线程上的堆栈为空之前，传递给这些函数的回调将无法运行。 结果，像 setTimeout(fn, 0) 这样的代码将在堆栈为空时立即执行，而不是立即执行。如果执行类似 setTimeout(fn, 0) 之类的代码，之后立即运行从 1 到 100亿 的循环之后，回调将在几秒后执行。 
+* 我们希望传递给setTimeout()中运行的函数的任何参数，都必须作为列表末尾的附加参数传递给它。 例如，我们可以重构之前的函数，这样无论传递给它的人的名字是什么，它都会向它打招呼：`function sayHi(who) { alert('Hello ' + who + '!'); }`, 人名可以通过第三个参数传进 setTimeout(): `let myGreeting = setTimeout(sayHi, 2000, 'Mr. Universe');`.
+* 最后，如果创建了 timeout，您可以通过调用clearTimeout()，将setTimeout()调用的标识符作为参数传递给它，从而在超时运行之前取消。要取消上面的超时，你需要这样做：`clearTimeout(myGreeting);`.
+* 这就是setInterval()的作用所在。这与setTimeout()的工作方式非常相似，只是作为第一个参数传递给它的函数，重复执行的时间不少于第二个参数给出的毫秒数，而不是一次执行。您还可以将正在执行的函数所需的任何参数作为 setInterval() 调用的后续参数传递。setInterval()永远保持运行任务,除非我们做点什么——我们可能会想阻止这样的任务,否则当浏览器无法完成任何进一步的任务时我们可能得到错误, 或者动画处理已经完成了。我们可以用与停止超时相同的方法来实现这一点——通过将setInterval()调用返回的标识符传递给clearInterval()函数.
+* 还有另一种方法可以使用setTimeout()：我们可以递归调用它来重复运行相同的代码，而不是使用setInterval()。
+  ```text
+  // recursive setTimeout()
+  let i = 1;
+
+  setTimeout(function run() {
+    console.log(i);
+    i++;
+    setTimeout(run, 100);
+  }, 100);
+  
+  // setInterval()
+  let i = 1;
+
+  setInterval(function run() {
+    console.log(i);
+    i++
+  }, 100);
+  ```
+* 递归setTimeout()和setInterval()有何不同？ 上述代码的两个版本之间的差异是微妙的。
+  * 递归 setTimeout() 保证执行之间的延迟相同，例如在上述情况下为100ms。 代码将运行，然后在它再次运行之前等待100ms，因此无论代码运行多长时间，间隔都是相同的。
+  * 使用 setInterval() 的示例有些不同。 我们选择的间隔包括执行我们想要运行的代码所花费的时间。假设代码需要40毫秒才能运行 - 然后间隔最终只有60毫秒。
+  * 当递归使用 setTimeout() 时，每次迭代都可以在运行下一次迭代之前计算不同的延迟。 换句话说，第二个参数的值可以指定在再次运行代码之前等待的不同时间（以毫秒为单位）。
+  * **当你的代码有可能比你分配的时间间隔，花费更长时间运行时，最好使用递归的 setTimeout() - 这将使执行之间的时间间隔保持不变，无论代码执行多长时间，你不会得到错误。**
+* [requestAnimationFrame()](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) 是一个专门的循环函数，旨在浏览器中高效运行动画。它基本上是现代版本的setInterval() —— 它在浏览器重新加载显示内容之前执行指定的代码块，从而允许动画以适当的帧速率运行，不管其运行的环境如何。 它是针对setInterval() 遇到的问题创建的，比如 setInterval()并不是针对设备优化的帧率运行，有时会丢帧。还有即使该选项卡不是活动的选项卡或动画滚出页面等问题。
+* 注意: 如果要执行某种简单的常规DOM动画, [CSS 动画](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations) 可能更快，因为它们是由浏览器的内部代码计算而不是JavaScript直接计算的。但是，如果您正在做一些更复杂的事情，并且涉及到在DOM中不能直接访问的对象(such as [2D Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) or [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) objects), requestAnimationFrame() 在大多数情况下是更好的选择。
+* 如前所述，我们没有为requestAnimationFrame();指定时间间隔；它只是在当前条件下尽可能快速平稳地运行它。如果动画由于某些原因而处于屏幕外浏览器也不会浪费时间运行它。另一方面setInterval()需要指定间隔。我们通过公式1000毫秒/60Hz得出17的最终值，然后将其四舍五入。四舍五入是一个好主意，浏览器可能会尝试运行动画的速度超过60fps，它不会对动画的平滑度有任何影响。如前所述，60Hz是标准刷新率。传递给 requestAnimationFrame() 函数的实际回调也可以被赋予一个参数（一个时间戳值），表示自 requestAnimationFrame() 开始运行以来的时间。这是很有用的，因为它允许您在特定的时间以恒定的速度运行，而不管您的设备有多快或多慢。
 * 
 
 
