@@ -262,6 +262,20 @@ chooseToppings()
 * 最基本的，promise与事件监听器类似，但有一些差异：
   * 一个promise只能成功或失败一次。它不能成功或失败两次，并且一旦操作完成，它就无法从成功切换到失败，反之亦然。
   * 如果promise成功或失败并且你稍后添加成功/失败回调，则将调用正确的回调，即使事件发生在较早的时间。
+* Promises 很重要，因为大多数现代Web API都将它们用于执行潜在冗长任务的函数。要使用现代Web技术，你需要使用promises。
+* 注意: .then()块的工作方式类似于使用AddEventListener()向对象添加事件侦听器时的方式。它不会在事件发生之前运行（当promise履行时）。最显着的区别是.then()每次使用时只运行一次，而事件监听器可以多次调用。
+* 如果其中一个promise失败（rejects，in promise-speak），目前没有什么可以明确地处理错误。我们可以通过运行前一个promise的 .catch() 方法来添加错误处理。如果你根本不操心包括的 .catch() 块，这并没有做太多的事情，但考虑一下（指.catch()块） ––这会使我们可以完全控制错误处理方式。在真实的应用程序中，你的.catch()块可以重试获取图像，或显示默认图像，或提示用户提供不同的图像URL等等。
+* 请记住，履行的promise所返回的值将成为传递给下一个 .then() 块的executor函数的参数。
+* 注意: promise中的.then()/catch()块基本上是同步代码中try...catch块的异步等价物。请记住，同步try ... catch在异步代码中不起作用。
+* 创建promise时，它既不是成功也不是失败状态。这个状态叫作pending（待定）。 
+* 当promise返回时，称为 resolved（已解决）
+  * 一个成功resolved的promise称为fullfilled（实现）。它返回一个值，可以通过将.then()块链接到promise链的末尾来访问该值。 .then()块中的执行程序函数将包含promise的返回值。 
+  * 一个不成功resolved的promise被称为rejected（拒绝）了。它返回一个原因（reason），一条错误消息，说明为什么拒绝promise。可以通过将.catch()块链接到promise链的末尾来访问此原因。
+* 首先，链接进程一个接一个地发生都很好，但是如果你想在一大堆Promises全部完成之后运行一些代码呢？ 你可以使用巧妙命名的Promise.all()静态方法完成此操作。这将一个promises数组作为输入参数，并返回一个新的Promise对象，只有当数组中的所有promise都满足时才会满足。它看起来像这样：`Promise.all([a, b, c]).then(values => { ... });`, 如果它们都实现，那么数组中的结果将作为参数传递给.then()块中的执行器函数。如果传递给Promise.all()的任何一个 promise 拒绝，整个块将拒绝。
+* 在promise完成后，你可能希望运行最后一段代码，无论它是否已实现（fullfilled）或被拒绝（rejected）。在现代浏览器中，[.finally()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally) 方法可用，它可以链接到常规promise链的末尾，允许你减少代码重复并更优雅地执行操作。
+* 注意:finally()允许你在异步代码中编写异步等价物try/ catch / finally。
+* 可以使用 [Promise()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 构造函数构建自己的promise。当你需要使用现有的旧项目代码、库或框架以及基于现代promise的代码时，这会派上用场。比如，当你遇到没有使用promise的旧式异步API的代码时，你可以用promise来重构这段异步代码。
+* 当我们不知道函数的返回值或返回需要多长时间时，Promises是构建异步应用程序的好方法。它们使得在没有深度嵌套回调的情况下更容易表达和推理异步操作序列，并且它们支持类似于同步try ... catch语句的错误处理方式。 Promise适用于所有现代浏览器的最新版本;promise有兼容问题的唯一情况是Opera Mini和IE11及更早版本。 本文中，我们没有涉及的所有promise的功能，只是最有趣和最有用的功能。当你开始了解有关promise的更多信息时，你会遇到更多功能和技巧。 大多数现代Web API都是基于promise的，因此你需要了解promise才能充分利用它们。这些API包括 [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API), [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), [Media Capture and Streams](https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API) 等等。随着时间的推移，Promises将变得越来越重要，因此学习使用和理解它们是学习现代JavaScript的重要一步。
 * 
 
 
