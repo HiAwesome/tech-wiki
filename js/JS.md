@@ -118,12 +118,30 @@
 * 有些人认为 JavaScript 不是真正的面向对象的语言，比如它没有像许多面向对象的语言一样有用于创建class类的声明。JavaScript 用一种称为构建函数的特殊函数来定义对象和它们的特征。构建函数非常有用，因为很多情况下您不知道实际需要多少个对象（实例）。构建函数提供了创建您所需对象（实例）的有效方法，将对象的数据和特征函数按需联结至相应对象。 不像“经典”的面向对象的语言，从构建函数创建的新实例的特征并非全盘复制，而是通过一个叫做原形链的参考链链接过去的。（参见 [Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes) ），所以这并非真正的实例，严格的讲， JavaScript 在对象间使用和其它语言的共享机制不同。 注： “经典”的面向对象的语言并非好事，就像上面提到的，OOP 可能很快就变得非常复杂，JavaScript 找到了在不变的特别复杂的情况下利用面向对象的优点的方法。
 * 这个构建函数是 JavaScript 版本的类。您会发现，它只定义了对象的属性和方法，除了没有明确创建一个对象和返回任何值和之外，它有了您期待的函数所拥有的全部功能。这里使用了this关键词，即无论是该对象的哪个实例被这个构建函数创建，它的 name 属性就是传递到构建函数形参name的值，它的 greeting() 方法中也将使用相同的传递到构建函数形参name的值。注： 一个构建函数通常是大写字母开头，这样便于区分构建函数和普通函数。
   ```text
+  // before:
+  function createNewPerson(name) {
+    var obj = {};
+    obj.name = name;
+    obj.greeting = function () {
+      alert('Hi! I\'m ' + this.name + '.');
+    }
+    return obj;
+  }
+  
+  var salva = createNewPerson('salva');
+  salva.name;
+  salva.greeting();
+  
+  // after:
   function Person(name) {
     this.name = name;
     this.greeting = function() {
       alert('Hi! I\'m ' + this.name + '.');
     };
   }
+
+  var person1 = new Person('Bob');
+  var person2 = new Person('Sarah');
   ```
 * 
 
