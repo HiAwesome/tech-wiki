@@ -171,6 +171,7 @@
   
   // 等等……
   ```
+* 正如前面课程所提到的，有些人认为JavaScript并不是真正的面向对象语言，在经典的面向对象语言中，您可能倾向于定义类对象,然后您可以简单地定义哪些类继承哪些类（参考 [C++ inheritance](https://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm) 里的一些简单的例子），JavaScript使用了另一套实现方式，继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 原型式继承 —— prototypal inheritance）。
 * 
 
 
