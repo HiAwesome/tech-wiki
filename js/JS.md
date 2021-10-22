@@ -10,6 +10,8 @@
 
 ### [JS Learn Promises](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Promises)
 
+### [JS Learn Async/Await](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Async_await)
+
 ### JS Books
 
 * [Secrets of the JavaScript Ninja](https://www.amazon.com/gp/product/193398869X/), 第6章 - 由John Resig和Bear Bibeault撰写的关于高级JavaScript概念和技术的好书。第6章很好地介绍了原型和继承的相关方面；您可以很容易地找到打印版本或在线副本。
@@ -276,6 +278,54 @@ chooseToppings()
 * 注意:finally()允许你在异步代码中编写异步等价物try/ catch / finally。
 * 可以使用 [Promise()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 构造函数构建自己的promise。当你需要使用现有的旧项目代码、库或框架以及基于现代promise的代码时，这会派上用场。比如，当你遇到没有使用promise的旧式异步API的代码时，你可以用promise来重构这段异步代码。
 * 当我们不知道函数的返回值或返回需要多长时间时，Promises是构建异步应用程序的好方法。它们使得在没有深度嵌套回调的情况下更容易表达和推理异步操作序列，并且它们支持类似于同步try ... catch语句的错误处理方式。 Promise适用于所有现代浏览器的最新版本;promise有兼容问题的唯一情况是Opera Mini和IE11及更早版本。 本文中，我们没有涉及的所有promise的功能，只是最有趣和最有用的功能。当你开始了解有关promise的更多信息时，你会遇到更多功能和技巧。 大多数现代Web API都是基于promise的，因此你需要了解promise才能充分利用它们。这些API包括 [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API), [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), [Media Capture and Streams](https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API) 等等。随着时间的推移，Promises将变得越来越重要，因此学习使用和理解它们是学习现代JavaScript的重要一步。
+* [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) 和 [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) 关键字是最近添加到JavaScript语言里面的。它们是ECMAScript 2017 JavaScript版的一部分。简单来说，它们是基于promises的语法糖，使异步代码更易于编写和阅读。通过使用它们，异步代码看起来更像是老式同步代码，因此它们非常值得学习。
+* 将 async 关键字加到函数申明中，可以告诉它们返回的是 promise，而不是直接返回值。此外，它避免了同步函数为支持使用 await 带来的任何潜在开销。在函数声明为 async 时，JavaScript引擎会添加必要的处理，以优化你的程序。爽！
+* 当 [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) 关键字与异步函数一起使用时，它的真正优势就变得明显了 —— 事实上， await 只在异步函数里面才起作用。它可以放在任何异步的，基于 promise 的函数之前。它会暂停代码在该行上，直到 promise 完成，然后返回结果值。在暂停的同时，其他正在等待执行的代码就有机会执行了。 您可以在调用任何返回Promise的函数时使用 await，包括Web API函数。
+* 使用 async/await 重写 promise 代码：
+  ```text
+  // 之前
+  fetch('coffee.jpg')
+  .then(response => response.blob())
+  .then(myBlob => {
+    let objectURL = URL.createObjectURL(myBlob);
+    let image = document.createElement('img');
+    image.src = objectURL;
+    document.body.appendChild(image);
+  })
+  .catch(e => {
+    console.log('There has been a problem with your fetch operation: ' + e.message);
+  });
+  
+  // 之后
+  async function myFetch() {
+  let response = await fetch('coffee.jpg');
+  let myBlob = await response.blob();
+
+  let objectURL = URL.createObjectURL(myBlob);
+  let image = document.createElement('img');
+  image.src = objectURL;
+  document.body.appendChild(image);
+  }
+  
+  myFetch()
+  .catch(e => {
+    console.log('There has been a problem with your fetch operation: ' + e.message);
+  });
+  ```
+* 它使代码简单多了，更容易理解 —— 去除了到处都是 .then() 代码块！ 由于 async 关键字将函数转换为 promise，您可以重构以上代码 —— 使用 promise 和 await 的混合方式，将函数的后半部分抽取到新代码块中。这样做可以更灵活：
+  ```text
+  async function myFetch() {
+    let response = await fetch('coffee.jpg');
+    return await response.blob();
+  }
+  
+  myFetch().then((blob) => {
+    let objectURL = URL.createObjectURL(blob);
+    let image = document.createElement('img');
+    image.src = objectURL;
+    document.body.appendChild(image);
+  });
+  ```
 * 
 
 
