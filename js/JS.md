@@ -14,6 +14,8 @@
 
 ### [JS Learn Async/Await](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Async_await)
 
+### [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
+
 ### JS Books
 
 * [Secrets of the JavaScript Ninja](https://www.amazon.com/gp/product/193398869X/), 第6章 - 由John Resig和Bear Bibeault撰写的关于高级JavaScript概念和技术的好书。第6章很好地介绍了原型和继承的相关方面；您可以很容易地找到打印版本或在线副本。
@@ -334,9 +336,12 @@ chooseToppings()
 * 决定是否使用 async/await 时的一个考虑因素是支持旧浏览器。它们适用于大多数浏览器的现代版本，与promise相同; 主要的支持问题存在于Internet Explorer和Opera Mini。 如果你想使用async/await但是担心旧的浏览器支持，你可以考虑使用 [BabelJS](https://babeljs.io/) 库 —— 这允许你使用最新的JavaScript编写应用程序，让Babel找出用户浏览器需要的更改。在遇到不支持async/await 的浏览器时，Babel的 polyfill 可以自动提供适用于旧版浏览器的实现。
 * async/await提供了一种很好的，简化的方法来编写更易于阅读和维护的异步代码。即使浏览器支持在撰写本文时比其他异步代码机制更受限制，但无论是现在还是将来，都值得学习和考虑使用。
 * 尽管有局限性，Web API仍然允许我们访问许多的功能，使我们用web页做很多事情。有几个在代码中经常引用的非常明显的部位：
-  * window是载入浏览器的标签，在JavaScript中用Window对象来表示，使用这个对象的可用方法，你可以返回窗口的大小（参见Window.innerWidth和Window.innerHeight），操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定event handler，等等。 
-  * navigator表示浏览器存在于web上的状态和标识（即用户代理）。在JavaScript中，用Navigator来表示。你可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等。 
-  * document（在浏览器中用DOM表示）是载入窗口的实际页面，在JavaScript中用Document 对象表示，你可以用这个对象来返回和操作文档中HTML和CSS上的信息。例如获取DOM中一个元素的引用，修改其文本内容，并应用新的样式，创建新的元素并添加为当前元素的子元素，甚至把他们一起删除。
+  * window是载入浏览器的标签，在JavaScript中用 [Window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window) 对象来表示，使用这个对象的可用方法，你可以返回窗口的大小（参见 [Window.innerWidth](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/innerWidth) 和 [Window.innerHeight](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/innerHeight) ），操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定 [event handler](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#a_series_of_fortunate_events), 等等。 
+  * navigator表示浏览器存在于web上的状态和标识（即用户代理）。在JavaScript中，用 [Navigator](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator) 来表示。你可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等。 
+  * document（在浏览器中用DOM表示）是载入窗口的实际页面，在JavaScript中用 [Document](https://developer.mozilla.org/zh-CN/docs/Web/API/Document) 对象表示，你可以用这个对象来返回和操作文档中HTML和CSS上的信息。例如获取DOM中一个元素的引用，修改其文本内容，并应用新的样式，创建新的元素并添加为当前元素的子元素，甚至把他们一起删除。
+* 注意，和JavaScript中的许多事情一样，有很多方法可以选择一个元素，并在一个变量中存储一个引用。 [Document.querySelector()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector) 是推荐的主流方法，它允许你使用CSS选择器选择元素，使用很方便。对于获取元素引用，还有一些更旧的方法，如：[Document.getElementById()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById), 选择一个id属性值已知的元素；[Document.getElementsByTagName()](https://developer.mozilla.org/zh-CN/docs/Wehttps://developer.mozilla.org/zh-CN/docs/Web/APIb/API/Document/getElementsByTagName), 返回页面中包含的所有已知类型元素的数组。
+* 注意: CSS样式的JavaSript属性版本以小驼峰式命名法书写，而CSS版本带连接符号（backgroundColor 对 background-color）。确保你不会混淆，否则就不能工作。
+* 使用JavaScript创建静态内容是毫无意义的 — 最好将其写入HTML，而不使用JavaScript。用JavaScript创建内容也有其他问题（如不能被搜索引擎读取），比HTML复杂得多。
 * 
 
 
