@@ -342,6 +342,25 @@ chooseToppings()
 * 注意，和JavaScript中的许多事情一样，有很多方法可以选择一个元素，并在一个变量中存储一个引用。 [Document.querySelector()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector) 是推荐的主流方法，它允许你使用CSS选择器选择元素，使用很方便。对于获取元素引用，还有一些更旧的方法，如：[Document.getElementById()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/getElementById), 选择一个id属性值已知的元素；[Document.getElementsByTagName()](https://developer.mozilla.org/zh-CN/docs/Wehttps://developer.mozilla.org/zh-CN/docs/Web/APIb/API/Document/getElementsByTagName), 返回页面中包含的所有已知类型元素的数组。
 * 注意: CSS样式的JavaSript属性版本以小驼峰式命名法书写，而CSS版本带连接符号（backgroundColor 对 background-color）。确保你不会混淆，否则就不能工作。
 * 使用JavaScript创建静态内容是毫无意义的 — 最好将其写入HTML，而不使用JavaScript。用JavaScript创建内容也有其他问题（如不能被搜索引擎读取），比HTML复杂得多。
+* 注意：在早期，这种通用技术被称为Asynchronous JavaScript and XML（Ajax）， 因为它倾向于使用 [XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest) 来请求XML数据。 但通常不是这种情况 (你更有可能使用 XMLHttpRequest 或 Fetch 来请求JSON), 但结果仍然是一样的，术语“Ajax”仍然常用于描述这种技术。
+* XMLHttpRequest （通常缩写为XHR）现在是一个相当古老的技术 - 它是在20世纪90年代后期由微软发明的，并且已经在相当长的时间内跨浏览器进行了标准化。
+* Fetch API基本上是XHR的一个现代替代品——它是最近在浏览器中引入的，它使异步HTTP请求在JavaScript中更容易实现，对于开发人员和在Fetch之上构建的其他API来说都是如此。
+* 关于promises: 当你第一次见到它们的时候，promises会让你有点困惑，但现在不要太担心这个。在一段时间之后，您将会习惯它们，特别是当您了解更多关于现代JavaScript api的时候——大多数现代的JavaScript api都是基于promises的。
+* 值得注意的是你可以直接将promise块 (.then()块, 但也有其他类型) 链接到另一个的尾部, 顺着链条将每个块的结果传到下一个块。 这使得promises非常强大。很多开发者更喜欢这种样式, 因为它更扁平并且按理说对于更长的promise链它更容易读 — 每一个promise(承诺）接续上一个promise，而不是在上一个promise的里面(会使得整个代码笨重起来，难以理解）。以上两种写法还有一个不同的地方是我们在response.text()  语句之前得包含一个 return  语句, 用来把这一部分的结果传向promise链的下一段。
+* Note: 一些api处理对其功能的访问略有不同，相反，它们要求开发人员向特定的URL模式发出HTTP请求(参见从服务器获取数据)，以检索特定的数据。这些被称为 RESTful API.
+* 当你能够使用 CSS 和 JavaScript 让 SVG 矢量图动起来时，位图却依然没有相应的支持。同时 SVG 动画的可用工具也少得可怜。有效地生成动画、游戏画面、3D场景和其他的需求依然没有满足，而这些在诸如 C++ 或者 Java 等底层语言中却司空见惯。 当浏览器开始支持 HTML 画布元素 [\<canvas\>](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/canvas) 和相关的 [Canvas API](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API) （由苹果公司在 2004 年前后发明，后来其他的浏览器开始跟进）时，形势开始改善。下面你会看到，canvas 提供了许多有用的工具，特别是当捆绑了由网络平台提供的一些其他的 API 时。它们用来生成 2D 动画、游戏画面和数据分析图，以及其他类型的 app。大约在 2006 - 2007 年，Mozilla 开始测试 3D 画布。后来演化为 [WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API), 它获得了各大浏览器厂商的认可，于是大约在 2009 - 2010 年间得到了标准化。WebGL 可以让你在 web 浏览器中生成真正的 3D 图形。下面的例子显示了一个简单的旋转的 WebGL 立方体。
+* WebGL 基于 [OpenGL](https://developer.mozilla.org/en-US/docs/Glossary/OpenGL) 图形编程语言实现，可直接与 [GPU](https://developer.mozilla.org/en-US/docs/Glossary/GPU) 通信，基于此，编写纯 WebGL 代码与常规的 JavaScript 不尽相同，更像 C++ 那样的底层语言，更加复杂，但无比强大。
+* 作为HTML5规范的一部分，[HTMLMediaElement](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement) API提供允许你以编程方式来控制视频和音频播放的功能—例如 [HTMLMediaElement.play()](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/play), [HTMLMediaElement.pause()](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/pause), 等。该接口对 [\<audio\>](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio) 和 [\<video\>](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video) 两个元素都是可用的，因为在这两个元素中要实现的功能几乎是相同的。
+* 注意：使用客户端存储 API 可以存储的数据量是有限的（可能是每个API单独的和累积的总量）;具体的数量限制取决于浏览器，也可能基于用户设置。有关更多信息，获取更多信息，请参考 [浏览器存储限制和清理标准](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria).
+* cookie的唯一优势是它们得到了非常旧的浏览器的支持，所以如果您的项目需要支持已经过时的浏览器（比如 Internet Explorer 8 或更早的浏览器），cookie可能仍然有用，但是对于大多数项目（很明显不包括本站）来说，您不需要再使用它们了。其实cookie也没什么好说的，[document.cookie](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie) 一把梭就完事了。
+* 现代浏览器有比使用 cookies 更简单、更有效的存储客户端数据的 API。
+  * [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) 提供了一种非常简单的语法，用于存储和检索较小的、由名称和相应值组成的数据项。当您只需要存储一些简单的数据时，比如用户的名字，用户是否登录，屏幕背景使用了什么颜色等等，这是非常有用的。
+  * [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) 为浏览器提供了一个完整的数据库系统来存储复杂的数据。这可以用于存储从完整的用户记录到甚至是复杂的数据类型，如音频或视频文件。
+* 未来：Cache API, 一些现代浏览器支持新的 [Cache API](https://developer.mozilla.org/zh-CN/docs/Web/API/Cache). 这个API是为存储特定HTTP请求的响应文件而设计的，它对于像存储离线网站文件这样的事情非常有用，这样网站就可以在没有网络连接的情况下使用。缓存通常与 [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) 组合使用，尽管不一定非要这么做。 Cache 和 Service Workers 的使用是一个高级主题。
+* [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) 非常容易使用 — 你只需存储简单的 键名/键值 对数据 (限制为字符串、数字等类型) 并在需要的时候检索其值。
+* 你所有的 web storage 数据都包含在浏览器内两个类似于对象的结构中： [sessionStorage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage) 和 [localStorage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage). 第一种方法，只要浏览器开着，数据就会一直保存 (关闭浏览器时数据会丢失) ，而第二种会一直保存数据，甚至到浏览器关闭又开启后也是这样。我们将在本文中使用第二种方法，因为它通常更有用。
+* 为每个域名分离储存：每个域都有一个单独的数据存储区(每个单独的网址都在浏览器中加载). 你 会看到，如果你加载两个网站（例如google.com和amazon.com）并尝试将某个项目存储在一个网站上，该数据项将无法从另一个网站获取。 这是有道理的 - 你可以想象如果网站能够查看彼此的数据，就会出现安全问题！
+* [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) （有时简称 IDB ）是可以在浏览器中访问的一个完整的数据库系统，在这里，你可以存储复杂的关系数据。其种类不限于像字符串和数字这样的简单值。你可以在一个IndexedDB中存储视频，图像和许多其他的内容。 但是，这确实是有代价的：使用IndexedDB要比Web Storage API复杂得多。
 * 
 
 
