@@ -43,6 +43,21 @@
   * [tldr](https://tldr.sh/#installation) —在本章前面提到的，但是可以作为命令行工具使用。
 * Note: npm is not the only package manager available. A successful and popular alternative package manager is [Yarn](https://yarnpkg.com/). Yarn resolves the dependencies using a different algorithm that can mean a faster user experience. There are also a number of other emerging clients, such as [pnpm](https://pnpm.js.org/).
 * Note: If you have trouble with the terminal returning a "command not found" type error, try running the above command with the npx utility, i.e. npx parcel index.html.
+* Note: The npm package manager is not required to install packages from the npm registry, even though they share the same name. pnpm and yarn can consume the same package.json format as npm, and can install any package from the npm and other package registries.
+* Tools used in our toolchain, In this article we're going to use the following tools and features:
+  * [JSX](https://reactjs.org/docs/introducing-jsx.html), a [React](https://reactjs.org/) related set of syntax extensions that allow you to do things like defining component structures inside JavaScript. You won't need to know React to follow this tutorial, but we've included this to give you an idea of how a non-native web language could be integrated into a toolchain. 
+  * The latest built-in JavaScript features (at time of writing), such as [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
+  * Useful development tools such as [Prettier](https://prettier.io/) for formatting and [eslint](https://eslint.org/) for linting.
+  * [PostCSS](https://postcss.org/) to provide CSS nesting capabilities.
+  * [Parcel](https://parceljs.org/) to build and minify our code, and to write a bunch of configuration file content automatically for us.
+  * [GitHub](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub) to manage our source code control.
+  * [Netlify](https://www.netlify.com/) to automate our deployment process.
+* Creating a development environment:
+  * This part of the toolchain is sometimes seen to be delaying the actual work, and it can be very easy to fall into a "[rabbit hole](https://www.merriam-webster.com/dictionary/rabbit%20hole)" of tooling where you spend a lot of time trying to get the environment "just right".
+  * But you can look at this in the same way as setting up your physical work environment. The chair needs to be comfortable, and set up in a good position to help with your posture. You need power, Wifi, and USB ports! There might be important decorations or music that help with your mental state — these are all important to doing your best work possible, and they should also only need to be set up once, if done properly.
+  * In the same way, setting up your development environment, if done well, needs doing only once and should be reusable in many future projects. You will probably want to review this part of the toolchain semi-regularly and consider if there's any upgrades or changes you should introduce, but this shouldn't be required too often.
+* Note: In the command above, I use Prettier with the --write flag. Prettier understands this to mean "if there's problems in my code format, go ahead and fix them, then save my file". This is fine for our development process, but we can also use prettier without the flag and it will only check the file. Checking the file (and not saving it) is useful for purposes like checks that run before a release - i.e. "don't release any code that's not been properly formatted."
+* Note: What is a git hook? Git (not GitHub) provides a system that lets us attach pre- and post- actions to the tasks you perform with git (such as committing your code). Although git hooks can be a bit overly complicated (in this author's opinion), once they're in place they can be very powerful. If you're interested in using hooks, [Husky](https://github.com/typicode/husky) is a greatly simplified route into using hooks.
 * 
 
 
