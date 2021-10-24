@@ -1,5 +1,7 @@
 # Github
 
+### [设定 master 为项目默认分支名](https://github.com/settings/repositories)
+
 ## [Github Advanced Search](https://github.com/search/advanced)
 
 * **[举例: JSON.parseObject extension:java](https://github.com/search?q=JSON.parseObject+extension%3Ajava&type=Code)**
