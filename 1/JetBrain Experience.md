@@ -1,5 +1,11 @@
 # Jetbrain Experience
 
+### [What the difference between JetBrains Mono and JetBrains Mono NL](https://stackoverflow.com/a/62262352)
+
+JetBrains Mono NL is the **no-ligature** version of JetBrains Mono font.
+
+In some editors you may [have difficulty disabling font ligatures](https://github.com/JetBrains/JetBrainsMono/issues/19) (although some popular editors like Sublime Text, VS Code do have the option). If you don't want font ligature, you can simply use the NL version.
+
 ### [Class Diagram](https://www.jetbrains.com/help/idea/class-diagram.html)
 
 **Properties 是参数为空且直接返回的 Methods.**
