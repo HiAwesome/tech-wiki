@@ -16,6 +16,8 @@
 
 ### [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 
+### [JS 正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+
 ### JS Books
 
 * [Secrets of the JavaScript Ninja](https://www.amazon.com/gp/product/193398869X/), 第6章 - 由John Resig和Bear Bibeault撰写的关于高级JavaScript概念和技术的好书。第6章很好地介绍了原型和继承的相关方面；您可以很容易地找到打印版本或在线副本。
