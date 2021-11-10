@@ -1,5 +1,7 @@
 # Jetbrain Experience
 
+### [Jetbrain Projector Documents](https://jetbrains.github.io/projector-client/mkdocs/latest/)
+
 ### [What the difference between JetBrains Mono and JetBrains Mono NL](https://stackoverflow.com/a/62262352)
 
 JetBrains Mono NL is the **no-ligature** version of JetBrains Mono font.
