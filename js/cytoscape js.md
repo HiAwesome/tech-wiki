@@ -5,3 +5,4 @@
 ### some feature
 
 * 禁止缩放: `cy.userZoomingEnabled(false)`
+* 禁止节点移动: `node.grabbable = false`
