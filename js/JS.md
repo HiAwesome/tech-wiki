@@ -1,5 +1,9 @@
 # JS
 
+### Update
+
+* [How to check if array is empty or does not exist?](https://stackoverflow.com/a/24403771), `if (!Array.isArray(array) || !array.length) {}`.
+
 ### [JavaScript 错误参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Errors)
 
 ### [JS Object 对象包装器](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object)
