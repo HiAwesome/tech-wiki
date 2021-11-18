@@ -1,5 +1,9 @@
 # CSS
 
+#### Some Useful links
+
+* [Applying a single font to an entire website with CSS](https://stackoverflow.com/a/10537230). `* { font-family:Algerian; }`
+
 ### [调试 CSS](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Debugging_CSS)
 
 ### [MDS CSS 风格指南](https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/CSS)
