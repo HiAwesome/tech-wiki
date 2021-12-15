@@ -1,5 +1,17 @@
 # Github
 
+### [ssh_exchange_identification: Connection closed by remote host under Git bash](https://stackoverflow.com/a/60994276)
+
+For fixing the issues add the Hostname for Git on `~/.ssh/config`,
+
+```text
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+```
+
+In my case GitHub!
+
 ### [设定 master 为项目默认分支名](https://github.com/settings/repositories)
 
 ## [Github Advanced Search](https://github.com/search/advanced)
