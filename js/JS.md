@@ -20,7 +20,9 @@
 
 ### [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 
-### [JS 正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+### [JS 正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+
+#### [JS 正则表达式 Guide](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 * [JavaScript regular expression exception (Invalid group)](https://stackoverflow.com/a/4200196), `(?<= )` is a positive lookbehind. JavaScript's flavor of RegEx does not support lookbehinds (but it does support lookaheads).
 
