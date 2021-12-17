@@ -3,6 +3,7 @@
 ### Update
 
 * [How to check if array is empty or does not exist?](https://stackoverflow.com/a/24403771), `if (!Array.isArray(array) || !array.length) {}`.
+* [JavaScript - Get Portion of URL Path](https://stackoverflow.com/a/6944772).
 
 ### [JavaScript 错误参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Errors)
 
