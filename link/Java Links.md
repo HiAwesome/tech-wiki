@@ -1,5 +1,15 @@
 # 与 Java 有关的链接
 
+#### [Capturing a Java Thread Dump](https://www.baeldung.com/java-thread-dump)
+
+* jstack: `jstack 17264 > /tmp/threaddump.txt`
+* jmc: `Start Flight Recording`
+* jvisualvm: `Thread Dump`
+* jcmd: `jcmd 17264 Thread.print`
+* jconsole: `open jconsole and connect to a running Java process`
+* kill signal: `kill -3 17264`
+* 
+
 #### [Delete a Directory Recursively in Java](https://www.baeldung.com/java-delete-directory)
 
 #### [How can I create a Java 8 LocalDate from a long Epoch time in Milliseconds?](https://stackoverflow.com/a/35187046)
