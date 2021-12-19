@@ -12,6 +12,8 @@ Host github.com
 
 In my case GitHub!
 
+alse see [Github: Using SSH over the HTTPS port](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port#enabling-ssh-connections-over-https).
+
 ### [设定 master 为项目默认分支名](https://github.com/settings/repositories)
 
 ## [Github Advanced Search](https://github.com/search/advanced)
