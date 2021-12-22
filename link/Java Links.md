@@ -10,6 +10,8 @@
 * JConsole: `we can navigate to the MBeans tab and find the HotSpotDiagnostic under com.sun.management`
 * Programmatic Way: `we simply need to get an instance of a HotSpotDiagnosticMXBean, and call its dumpHeap method`
 
+Explain it use [IntelliJ IDEA: Open an external profiling report](https://www.jetbrains.com/help/idea/open-an-external-profiling-report.html).
+
 #### [Capturing a Java Thread Dump](https://www.baeldung.com/java-thread-dump)
 
 * jstack: `jstack 17264 > /tmp/threaddump.txt`
@@ -18,6 +20,8 @@
 * jcmd: `jcmd 17264 Thread.print`
 * jconsole: `open jconsole and connect to a running Java process`
 * kill signal: `kill -3 17264`
+
+Explain it use [IntelliJ IDEA: Analyze external stack traces](https://www.jetbrains.com/help/idea/analyzing-external-stacktraces.html).
 
 #### [Delete a Directory Recursively in Java](https://www.baeldung.com/java-delete-directory)
 
