@@ -1,5 +1,13 @@
 # Docker
 
+#### [Docker: Copying files from Docker container to host](https://stackoverflow.com/a/22050116)
+
+In order to copy a file from a container to the host, you can use the command
+
+```shell
+docker cp <containerId>:/file/path/within/container /host/path/target
+```
+
 #### [Change Docker Root Dir on Red Hat Linux?](https://unix.stackexchange.com/questions/452368/change-docker-root-dir-on-red-hat-linux)
 
 Stop all running docker containers and then docker daemon. Move "/var/lib/docker" directory to the place where you want to have this data. For you it would be:
