@@ -1,5 +1,15 @@
 # 与 Java 有关的链接
 
+### [Different Ways to Capture Java Heap Dumps](https://www.baeldung.com/java-heap-dump-capture)
+
+* jmap: `jmap -dump:live,format=b,file=/tmp/dump.hprof 12587`
+* jcmp: `jcmd 12587 GC.heap_dump /tmp/dump.hprof`
+* JVisualVM: `Heap Dump” option`
+* Capture a Heap Dump Automatically: `java -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<file-or-dir-path>`
+* JMX: `This MBean provides a dumpHeap method`
+* JConsole: `we can navigate to the MBeans tab and find the HotSpotDiagnostic under com.sun.management`
+* Programmatic Way: `we simply need to get an instance of a HotSpotDiagnosticMXBean, and call its dumpHeap method`
+
 #### [Capturing a Java Thread Dump](https://www.baeldung.com/java-thread-dump)
 
 * jstack: `jstack 17264 > /tmp/threaddump.txt`
@@ -8,7 +18,6 @@
 * jcmd: `jcmd 17264 Thread.print`
 * jconsole: `open jconsole and connect to a running Java process`
 * kill signal: `kill -3 17264`
-* 
 
 #### [Delete a Directory Recursively in Java](https://www.baeldung.com/java-delete-directory)
 
