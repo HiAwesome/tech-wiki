@@ -11,6 +11,20 @@
 
 ### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
 
+#### [Run jdeps on Your Code](https://docs.oracle.com/en/java/javase/17/migrate/preparing-migration.html#GUID-BA521187-60FD-4CA5-B998-58A1D05587BC)
+
+Run the jdeps tool on your application to see what packages and classes your applications and libraries depend on. If you use internal APIs, then jdeps may suggest replacements to help you to update your code.
+
+If you use Maven, there’s a [jdeps]((https://maven.apache.org/plugins/maven-jdeps-plugin/usage.html)) plugin available.
+
+#### [Changes to GC Log Output](https://docs.oracle.com/en/java/javase/17/migrate/migrating-jdk-8-later-jdk-releases.html#GUID-055EA9F4-835E-463F-B9E1-9081B3D9E55D)
+
+Garbage collection (GC) logging uses the JVM unified logging framework, and there are some differences between the new and the old logs. Any GC log parsers that you’re working with will probably need to change.
+
+You may also need to update your JVM logging options. All GC-related logging should use the gc tag (for example, —Xlog:gc), usually in combination with other tags. The —XX:+PrintGCDetails and -XX:+PrintGC options have been deprecated.
+
+See [Enable Logging with the JVM Unified Logging Framework](https://docs.oracle.com/pls/topic/lookup?ctx=javase15&id=unified_logging) in the Java Development Kit Tool Specifications and [JEP 271: Unified GC Logging](https://docs.oracle.com/en/java/javase/17/migrate/migrating-jdk-8-later-jdk-releases.html#:~:text=JEP%20271%3A%20Unified%20GC%20Logging).
+
 ### [Migrating a Spring Boot application to Java 17 – the hard way](https://blog.codecentric.de/en/2021/12/migrating-spring-boot-java-17/)
 
 ### [Different Ways to Capture Java Heap Dumps](https://www.baeldung.com/java-heap-dump-capture)
