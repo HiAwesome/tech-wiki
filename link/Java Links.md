@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+### [Migrating a Spring Boot application to Java 17 – the hard way](https://blog.codecentric.de/en/2021/12/migrating-spring-boot-java-17/)
+
 ### [Different Ways to Capture Java Heap Dumps](https://www.baeldung.com/java-heap-dump-capture)
 
 * jmap: `jmap -dump:live,format=b,file=/tmp/dump.hprof 12587`
