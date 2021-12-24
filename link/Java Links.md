@@ -1,5 +1,14 @@
 # 与 Java 有关的链接
 
+### [What Are The Most Important Skills As A Java Software Engineer?](https://arnoldgalovics.com/java-software-engineer-skills/)
+
+* Problem solving
+* Attitude
+* Ability to learn new things
+* Diligence
+* Communication
+* Team worker
+
 ### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
 
 ### [Migrating a Spring Boot application to Java 17 – the hard way](https://blog.codecentric.de/en/2021/12/migrating-spring-boot-java-17/)
