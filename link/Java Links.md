@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
+
 ### [Migrating a Spring Boot application to Java 17 – the hard way](https://blog.codecentric.de/en/2021/12/migrating-spring-boot-java-17/)
 
 ### [Different Ways to Capture Java Heap Dumps](https://www.baeldung.com/java-heap-dump-capture)
