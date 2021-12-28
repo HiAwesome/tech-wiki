@@ -1,5 +1,9 @@
 # Linux
 
+#### [Listing with `ls` and regular expression](https://unix.stackexchange.com/a/523013)
+
+The question asked for regular expressions. Bash, and thus `ls`, does not support regular expressions here. What it supports is filename expressions ([Globbing](https://tldp.org/LDP/abs/html/globbingref.html)), a form of wildcards. Regular expressions are a lot more powerful than that.
+
 #### [Why does man print “gimme gimme gimme” at 00:30?](https://unix.stackexchange.com/questions/405783/why-does-man-print-gimme-gimme-gimme-at-0030)
 
 #### [Common Linux Text Search](https://www.baeldung.com/linux/common-text-search)
