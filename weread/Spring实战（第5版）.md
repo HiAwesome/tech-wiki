@@ -1,6 +1,9 @@
-## Spring实战（第5版）
+# Spring实战（第5版）
 
  **克雷格·沃斯**
+
+
+## 划线部分
 
 
 ### 1.1 什么是Spring
@@ -333,4 +336,203 @@
 ### 19.6 小结
 
 * 借助Spotify的Maven Dockerfile插件，能够非常容易地容器化Spring应用。
+
+
+## 个人笔记部分
+
+
+### 11.6 小结
+
+* 11.6 小结
+•Spring WebFlux提供了一个反应式的Web框架，它的编程模型是与Spring MVC对应的，甚至共享了很多相同的注解。
+•Spring 5还提供了函数式编程模型，作为Spring WebFlux的替代方案。
+•反应式控制器可以使用WebTestClient来进行测试。
+•在客户端，Spring 5提供了WebClient，也就是Spring RestTemplate的反应式等价实现。
+•在保护Web应用方面，尽管WebFlux在底层有一些区别，但是Spring Security 5为反应式安全所提供的编程模型与非反应式Spring MVC应用相比并没有特别大的差异。  （个人笔记: web框架，编程模型，客户端，测试，安全）
+
+
+### 16.1 Actuator概览
+
+* 在机器领域中，执行机构（Actuator）指的是负责控制和移动装置的组件。  （个人笔记: cultrue means, it's a inherited like interface in java.）
+
+
+### 19.4 在Docker容器中运行Spring Boot
+
+* 在分发云中部署的各种应用时，Docker已经成为事实标准。  （个人笔记: So you should know more about Docker.）
+
+
+### 6.4 小结
+
+* 为了绕过视图和模型的逻辑并将数据直接写入响应体中，控制器处理方法既可以添加@ResponseBody注解也可以返回ResponseEntity对象。  （个人笔记: Prune backend!）
+
+
+### 15.4 聚合多个Hystrix流
+
+* 幸运的是，Netflix的另一个项目Turbine提供了将所有微服务的所有Hystrix流聚合到一个Hystrix流中的办法，这样Hystrix dashboard就能对其进行监控了。Spring Cloud Netflix支持以类似于创建其他Spring Cloud服务的方式创建Turbine服务。要创建Turbine服务，我们需要创建一个新的Spring Boot项目并将Turbine starter依赖添加到构建文件中：  （个人笔记: another demand, another open source project, use it, create another springboot application.）
+
+
+### 6.2 启用超媒体
+
+* 对API URL进行硬编码和字符串操作会让客户端代码变得很脆弱。  （个人笔记: 
+不够稳健）
+
+* 除此之外，TacoResource并没有包含Taco的id属性。这是因为没有必要在API中暴露数据库相关的ID。从API客户端的角度来看，资源的self链接将会作为该资源的标识符。  （个人笔记: System design）
+
+* 我们现在的taco列表已经完全具备了超链接，不仅是它本身（recents链接），而且所有的taco条目和每个taco中的配料都有了超链接。  （个人笔记: 解除耦合代价大）
+
+
+### 19.6 小结
+
+* 借助Spotify的Maven Dockerfile插件，能够非常容易地容器化Spring应用。  （个人笔记: Try it later.）
+
+
+### 14.7 小结
+
+* Config Server客户端能够借助手动或自动刷新得到新的属性，前者通过Actuator端点来实现，后者通过Spring Cloud Bus和Git webhooks来实现。  （个人笔记: More important on centralized configuration）
+
+
+### 第6章 创建REST服务
+
+* 随着客户端的可选方案越来越多，许多应用程序采用了一种通用的设计，那就是将用户界面推到更接近客户端的地方，而让服务器公开API，通过这种API，各种客户端都能与后端功能进行交互。  （个人笔记: 
+前后端分离）
+
+
+### 12.1 理解Spring Data的反应式概况
+
+* 不幸的是，至少目前还不支持关系数据库的反应式处理。希望这种情况能在不久的将来得到解决。  （个人笔记: 
+Wait for a new jdbc）
+
+
+### 第12章 反应式持久化数据
+
+* 此，很重要的一点在于，要让整个数据流变成反应式和非阻塞的，也就是从控制器直到数据库。  （个人笔记: Back to end.）
+
+
+### 14.6 在运行时刷新配置属性
+
+* 每种方案都有其优点和缺点。手动刷新能够更精确地控制服务何时更新最新配置，但是它需要向每个微服务实例发送一个HTTP请求。自动更新能够让应用中的每个微服务即时使用最新的配置，但它是由配置仓库的提交自动触发的，对于有些项目来说过于危险。  （个人笔记: You just need some trade off again.）
+
+* 在Config Server客户端应用中添加Actuator之后，我们可以在任意时间发送HTTP POST请求到“/actuator/refresh”，通知它从后端仓库刷新配置属性。  （个人笔记: Trigger change by http post request every time.）
+
+* 注意，响应中包含一个JSON数组，列出了发生变更的属性名。这个数组包含greeting.message属性，还包含config.client.version属性（当前配置对应的Git提交的哈希值）的变化。因为现在的配置基于一个新的Git提交，所以每当后端的配置仓库有变化时，这个值都会跟着变化。  （个人笔记: It means you get config.client.version every time, another fields is what you actrually change.）
+
+* 这样做的结果就是，在配置属性变更推送到后端的Git仓库之后，所有的Config Server客户端应用能够立即获取最新的配置属性值。  （个人笔记: As soon as possible.）
+
+
+### 15.2 声明断路器
+
+* 为了实现这一点，我们可以在应用的主配置类上添加@EnableHystrix。  （个人笔记: Every time we want config something on whole application, we will append @Enable*** on @SpringBootApplication. It's on application level.）
+
+* 后备行为方法的唯一规则是它们要与原始方法具有相同的签名（除了方法名称之外）。  （个人笔记: It makes backup behavior method can hold all request from origin method.）
+
+* 唯一的要求就是必须要在后备方法的底部有一个不会失败的方法，该方法不需要使用断路器。  （个人笔记: Recursion failed need resursion hystrix and final normal method.）
+
+* 默认情况下，如果断路器保护的方法调用超过20次，而且50%以上的调用在10秒的时间内发生失败，那么断路器就会进入打开状态。所有后续的调用都将会由后备方法处理。在5秒之后，断路器进入半开状态，将会再次尝试调用原始的方法。  （个人笔记: It means hystrix think origin method will be re healthy now.）
+
+
+### 5.3 使用profile进行配置
+
+* 定义特定profile相关的属性的另外一种方式仅适用于YAML配置。它会将特定profile的属性和非profile的属性都放到application.yml中，它们之间使用3个中划线进行分割，并且使用spring.profiles属性来命名profile。  （个人笔记: yaml 大法好）
+
+
+### 8.2 使用RabbitMQ和AMQP
+
+* 我们要使用Spring发送和接收RabbitMQ代理的消息，只需要添加这项依赖就可以了。  （个人笔记: 从更高的层次上来看，他引用新的组件的方式是一种更高级的模版代码。）
+
+* 实际上，@RabbitListener和@JmsListener的运行方式非常相似是一件令人兴奋的事情。这意味着当我们使用RabbitMQ替代Artemis或ActiveMQ的时候，不需要学习全新的编程模型。同样令人兴奋的是，RabbitTemplate和JmsTemplate之间也具有这样的相似性。  （个人笔记: 更高层次的面向接口编程。）
+
+
+### 13.1 思考微服务
+
+* Cloud Native（Manning，2019）。  （个人笔记: Wow, new book）
+
+* Bundle und unbundled, always that, the war never stop.
+
+
+### 10.2 初识Reactor
+
+* 把Reactor的Bismuth版本  （个人笔记: 案例中scope：import解决maven单继承问题，当前项目可以存在多个父pom）
+
+
+### 14.2 运行配置服务器
+
+* 我们必须要告诉它，它要对外提供的配置属性都位于何处。  （个人笔记: 绝对重要的配置属性。）
+
+
+### 19.2 构建和部署WAR文件
+
+* 虽然WAR文件作为Java部署的主流方案已经有20多年的历史了，但是它们确实是为将应用程序部署到传统Java应用服务器而设计的。按照我们所选择的平台，现代云部署方案并不需要WAR文件，有些甚至都不支持这种格式。随着我们进入云部署的新时代，JAR文件可能是更好的选择。  （个人笔记: Jar is more modern than war.）
+
+
+### 11.2 定义函数式请求处理器
+
+* 更明显的差异在于，路由是由方法引用处理的。如果RouterFunction背后的行为相对简单和简洁，那么lambda是很不错的选择。在很多场景下，最好将功能抽取到一个单独的方法中（甚至抽取到一个独立类的方法中），以便于保持代码的可读性。  （个人笔记: 工具类结构）
+
+
+### 16.2 消费Actuator端点
+
+* 所有的应用，不管其外部依赖是什么，至少都会有一个针对文件系统的健康指示器，名为diskSpace。diskSpace健康指示器能够显示文件系统的健康状况（希望它是UP状态），这个状态的值是由还有多少剩余空间决定的。如果可用磁盘空间低于阈值，那么它将会报告DOWN的状态。  （个人笔记: so you better know diskSpace is so important for any application.）
+
+* 匹配上的（positive matches，即已通过的条件化配置）、未匹配上的（negative matches，即失败的条件化配置）以及非条件化的类。  （个人笔记: It's core magic on springboot auto config.）
+
+* 尽管Actuator端点所提供的信息有助于观察运行中Spring Boot应用的内部状况，但是它们并不适用于人类直接使用。作为REST端点，它们是供其他应用消费的，这里所说的其他应用也可能是UI。考虑到这一点，我们在第17章会看到如何在用户友好的Web应用中展现Actuator信息。现在，我们看一下如何自定义Actuator的端点。  （个人笔记: so it's pretty good design: major service expose http and response json, then user could use it by cli or UI tools. Generally cli used by shell or other automatic tools, UI tools used by dashboard to see whole applecation states.）
+
+
+### 12.2 使用反应式的Cassandra repository
+
+* 需要说明一点，将Taco Cloud领域类型调整为使用Cassandra，并不是简单地将几个JPA注解替换为Cassandra注解就可以了。我们必须重新考虑如何对数据进行建模。  （个人笔记: 
+有点oltp vs olap 那味了。）
+
+* 如果我们想要插入很多数据，那么可能需要选择ReactiveCassandraRepository；否则，最好选择ReactiveCrudRepository，因为在不同数据库类型之间它更具可移植性。  （个人笔记: 接口的设计与其见名知义的重要性。）
+
+
+### 6.1 编写RESTful控制器
+
+* 与REST最密切相关之处在于，@RestController注解会告诉Spring，控制器中的所有处理器方法的返回值都要直接写入响应体中，而不是将值放到模型中并传递给一个视图以便于进行渲染。  （个人笔记: 
+意味着不使用传统MVC）
+
+* 客户端实际上接收到了一个无法使用的响应，但是状态码却提示一切正常。有一种更好的方式是在响应中使用HTTP 404 (NOT FOUND)状态。  （个人笔记: 一切按照规范来。）
+
+* 现在，tacoById()返回的不是一个Taco对象，而是ResponseEntity<Taco>。如果找到taco，我们就将Taco包装到ResponseEntity中，并且会带有OK的HTTP状态（这也是之前的行为）。如果找不到taco，我们就将会在ResponseEntity中包装一个null，并且会带有NOT FOUND的HTTP状态，从而表明客户端试图抓取的taco并不存在。  （个人笔记: 
+专业．）
+
+* 在onSubmit()方法中，我们调用了HttpClient的post()方法而不是get()方法。这意味着我们不再是从API中抓取数据，而是向API发送数据。具体来讲，我们将一个taco设计（存放到model变量中）借助HTTP POST请求发送至“/design”的API端点上。  （个人笔记: 
+角度好．）
+
+* 但是，我们设置了consumes属性。consumes属性用于指定请求输入，而produces用于指定请求输出。在这里，我们使用consumes属性，表明该方法只会处理Content-type与application/json相匹配的请求。  （个人笔记: 
+生产者和消费者、）
+
+* 在POST请求的情况下，201 (CREATED)的HTTP状态更具有描述性。它会告诉客户端，请求不仅成功了，还创建了一个资源。在适当的地方使用@ResponseStatus将最具描述性和最精确的HTTP状态码传递给客户端是一种更好的做法。  （个人笔记: 
+专业，精确。）
+
+* 为什么会有两种不同的HTTP方法来更新资源？  （个人笔记: 
+Good question!）
+
+* 从这个意义上讲，PUT真正的目的是执行大规模的替换（replacement）操作，而不是更新操作。HTTP PATCH的目的是对资源数据打补丁或局部更新。  （个人笔记: 
+全局更新V S 部分更新）
+
+* 在这里，我选择捕获该EmptyResultDataAccessException异常，但是什么都没有做。在这里，我的想法是如果你尝试删除一个并不存在的资源，那么它的结果和删除之前存在这个资源是一样的。也就是，最终的效果都是资源不复存在。所以在删除之前资源是否存在并不重要。另外一种办法就是可以让deleteOrder()返回ResponseEntity，在资源不存在的时候将响应体设置为null并将HTTP状态码设置为NOT FOUND。  （个人笔记: 
+
+It depend on what consumer want.）
+
+
+### 5.2 创建自己的配置属性
+
+* 尽管我们很容易就可以将@Validated、@Min和@Max注解用到OrderController（和其他可以注入OrderProps的地方），但是这样会使OrderController更加混乱。通过配置属性的持有者bean，我们将所有的配置属性收集到了一个地方，这样就能让使用这些属性的bean尽可能保持整洁。  （个人笔记: 规范）
+
+* 为了帮助那些使用你所定义的配置属性的人（有可能就是你本人），为这些属性创建一些元数据是非常好的办法，至少它能消除IDE上那些烦人的黄色警告。  （个人笔记: 哈哈）
+
+
+### 6.3 启用数据后端服务
+
+* 你可能会发现，很多命令行shell遇到请求中的&符号会出错，所以我们在前面的curl命令中为整个URL使用了引号  （个人笔记: 自动转义）
+
+* UI代码需要硬编码才能请求带有指定参数的taco列表。当然，这可以正常运行。但是，如果让客户端太多地了解如何构建API请求，就会在一定程度上增加脆弱性。如果客户端能够从链接列表中查找URL就太好了。如果URL能够更简洁，就像前面看到“/design/recent”一样，那就更棒了。  （个人笔记: 取舍）
+
+* 需要注意的是，尽管@RepositoryRestController的名称和@RestController非常相似，但是它并没有和@RestController相同的语义。具体来讲，它并不能保证处理器方法返回的值会自动写入响应体中。所以，我们要么为方法添加@ResponseBody注解，要么返回包装响应数据的ResponseEntity。这里我们选择的方案是返回ResponseEntity。  （个人笔记: 不太优雅）
+
+
+### 16.3 自定义Actuator
+
+* 很重要的一点就是，尽管我只展现了如何使用HTTP与端点交互，但是它们还会暴露为MBean，我们可以使用任意的JMX客户端来进行访问。  （个人笔记: define a high level interface than http or jmx bean.）
 
