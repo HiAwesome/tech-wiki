@@ -1,5 +1,7 @@
 # 零散的经验
 
+#### [List of In-Memory Databases](https://www.baeldung.com/java-in-memory-databases)
+
 #### [Too many open files error on Mac OS](https://discussions.apple.com/thread/251000125)
 
 ###### mac 'caps lock' 切换输入法失效 20210728
