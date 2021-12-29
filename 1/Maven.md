@@ -1,5 +1,7 @@
 # Maven
 
+### [Integration Testing with Maven](https://www.baeldung.com/maven-integration-test)
+
 ### [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 
 ### [Maven Dependency Scopes](https://www.baeldung.com/maven-dependency-scopes)
