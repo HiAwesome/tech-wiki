@@ -1,5 +1,11 @@
 # MySQL
 
+### [Most MySQL-like hibernate-compatible in-memory database?](https://stackoverflow.com/questions/17630545/most-mysql-like-hibernate-compatible-in-memory-database)
+
+* H2 缺失一些 MySQL 函数，例如 `Numeric value out of range: "2145916800000" in column`, `Cause: org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select count(*) from TABLE_NAME  where (     lower(tag) rlike[*] concat('(^|,)', lower(?), '(,|$)')   )       and namespace_name = ?     and service_name = ?"; expected "], :=, AT, FORMAT, ,, %, ;, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ., )"; SQL statement:`, `Cause: org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "time_to_sec" not found;`.
+* HSQLDB 2.6.0+ 要求 Java11+, 降级到 Java8 可用的版本，依然会碰到和 H2 一样的 MySQL 不完全兼容问题。
+* 结论：使用 H2 数据库加上关联的 Profile 解决日常 90% 的 SQL 单元测试，线上使用 Docker 启动的 MySQL.
+
 ## PingCAP TiDB
 
 * [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
