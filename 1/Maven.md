@@ -1,5 +1,7 @@
 # Maven
 
+### [Guide to Maven Profiles](https://www.baeldung.com/maven-profiles)
+
 ### [Integration Testing with Maven](https://www.baeldung.com/maven-integration-test)
 
 ### [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
