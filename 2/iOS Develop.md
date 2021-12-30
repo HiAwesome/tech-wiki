@@ -1,5 +1,13 @@
 # iOS Develop
 
+#### [Garbage Collection vs Automatic Reference Counting](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
+
+There is no algorithm that can determine with absolute certainty whether some object is garbage or not. GC algorithm can do is to make intelligent guessing, the more intelligent the better. More sophisticated GC algorithms will require more and more CPU and memory to run. Unless GC is provided with 3–4x more memory, there will be poor performance.
+
+> If your program needs 100 MB of RAM for its own objects, GC will require you to allocate 200–300 MB of space 😧
+
+There is a direct financial consequence of this. Compare the high-end iPhone vs the high-end Android phones. iPhone 8(2 GB or 3 GB) vs the Google Pixel, which has 4GB because the apps on the iPhone simply need less RAM than the same apps written on Android. It is not just that the Android phones need extra memory. **Even with that memory, they tend to lag, even the highest end Android phones, because the GC pauses your application.** That happens to be the moment when you want to scroll it or do something, which you perceive as a lag.
+
 #### [Android’s GC VS ARC on iOS – what’s best?](https://exaud.com/androids-gc-vs-arc-ios-whats-best/)
 
 Looking at the list of pro and contra above, a natural question arises – in the end, what’s the best approach to object lifecycle management and memory management in general on the mobile platforms?
