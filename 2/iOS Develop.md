@@ -1,5 +1,21 @@
 # iOS Develop
 
+#### [Android’s GC VS ARC on iOS – what’s best?](https://exaud.com/androids-gc-vs-arc-ios-whats-best/)
+
+Looking at the list of pro and contra above, a natural question arises – in the end, what’s the best approach to object lifecycle management and memory management in general on the mobile platforms?
+
+As compelled as I feel to answer it in a straightforward manner, it really depends on the circumstances and the platform itself.
+
+That said, when it comes to technical excellence and performance on systems with relatively large memory recourses, the current research and practical evidence points that the modern tracing GCs, such as one used in .Net’s CLR are superior.
+
+However, GC often falls short to perform well with unmanaged programming languages where moving existing objects around the heap is a complicated and costly operation, which is the case with iOS’s Objective-C and even much more modern Swift.
+
+The latter fact along with lower memory requirements for ARC is most likely behind the Apple’s decision to drop the GC support on OS X 10.8 and keep proceeding with ARC, in fact, their mobile platform, iOS, never supported it in the first place.
+
+As for Android, it’s inherited much of the existing Java stack from the desktop world so GC was (and still is) the only option since the day one.
+
+Therefore, the choice of the memory management system is rather multi-faceted and the current state of things in the mobile world is based largely on various historical reasons.
+
 #### [Transitioning to ARC Release Notes](https://developer.apple.com/library/archive/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226)
 
 Automatic Reference Counting (ARC) is a compiler feature that provides automatic memory management of Objective-C objects. Rather than having to think about retain and release operations, ARC allows you to concentrate on the interesting code, the object graphs, and the relationships between objects in your application.
