@@ -1,5 +1,7 @@
 # iOS Develop
 
+### ARC
+
 #### [Garbage Collection vs Automatic Reference Counting](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
 
 There is no algorithm that can determine with absolute certainty whether some object is garbage or not. GC algorithm can do is to make intelligent guessing, the more intelligent the better. More sophisticated GC algorithms will require more and more CPU and memory to run. Unless GC is provided with 3–4x more memory, there will be poor performance.
