@@ -3,6 +3,7 @@
 #### Some Useful links
 
 * [Applying a single font to an entire website with CSS](https://stackoverflow.com/a/10537230). `* { font-family:Algerian; }`
+* [Defensive CSS](https://ishadeed.com/article/defensive-css/)
 
 ### [调试 CSS](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Debugging_CSS)
 
