@@ -23,4 +23,9 @@ rbenv: cannot rehash: /Users/moqi/.rbenv/shims/.rbenv-shim exists
 irb(main):001:0> puts 'hello, world'
 hello, world
 => nil
+irb(main):002:0> exit
+~ which ruby
+/Users/moqi/.rbenv/shims/ruby
+~ which irb
+/Users/moqi/.rbenv/shims/irb
 ```
