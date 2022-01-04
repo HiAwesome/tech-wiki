@@ -1,5 +1,9 @@
 # Mac
 
+### [简单5步，解决macOS声音无法正常工作](https://www.sysgeek.cn/macos-fix-sound/)
+
+打开「终端」——在终端中执行 `sudo killall coreaudiod` 命令
+
 ### M1 Mac 在某些 SSH 远端机器上无法换行
 
 具体原因见 [stty returns 0 rows and columns on Apple M1](https://sourceforge.net/p/expect/bugs/106/), 卸载掉 brew install expect 5.45.4, 使用 Mac 系统自身的位于 `/usr/bin/expect` 的 expect, 确保 `expect -v` 返回 5.45 即可。
