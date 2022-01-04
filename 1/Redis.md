@@ -1,5 +1,13 @@
 # Redis
 
+### 单元测试中使用 Redis
+
+#### [Embedded Redis Server with Spring Boot Test](https://www.baeldung.com/spring-embedded-redis)
+
+这个项目依赖的 [embedded-redis](https://github.com/kstyrc/embedded-redis) 最后一次提交时间为 20180927, 已经三年多没有维护了。
+
+从目前这个时间点 20220104 看去，这个 [jedis-mock](https://github.com/fppt/jedis-mock) 应该是提供类似功能且较新的工具，其介绍为 `A simple redis java mock for unit testing`, 最后一次提交时间为 20211229.
+
 #### [Using pipelining to speedup Redis queries](https://redis.io/topics/pipelining)
 
 > Why are busy loops slow even on the loopback interface?
