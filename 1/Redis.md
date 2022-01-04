@@ -6,7 +6,7 @@
 
 这个项目依赖的 [embedded-redis](https://github.com/kstyrc/embedded-redis) 最后一次提交时间为 20180927, 已经三年多没有维护了。
 
-从目前这个时间点 20220104 看去，这个 [jedis-mock](https://github.com/fppt/jedis-mock) 应该是提供类似功能且较新的工具，其介绍为 `A simple redis java mock for unit testing`, 最后一次提交时间为 20211229.
+从目前这个时间点 20220104 看去，这个 [jedis-mock](https://github.com/fppt/jedis-mock) 应该是提供类似功能且较新的工具，其介绍为 `A simple redis java mock for unit testing`, 最后一次提交时间为 20211229. 以这个项目为例，[supported_operations](https://github.com/fppt/jedis-mock/blob/master/supported_operations.md) 可以展示其支持 Mock 的 Redis 的方法，从列出来的命令的绝对数量上来说，support/not support 大概是 99/126, 所以在实际 Mock 中可能较容易得到 `Unsupported operation` 而发生错误。
 
 #### [Using pipelining to speedup Redis queries](https://redis.io/topics/pipelining)
 
