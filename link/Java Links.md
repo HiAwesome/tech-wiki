@@ -11,6 +11,11 @@
 
 ### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
 
+#### [Strong Encapsulation in the JDK](https://docs.oracle.com/en/java/javase/17/migrate/migrating-jdk-8-later-jdk-releases.html#GUID-7BB28E4D-99B3-4078-BDC4-FC24180CE82B)
+
+* --add-exports: If you have an older tool or library that needs to use an internal API that has been strongly encapsulated, then use the --add-exports runtime option. You can also use --add-exports at compile time to access the internal APIs.
+* --add-opens: If you have an older tool or library that needs to access non-public fields and methods of java.* APIs by reflection, then use the --add-opens option.
+
 #### [Run jdeps on Your Code](https://docs.oracle.com/en/java/javase/17/migrate/preparing-migration.html#GUID-BA521187-60FD-4CA5-B998-58A1D05587BC)
 
 Run the jdeps tool on your application to see what packages and classes your applications and libraries depend on. If you use internal APIs, then jdeps may suggest replacements to help you to update your code.
