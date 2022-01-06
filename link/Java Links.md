@@ -19,6 +19,8 @@
 
 cglib 最后一次更新时间是 20190812，Java17 不允许使用 `--illegal-access=permit` 这个命令，因此截至目前 20220106，使用 cglib 作为反射工具的库都会碰到问题。
 
+#### [Multi-Release JAR Files with Maven](https://www.baeldung.com/maven-multi-release-jars)
+
 ### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
 
 #### [Strong Encapsulation in the JDK](https://docs.oracle.com/en/java/javase/17/migrate/migrating-jdk-8-later-jdk-releases.html#GUID-7BB28E4D-99B3-4078-BDC4-FC24180CE82B)
