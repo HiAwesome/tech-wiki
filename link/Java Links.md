@@ -20,6 +20,11 @@ JDWP 套接字连接器默认只接受本地连接
 
 JDWP 套接字连接器已更改为仅在代理命令行上未指定 ip 地址或主机名时绑定到 localhost。星号 (*) 的主机名可用于实现旧行为，即将 JDWP 套接字连接器绑定到所有可用接口；这不安全，不推荐。
 
+#### [Tomcat: Developing](https://cwiki.apache.org/confluence/display/TOMCAT/Developing)
+
+* -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n
+*  catalina jpda start
+
 #### [spock: Cannot create mock due to module java.base does not "opens java.lang.invoke"](https://github.com/spockframework/spock/issues/1406)
 
 使用 Spock 测试框架与 Java17 的进度目前在此 issue 中进行讨论。
