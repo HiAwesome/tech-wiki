@@ -11,9 +11,12 @@
 
 ### Migration Java17
 
-
 * [java.lang.ExceptionInInitializerError with Java-16 | j.l.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module](https://stackoverflow.com/a/67006749)
 * [How to solve InaccessibleObjectException ("Unable to make {member} accessible: module {A} does not 'opens {package}' to {B}") on Java 9?](https://stackoverflow.com/a/41265267)
+
+#### [spock: Cannot create mock due to module java.base does not "opens java.lang.invoke"](https://github.com/spockframework/spock/issues/1406)
+
+使用 Spock 测试框架与 Java17 的进度目前在此 issue 中进行讨论。
 
 #### [cglib: Java 16 and 17 compatibility](https://github.com/cglib/cglib/issues/191)
 

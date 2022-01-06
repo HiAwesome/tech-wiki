@@ -1,9 +1,5 @@
 # Spock Framework
 
-## 迁移 Compile Java17 碰到的问题
-
-#### [Cannot create mock due to module java.base does not "opens java.lang.invoke"](https://github.com/spockframework/spock/issues/1406)
-
 ## [IntelliJ IDEA Writing Tests with Spock(2021)](https://www.youtube.com/watch?v=i5Qu3qYOfsM&t=168s)
 
 ## Spock with Spring
