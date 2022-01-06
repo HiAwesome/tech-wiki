@@ -11,7 +11,13 @@
 
 ### Migration Java17
 
-#### [How to solve InaccessibleObjectException ("Unable to make {member} accessible: module {A} does not 'opens {package}' to {B}") on Java 9?](https://stackoverflow.com/a/41265267)
+
+* [java.lang.ExceptionInInitializerError with Java-16 | j.l.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module](https://stackoverflow.com/a/67006749)
+* [How to solve InaccessibleObjectException ("Unable to make {member} accessible: module {A} does not 'opens {package}' to {B}") on Java 9?](https://stackoverflow.com/a/41265267)
+
+#### [cglib: Java 16 and 17 compatibility](https://github.com/cglib/cglib/issues/191)
+
+cglib 最后一次更新时间是 20190812，Java17 不允许使用 `--illegal-access=permit` 这个命令，因此截至目前 20220106，使用 cglib 作为反射工具的库都会碰到问题。
 
 ### [Oracle JDK Migration Guide](https://docs.oracle.com/en/java/javase/17/migrate/getting-started.html)
 
