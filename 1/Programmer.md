@@ -1,5 +1,7 @@
 # 散装语录
 
+* 你永远不会通过与现实做斗争，而改变事物。想要改变事物，需要建立一个使现有模型过时的新模型。  ——[富勒](https://news.ycombinator.com/item?id=29441945) 美国建筑师
+* C 和 C++ 这两种语言不保证内存安全，后果就是所有软件安全问题的大约三分之二，都跟内存处理不当有或多或少的关系。  ——[《Rust 正在变成 Linux 的第二官方语言》](https://www.zdnet.com/article/rust-takes-a-major-step-forward-as-linuxs-second-official-language/)
 * 经常有人说："学习 xx 语言会让你成为更好的程序员。" 我认为，这种说法有些误导。学习新的语言确实很有趣，而且非常有用，但是真正让我更擅长编程的是做大量的编程练习，尤其是那些挑战能力极限的问题。  ——[《我没有学到的东西》](https://scattered-thoughts.net/writing/things-unlearned/)
 * "英雄项目"指的是80%以上的贡献来自20%的开发人员的项目。通过对 1000 多个开源 GitHub 项目的分析，发现大多数开源项目都是英雄项目。  ——[为什么软件项目需要英雄](https://neverworkintheory.org/2021/09/10/why-software-projects-need-heroes.html)
 * 通用芯片（比如英特尔的产品）不再适合市场需求，越来越多的公司将会开发自己的芯片，并外包给台积电和三星进行生产。苹果公司的 M1 芯片、YouTube 的视频转码芯片、亚马逊的 Graviton 芯片和谷歌的 Pixel 6 芯片，都是自己研发的。 我们已经到了现成的芯片无法解决各家公司的问题的阶段，定制自己的芯片比购买低价的通用芯片更重要。  ——[Hacker News 读者](https://news.ycombinator.com/item?id=28526969)
