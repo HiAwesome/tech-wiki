@@ -1,5 +1,7 @@
 # Maven
 
+* [Setting the Java Version in Maven](https://www.baeldung.com/maven-java-version)
+
 ### [Guide to Maven Profiles](https://www.baeldung.com/maven-profiles)
 
 ### [Integration Testing with Maven](https://www.baeldung.com/maven-integration-test)
