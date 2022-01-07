@@ -46,7 +46,7 @@ cglib 最后一次更新时间是 20190812，Java17 不允许使用 `--illegal-a
 
 Run the jdeps tool on your application to see what packages and classes your applications and libraries depend on. If you use internal APIs, then jdeps may suggest replacements to help you to update your code.
 
-If you use Maven, there’s a [jdeps]((https://maven.apache.org/plugins/maven-jdeps-plugin/usage.html)) plugin available.
+If you use Maven, there’s a [jdeps](https://maven.apache.org/plugins/maven-jdeps-plugin/usage.html) plugin available.
 
 #### [Changes to GC Log Output](https://docs.oracle.com/en/java/javase/17/migrate/migrating-jdk-8-later-jdk-releases.html#GUID-055EA9F4-835E-463F-B9E1-9081B3D9E55D)
 
