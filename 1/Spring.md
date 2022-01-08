@@ -1,5 +1,7 @@
 # Spring
 
+* [Springboot 2.3: Validation Starter no longer included in web starters](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#validation-starter-no-longer-included-in-web-starters)
+
 ### [Guide to Spring Retry](https://www.baeldung.com/spring-retry)
 
 ### [Overview of Spring Boot Dev Tools](https://www.baeldung.com/spring-boot-devtools)
