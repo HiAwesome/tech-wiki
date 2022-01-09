@@ -13,6 +13,7 @@
 
 * [java.lang.ExceptionInInitializerError with Java-16 | j.l.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module](https://stackoverflow.com/a/67006749)
 * [How to solve InaccessibleObjectException ("Unable to make {member} accessible: module {A} does not 'opens {package}' to {B}") on Java 9?](https://stackoverflow.com/a/41265267)
+* [Get declared fields of java.lang.reflect.Fields in jdk12](https://stackoverflow.com/a/56043252)
 
 #### [Java9 中: jdwp 更新](https://www.oracle.com/java/technologies/javase/9-notes.html)
 
