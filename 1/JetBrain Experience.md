@@ -2,7 +2,11 @@
 
 ### 关闭 IDEA 格式化时去掉行尾的空格
 
-Settting -> Editor -> General -> On Save -> Remove trailing space on, 选择从 All lines 变更为 Modified lines.
+Setting -> Editor -> General -> On Save -> Remove trailing space on, 选择从 All lines 变更为 Modified lines.
+
+### 设置 IDEA 保存时执行的操作及范围等
+
+Setting -> Tools -> Actions on Save
 
 ### [Jetbrain Projector Documents](https://jetbrains.github.io/projector-client/mkdocs/latest/)
 
