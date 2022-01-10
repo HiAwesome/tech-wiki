@@ -1,5 +1,29 @@
 # 与 Java 有关的链接
 
+### [Correct way to check Java version from BASH script](https://stackoverflow.com/a/7335524)
+
+```shell
+if type -p java; then
+    echo found java executable in PATH
+    _java=java
+elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+    echo found java executable in JAVA_HOME     
+    _java="$JAVA_HOME/bin/java"
+else
+    echo "no java"
+fi
+
+if [[ "$_java" ]]; then
+    version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+    echo version "$version"
+    if [[ "$version" > "1.5" ]]; then
+        echo version is more than 1.5
+    else         
+        echo version is less than 1.5
+    fi
+fi
+```
+
 ### [What Are The Most Important Skills As A Java Software Engineer?](https://arnoldgalovics.com/java-software-engineer-skills/)
 
 * Problem solving
