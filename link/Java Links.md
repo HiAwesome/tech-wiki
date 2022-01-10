@@ -16,6 +16,8 @@
 * [Get declared fields of java.lang.reflect.Fields in jdk12](https://stackoverflow.com/a/56043252)
 * [Presto: Fix incompatible reflection for modifying static final fields since JDK 12](https://github.com/prestodb/presto/pull/15240)
 * [Moqi: Java17ReflectTool](https://github.com/moqimoqidea/moqi-tool-java/blob/master/src/main/java/com/moqi/in20220109/Java17ReflectTool.java)
+* [Programmer's Guide to Text Blocks](https://docs.oracle.com/en/java/javase/15/text-blocks/index.html)
+* [JEP 396: Strongly Encapsulate JDK Internals by Default](http://openjdk.java.net/jeps/396)
 
 #### [Java9 中: jdwp 更新](https://www.oracle.com/java/technologies/javase/9-notes.html)
 
