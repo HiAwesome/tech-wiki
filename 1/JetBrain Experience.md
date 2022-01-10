@@ -1,5 +1,9 @@
 # Jetbrain Experience
 
+### 关闭 IDEA 格式化时去掉行尾的空格
+
+Settting -> Editor -> General -> On Save -> Remove trailing space on, 选择从 All lines 变更为 Modified lines.
+
 ### [Jetbrain Projector Documents](https://jetbrains.github.io/projector-client/mkdocs/latest/)
 
 ### [What the difference between JetBrains Mono and JetBrains Mono NL](https://stackoverflow.com/a/62262352)
