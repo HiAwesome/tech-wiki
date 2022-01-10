@@ -19,6 +19,10 @@
 * [Programmer's Guide to Text Blocks](https://docs.oracle.com/en/java/javase/15/text-blocks/index.html)
 * [JEP 396: Strongly Encapsulate JDK Internals by Default](http://openjdk.java.net/jeps/396)
 
+#### [Information about _JAVA_OPTIONS](https://stackoverflow.com/questions/17781405/information-about-java-options) 
+
+* [What is the difference between JDK_JAVA_OPTIONS and JAVA_TOOL_OPTIONS when using Java 11?](https://stackoverflow.com/a/52989562)
+
 #### [Java9 中: jdwp 更新](https://www.oracle.com/java/technologies/javase/9-notes.html)
 
 JDWP 套接字连接器默认只接受本地连接 
