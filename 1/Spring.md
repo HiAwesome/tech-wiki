@@ -1,5 +1,7 @@
 # Spring
 
+### [Properties with Spring and Spring Boot](https://www.baeldung.com/properties-with-spring)
+
 ### [Guide to @ConfigurationProperties in Spring Boot](https://www.baeldung.com/configuration-properties-in-spring-boot)
 
 ### [Validation in Spring Boot](https://www.baeldung.com/spring-boot-bean-validation)
