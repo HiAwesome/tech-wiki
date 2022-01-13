@@ -1,5 +1,20 @@
 # Spring
 
+### [spring cloud config client not loading configuration from config server](https://stackoverflow.com/a/65539287)
+
+If you are using 2020.0.0 version of spring cloud than you need to this dependency in your maven dependencies to enable bootstrap, which is desabled by default in 2020.0.0.
+
+[Breaking changes in 2020.0.0](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes#breaking-changes)
+
+It work for me.
+
+```text
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+</dependency>
+```
+
 ### [Properties with Spring and Spring Boot](https://www.baeldung.com/properties-with-spring)
 
 ### [Guide to @ConfigurationProperties in Spring Boot](https://www.baeldung.com/configuration-properties-in-spring-boot)
