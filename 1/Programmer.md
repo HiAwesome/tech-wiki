@@ -1,5 +1,6 @@
 # 散装语录
 
+* 有一家公司的服务器，每隔几周就会神秘的崩溃。调查发现，这种现象只发生新月或满月出现的日子。原来，那时会有大潮，导致停泊在附近港口的一艘军舰会上升到足够高的位置，舰上强大的雷达就会干扰到服务器。  —— [Hacker News 读者](https://news.ycombinator.com/item?id=29214115)
 * 你永远不会通过与现实做斗争，而改变事物。想要改变事物，需要建立一个使现有模型过时的新模型。  ——[富勒](https://news.ycombinator.com/item?id=29441945) 美国建筑师
 * C 和 C++ 这两种语言不保证内存安全，后果就是所有软件安全问题的大约三分之二，都跟内存处理不当有或多或少的关系。  ——[《Rust 正在变成 Linux 的第二官方语言》](https://www.zdnet.com/article/rust-takes-a-major-step-forward-as-linuxs-second-official-language/)
 * 经常有人说："学习 xx 语言会让你成为更好的程序员。" 我认为，这种说法有些误导。学习新的语言确实很有趣，而且非常有用，但是真正让我更擅长编程的是做大量的编程练习，尤其是那些挑战能力极限的问题。  ——[《我没有学到的东西》](https://scattered-thoughts.net/writing/things-unlearned/)
