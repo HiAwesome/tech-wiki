@@ -1,5 +1,9 @@
 # Linux
 
+#### [How to Print the Longest Line(s) in a File](https://www.baeldung.com/linux/print-longest-lines-in-file)
+
+应用: `awk '{printf "line #%d has length:%d\n",NR,length}' 20220120_web_long_info.log | awk -F ":" '{if($2 > 5000){print $0}}' | head`
+
 #### [Listing with `ls` and regular expression](https://unix.stackexchange.com/a/523013)
 
 The question asked for regular expressions. Bash, and thus `ls`, does not support regular expressions here. What it supports is filename expressions ([Globbing](https://tldp.org/LDP/abs/html/globbingref.html)), a form of wildcards. Regular expressions are a lot more powerful than that.
