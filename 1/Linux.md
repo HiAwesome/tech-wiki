@@ -2,7 +2,20 @@
 
 #### [How to Print the Longest Line(s) in a File](https://www.baeldung.com/linux/print-longest-lines-in-file)
 
-应用: `awk '{printf "line #%d has length:%d\n",NR,length}' 20220120_web_long_info.log | awk -F ":" '{if($2 > 5000){print $0}}' | head`
+应用: `awk '{printf "line #%d has length:%d\n",NR,length}' 20220120_web_long_info.log | awk -F ":" '{if($2 > 5000){print $0}}' | sort -nk 2 -t':' -r | head`
+
+```text
+line #39565 has length:14819607
+line #38473 has length:14707696
+line #38524 has length:1402603
+line #38529 has length:382840
+line #38528 has length:340657
+line #38525 has length:303864
+line #38496 has length:226641
+line #38484 has length:226641
+line #38517 has length:212428
+line #38511 has length:198182
+```
 
 #### [Listing with `ls` and regular expression](https://unix.stackexchange.com/a/523013)
 
