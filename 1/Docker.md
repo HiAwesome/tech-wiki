@@ -1,5 +1,7 @@
 # Docker
 
+#### [Docker container will automatically stop after "docker run -d"](https://stackoverflow.com/a/30209974)
+
 #### [Docker: Copying files from Docker container to host](https://stackoverflow.com/a/22050116)
 
 In order to copy a file from a container to the host, you can use the command
