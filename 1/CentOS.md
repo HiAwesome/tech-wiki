@@ -1,5 +1,7 @@
 # CentOS
 
+### [How to reduce the size of RHEL/Centos/Fedora Docker image](https://stackoverflow.com/a/46089220)
+
 环境： Cent OS 7 on Vmware Fusion. root password: 0987UUUU
 
 ### [How can I display the absolute path in bash prompt?](https://superuser.com/a/285254)

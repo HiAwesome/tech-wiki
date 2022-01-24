@@ -1,5 +1,7 @@
 # Docker
 
+#### [Best Practices to Reduce Docker Image Size](https://www.ecloudcontrol.com/best-practices-to-reduce-docker-images-size/)
+
 #### [Docker container will automatically stop after "docker run -d"](https://stackoverflow.com/a/30209974)
 
 #### [Docker: Copying files from Docker container to host](https://stackoverflow.com/a/22050116)
