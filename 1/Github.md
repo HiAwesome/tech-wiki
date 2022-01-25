@@ -6,6 +6,8 @@
 
 ssh-keygen -t ed25519 -C "moqimoqidea@gmail.com"
 
+cat ~/.ssh/id_ed25519.pub
+
 ```
 
 * [SSH keys / Add new](https://github.com/settings/ssh/new)
