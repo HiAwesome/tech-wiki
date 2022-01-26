@@ -1,5 +1,9 @@
 # Docker
 
+#### [From inside of a Docker container, how do I connect to the localhost of the machine?](https://stackoverflow.com/a/24326540)
+
+If you are using [Docker-for-mac](https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos#i-want-to-connect-from-a-container-to-a-service-on-the-host) or [Docker-for-Windows 18.03+](https://docs.docker.com/docker-for-windows/networking/#there-is-no-docker0-bridge-on-windows#i-want-to-connect-from-a-container-to-a-service-on-the-host), just connect to your mysql service using the host `host.docker.internal` (instead of the `127.0.0.1` in your connection string).
+
 #### [Best Practices to Reduce Docker Image Size](https://www.ecloudcontrol.com/best-practices-to-reduce-docker-images-size/)
 
 #### [Docker container will automatically stop after "docker run -d"](https://stackoverflow.com/a/30209974)
