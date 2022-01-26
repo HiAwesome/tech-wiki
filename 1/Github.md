@@ -1,5 +1,17 @@
 # Github
 
+### [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+```shell
+
+ssh-keygen -t ed25519 -C "moqimoqidea@gmail.com"
+
+cat ~/.ssh/id_ed25519.pub
+
+```
+
+* [SSH keys / Add new](https://github.com/settings/ssh/new)
+
 ### [ssh_exchange_identification: Connection closed by remote host under Git bash](https://stackoverflow.com/a/60994276)
 
 For fixing the issues add the Hostname for Git on `~/.ssh/config`,
