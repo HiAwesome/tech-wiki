@@ -1,5 +1,21 @@
 # 零散的经验
 
+#### [Unix zip directory but excluded specific subdirectories (and everything within them)](https://superuser.com/a/496903)
+
+For my particular system in order to exclude a directory I had to put quotes around my excluded directories and it worked like a charm:
+
+```text
+
+zip -r myarchive.zip dir1 -x "dir1/ignoreDir1/*" "dir1/ignoreDir2/*"
+ 
+```
+
+Notes:
+
+-- this excluded both the directory to exclude and all files inside it.
+
+-- You must use the full path to the directories you want to exclude!
+
 #### [Spring Boot With H2 Database](https://www.baeldung.com/spring-boot-h2-database)
 
 #### [List of In-Memory Databases](https://www.baeldung.com/java-in-memory-databases)
