@@ -1,5 +1,34 @@
 # 零散的经验
 
+#### open on mac
+
+```shell
+~/Downloads open -a
+open: option requires an argument -- a
+Usage: open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-s <partial SDK name>][-b <bundle identifier>] [-a <application>] [-u URL] [filenames] [--args arguments]
+Help: Open opens files from a shell.
+      By default, opens each file using the default application for that file.
+      If the file is in the form of a URL, the file will be opened as a URL.
+Options:
+      -a                    Opens with the specified application.
+      -b                    Opens with the specified application bundle identifier.
+      -e                    Opens with TextEdit.
+      -t                    Opens with default text editor.
+      -f                    Reads input from standard input and opens with TextEdit.
+
+# 打开 Chrome
+open -a Google\ Chrome
+
+# 使用默认文本编辑器打开一个文本
+open -t some.txt
+
+# 使用 Sublime 打开一个文本文件
+open -a Sublime\ Text 88_confs.d_default.conf
+
+# 使用 Xcode 打开一个文本文件
+open -a Xcode some.txt
+```
+
 #### [Unix zip directory but excluded specific subdirectories (and everything within them)](https://superuser.com/a/496903)
 
 For my particular system in order to exclude a directory I had to put quotes around my excluded directories and it worked like a charm:
