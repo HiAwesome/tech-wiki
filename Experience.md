@@ -1,5 +1,75 @@
 # 零散的经验
 
+#### file on mac
+
+```text
+
+~/Downloads file --help
+Usage: file [OPTION...] [FILE...]
+Determine type of FILEs.
+
+      --help                 display this help and exit
+  -v, --version              output version information and exit
+  -m, --magic-file LIST      use LIST as a colon-separated list of magic
+                               number files
+  -M LIST                    use LIST as a colon-separated list of magic
+                               number files in place of default
+ LIST                    use LIST as a colon-separated list of magic
+                               number files in place of default
+  -z, --uncompress           try to look inside compressed files
+  -Z, --uncompress-noreport  only print the contents of compressed files
+  -b, --brief                do not prepend filenames to output lines
+  -c, --checking-printout    print the parsed form of the magic file, use in
+                               conjunction with -m to debug a new magic file
+                               before installing it
+  -d                         use default magic file
+                         use default magic file
+  -e, --exclude TEST         exclude TEST from the list of test to be
+                               performed for file. Valid tests are:
+                               apptype, ascii, cdf, compress, csv, elf,
+                               encoding, soft, tar, json, text,
+                               tokens
+      --exclude-quiet TEST         like exclude, but ignore unknown tests
+  -f, --files-from FILE      read the filenames to be examined from FILE
+  -F, --separator STRING     use string as separator instead of `:'
+  -i                         do not further classify regular files
+                         do not further classify regular files
+  -I, --mime                 output MIME type strings (--mime-type and
+                               --mime-encoding)
+      --extension            output a slash-separated list of extensions
+      --mime-type            output the MIME type
+      --mime-encoding        output the MIME encoding
+  -k, --keep-going           don't stop at the first match
+  -l, --list                 list magic strength
+  -L, --dereference          follow symlinks
+  -h, --no-dereference       don't follow symlinks (default)
+  -n, --no-buffer            do not buffer output
+  -N, --no-pad               do not pad output
+  -0, --print0               terminate filenames with ASCII NUL
+  -p, --preserve-date        preserve access times on files
+  -P, --parameter            set file engine parameter limits
+                                   bytes 1048576 max bytes to look inside file
+                               elf_notes     256 max ELF notes processed
+                               elf_phnum    2048 max ELF prog sections processed
+                               elf_shnum   32768 max ELF sections processed
+                                encoding   65536 max bytes to scan for encoding
+                                   indir      50 recursion limit for indirection
+                                    name      60 use limit for name/use magic
+                                   regex    8192 length limit for REGEX searches
+  -r, --raw                  don't translate unprintable chars to \ooo
+  -s, --special-files        treat special (block/char devices) files as
+                             ordinary ones
+  -S, --no-sandbox           disable system call sandboxing
+  -C, --compile              compile file specified by -m
+  -D, --debug                print debugging messages
+
+Report bugs to https://bugs.astron.com/
+
+~/Downloads file green-leaves-1410259.jpg
+green-leaves-1410259.jpg: JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=11, manufacturer=FUJIFILM, model=FinePix A210  , orientation=upper-left, xresolution=170, yresolution=178, resolutionunit=2, software=Adobe Photoshop CS Windows, datetime=2005:01:23 17:55:48, copyright=    ], baseline, precision 8, 836x627, components 3
+
+```
+
 #### mdls on mac
 
 mdls可以列出某个文件或文件夹的所有元数据信息，针对不同文件显示不同的元数据信息，例如文件创建时间、类型、大小等。如果是图片或音视频文件，则会显示更多元数据信息。
