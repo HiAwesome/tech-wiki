@@ -1,6 +1,28 @@
 # 零散的经验
 
+#### mdls on mac
+
+mdls可以列出某个文件或文件夹的所有元数据信息，针对不同文件显示不同的元数据信息，例如文件创建时间、类型、大小等。如果是图片或音视频文件，则会显示更多元数据信息。
+
+```text
+
+~/Downloads mdls
+(null): no filename specified!
+
+usage: mdls [-name attr][-sdb] [-raw [-nullMarker markerString]] [-plist file] path
+list the values of one or all the attributes of the specified file
+  -raw:         don't print attribute names before values
+  -nullMarker:  substitute this string for null attributes in raw mode
+  -plist:       output attributes in XML format to file. Use - to write to stdout
+                option -plist is incompatible with options -raw, -nullMarker, and -name
+example:  mdls  ~/Pictures/Birthday.jpg
+example:  mdls  -name Keyword ~/Pictures/Birthday.jpg
+
+```
+
 #### mdfind on mac
+
+mdfind是一个非常灵活的全局搜索命令，类似Spotlight的命令行模式，可以在任何目录对文件名、文件内容进行检索。
 
 ```text
 
