@@ -25,6 +25,19 @@ example:  mdfind -name stdlib.h
 example:  mdfind "kMDItemAuthor == '*MyFavoriteAuthor*'"
 example:  mdfind -live MyFavoriteAuthor
 
+~ mdfind image | head
+/System/Library/CoreServices/DiskImageMounter.app
+/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/Resources/BridgeSupport/vImage.bridgesupport
+/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/Resources/BridgeSupport/vImage.arm64e.bridgesupport
+/System/Library/Frameworks/CoreImage.framework/Versions/A/Resources/BridgeSupport/CoreImage.bridgesupport
+/System/Library/Frameworks/CoreImage.framework/Versions/A/Resources/BridgeSupport/CoreImage.arm64e.bridgesupport
+/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/Resources/BridgeSupport/ImageCapture.bridgesupport
+/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/Resources/BridgeSupport/ImageCapture.arm64e.bridgesupport
+/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/BridgeSupport/ImageIO.bridgesupport
+/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/BridgeSupport/ImageIO.arm64e.bridgesupport
+/System/Library/Frameworks/ImageCaptureCore.framework/Versions/A/Resources/BridgeSupport/ImageCaptureCore.bridgesupport
+~
+
 ```
 
 #### open on mac
