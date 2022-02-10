@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+### [Guide To CompletableFuture](https://www.baeldung.com/java-completablefuture)
+
 ### [Correct way to check Java version from BASH script](https://stackoverflow.com/a/7335524)
 
 ```shell
