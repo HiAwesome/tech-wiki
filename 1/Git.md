@@ -22,6 +22,8 @@ eval `ssh-agent -s`
 
 ```
 
+* 20220213 更新: 在目前 Mac 上运行 docker 容器出现此状况关闭 Surge 代理的增强模式即可。
+
 ### [Git基本原理介绍](https://www.escapelife.site/posts/da89563c.html)
 
 ### [Git Hard reset of a single file](https://stackoverflow.com/a/7147320/7379661)
