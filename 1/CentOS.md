@@ -1,5 +1,21 @@
 # CentOS
 
+### [What is the difference between DNF and YUM?](https://www.2daygeek.com/comparison-difference-between-dnf-vs-yum/)
+
+[Yum Package Manager](https://www.2daygeek.com/yum-command-examples-manage-packages-rhel-centos-systems/) has been replaced by [DNF Package Manager](https://www.2daygeek.com/linux-dnf-command-examples-manage-packages-fedora-centos-rhel-systems/) since many long-standing issues in Yum remain unresolved.
+
+These problems include poor performance, excessive memory usage, slowdown for dependency resolution.
+
+DNF uses “libsolv” for dependency resolution, developed and maintained by SUSE to improve performance.
+
+It was written mostly in python, and it has its own way of coping with dependency resolution.
+
+Its API is not fully documented, and its extension system only allows Python plugins.
+
+Yum is a front-end tool for rpm that manages dependencies and repositories and then uses RPM to install, download and remove packages.
+
+Both are used to manage packages on the rpm-based system (such as Red Hat, CentOS and Fedora), including installation, upgrade, search and remove.
+
 ### [How to reduce the size of RHEL/Centos/Fedora Docker image](https://stackoverflow.com/a/46089220)
 
 环境： Cent OS 7 on Vmware Fusion. root password: 0987UUUU
