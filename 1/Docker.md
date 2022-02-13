@@ -1,5 +1,27 @@
 # Docker
 
+#### [docker 容器使用 systemctl 命令是报错](https://www.cnblogs.com/infoo/p/11900607.html)
+
+看了许多解决方案，但是对于新手来说并不友好，不是特别清楚
+
+报错内容： 
+
+```shell
+ System has not been booted with systemd as init system (PID 1). Can't operate.
+ Failed to connect to bus: Host is down
+```
+
+解决方法：
+
+```shell
+docker run -itd   --privileged --name myCentos centos /usr/sbin/init
+```
+
+要点：
+
+1. --privileged 
+2. /usr/sbin/init
+
 #### [From inside of a Docker container, how do I connect to the localhost of the machine?](https://stackoverflow.com/a/24326540)
 
 If you are using [Docker-for-mac](https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos#i-want-to-connect-from-a-container-to-a-service-on-the-host) or [Docker-for-Windows 18.03+](https://docs.docker.com/docker-for-windows/networking/#there-is-no-docker0-bridge-on-windows#i-want-to-connect-from-a-container-to-a-service-on-the-host), just connect to your mysql service using the host `host.docker.internal` (instead of the `127.0.0.1` in your connection string).
