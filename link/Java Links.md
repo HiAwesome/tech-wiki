@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+#### [Java equivalent to JavaScript's encodeURIComponent that produces identical output?](https://stackoverflow.com/a/611117)
+
 ### [Guide To CompletableFuture](https://www.baeldung.com/java-completablefuture)
 
 ### [Correct way to check Java version from BASH script](https://stackoverflow.com/a/7335524)
