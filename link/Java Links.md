@@ -1,5 +1,11 @@
 # 与 Java 有关的链接
 
+#### [java.lang.NoClassDefFoundError: sun/misc/BASE64Encoder](https://stackoverflow.com/a/29692535)
+
+old: ` new sun.misc.BASE64Encoder().encode `
+
+new: ` new org.apache.commons.codec.binary.Base64.encodeBase64String `
+
 #### [Java equivalent to JavaScript's encodeURIComponent that produces identical output?](https://stackoverflow.com/a/611117)
 
 ### [Guide To CompletableFuture](https://www.baeldung.com/java-completablefuture)
