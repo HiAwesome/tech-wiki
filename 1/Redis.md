@@ -1,5 +1,7 @@
 # Redis
 
+### [A quick guide to Redis Lua scripting](https://www.freecodecamp.org/news/a-quick-guide-to-redis-lua-scripting/)
+
 ### 单元测试中使用 Redis
 
 #### [Embedded Redis Server with Spring Boot Test](https://www.baeldung.com/spring-embedded-redis)
