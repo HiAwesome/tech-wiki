@@ -1,5 +1,7 @@
 # 与 Java 有关的链接
 
+#### [https://www.baeldung.com/java-thread-stop](https://www.baeldung.com/java-thread-stop)
+
 #### [java.lang.NoClassDefFoundError: sun/misc/BASE64Encoder](https://stackoverflow.com/a/29692535)
 
 old: ` new sun.misc.BASE64Encoder().encode `
