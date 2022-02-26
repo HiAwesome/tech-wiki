@@ -84,7 +84,7 @@
 * 属性存在性测试，“in” 操作符：相比于其他语言，JavaScript 的对象有一个需要注意的特性：能够被访问任何属性。即使属性不存在也不会报错！ 读取不存在的属性只会得到 undefined。所以我们可以很容易地判断一个属性是否存在。这里还有一个特别的，检查属性是否存在的操作符 "in"。请注意，in 的左边必须是 属性名。通常是一个带引号的字符串。 如果我们省略引号，就意味着左边是一个变量，它应该包含要判断的实际属性名。为何会有 in 运算符呢？与 undefined 进行比较来判断还不够吗？ 确实，大部分情况下与 undefined 进行比较来判断就可以了。但有一个例外情况，这种比对方式会有问题，但 in 运算符的判断结果仍是对的。 那就是属性存在，但存储的值是 undefined 的时候。
 * 像对象一样排序：对象有顺序吗？换句话说，如果我们遍历一个对象，我们获取属性的顺序是和属性添加时的顺序相同吗？这靠谱吗？ 简短的回答是：“有特别的顺序”：整数属性会被进行排序，其他属性则按照创建的顺序显示。
 * 整数属性？那是什么？这里的“整数属性”指的是一个可以在不做任何更改的情况下与一个整数进行相互转换的字符串。 所以，“49” 是一个整数属性名，因为我们把它转换成整数，再转换回来，它还是一样的。但是 “+49” 和 “1.2” 就不行了。……此外，如果属性名不是整数，那它们就按照创建时的顺序来排序。
-* 深层克隆: 为了解决这个问题，我们应该使用一个拷贝循环来检查 user[key] 的每个值，如果它是一个对象，那么也复制它的结构。这就是所谓的“深拷贝”。 我们可以使用递归来实现它。或者为了不重复造轮子，采用现有的实现，例如 [lodash](https://lodash.com/) 库的 [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+* 深层克隆: 为了解决这个问题，我们应该使用一个拷贝循环来检查 user\[key] 的每个值，如果它是一个对象，那么也复制它的结构。这就是所谓的“深拷贝”。 我们可以使用递归来实现它。或者为了不重复造轮子，采用现有的实现，例如 [lodash](https://lodash.com/) 库的 [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 * [垃圾回收](https://zh.javascript.info/garbage-collection): JavaScript 中主要的内存管理概念是 可达性。 **这里有大量图说明可达性概念。**  一些优化建议： 
   * 分代收集（Generational collection）—— 对象被分成两组：“新的”和“旧的”。许多对象出现，完成它们的工作并很快死去，它们可以很快被清理。那些长期存活的对象会变得“老旧”，而且被检查的频次也会减少。 
   * 增量收集（Incremental collection）—— 如果有许多对象，并且我们试图一次遍历并标记整个对象集，则可能需要一些时间，并在执行过程中带来明显的延迟。所以引擎试图将垃圾收集工作分成几部分来做。然后将这几部分会逐一进行处理。这需要它们之间有额外的标记来追踪变化，但是这样会有许多微小的延迟而不是一个大的延迟。 
@@ -151,10 +151,45 @@
 * length 属性的另一个有意思的点是它是可写的。 如果我们手动增加它，则不会发生任何有趣的事儿。但是如果我们减少它，数组就会被截断。该过程是不可逆的。所以，清空数组最简单的方法就是：arr.length = 0;。
 * 不要使用 == 比较数组：JavaScript 中的数组与其它一些编程语言的不同，不应该使用 == 运算符比较 JavaScript 中的数组。 该运算符不会对数组进行特殊处理，它会像处理任意对象那样处理数组。
 * [arr.splice](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) 方法可以说是处理数组的瑞士军刀。它可以做所有事情：添加，删除和插入元素。
+* [arr.slice](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) 方法比 arr.splice 简单得多。它会返回一个新数组，将所有从索引 start 到 end（不包括 end）的数组项复制到一个新的数组。start 和 end 都可以是负数，在这种情况下，从末尾计算索引。 它和字符串的 str.slice 方法有点像，就是把子字符串替换成子数组。
+* [arr.concat](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) 创建一个新数组，其中包含来自于其他数组和其他项的值。它接受任意数量的参数 —— 数组或值都可以。 结果是一个包含来自于 arr，然后是 arg1，arg2 的元素的新数组。 如果参数 argN 是一个数组，那么其中的所有元素都会被复制。否则，将复制参数本身。通常，它只复制数组中的元素。其他对象，即使它们看起来像数组一样，但仍然会被作为一个整体添加。……但是，如果类似数组的对象具有 Symbol.isConcatSpreadable 属性，那么它就会被 concat 当作一个数组来处理：此对象中的元素将被添加。
+* [arr.forEach](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) 方法允许为数组的每个元素都运行一个函数。该函数的结果（如果它有返回）会被抛弃和忽略。
+* [arr.map](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 方法是最有用和经常使用的方法之一。 它对数组的每个元素都调用函数，并返回结果数组。
+* [arr.sort](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 方法对数组进行 原位（in-place） 排序，更改元素的顺序。(译注：原位是指在此数组内，而非生成一个新数组。) 它还返回排序后的数组，但是返回值通常会被忽略，因为修改了 arr 本身。 arr 可以是由任何内容组成的数组，对吗？它可能包含数字、字符串、对象或其他任何内容。我们有一组 一些元素。要对其进行排序，我们需要一个 排序函数 来确认如何比较这些元素。默认是按字符串进行排序的。 arr.sort(fn) 方法实现了通用的排序算法。我们不需要关心它的内部工作原理（大多数情况下都是经过 [快速排序](https://en.wikipedia.org/wiki/Quicksort) 或 [Timsort](https://en.wikipedia.org/wiki/Timsort) 算法优化的）。它将遍历数组，使用提供的函数比较其元素并对其重新排序，我们所需要的就是提供执行比较的函数 fn。
+* 比较函数可以返回任何数字：实际上，比较函数只需要返回一个正数表示“大于”，一个负数表示“小于”。 通过这个原理我们可以编写更短的函数：`arr.sort(function(a, b) { return a - b; });`  这里使用箭头函数会更加简洁：`arr.sort( (a, b) => a - b );`.  
+* 当我们需要遍历一个数组时 —— 我们可以使用 forEach，for 或 for..of。 当我们需要遍历并返回每个元素的数据时 —— 我们可以使用 map。 [arr.reduce](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) 方法和 [arr.reduceRight](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) 方法和上面的种类差不多，但稍微复杂一点。它们用于根据数组计算单个值。掌握这个知识点的最简单的方法就是通过示例。
+* 大多数方法都支持 “thisArg”: 几乎所有调用函数的数组方法 —— 比如 find，filter，map，除了 sort 是一个特例，都接受一个可选的附加参数 thisArg。 上面的部分中没有解释该参数，因为该参数很少使用。但是为了完整性，我们需要讲讲它。
+* [arr.some(fn)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/some)/[arr.every(fn)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/every) 检查数组。 与 map 类似，对数组的每个元素调用函数 fn。如果任何/所有结果为 true，则返回 true，否则返回 false。 这两个方法的行为类似于 || 和 && 运算符：如果 fn 返回一个真值，arr.some() 立即返回 true 并停止迭代其余数组项；如果 fn 返回一个假值，arr.every() 立即返回 false 并停止对其余数组项的迭代。
+* Iterable object（可迭代对象）: 可迭代（Iterable） 对象是数组的泛化。这个概念是说任何对象都可以被定制为可在 for..of 循环中使用的对象。 数组是可迭代的。但不仅仅是数组。很多其他内建对象也都是可迭代的。例如字符串也是可迭代的。 如果从技术上讲，对象不是数组，而是表示某物的集合（列表，集合），for..of 是一个能够遍历它的很好的语法，因此，让我们来看看如何使其发挥作用。为了让对象可迭代（也就让 for..of 可以运行）我们需要为对象添加一个名为 Symbol.iterator 的方法（一个专门用于使对象可迭代的内建 symbol）。
+* 无穷迭代器（iterator）: 无穷迭代器也是可能的。例如，将 range 设置为 range.to = Infinity，这时 range 则成为了无穷迭代器。或者我们可以创建一个可迭代对象，它生成一个无穷伪随机数序列。也是可能的。 next 没有什么限制，它可以返回越来越多的值，这是正常的。 当然，迭代这种对象的 for..of 循环将不会停止。但是我们可以通过使用 break 来停止它。
+* 可迭代（iterable）和类数组（array-like）: 这两个官方术语看起来差不多，但其实大不相同。请确保你能够充分理解它们的含义，以免造成混淆。 Iterable 如上所述，是实现了 Symbol.iterator 方法的对象。 Array-like 是有索引和 length 属性的对象，所以它们看起来很像数组。 当我们将 JavaScript 用于编写在浏览器或任何其他环境中的实际任务时，我们可能会遇到可迭代对象或类数组对象，或两者兼有。有一个全局方法 [Array.from](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/from) 可以接受一个可迭代或类数组的值，并从中获取一个“真正的”数组。然后我们就可以对其调用数组方法了。
+* map\[key] 不是使用 Map 的正确方式: 虽然 map\[key] 也有效，例如我们可以设置 map\[key] = 2，这样会将 map 视为 JavaScript 的 plain object，因此它暗含了所有相应的限制（仅支持 string/symbol 键等）。 所以我们应该使用 map 方法：set 和 get 等。
+* Map 是怎么比较键的？ Map 使用 [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero) 算法来比较键是否相等。它和严格等于 === 差不多，但区别是 NaN 被看成是等于 NaN。所以 NaN 也可以被用作键。 这个算法不能被改变或者自定义。
+* 链式调用: 每一次 map.set 调用都会返回 map 本身，所以我们可以进行“链式”调用：`map.set('1', 'str1').set(1, 'num1').set(true, 'bool1');`.
+* 使用插入顺序: 迭代的顺序与插入值的顺序相同。与普通的 Object 不同，Map 保留了此顺序。
+* 当创建一个 Map 后，我们可以传入一个带有键值对的数组（或其它可迭代对象）来进行初始化。如果我们想从一个已有的普通对象（plain object）来创建一个 Map，那么我们可以使用内建方法 [Object.entries(obj)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/entries), 该方法返回对象的键/值对数组，该数组格式完全按照 Map 所需的格式。[Object.fromEntries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries) 方法的作用是相反的：给定一个具有 \[key, value] 键值对的数组，它会根据给定数组创建一个对象。
+* Set 迭代（iteration）: 注意一件有趣的事儿。forEach 的回调函数有三个参数：一个 value，然后是 同一个值 valueAgain，最后是目标对象。没错，同一个值在参数里出现了两次。 forEach 的回调函数有三个参数，是为了与 Map 兼容。当然，这看起来确实有些奇怪。但是这对在特定情况下轻松地用 Set 代替 Map 很有帮助，反之亦然。
+* WeakMap 在这方面有着根本上的不同。它不会阻止垃圾回收机制对作为键的对象（key object）的回收。WeakMap 和 Map 的第一个不同点就是，WeakMap 的键必须是对象，不能是原始值。WeakMap 不支持迭代以及 keys()，values() 和 entries() 方法。所以没有办法获取 WeakMap 的所有键或值。为什么会有这种限制呢？这是技术的原因。如果一个对象丢失了其它所有引用（就像上面示例中的 john），那么它就会被垃圾回收机制自动回收。但是在从技术的角度并不能准确知道 何时会被回收。 这些都是由 JavaScript 引擎决定的。JavaScript 引擎可能会选择立即执行内存清理，如果现在正在发生很多删除操作，那么 JavaScript 引擎可能就会选择等一等，稍后再进行内存清理。因此，从技术上讲，WeakMap 的当前元素的数量是未知的。JavaScript 引擎可能清理了其中的垃圾，可能没清理，也可能清理了一部分。因此，暂不支持访问 WeakMap 的所有键/值的方法。WeakMap 和 WeakSet 最明显的局限性就是不能迭代，并且无法获取所有当前内容。那样可能会造成不便，但是并不会阻止 WeakMap/WeakSet 完成其主要工作 — 成为在其它地方管理/存储“额外”的对象数据。
+* Object.keys(obj) 相对于 map.keys() 第一个区别是，对于对象我们使用的调用语法是 Object.keys(obj)，而不是 obj.keys()。 为什么会这样？主要原因是灵活性。请记住，在 JavaScript 中，对象是所有复杂结构的基础。因此，我们可能有一个自己创建的对象，比如 data，并实现了它自己的 data.values() 方法。同时，我们依然可以对它调用 Object.values(data) 方法。 第二个区别是 Object.* 方法返回的是“真正的”数组对象，而不只是一个可迭代项。这主要是历史原因。
+* Object.keys/values/entries 会忽略 symbol 属性: 就像 for..in 循环一样，这些方法会忽略使用 Symbol(...) 作为键的属性。 通常这很方便。但是，如果我们也想要 Symbol 类型的键，那么这儿有一个单独的方法 [Object.getOwnPropertySymbols](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols), 它会返回一个只包含 Symbol 类型的键的数组。另外，还有一种方法 [Reflect.ownKeys(obj)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys), 它会返回 所有 键。
+* 转换对象: 对象缺少数组存在的许多方法，例如 map 和 filter 等。 如果我们想应用它们，那么我们可以使用 Object.entries，然后使用 Object.fromEntries： 使用 Object.entries(obj) 从 obj 获取由键/值对组成的数组。 对该数组使用数组方法，例如 map，对这些键/值对进行转换。 对结果数组使用 Object.fromEntries(array) 方法，将结果转回成对象。乍一看，可能感觉有点困难，但是使用一两次之后就很容易理解了。我们可以通过这种方式建立强大的转换链。
+  ```text
+  let prices = {
+    banana: 1,
+    orange: 2,
+    meat: 4,
+  };
+  
+  let doublePrices = Object.fromEntries(
+    // 将价格转换为数组，将每个键/值对映射为另一对
+    // 然后通过 fromEntries 再将结果转换为对象
+    Object.entries(prices).map(entry => [entry[0], entry[1] * 2])
+  );
+  
+  alert(doublePrices.meat); // 8
+  ```
+* 解构赋值 是一种特殊的语法，它使我们可以将数组或对象“拆包”至一系列变量中，因为有时这样更方便。 解构操作对那些具有很多参数和默认值等的函数也很奏效。
 * 
-
-
-
 
 
 
