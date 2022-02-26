@@ -111,6 +111,17 @@
   * obj?.\[prop\] —— 如果 obj 存在则返回 obj\[prop\]，否则返回 undefined。
   * obj.method?.() —— 如果 obj.method 存在则调用 obj.method()，否则返回 undefined。
 * Symbol 不会被自动转换为字符串: JavaScript 中的大多数值都支持字符串的隐式转换。例如，我们可以 alert 任何值，都可以生效。Symbol 比较特殊，它不会被自动转换。
+* “隐藏”属性: Symbol 允许我们创建对象的“隐藏”属性，代码的任何其他部分都不能意外访问或重写这些属性。
+* 对象字面量中的 Symbol: 如果我们要在对象字面量 {...} 中使用 Symbol，则需要使用方括号把它括起来。
+* 全局 symbol: 正如我们所看到的，通常所有的 Symbol 都是不同的，即使它们有相同的名字。但有时我们想要名字相同的 Symbol 具有相同的实体。例如，应用程序的不同部分想要访问的 Symbol "id" 指的是完全相同的属性。 为了实现这一点，这里有一个 全局 Symbol 注册表。我们可以在其中创建 Symbol 并在稍后访问它们，它可以确保每次访问相同名字的 Symbol 时，返回的都是相同的 Symbol。 要从注册表中读取（不存在则创建）Symbol，请使用 Symbol.for(key)。 该调用会检查全局注册表，如果有一个描述为 key 的 Symbol，则返回该 Symbol，否则将创建一个新 Symbol（Symbol(key)），并通过给定的 key 将其存储在注册表中。
+* 这听起来像 Ruby: 在一些编程语言中，例如 Ruby，每个名字都有一个 Symbol。 正如我们所看到的，在 JavaScript 中，全局 Symbol 也是这样的。
+* 系统 Symbol: JavaScript 内部有很多“系统” Symbol，我们可以使用它们来微调对象的各个方面。例如，Symbol.toPrimitive 允许我们将对象描述为原始值转换。我们很快就会看到它的使用。 当我们研究相应的语言特征时，我们对其他的 Symbol 也会慢慢熟悉起来。
+* Symbol 有两个主要的使用场景： “隐藏” 对象属性。 如果我们想要向“属于”另一个脚本或者库的对象添加一个属性，我们可以创建一个 Symbol 并使用它作为属性的键。Symbol 属性不会出现在 for..in 中，因此它不会意外地被与其他属性一起处理。并且，它不会被直接访问，因为另一个脚本没有我们的 symbol。因此，该属性将受到保护，防止被意外使用或重写。 因此我们可以使用 Symbol 属性“秘密地”将一些东西隐藏到我们需要的对象中，但其他地方看不到它。 JavaScript 使用了许多系统 Symbol，这些 Symbol 可以作为 Symbol.* 访问。我们可以使用它们来改变一些内建行为。例如，在本教程的后面部分，我们将使用 Symbol.iterator 来进行 [迭代](https://zh.javascript.info/iterable) 操作，使用 Symbol.toPrimitive 来设置 [对象原始值的转换](https://zh.javascript.info/object-toprimitive) 等等。 从技术上说，Symbol 不是 100% 隐藏的。有一个内建方法 [Object.getOwnPropertySymbols](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols)(obj) 允许我们获取所有的 Symbol。还有一个名为 [Reflect.ownKeys(obj)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) 的方法可以返回一个对象的 所有 键，包括 Symbol。所以它们并不是真正的隐藏。但是大多数库、内建方法和语法结构都没有使用这些方法。
+* 对象 — 原始值转换，为了进行转换，JavaScript 尝试查找并调用三个对象方法：
+  1. 调用 obj\[Symbol.toPrimitive\](hint) —— 带有 symbol 键 Symbol.toPrimitive（系统 symbol）的方法，如果这个方法存在的话， 
+  2. 否则，如果 hint 是 "string" —— 尝试 obj.toString() 和 obj.valueOf()，无论哪个存在。 
+  3. 否则，如果 hint 是 "number" 或 "default" —— 尝试 obj.valueOf() 和 obj.toString()，无论哪个存在。
+* 历史原因：由于历史原因，如果 toString 或 valueOf 返回一个对象，则不会出现 error，但是这种值会被忽略（就像这种方法根本不存在）。这是因为在 JavaScript 语言发展初期，没有很好的 “error” 的概念。 相反，Symbol.toPrimitive 必须 返回一个原始值，否则就会出现 error。
 * 
 
 
