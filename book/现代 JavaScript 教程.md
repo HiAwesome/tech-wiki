@@ -261,6 +261,27 @@
 * 属性的 getter 和 setter：有两种类型的对象属性。 第一种是 数据属性。我们已经知道如何使用它们了。到目前为止，我们使用过的所有属性都是数据属性。 第二种类型的属性是新东西。它是 访问器属性（accessor properties）。它们本质上是用于获取和设置值的函数，但从外部代码来看就像常规属性。
 * 从外表看，访问器属性看起来就像一个普通属性。这就是访问器属性的设计思想。我们不以函数的方式 调用 user.fullName，我们正常 读取 它：getter 在幕后运行。
 * 在编程中，我们经常会想获取并扩展一些东西。 例如，我们有一个 user 对象及其属性和方法，并希望将 admin 和 guest 作为基于 user 稍加修改的变体。我们想重用 user 中的内容，而不是复制/重新实现它的方法，而只是在其之上构建一个新的对象。 原型继承（Prototypal inheritance） 这个语言特性能够帮助我们实现这一需求。
+* 现在，如果我们从 longEar 中读取一些它不存在的内容，JavaScript 会先在 rabbit 中查找，然后在 animal 中查找。 这里只有两个限制： 引用不能形成闭环。如果我们试图在一个闭环中分配 \_\_proto__，JavaScript 会抛出错误。\_\_proto__ 的值可以是对象，也可以是 null。而其他的类型都会被忽略。 当然，这可能很显而易见，但是仍然要强调：只能有一个 \[\[Prototype]]。一个对象不能从其他两个对象获得继承。
+* \_\_proto__ 是 \[\[Prototype]] 的因历史原因而留下来的 getter/setter: 初学者常犯一个普遍的错误，就是不知道 \_\_proto__ 和 \[\[Prototype]] 的区别。 请注意，\_\_proto__ 与内部的 \[\[Prototype]] 不一样。\_\_proto__ 是 \[\[Prototype]] 的 getter/setter。稍后，我们将看到在什么情况下理解它们很重要，在建立对 JavaScript 语言的理解时，让我们牢记这一点。\_\_proto__ 属性有点过时了。它的存在是出于历史的原因，现代编程语言建议我们应该使用函数 Object.getPrototypeOf/Object.setPrototypeOf 来取代 \_\_proto__ 去 get/set 原型。稍后我们将介绍这些函数。 根据规范，\_\_proto__ 必须仅受浏览器环境的支持。但实际上，包括服务端在内的所有环境都支持它，因此我们使用它是非常安全的。 由于 \_\_proto__ 标记在观感上更加明显，所以我们在后面的示例中将使用它。
+* 写入不使用原型: 原型仅用于读取属性。 对于写入/删除操作可以直接在对象上进行。访问器（accessor）属性是一个例外，因为分配（assignment）操作是由 setter 函数处理的。因此，写入此类属性实际上与调用函数相同。
+* “this” 的值: 在上面的例子中可能会出现一个有趣的问题：在 set fullName(value) 中 this 的值是什么？属性 this.name 和 this.surname 被写在哪里：在 user 还是 admin？ 答案很简单：this 根本不受原型的影响。 无论在哪里找到方法：在一个对象还是在原型中。在一个方法调用中，this 始终是点符号 . 前面的对象。这是一件非常重要的事儿，因为我们可能有一个带有很多方法的大对象，并且还有从其继承的对象。当继承的对象运行继承的方法时，它们将仅修改自己的状态，而不会修改大对象的状态。方法是共享的，但对象状态不是。
+* 几乎所有其他键/值获取方法都忽略继承的属性: 几乎所有其他键/值获取方法，例如 Object.keys 和 Object.values 等，都会忽略继承的属性。 它们只会对对象自身进行操作。不考虑 继承自原型的属性。
+* 请注意：JavaScript 从一开始就有了原型继承。这是 JavaScript 编程语言的核心特性之一。 但是在过去，没有直接对其进行访问的方式。唯一可靠的方法是本章中会介绍的构造函数的 "prototype" 属性。目前仍有许多脚本仍在使用它。
+* F.prototype 仅用在 new F 时: F.prototype 属性仅在 new F 被调用时使用，它为新对象的 \[\[Prototype]] 赋值。 如果在创建之后，F.prototype 属性有了变化（F.prototype = <another object>），那么通过 new F 创建的新对象也将随之拥有新的对象作为 \[\[Prototype]]，但已经存在的对象将保持旧有的值。
+* 当我们有一个对象，但不知道它使用了哪个构造器（例如它来自第三方库），并且我们需要创建另一个类似的对象时，用这种方法就很方便。 但是，关于 "constructor" 最重要的是…… ……JavaScript 自身并不能确保正确的 "constructor" 函数值。 是的，它存在于函数的默认 "prototype" 中，但仅此而已。之后会发生什么 —— 完全取决于我们。 特别是，如果我们将整个默认 prototype 替换掉，那么其中就不会有 "constructor" 了。因此，为了确保正确的 "constructor"，我们可以选择添加/删除属性到默认 "prototype"，而不是将其整个覆盖。或者，也可以手动重新创建 constructor 属性。
+* "prototype" 属性在 JavaScript 自身的核心部分中被广泛地应用。所有的内建构造函数都用到了它。当 new Object() 被调用（或一个字面量对象 {...} 被创建），按照前面章节中我们学习过的规则，这个对象的 \[\[Prototype]] 属性被设置为 Object.prototype. 其他内建对象，像 Array、Date、Function 及其他，都在 prototype 上挂载了方法。 例如，当我们创建一个数组 \[1, 2, 3]，在内部会默认使用 new Array() 构造器。因此 Array.prototype 变成了这个数组的 prototype，并为这个数组提供数组的操作方法。这样内存的存储效率是很高的。 按照规范，所有的内建原型顶端都是 Object.prototype。这就是为什么有人说“一切都从对象继承而来”。
+* 最复杂的事情发生在字符串、数字和布尔值上。 正如我们记忆中的那样，它们并不是对象。但是如果我们试图访问它们的属性，那么临时包装器对象将会通过内建的构造器 String、Number 和 Boolean 被创建。它们提供给我们操作字符串、数字和布尔值的方法然后消失。 这些对象对我们来说是无形地创建出来的。大多数引擎都会对其进行优化，但是规范中描述的就是通过这种方式。这些对象的方法也驻留在它们的 prototype 中，可以通过 String.prototype、Number.prototype 和 Boolean.prototype 进行获取。
+* 值 null 和 undefined 没有对象包装器: 特殊值 null 和 undefined 比较特殊。它们没有对象包装器，所以它们没有方法和属性。并且它们也没有相应的原型。
+* 更改原生原型: 原生的原型是可以被修改的。重要：原型是全局的，所以很容易造成冲突。如果有两个库都添加了 String.prototype.show 方法，那么其中的一个方法将被另一个覆盖。 所以，通常来说，修改原生原型被认为是一个很不好的想法。在现代编程中，只有一种情况下允许修改原生原型。那就是 polyfilling。
+* 从原型中借用: 一些原生原型的方法通常会被借用。 例如，如果我们要创建类数组对象，则可能需要向其中复制一些 Array 方法。方法借用很灵活，它允许在需要时混合来自不同对象的方法。
+* 内建原型可以被修改或被用新的方法填充。但是不建议更改它们。唯一允许的情况可能是，当我们添加一个还没有被 JavaScript 引擎支持，但已经被加入 JavaScript 规范的新标准时，才可能允许这样做。
+* \_\_proto__ 被认为是过时且不推荐使用的（deprecated），这里的不推荐使用是指 JavaScript 规范中规定，proto 必须仅在浏览器环境下才能得到支持。 现代的方法有（应该使用这些方法来代替 \_\_proto__）：
+  1. [Object.create(proto, \[descriptors])](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/create) —— 利用给定的 proto 作为 \[\[Prototype]] 和可选的属性描述来创建一个空对象。
+  2. [Object.getPrototypeOf(obj)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) —— 返回对象 obj 的 \[\[Prototype]]。
+  3. [Object.setPrototypeOf(obj, proto)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) —— 将对象 obj 的 \[\[Prototype]] 设置为 proto。
+* 我们可以使用 Object.create 来实现比复制 for..in 循环中的属性更强大的对象克隆方式：`let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));`, 此调用可以对 obj 进行真正准确地拷贝，包括所有的属性：可枚举和不可枚举的，数据属性和 setters/getters —— 包括所有内容，并带有正确的 \[\[Prototype]]。
+* 如果速度很重要，就请不要修改已存在的对象的 \[\[Prototype]]: 从技术上来讲，我们可以在任何时候 get/set \[\[Prototype]]。但是通常我们只在创建对象的时候设置它一次，自那之后不再修改：rabbit 继承自 animal，之后不再更改。 并且，JavaScript 引擎对此进行了高度优化。用 Object.setPrototypeOf 或 obj.\_\_proto__= “即时”更改原型是一个非常缓慢的操作，因为它破坏了对象属性访问操作的内部优化。因此，除非你知道自己在做什么，或者 JavaScript 的执行速度对你来说完全不重要，否则请避免使用它。
+* 我们可以通过 Object.create(null) 来创建没有原型的对象。这样的对象被称为 “very plain” 或 “pure dictionary” 对象，因为它们甚至比通常的普通对象（plain object）{...} 还要简单，对于它们而言，使用 "\_\_proto__" 作为键是没有问题的。
 * 
 
 
