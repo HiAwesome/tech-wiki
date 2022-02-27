@@ -306,6 +306,18 @@
 * 使用 Object.prototype.toString 方法来揭示类型: 这是通过 toString 方法实现的。但是这儿有一个隐藏的功能，该功能可以使 toString 实际上比这更强大。我们可以将其作为 typeof 的增强版或者 instanceof 的替代方法来使用。Symbol.toStringTag: 可以使用特殊的对象属性 Symbol.toStringTag 自定义对象的 toString 方法的行为。正如我们所看到的，输出结果恰好是 Symbol.toStringTag（如果存在），只不过被包裹进了 \[object ...] 里。 这样一来，我们手头上就有了个“磕了药似的 typeof”，不仅能检查原始数据类型，而且适用于内建对象，更可贵的是还支持自定义。 所以，如果我们想要获取内建对象的类型，并希望把该信息以字符串的形式返回，而不只是检查类型的话，我们可以用 {}.toString.call 替代 instanceof。
 * 在 JavaScript 中构造一个 mixin 最简单的方式就是构造一个拥有实用方法的对象，以便我们可以轻松地将这些实用的方法合并到任何类的原型中。
 * Mixin — 是一个通用的面向对象编程术语：一个包含其他类的方法的类。 一些其它编程语言允许多重继承。JavaScript 不支持多重继承，但是可以通过将方法拷贝到原型中来实现 mixin。 我们可以使用 mixin 作为一种通过添加多种行为（例如上文中所提到的事件处理）来扩充类的方法。 如果 Mixins 意外覆盖了现有类的方法，那么它们可能会成为一个冲突点。因此，通常应该仔细考虑 mixin 的命名方法，以最大程度地降低发生这种冲突的可能性。
+* **不管你多么精通编程，有时我们的脚本总还是会出现错误。可能是因为我们的编写出错，或是与预期不同的用户输入，或是错误的服务端响应以及其他数千种原因。** 通常，如果发生错误，脚本就会“死亡”（立即停止），并在控制台将错误打印出来。 但是有一种语法结构 try...catch，它使我们可以“捕获（catch）”错误，因此脚本可以执行更合理的操作，而不是死掉。
+* try...catch 仅对运行时的 error 有效: 要使得 try...catch 能工作，代码必须是可执行的。换句话说，它必须是有效的 JavaScript 代码。 如果代码包含语法错误，那么 try..catch 将无法正常工作。JavaScript 引擎首先会读取代码，然后运行它。在读取阶段发生的错误被称为“解析时间（parse-time）”错误，并且无法恢复（从该代码内部）。这是因为引擎无法理解该代码。 所以，try...catch 只能处理有效代码中出现的错误。这类错误被称为“运行时的错误（runtime errors）”，有时被称为“异常（exceptions）”。
+* try...catch 同步工作：如果在“计划的（scheduled）”代码中发生异常，例如在 setTimeout 中，则 try...catch 不会捕获到异常。因为 try...catch 包裹了计划要执行的函数，该函数本身要稍后才执行，这时引擎已经离开了 try...catch 结构。 为了捕获到计划的（scheduled）函数中的异常，那么 try...catch 必须在这个函数内。
+* 发生错误时，JavaScript 生成一个包含有关其详细信息的对象。然后将该对象作为参数传递给 catch。对于所有内建的 error，error 对象具有两个主要属性：
+  1. name：Error 名称。例如，对于一个未定义的变量，名称是 "ReferenceError"。 
+  2. message：关于 error 的详细文字描述。
+  3. 还有其他非标准的属性在大多数环境中可用。其中被最广泛使用和支持的是： stack：当前的调用栈：用于调试目的的一个字符串，其中包含有关导致 error 的嵌套调用序列的信息。
+* throw 操作符会生成一个 error 对象。技术上讲，我们可以将任何东西用作 error 对象。甚至可以是一个原始类型数据，例如数字或字符串，但最好使用对象，最好使用具有 name 和 message 属性的对象（某种程度上保持与内建 error 的兼容性）。 JavaScript 中有很多内建的标准 error 的构造器：Error，SyntaxError，ReferenceError，TypeError 等。我们也可以使用它们来创建 error 对象。
+* 变量和 try...catch...finally 中的局部变量: 请注意，上面代码中的 result 和 diff 变量都是在 try...catch 之前 声明的。 否则，如果我们使用 let 在 try 块中声明变量，那么该变量将只在 try 块中可见。
+* finally 和 return: finally 子句适用于 try...catch 的 任何 出口。这包括显式的 return。 在下面这个例子中，在 try 中有一个 return。在这种情况下，finally 会在控制转向外部代码前被执行。
+* 全局 catch: 环境特定: 这个部分的内容并不是 JavaScript 核心的一部分。设想一下，在 try...catch 结构外有一个致命的 error，然后脚本死亡了。这个 error 就像编程错误或其他可怕的事儿那样。 有什么办法可以用来应对这种情况吗？我们可能想要记录这个 error，并向用户显示某些内容（通常用户看不到错误信息）等。 规范中没有相关内容，但是代码的执行环境一般会提供这种机制，因为它确实很有用。例如，Node.JS 有 process.on("uncaughtException")。在浏览器中，我们可以将将一个函数赋值给特殊的 [window.onerror](https://developer.mozilla.org/zh/docs/Web/API/GlobalEventHandlers/onerror) 属性，该函数将在发生未捕获的 error 时执行。
+* 我们可以正常地从 Error 和其他内建的 error 类中进行继承，。我们只需要注意 name 属性以及不要忘了调用 super。 我们可以使用 instanceof 来检查特定的 error。但有时我们有来自第三方库的 error 对象，并且在这儿没有简单的方法来获取它的类。那么可以将 name 属性用于这一类的检查。 包装异常是一项广泛应用的技术：用于处理低级别异常并创建高级别 error 而不是各种低级别 error 的函数。在上面的示例中，低级别异常有时会成为该对象的属性，例如 err.cause，但这不是严格要求的。
 * 
 
 
