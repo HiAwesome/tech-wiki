@@ -296,8 +296,17 @@
 * 方法并不是“自由”的: 正如我们之前所知道的，函数通常都是“自由”的，并没有绑定到 JavaScript 中的对象。正因如此，它们可以在对象之间复制，并用另外一个 this 调用它。\[\[HomeObject]] 的存在违反了这个原则，因为方法记住了它们的对象。\[\[HomeObject]] 不能被更改，所以这个绑定是永久的。 在 JavaScript 语言中 \[\[HomeObject]] 仅被用于 super。所以，如果一个方法不使用 super，那么我们仍然可以视它为自由的并且可在对象之间复制。但是用了 super 再这样做可能就会出错。
 * 方法，不是函数属性: \[\[HomeObject]] 是为类和普通对象中的方法定义的。但是对于对象而言，方法必须确切指定为 method()，而不是 "method: function()"。 这个差别对我们来说可能不重要，但是对 JavaScript 来说却非常重要。
 * 静态方法被用于实现属于整个类的功能。它与具体的类实例无关。 举个例子， 一个用于进行比较的方法 Article.compare(article1, article2) 或一个工厂（factory）方法 Article.createTodays()。 在类生命中，它们都被用关键字 static 进行了标记。 静态属性被用于当我们想要存储类级别的数据时，而不是绑定到实例。
+* 在 JavaScript 中，有两种类型的对象字段（属性和方法）： 公共的：可从任何地方访问。它们构成了外部接口。到目前为止，我们只使用了公共的属性和方法。 私有的：只能从类的内部访问。这些用于内部接口。 在许多其他编程语言中，还存在“受保护”的字段：只能从类的内部和基于其扩展的类的内部访问（例如私有的，但可以从继承的类进行访问）。它们对于内部接口也很有用。从某种意义上讲，它们比私有的属性和方法更为广泛，因为我们通常希望继承类来访问它们。 受保护的字段不是在语言级别的 Javascript 中实现的，但实际上它们非常方便，因为它们是在 Javascript 中模拟的类定义语法。受保护的属性通常以下划线 _ 作为前缀。 这不是在语言级别强制实施的，但是程序员之间有一个众所周知的约定，即不应该从外部访问此类型的属性和方法。
+* Getter/setter 函数: 这里我们使用了 getter/setter 语法。 但大多数时候首选 get.../set... 函数，这看起来有点长，但函数更灵活。它们可以接受多个参数（即使我们现在还不需要）。 另一方面，get/set 语法更短，所以最终没有严格的规定，而是由你自己来决定。
+* 这儿有一个马上就会被加到规范中的已完成的 Javascript 提案，它为[私有属性和方法提供语言级支持](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields). 私有属性和方法应该以 # 开头。它们只在类的内部可被访问。在语言级别，# 是该字段为私有的特殊标志。我们无法从外部或从继承的类中访问它。 私有字段与公共字段不会发生冲突。我们可以同时拥有私有的 #waterAmount 和公共的 waterAmount 字段。与受保护的字段不同，私有字段由语言本身强制执行。这是好事儿。但是如果我们继承自 CoffeeMachine，那么我们将无法直接访问 #waterAmount。我们需要依靠 waterAmount getter/setter：在许多情况下，这种限制太严重了。如果我们扩展 CoffeeMachine，则可能有正当理由访问其内部。这就是为什么大多数时候都会使用受保护字段，即使它们不受语言语法的支持。
+* 私有字段不能通过 this\[name] 访问: 私有字段很特别。 正如我们所知道的，通常我们可以使用 this\[name] 访问字段。对于私有字段来说，这是不可能的：this\['#name'] 不起作用。这是确保私有性的语法限制。
+* 扩展内建类: 内建的类，例如 Array，Map 等也都是可以扩展的（extendable）。
+* 内建类没有静态方法继承: 通常，当一个类扩展另一个类时，静态方法和非静态方法都会被继承。 但内建类却是一个例外。它们相互间不继承静态方法。 例如，Array 和 Date 都继承自 Object，所以它们的实例都有来自 Object.prototype 的方法。但 Array.\[\[Prototype]] 并不指向 Object，所以它们没有例如 Array.keys()（或 Date.keys()）这些静态方法。正如你所看到的，Date 和 Object 之间没有连结。它们是独立的，只有 Date.prototype 继承自 Object.prototype，仅此而已。 与我们所了解的通过 extends 获得的继承相比，这是内建对象之间继承的一个重要区别。
+* 类检查："instanceof": instanceof 操作符用于检查一个对象是否属于某个特定的 class。同时，它还考虑了继承。 在许多情况下，可能都需要进行此类检查。例如，它可以被用来构建一个 多态性（polymorphic） 的函数，该函数根据参数的类型对参数进行不同的处理。这里还要提到一个方法 [objA.isPrototypeOf(objB)](https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/object/isPrototypeOf), 如果 objA 处在 objB 的原型链中，则返回 true。所以，可以将 obj instanceof Class 检查改为 Class.prototype.isPrototypeOf(obj)。 这很有趣，但是 Class 的 constructor 自身是不参与检查的！检查过程只和原型链以及 Class.prototype 有关。
+* 使用 Object.prototype.toString 方法来揭示类型: 这是通过 toString 方法实现的。但是这儿有一个隐藏的功能，该功能可以使 toString 实际上比这更强大。我们可以将其作为 typeof 的增强版或者 instanceof 的替代方法来使用。Symbol.toStringTag: 可以使用特殊的对象属性 Symbol.toStringTag 自定义对象的 toString 方法的行为。正如我们所看到的，输出结果恰好是 Symbol.toStringTag（如果存在），只不过被包裹进了 \[object ...] 里。 这样一来，我们手头上就有了个“磕了药似的 typeof”，不仅能检查原始数据类型，而且适用于内建对象，更可贵的是还支持自定义。 所以，如果我们想要获取内建对象的类型，并希望把该信息以字符串的形式返回，而不只是检查类型的话，我们可以用 {}.toString.call 替代 instanceof。
+* 在 JavaScript 中构造一个 mixin 最简单的方式就是构造一个拥有实用方法的对象，以便我们可以轻松地将这些实用的方法合并到任何类的原型中。
+* Mixin — 是一个通用的面向对象编程术语：一个包含其他类的方法的类。 一些其它编程语言允许多重继承。JavaScript 不支持多重继承，但是可以通过将方法拷贝到原型中来实现 mixin。 我们可以使用 mixin 作为一种通过添加多种行为（例如上文中所提到的事件处理）来扩充类的方法。 如果 Mixins 意外覆盖了现有类的方法，那么它们可能会成为一个冲突点。因此，通常应该仔细考虑 mixin 的命名方法，以最大程度地降低发生这种冲突的可能性。
 * 
-
 
 
 
