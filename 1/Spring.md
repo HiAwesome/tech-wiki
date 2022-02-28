@@ -1,5 +1,7 @@
 # Spring
 
+#### [How to use Log4j 2 with Spring Boot](https://www.callicoder.com/spring-boot-log4j-2-example/)
+
 ### [Spring Bean Names](https://www.baeldung.com/spring-bean-names)
 
 ### [spring cloud config client not loading configuration from config server](https://stackoverflow.com/a/65539287)
