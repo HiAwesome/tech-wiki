@@ -1,5 +1,13 @@
 # Redis
 
+### [Redis Programmability](https://redis.io/topics/programmability)
+
+### [Introduction to Eval Scripts](https://redis.io/topics/eval-intro)
+
+### [Redis Lua API Reference](https://redis.io/topics/lua-api)
+
+### [Redis Lua scripts debugger](https://redis.io/topics/ldb)
+
 ### [A quick guide to Redis Lua scripting](https://www.freecodecamp.org/news/a-quick-guide-to-redis-lua-scripting/)
 
 ### 单元测试中使用 Redis
