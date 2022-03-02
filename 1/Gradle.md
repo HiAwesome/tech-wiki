@@ -1,5 +1,10 @@
 # Gradle
 
+#### IDEA show: The JavaExec.main property has been deprecated.
+
+* [Lot's of deprecation warnings when running against Gradle 7.1](https://github.com/JetBrains/gradle-intellij-plugin/issues/700)
+* [youtrack: gradle: The JavaExec.main property has been deprecated](https://youtrack.jetbrains.com/issue/IDEA-279280)
+
 ## Gradle Major Version
 
 发布版本越来越快。
