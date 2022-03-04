@@ -8,6 +8,8 @@
 
 ### [Redis Lua scripts debugger](https://redis.io/topics/ldb)
 
+* 注意: Lua 里定义布尔值 true/false 返回到 redis 会得到字符串 1/0, 而不是字符串 true/false.
+
 ### [A quick guide to Redis Lua scripting](https://www.freecodecamp.org/news/a-quick-guide-to-redis-lua-scripting/)
 
 ### 单元测试中使用 Redis
