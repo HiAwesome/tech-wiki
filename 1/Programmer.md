@@ -1,5 +1,7 @@
 # 散装语录
 
+* 随着在家办公的盛行，员工为了让经理看见自己，表演性质的行为也变得盛行，比如始终在通讯软件上显示在线、分享安排得满满的日历、电子邮件的发出时间经常在清晨或下班后。     ——[《表演行为的兴起》](https://www.economist.com/business/2022/01/08/the-rise-of-performative-work)
+* 自由软件最好的部分是，它有时会产生你付钱也开发不出来的产品（比如 Linux），或者比你付钱得到的软件质量更好的软件（比如 SQLite）。 自由软件最糟糕的部分是，开发人员可能根本不理睬用户。    ——[apenwarr.ca](https://apenwarr.ca/log/20211229)
 * 有一家公司的服务器，每隔几周就会神秘的崩溃。调查发现，这种现象只发生新月或满月出现的日子。原来，那时会有大潮，导致停泊在附近港口的一艘军舰会上升到足够高的位置，舰上强大的雷达就会干扰到服务器。  —— [Hacker News 读者](https://news.ycombinator.com/item?id=29214115)
 * 你永远不会通过与现实做斗争，而改变事物。想要改变事物，需要建立一个使现有模型过时的新模型。  ——[富勒](https://news.ycombinator.com/item?id=29441945) 美国建筑师
 * C 和 C++ 这两种语言不保证内存安全，后果就是所有软件安全问题的大约三分之二，都跟内存处理不当有或多或少的关系。  ——[《Rust 正在变成 Linux 的第二官方语言》](https://www.zdnet.com/article/rust-takes-a-major-step-forward-as-linuxs-second-official-language/)
