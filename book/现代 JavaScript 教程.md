@@ -318,8 +318,20 @@
 * finally 和 return: finally 子句适用于 try...catch 的 任何 出口。这包括显式的 return。 在下面这个例子中，在 try 中有一个 return。在这种情况下，finally 会在控制转向外部代码前被执行。
 * 全局 catch: 环境特定: 这个部分的内容并不是 JavaScript 核心的一部分。设想一下，在 try...catch 结构外有一个致命的 error，然后脚本死亡了。这个 error 就像编程错误或其他可怕的事儿那样。 有什么办法可以用来应对这种情况吗？我们可能想要记录这个 error，并向用户显示某些内容（通常用户看不到错误信息）等。 规范中没有相关内容，但是代码的执行环境一般会提供这种机制，因为它确实很有用。例如，Node.JS 有 process.on("uncaughtException")。在浏览器中，我们可以将将一个函数赋值给特殊的 [window.onerror](https://developer.mozilla.org/zh/docs/Web/API/GlobalEventHandlers/onerror) 属性，该函数将在发生未捕获的 error 时执行。
 * 我们可以正常地从 Error 和其他内建的 error 类中进行继承，。我们只需要注意 name 属性以及不要忘了调用 super。 我们可以使用 instanceof 来检查特定的 error。但有时我们有来自第三方库的 error 对象，并且在这儿没有简单的方法来获取它的类。那么可以将 name 属性用于这一类的检查。 包装异常是一项广泛应用的技术：用于处理低级别异常并创建高级别 error 而不是各种低级别 error 的函数。在上面的示例中，低级别异常有时会成为该对象的属性，例如 err.cause，但这不是严格要求的。
+* Promise 类有 6 种静态方法：
+  1. Promise.all(promises) —— 等待所有 promise 都 resolve 时，返回存放它们结果的数组。如果给定的任意一个 promise 为 reject，那么它就会变成 Promise.all 的 error，所有其他 promise 的结果都会被忽略。
+  2. Promise.allSettled(promises)（ES2020 新增方法）—— 等待所有 promise 都 settle 时，并以包含以下内容的对象数组的形式返回它们的结果：
+    * status: "fulfilled" 或 "rejected"
+    * value（如果 fulfilled）或 reason（如果 rejected）。
+  3. Promise.race(promises) —— 等待第一个 settle 的 promise，并将其 result/error 作为结果返回。
+  4. Promise.any(promises)（ES2021 新增方法）—— 等待第一个 fulfilled 的 promise，并将其结果作为结果返回。如果所有 promise 都 rejected，Promise.any 则会抛出 AggregateError 错误类型的 error 实例。
+  5. Promise.resolve(value) —— 使用给定 value 创建一个 resolved 的 promise。
+  6. Promise.reject(error) —— 使用给定 error 创建一个 rejected 的 promise。
+* Promisification 是一种很好的方法，特别是在你使用 async/await 的时候（请看下一章），但不是回调的完全替代。 请记住，一个 promise 可能只有一个结果，但从技术上讲，一个回调可能被调用很多次。 因此，promisification 仅适用于调用一次回调的函数。进一步的调用将被忽略。
+* Promise 处理始终是异步的，因为所有 promise 行为都会通过内部的 “promise jobs” 队列，也被称为“微任务队列”（V8 术语）。 因此，.then/catch/finally 处理程序（handler）总是在当前代码完成后才会被调用。 如果我们需要确保一段代码在 .then/catch/finally 之后被执行，我们可以将它添加到链式调用的 .then 中。 在大多数 JavaScript 引擎中（包括浏览器和 Node.js），微任务（microtask）的概念与“事件循环（event loop）”和“宏任务（macrotasks）”紧密相关。由于这些概念跟 promise 没有直接关系，所以我们将在本教程另外一部分的 [事件循环：微任务和宏任务](https://zh.javascript.info/event-loop) 一章中对它们进行介绍。
+* 函数前面的关键字 async 有两个作用： 让这个函数总是返回一个 promise。 允许在该函数内使用 await。 Promise 前的关键字 await 使 JavaScript 引擎等待该 promise settle，然后： 如果有 error，就会抛出异常 —— 就像那里调用了 throw error 一样。 否则，就返回结果。 这两个关键字一起提供了一个很好的用来编写异步代码的框架，这种代码易于阅读也易于编写。 有了 async/await 之后，我们就几乎不需要使用 promise.then/catch，但是不要忘了它们是基于 promise 的，因为有些时候（例如在最外层作用域）我们不得不使用这些方法。并且，当我们需要同时等待需要任务时，Promise.all 是很好用的。
+* Reference Type 是语言内部的一个类型。 读取一个属性，例如在 obj.method() 中，. 返回的准确来说不是属性的值，而是一个特殊的 “Reference Type” 值，其中储存着属性的值和它的来源对象。 这是为了随后的方法调用 () 获取来源对象，然后将 this 设为它。 对于所有其它操作，Reference Type 会自动变成属性的值（在我们这个情况下是一个函数）。 这整个机制对我们是不可见的。它仅在一些微妙的情况下才重要，例如使用表达式从对象动态地获取一个方法时。
 * 
-
 
 
 
