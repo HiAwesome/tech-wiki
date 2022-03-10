@@ -352,7 +352,7 @@
   * 在元素（Elements）选项卡中选择第一个 <li>。
   * 按下 Esc — 它将在元素（Elements）选项卡下方打开控制台（Console）。
   * 现在最后选中的元素可以通过 $0 来进行操作，先前选择的是 $1，等。 我们可以对它们执行一些命令。例如，$0.style.background = 'red' 使选定的列表项（list item）变成红色。
-* 
+* 在这里，我们介绍了基础知识，入门最常用和最重要的行为。在 [https://developers.google.cn/web/tools/chrome-devtools](https://developers.google.cn/web/tools/chrome-devtools) 上有关于 Chrome 开发者工具的详细文档说明。学习这些工具的最佳方式就是到处点一点看一看，阅读菜单：大多数选项都很明显。而后，当你大致了解它们后，请阅读文档并学习其余内容。
 
 
 
