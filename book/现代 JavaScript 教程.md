@@ -331,6 +331,10 @@
 * Promise 处理始终是异步的，因为所有 promise 行为都会通过内部的 “promise jobs” 队列，也被称为“微任务队列”（V8 术语）。 因此，.then/catch/finally 处理程序（handler）总是在当前代码完成后才会被调用。 如果我们需要确保一段代码在 .then/catch/finally 之后被执行，我们可以将它添加到链式调用的 .then 中。 在大多数 JavaScript 引擎中（包括浏览器和 Node.js），微任务（microtask）的概念与“事件循环（event loop）”和“宏任务（macrotasks）”紧密相关。由于这些概念跟 promise 没有直接关系，所以我们将在本教程另外一部分的 [事件循环：微任务和宏任务](https://zh.javascript.info/event-loop) 一章中对它们进行介绍。
 * 函数前面的关键字 async 有两个作用： 让这个函数总是返回一个 promise。 允许在该函数内使用 await。 Promise 前的关键字 await 使 JavaScript 引擎等待该 promise settle，然后： 如果有 error，就会抛出异常 —— 就像那里调用了 throw error 一样。 否则，就返回结果。 这两个关键字一起提供了一个很好的用来编写异步代码的框架，这种代码易于阅读也易于编写。 有了 async/await 之后，我们就几乎不需要使用 promise.then/catch，但是不要忘了它们是基于 promise 的，因为有些时候（例如在最外层作用域）我们不得不使用这些方法。并且，当我们需要同时等待需要任务时，Promise.all 是很好用的。
 * Reference Type 是语言内部的一个类型。 读取一个属性，例如在 obj.method() 中，. 返回的准确来说不是属性的值，而是一个特殊的 “Reference Type” 值，其中储存着属性的值和它的来源对象。 这是为了随后的方法调用 () 获取来源对象，然后将 this 设为它。 对于所有其它操作，Reference Type 会自动变成属性的值（在我们这个情况下是一个函数）。 这整个机制对我们是不可见的。它仅在一些微妙的情况下才重要，例如使用表达式从对象动态地获取一个方法时。
+* DOM 不仅仅用于浏览器: DOM 规范解释了文档的结构，并提供了操作文档的对象。有的非浏览器设备也使用 DOM。 例如，下载 HTML 文件并对其进行处理的服务器端脚本也可以使用 DOM。但它们可能仅支持部分规范中的内容。
+* 用于样式的 CSSOM: 另外也有一份针对 CSS 规则和样式表的、单独的规范 [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/), 这份规范解释了如何将 CSS 表示为对象，以及如何读写这些对象。 当我们修改文档的样式规则时，CSSOM 与 DOM 是一起使用的。但实际上，很少需要 CSSOM，因为我们很少需要从 JavaScript 中修改 CSS 规则（我们通常只是添加/移除一些 CSS 类，而不是直接修改其中的 CSS 规则），但这也是可行的。
+* 函数 alert/confirm/prompt 也是 BOM 的一部分：它们与文档（document）没有直接关系，但它代表了与用户通信的纯浏览器方法。
+* 规范: BOM 是通用 HTML 规范 的一部分。 是的，你没听错。在 [https://html.spec.whatwg.org](https://html.spec.whatwg.org/) 中的 HTML 规范不仅是关于“HTML 语言”（标签，特性）的，还涵盖了一堆对象、方法和浏览器特定的 DOM 扩展。这就是“广义的 HTML”。此外，某些部分也有其他的规范，它们被列在 [https://spec.whatwg.org](https://spec.whatwg.org) 中。
 * 
 
 
