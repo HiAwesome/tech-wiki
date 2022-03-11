@@ -362,6 +362,7 @@
 * 不要忘记字母 "s"！  新手开发者有时会忘记字符 "s"。也就是说，他们会调用 getElementByTagName 而不是 getElementsByTagName。 getElementById 中没有字母 "s"，是因为它只返回单个元素。但是 getElementsByTagName 返回的是元素的集合，所以里面有 "s"。
 * 所有的 "getElementsBy*" 方法都会返回一个 实时的（live） 集合。这样的集合始终反映的是文档的当前状态，并且在文档发生更改时会“自动更新”。相反，querySelectorAll 返回的是一个 静态的 集合。就像元素的固定数组。
 * console.dir(elem) 与 console.log(elem): 大多数浏览器在其开发者工具中都支持这两个命令：console.log 和 console.dir。它们将它们的参数输出到控制台中。对于 JavaScript 对象，这些命令通常做的是相同的事。 但对于 DOM 元素，它们是不同的： console.log(elem) 显示元素的 DOM 树。 console.dir(elem) 将元素显示为 DOM 对象，非常适合探索其属性。 你可以在 document.body 上尝试一下。
+* 规范中的 IDL: 在规范中，DOM 类不是使用 JavaScript 来描述的，而是一种特殊的 [接口描述语言（Interface description language）](https://en.wikipedia.org/wiki/Interface_description_language), 简写为 IDL，它通常很容易理解。 在 IDL 中，所有属性以其类型开头。例如，DOMString 和 boolean 等。
 * 
 
 
