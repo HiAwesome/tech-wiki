@@ -318,9 +318,41 @@
 * finally 和 return: finally 子句适用于 try...catch 的 任何 出口。这包括显式的 return。 在下面这个例子中，在 try 中有一个 return。在这种情况下，finally 会在控制转向外部代码前被执行。
 * 全局 catch: 环境特定: 这个部分的内容并不是 JavaScript 核心的一部分。设想一下，在 try...catch 结构外有一个致命的 error，然后脚本死亡了。这个 error 就像编程错误或其他可怕的事儿那样。 有什么办法可以用来应对这种情况吗？我们可能想要记录这个 error，并向用户显示某些内容（通常用户看不到错误信息）等。 规范中没有相关内容，但是代码的执行环境一般会提供这种机制，因为它确实很有用。例如，Node.JS 有 process.on("uncaughtException")。在浏览器中，我们可以将将一个函数赋值给特殊的 [window.onerror](https://developer.mozilla.org/zh/docs/Web/API/GlobalEventHandlers/onerror) 属性，该函数将在发生未捕获的 error 时执行。
 * 我们可以正常地从 Error 和其他内建的 error 类中进行继承，。我们只需要注意 name 属性以及不要忘了调用 super。 我们可以使用 instanceof 来检查特定的 error。但有时我们有来自第三方库的 error 对象，并且在这儿没有简单的方法来获取它的类。那么可以将 name 属性用于这一类的检查。 包装异常是一项广泛应用的技术：用于处理低级别异常并创建高级别 error 而不是各种低级别 error 的函数。在上面的示例中，低级别异常有时会成为该对象的属性，例如 err.cause，但这不是严格要求的。
-* 
-
-
+* Promise 类有 6 种静态方法：
+  1. Promise.all(promises) —— 等待所有 promise 都 resolve 时，返回存放它们结果的数组。如果给定的任意一个 promise 为 reject，那么它就会变成 Promise.all 的 error，所有其他 promise 的结果都会被忽略。
+  2. Promise.allSettled(promises)（ES2020 新增方法）—— 等待所有 promise 都 settle 时，并以包含以下内容的对象数组的形式返回它们的结果：
+    * status: "fulfilled" 或 "rejected"
+    * value（如果 fulfilled）或 reason（如果 rejected）。
+  3. Promise.race(promises) —— 等待第一个 settle 的 promise，并将其 result/error 作为结果返回。
+  4. Promise.any(promises)（ES2021 新增方法）—— 等待第一个 fulfilled 的 promise，并将其结果作为结果返回。如果所有 promise 都 rejected，Promise.any 则会抛出 AggregateError 错误类型的 error 实例。
+  5. Promise.resolve(value) —— 使用给定 value 创建一个 resolved 的 promise。
+  6. Promise.reject(error) —— 使用给定 error 创建一个 rejected 的 promise。
+* Promisification 是一种很好的方法，特别是在你使用 async/await 的时候（请看下一章），但不是回调的完全替代。 请记住，一个 promise 可能只有一个结果，但从技术上讲，一个回调可能被调用很多次。 因此，promisification 仅适用于调用一次回调的函数。进一步的调用将被忽略。
+* Promise 处理始终是异步的，因为所有 promise 行为都会通过内部的 “promise jobs” 队列，也被称为“微任务队列”（V8 术语）。 因此，.then/catch/finally 处理程序（handler）总是在当前代码完成后才会被调用。 如果我们需要确保一段代码在 .then/catch/finally 之后被执行，我们可以将它添加到链式调用的 .then 中。 在大多数 JavaScript 引擎中（包括浏览器和 Node.js），微任务（microtask）的概念与“事件循环（event loop）”和“宏任务（macrotasks）”紧密相关。由于这些概念跟 promise 没有直接关系，所以我们将在本教程另外一部分的 [事件循环：微任务和宏任务](https://zh.javascript.info/event-loop) 一章中对它们进行介绍。
+* 函数前面的关键字 async 有两个作用： 让这个函数总是返回一个 promise。 允许在该函数内使用 await。 Promise 前的关键字 await 使 JavaScript 引擎等待该 promise settle，然后： 如果有 error，就会抛出异常 —— 就像那里调用了 throw error 一样。 否则，就返回结果。 这两个关键字一起提供了一个很好的用来编写异步代码的框架，这种代码易于阅读也易于编写。 有了 async/await 之后，我们就几乎不需要使用 promise.then/catch，但是不要忘了它们是基于 promise 的，因为有些时候（例如在最外层作用域）我们不得不使用这些方法。并且，当我们需要同时等待需要任务时，Promise.all 是很好用的。
+* Reference Type 是语言内部的一个类型。 读取一个属性，例如在 obj.method() 中，. 返回的准确来说不是属性的值，而是一个特殊的 “Reference Type” 值，其中储存着属性的值和它的来源对象。 这是为了随后的方法调用 () 获取来源对象，然后将 this 设为它。 对于所有其它操作，Reference Type 会自动变成属性的值（在我们这个情况下是一个函数）。 这整个机制对我们是不可见的。它仅在一些微妙的情况下才重要，例如使用表达式从对象动态地获取一个方法时。
+* DOM 不仅仅用于浏览器: DOM 规范解释了文档的结构，并提供了操作文档的对象。有的非浏览器设备也使用 DOM。 例如，下载 HTML 文件并对其进行处理的服务器端脚本也可以使用 DOM。但它们可能仅支持部分规范中的内容。
+* 用于样式的 CSSOM: 另外也有一份针对 CSS 规则和样式表的、单独的规范 [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/), 这份规范解释了如何将 CSS 表示为对象，以及如何读写这些对象。 当我们修改文档的样式规则时，CSSOM 与 DOM 是一起使用的。但实际上，很少需要 CSSOM，因为我们很少需要从 JavaScript 中修改 CSS 规则（我们通常只是添加/移除一些 CSS 类，而不是直接修改其中的 CSS 规则），但这也是可行的。
+* 函数 alert/confirm/prompt 也是 BOM 的一部分：它们与文档（document）没有直接关系，但它代表了与用户通信的纯浏览器方法。
+* 规范: BOM 是通用 HTML 规范 的一部分。 是的，你没听错。在 [https://html.spec.whatwg.org](https://html.spec.whatwg.org/) 中的 HTML 规范不仅是关于“HTML 语言”（标签，特性）的，还涵盖了一堆对象、方法和浏览器特定的 DOM 扩展。这就是“广义的 HTML”。此外，某些部分也有其他的规范，它们被列在 [https://spec.whatwg.org](https://spec.whatwg.org) 中。
+* 空格和换行符都是完全有效的字符，就像字母和数字。它们形成文本节点并成为 DOM 的一部分。所以，例如，在上面的示例中，<head> 标签中的 <title> 标签前面包含了一些空格，并且该文本变成了一个 #text 节点（它只包含一个换行符和一些空格）。 只有两个顶级排除项： 
+  * 由于历史原因，<head> 之前的空格和换行符均被忽略。 
+  * 如果我们在 </body> 之后放置一些东西，那么它会被自动移动到 body 内，并处于 body 中的最下方，因为 HTML 规范要求所有内容必须位于 <body> 内。所以 </body> 之后不能有空格。
+* 字符串开头/结尾处的空格，以及只有空格的文本节点，通常会被工具隐藏: 与 DOM 一起使用的浏览器工具（即将介绍）通常不会在文本的开始/结尾显示空格，并且在标签之间也不会显示空文本节点（换行符）。 开发者工具通过这种方式节省屏幕空间。 在本教程中，如果这些空格和空文本节点无关紧要时，我们在后面出现的关于 DOM 的示意图中会忽略它们。
+* HTML 中的所有内容，甚至注释，都会成为 DOM 的一部分。 甚至 HTML 开头的 <!DOCTYPE...> 指令也是一个 DOM 节点。它在 DOM 树中位于 <html> 之前。很少有人知道这一点。我们不会触及那个节点，我们甚至不会在图表中绘制它，但它确实就在那里。 表示整个文档的 document 对象，在形式上也是一个 DOM 节点。 一共有 [12 种节点类型](https://dom.spec.whatwg.org/#node). 实际上，我们通常用到的是其中的 4 种：
+  1. document — DOM 的“入口点”。
+  2. 元素节点 — HTML 标签，树构建块。
+  3. 文本节点 — 包含文本。
+  4. 注释 — 有时我们可以将一些信息放入其中，它不会显示，但 JS 可以从 DOM 中读取它。
+* 在浏览器调试器工具的右侧部分有以下子选项卡：
+  * Styles — 我们可以看到按规则应用于当前元素的 CSS 规则，包括内建规则（灰色）。几乎所有内容都可以就地编辑，包括下面的方框的 dimension/margin/padding。
+  * Computed — 按属性查看应用于元素的 CSS：对于每个属性，我们可以都可以看到赋予它的规则（包括 CSS 继承等）。
+  * Event Listeners — 查看附加到 DOM 元素的事件侦听器（我们将在本教程的下一部分介绍它们）。
+* 在我们处理 DOM 时，我们可能还希望对其应用 JavaScript。例如：获取一个节点并运行一些代码来修改它，以查看结果。以下是在元素（Elements）选项卡和控制台（Console）之间切换的一些技巧。 首先：
+  * 在元素（Elements）选项卡中选择第一个 <li>。
+  * 按下 Esc — 它将在元素（Elements）选项卡下方打开控制台（Console）。
+  * 现在最后选中的元素可以通过 $0 来进行操作，先前选择的是 $1，等。 我们可以对它们执行一些命令。例如，$0.style.background = 'red' 使选定的列表项（list item）变成红色。
+* 在这里，我们介绍了基础知识，入门最常用和最重要的行为。在 [https://developers.google.cn/web/tools/chrome-devtools](https://developers.google.cn/web/tools/chrome-devtools) 上有关于 Chrome 开发者工具的详细文档说明。学习这些工具的最佳方式就是到处点一点看一看，阅读菜单：大多数选项都很明显。而后，当你大致了解它们后，请阅读文档并学习其余内容。
 
 
 
