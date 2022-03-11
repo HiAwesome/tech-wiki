@@ -353,6 +353,16 @@
   * 按下 Esc — 它将在元素（Elements）选项卡下方打开控制台（Console）。
   * 现在最后选中的元素可以通过 $0 来进行操作，先前选择的是 $1，等。 我们可以对它们执行一些命令。例如，$0.style.background = 'red' 使选定的列表项（list item）变成红色。
 * 在这里，我们介绍了基础知识，入门最常用和最重要的行为。在 [https://developers.google.cn/web/tools/chrome-devtools](https://developers.google.cn/web/tools/chrome-devtools) 上有关于 Chrome 开发者工具的详细文档说明。学习这些工具的最佳方式就是到处点一点看一看，阅读菜单：大多数选项都很明显。而后，当你大致了解它们后，请阅读文档并学习其余内容。
+* 在 DOM 的世界中，null 就意味着“不存在”: 在 DOM 中，null 值就意味着“不存在”或者“没有这个节点”。
+* DOM 集合是只读的: DOM 集合，甚至可以说本章中列出的 所有 导航（navigation）属性都是只读的。 我们不能通过类似 childNodes\[i\] = ... 的操作来替换一个子节点。 修改子节点需要使用其它方法。我们将会在下一章中看到它们。
+* DOM 集合是实时的: 除小部分例外，几乎所有的 DOM 集合都是 实时 的。换句话说，它们反映了 DOM 的当前状态。 如果我们保留一个对 elem.childNodes 的引用，然后向 DOM 中添加/移除节点，那么这些节点的更新会自动出现在集合中。
+* 不要使用 for..in 来遍历集合: 可以使用 for..of 对集合进行迭代。但有时候人们会尝试使用 for..in 来迭代集合。 请不要这么做。for..in 循环遍历的是所有可枚举的（enumerable）属性。集合还有一些“额外的”很少被用到的属性，通常这些属性也是我们不期望得到的。
+* 请不要使用以 id 命名的全局变量来访问元素: [在规范中](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem) 对此行为进行了描述，所以它是一种标准。但这是注意考虑到兼容性才支持的。 浏览器尝试通过混合 JavaScript 和 DOM 的命名空间来帮助我们。对于内联到 HTML 中的简单脚本来说，这还行，但是通常来说，这不是一件好事。因为这可能会造成命名冲突。另外，当人们阅读 JavaScript 代码且看不到对应的 HTML 时，变量的来源就会不明显。 在本教程中，我们只会在元素来源非常明显时，为了简洁起见，才会使用 id 直接引用对应的元素。 在实际开发中，document.getElementById 是首选方法。
+* id 必须是唯一的: id 必须是唯一的。在文档中，只能有一个元素带有给定的 id。 如果有多个元素都带有同一个 id，那么使用它的方法的行为是不可预测的，例如 document.getElementById 可能会随机返回其中一个元素。因此，请遵守规则，保持 id 的唯一性。
+* 不要忘记字母 "s"！  新手开发者有时会忘记字符 "s"。也就是说，他们会调用 getElementByTagName 而不是 getElementsByTagName。 getElementById 中没有字母 "s"，是因为它只返回单个元素。但是 getElementsByTagName 返回的是元素的集合，所以里面有 "s"。
+* 所有的 "getElementsBy*" 方法都会返回一个 实时的（live） 集合。这样的集合始终反映的是文档的当前状态，并且在文档发生更改时会“自动更新”。相反，querySelectorAll 返回的是一个 静态的 集合。就像元素的固定数组。
+* console.dir(elem) 与 console.log(elem): 大多数浏览器在其开发者工具中都支持这两个命令：console.log 和 console.dir。它们将它们的参数输出到控制台中。对于 JavaScript 对象，这些命令通常做的是相同的事。 但对于 DOM 元素，它们是不同的： console.log(elem) 显示元素的 DOM 树。 console.dir(elem) 将元素显示为 DOM 对象，非常适合探索其属性。 你可以在 document.body 上尝试一下。
+* 
 
 
 
