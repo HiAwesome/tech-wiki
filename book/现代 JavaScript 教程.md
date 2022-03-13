@@ -373,6 +373,14 @@
 * 尽管大多数 DOM 属性都是字符串类型的。 有一种非常少见的情况，即使一个 DOM 属性是字符串类型的，但它可能和 HTML 特性也是不同的。例如，href DOM 属性一直是一个 完整的 URL，即使该特性包含一个相对路径或者包含一个 #hash。
 * 当编写 HTML 时，我们会用到很多标准的特性。但是非标准的，自定义的呢？首先，让我们看看它们是否有用？用来做什么？ 有时，非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素。但是自定义的特性也存在问题。如果我们出于我们的目的使用了非标准的特性，之后它被引入到了标准中并有了其自己的用途，该怎么办？HTML 语言是在不断发展的，并且更多的特性出现在了标准中，以满足开发者的需求。在这种情况下，自定义的属性可能会产生意料不到的影响。 为了避免冲突，存在 [data-*](https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes) 特性。 **所有以 “data-” 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。** 例如，如果一个 elem 有一个名为 "data-about" 的特性，那么可以通过 elem.dataset.about 取到它。像 data-order-state 这样的多词特性可以以驼峰式进行调用：dataset.orderState。使用 data-* 特性是一种合法且安全的传递自定义数据的方式。 请注意，我们不仅可以读取数据，还可以修改数据属性（data-attributes）。然后 CSS 会更新相应的视图。
 * 如何再插入一条类似的消息？ 我们可以创建一个函数，并将代码放在其中。但是另一种方法是 克隆 现有的 div，并修改其中的文本（如果需要）。 当我们有一个很大的元素时，克隆的方式可能更快更简单。 调用 elem.cloneNode(true) 来创建元素的一个“深”克隆 — 具有所有特性（attribute）和子元素。如果我们调用 elem.cloneNode(false)，那克隆就不包括子元素。
+* JavaScript 既可以修改类，也可以修改 style 属性。 相较于将样式写入 style 属性，我们应该首选通过 CSS 类的方式来添加样式。仅当类“无法处理”时，才应选择使用 style 属性的方式。
+* elem.style 属性是一个对象，它对应于 "style" 特性（attribute）中所写的内容。elem.style.width="100px" 的效果等价于我们在 style 特性中有一个 width:100px 字符串。 对于多词（multi-word）属性，使用驼峰式 camelCase.
+* 有时我们想要分配一个样式属性，稍后移除它。 例如，为了隐藏一个元素，我们可以设置 elem.style.display = "none"。 然后，稍后我们可能想要移除 style.display，就像它没有被设置一样。这里不应该使用 delete elem.style.display，而应该使用 elem.style.display = "" 将其赋值为空。
+* 用 style.cssText 进行完全的重写: 通常，我们使用 style.* 来对各个样式属性进行赋值。我们不能像这样的 div.style="color: red; width: 100px" 设置完整的属性，因为 div.style 是一个对象，并且它是只读的。 想要以字符串的形式设置完整的样式，可以使用特殊属性 style.cssText. 我们很少使用这个属性，因为这样的赋值会删除所有现有样式：它不是进行添加，而是替换它们。有时可能会删除所需的内容。但是，当我们知道我们不会删除现有样式时，可以安全地将其用于新元素。 可以通过设置一个特性（attribute）来实现同样的效果：div.setAttribute('style', 'color: red...')。
+* 计算值和解析值: 在 [CSS](https://drafts.csswg.org/cssom/#resolved-values) 中有两个概念： 计算 (computed) 样式值是所有 CSS 规则和 CSS 继承都应用后的值，这是 CSS 级联（cascade）的结果。它看起来像 height:1em 或 font-size:125%。 解析 (resolved) 样式值是最终应用于元素的样式值值。诸如 1em 或 125% 这样的值是相对的。浏览器将使用计算（computed）值，并使所有单位均为固定的，且为绝对单位，例如：height:20px 或 font-size:16px。对于几何属性，解析（resolved）值可能具有浮点，例如：width:50.5px。 很久以前，创建了 getComputedStyle 来获取计算（computed）值，但事实证明，解析（resolved）值要方便得多，标准也因此发生了变化。 所以，现在 getComputedStyle 实际上返回的是属性的解析值（resolved）。
+* 应用于 :visited 链接的样式被隐藏了！ 可以使用 CSS 伪类 :visited 对被访问过的链接进行着色。 但 getComputedStyle 没有给出访问该颜色的方式，因为否则，任意页面都可以通过在页面上创建它，并通过检查样式来确定用户是否访问了某链接。 JavaScript 看不到 :visited 所应用的样式。此外，CSS 中也有一个限制，即禁止在 :visited 中应用更改几何形状的样式。这是为了确保一个不好的页面无法测试链接是否被访问，进而窥探隐私。
+* JavaScript 中有许多属性可让我们读取有关元素宽度、高度和其他几何特征的信息。这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”，因此它们是像素测量值。
+* scrollLeft/scrollTop 是可修改的: 大多数几何属性是只读的，但是 scrollLeft/scrollTop 是可修改的，并且浏览器会滚动该元素。 如果你点击下面的元素，则会执行代码 elem.scrollTop += 10。这使得元素内容向下滚动 10px。将 scrollTop 设置为 0 或一个大的值，例如 1e9，将会使元素滚动到顶部/底部。
 * 
 
 
