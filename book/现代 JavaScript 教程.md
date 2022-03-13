@@ -474,6 +474,15 @@
 * 换句话说，async 脚本会在后台加载，并在加载就绪时运行。DOM 和其他脚本不会等待它们，它们也不会等待其它的东西。async 脚本就是一个会在加载完成时执行的完全独立的脚本。就这么简单，现在明白了吧？当我们将独立的第三方脚本集成到页面时，此时采用异步加载方式是非常棒的：计数器，广告等，因为它们不依赖于我们的脚本，我们的脚本也不应该等待它们。
 * 在实际开发中，defer 用于需要整个 DOM 的脚本，和/或脚本的相对执行顺序很重要的时候。 async 用于独立脚本，例如计数器或广告，这些脚本的相对执行顺序无关紧要。
 * 没有脚本的页面应该也是可用的：请注意：如果你使用的是 defer 或 async，那么用于将在脚本加载完成 之前 先看到页面。 在这种情况下，某些图形组件可能尚未初始化完成。 因此，请记得添加一个“正在加载”的提示，并禁用尚不可用的按钮。以让用户可以清楚地看到，他现在可以在页面上做什么，以及还有什么是正在准备中的。
+* 浏览器允许我们跟踪外部资源的加载 —— 脚本，iframe，图片等。 这里有两个事件：
+  * onload —— 成功加载，
+  * onerror —— 出现 error。
+* onload/onerror 事件仅跟踪加载本身。 在脚本处理和执行期间可能发生的 error 超出了这些事件跟踪的范围。也就是说：如果脚本成功加载，则即使脚本中有编程 error，也会触发 onload 事件。如果要跟踪脚本 error，可以使用 window.onerror 全局处理程序。
+* **要允许跨源访问，<script> 标签需要具有 crossorigin 特性（attribute），并且远程服务器必须提供特殊的 header。** 这里有三个级别的跨源访问：
+  * 无 crossorigin 特性 —— 禁止访问。 
+  * crossorigin="anonymous" —— 如果服务器的响应带有包含 * 或我们的源（origin）的 header Access-Control-Allow-Origin，则允许访问。浏览器不会将授权信息和 cookie 发送到远程服务器。 
+  * crossorigin="use-credentials" —— 如果服务器发送回带有我们的源的 header Access-Control-Allow-Origin 和 Access-Control-Allow-Credentials: true，则允许访问。浏览器会将授权信息和 cookie 发送到远程服务器。
+* MutationObserver 是一个内建对象，它观察 DOM 元素，并在检测到更改时触发回调。
 * 
 
 
