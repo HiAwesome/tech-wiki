@@ -363,8 +363,17 @@
 * 所有的 "getElementsBy*" 方法都会返回一个 实时的（live） 集合。这样的集合始终反映的是文档的当前状态，并且在文档发生更改时会“自动更新”。相反，querySelectorAll 返回的是一个 静态的 集合。就像元素的固定数组。
 * console.dir(elem) 与 console.log(elem): 大多数浏览器在其开发者工具中都支持这两个命令：console.log 和 console.dir。它们将它们的参数输出到控制台中。对于 JavaScript 对象，这些命令通常做的是相同的事。 但对于 DOM 元素，它们是不同的： console.log(elem) 显示元素的 DOM 树。 console.dir(elem) 将元素显示为 DOM 对象，非常适合探索其属性。 你可以在 document.body 上尝试一下。
 * 规范中的 IDL: 在规范中，DOM 类不是使用 JavaScript 来描述的，而是一种特殊的 [接口描述语言（Interface description language）](https://en.wikipedia.org/wiki/Interface_description_language), 简写为 IDL，它通常很容易理解。 在 IDL 中，所有属性以其类型开头。例如，DOMString 和 boolean 等。
+* 当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）。（译注：attribute 和 property 两词意思相近，为作区分，全文将 attribute 译为“特性”，property 译为“属性”，请读者注意区分。） 例如，如果标签是 <body id="page">，那么 DOM 对象就会有 body.id="page"。 但特性—属性映射并不是一一对应的！在 HTML 中，标签可能拥有特性（attributes）。当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别 标准的 特性并以此创建 DOM 属性。 所以，当一个元素有 id 或其他 标准的 特性，那么就会生成对应的 DOM 属性。但是非 标准的 特性则不会。请注意，一个元素的标准的特性对于另一个元素可能是未知的。例如 "type" 是 <input> 的一个标准的特性（ [HTMLInputElement](https://html.spec.whatwg.org/#htmlinputelement) ），但对于 <body>（ [HTMLBodyElement](https://html.spec.whatwg.org/#htmlbodyelement) ）来说则不是。规范中对相应元素类的标准的属性进行了详细的描述。
+* 所以，如果一个特性不是标准的，那么就没有相对应的 DOM 属性。那我们有什么方法来访问这些特性吗？ 当然。所有特性都可以通过使用以下方法进行访问：
+  * elem.hasAttribute(name) — 检查特性是否存在。
+  * elem.getAttribute(name) — 获取这个特性值。
+  * elem.setAttribute(name, value) — 设置这个特性值。
+  * elem.removeAttribute(name) — 移除这个特性。
+* DOM 属性是多类型的: DOM 属性不总是字符串类型的。例如，input.checked 属性（对于 checkbox 的）是布尔型的。还有其他的例子。style 特性是字符串类型的，但 style 属性是一个对象。
+* 尽管大多数 DOM 属性都是字符串类型的。 有一种非常少见的情况，即使一个 DOM 属性是字符串类型的，但它可能和 HTML 特性也是不同的。例如，href DOM 属性一直是一个 完整的 URL，即使该特性包含一个相对路径或者包含一个 #hash。
+* 当编写 HTML 时，我们会用到很多标准的特性。但是非标准的，自定义的呢？首先，让我们看看它们是否有用？用来做什么？ 有时，非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素。但是自定义的特性也存在问题。如果我们出于我们的目的使用了非标准的特性，之后它被引入到了标准中并有了其自己的用途，该怎么办？HTML 语言是在不断发展的，并且更多的特性出现在了标准中，以满足开发者的需求。在这种情况下，自定义的属性可能会产生意料不到的影响。 为了避免冲突，存在 [data-*](https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes) 特性。 **所有以 “data-” 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。** 例如，如果一个 elem 有一个名为 "data-about" 的特性，那么可以通过 elem.dataset.about 取到它。像 data-order-state 这样的多词特性可以以驼峰式进行调用：dataset.orderState。使用 data-* 特性是一种合法且安全的传递自定义数据的方式。 请注意，我们不仅可以读取数据，还可以修改数据属性（data-attributes）。然后 CSS 会更新相应的视图。
+* 如何再插入一条类似的消息？ 我们可以创建一个函数，并将代码放在其中。但是另一种方法是 克隆 现有的 div，并修改其中的文本（如果需要）。 当我们有一个很大的元素时，克隆的方式可能更快更简单。 调用 elem.cloneNode(true) 来创建元素的一个“深”克隆 — 具有所有特性（attribute）和子元素。如果我们调用 elem.cloneNode(false)，那克隆就不包括子元素。
 * 
-
 
 
 
