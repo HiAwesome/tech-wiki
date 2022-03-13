@@ -434,6 +434,18 @@
 * 大小写敏感："KeyZ"，不是 "keyZ": 这是显而易见的，但人们仍会搞错。 请规避错误类型：它是 KeyZ，而不是 keyZ。像 event.code=="keyZ" 这样的检查不起作用："Key" 的首字母必须大写。
 * 遗存: 过去曾经有一个 keypress 事件，还有事件对象的 keyCode、charCode 和 which 属性。 大多数浏览器对它们都存在兼容性问题，以致使该规范的开发者不得不弃用它们并创建新的现代的事件（本文上面所讲的这些事件），除此之外别无选择。旧的代码仍然有效，因为浏览器还在支持它们，但现在完全没必要再使用它们。
 * 按一个按键总是会产生一个键盘事件，无论是符号键，还是例如 Shift 或 Ctrl 等特殊按键。唯一的例外是有时会出现在笔记本电脑的键盘上的 Fn 键。它没有键盘事件，因为它通常是被在比 OS 更低的级别上实现的。 键盘事件： keydown —— 在按下键时（如果长按按键，则将自动重复）， keyup —— 释放按键时。 键盘事件的主要属性： code —— “按键代码”（"KeyA"，"ArrowLeft" 等），特定于键盘上按键的物理位置。 key —— 字符（"A"，"a" 等），对于非字符（non-character）的按键，通常具有与 code 相同的值。 过去，键盘事件有时会被用于跟踪表单字段中的用户输入。这并不可靠，因为输入可能来自各种来源。我们有 input 和 change 事件来处理任何输入（稍后我们会在 [事件：change，input，cut，copy，paste](https://zh.javascript.info/events-change-input) 一章中进行介绍）。它们在任何类型的输入（包括复制粘贴或语音识别）后触发。 当我们真的想要键盘时，我们应该使用键盘事件。例如，对热键或特殊键作出反应。
+* scroll 事件允许对页面或元素滚动作出反应。我们可以在这里做一些有用的事情。 例如：
+  * 根据用户在文档中的位置显示/隐藏其他控件或信息。
+  * 当用户向下滚动到页面末端时加载更多数据。
+* 防止滚动: 我们如何使某些东西变成不可滚动？ 我们不能通过在 onscroll 监听器中使用 event.preventDefault() 来阻止滚动，因为它会在滚动发生 之后 才触发。 但是我们可以在导致滚动的事件上，例如在 pageUp 和 pageDown 的 keydown 事件上，使用 event.preventDefault() 来阻止滚动。 如果我们向这些事件中添加事件处理程序，并向其中添加 event.preventDefault()，那么滚动就不会开始。 启动滚动的方式有很多，使用 CSS 的 overflow 属性更加可靠。
+* 更简短的表示方式：form.name: 还有一个更简短的表示方式：我们可以通过 form\[index/name\] 来访问元素。 换句话说，我们可以将 form.elements.login 写成 form.login。 这也有效，但是会有一个小问题：如果我们访问一个元素，然后修改它的 name，之后它仍然可以被通过旧的 name 访问到（当然也能通过新的 name 访问）。这通常来说并不是一个问题，因为我们很少修改表单元素的名字。
+* 使用 textarea.value 而不是 textarea.innerHTML: 请注意，即使 <textarea>...</textarea> 将它们的 value 作为嵌套的 HTML 标签来保存，我们也绝不应该使用 textarea.innerHTML 来访问它。 它仅存储最初在页面上的 HTML，而不是存储的当前 value。
+* 当用户点击某个元素或使用键盘上的 Tab 键选中时，该元素将会获得聚焦（focus）。还有一个 HTML 特性（attribute）autofocus 可以让焦点在网页加载时默认落在一个元素上，此外还有其它途径可以获得焦点。 聚焦到一个元素通常意味着：“准备在此处接受数据”，所以，这正是我们可以运行代码以初始化所需功能的时刻。 失去焦点的时刻（“blur”）可能更为重要。它可能发生在用户点击页面的其它地方，或者按下 Tab 键跳转到下一个表单字段，亦或是其它途径的时候。 失去焦点通常意味着：“数据已经输入完成”，所以我们可以运行代码来检查它，甚至可以将其保存到服务器上，或进行其他操作。
+* JavaScript 导致的焦点丢失: 很多种原因可以导致焦点丢失。 其中之一就是用户点击了其它位置。当然 JavaScript 自身也可能导致焦点丢失，例如： 一个 alert 会将焦点移至自身，因此会导致元素失去焦点（触发 blur 事件），而当 alert 对话框被取消时，焦点又回重新回到原元素上（触发 focus 事件）。 如果一个元素被从 DOM 中移除，那么也会导致焦点丢失。如果稍后它被重新插入到 DOM，焦点也不会回到它身上。 这些特性有时候会导致 focus/blur 处理程序发生异常 —— 在不需要它们时触发。 最好的秘诀就是在使用这些事件时小心点。如果我们想要跟踪用户导致的焦点丢失，则应该避免自己造成的焦点丢失。
+* focus/blur 委托: focus 和 blur 事件不会向上冒泡。这里有两个解决方案。 方案一，有一个遗留下来的有趣的特性（feature）：focus/blur 不会向上冒泡，但会在捕获阶段向下传播。方案二，可以使用 focusin 和 focusout 事件 —— 与 focus/blur 事件完全一样，只是它们会冒泡。 值得注意的是，必须使用 elem.addEventListener 来分配它们，而不是 on<event>。
+* 如果我们想要处理对 <input> 的每次更改，那么此事件是最佳选择。 另一方面，input 事件不会在那些不涉及值更改的键盘输入或其他行为上触发，例如在输入时按方向键 ⇦ ⇨。无法阻止 oninput 中的任何事件: 当输入值更改后，就会触发 input 事件。 所以，我们无法使用 event.preventDefault() —— 已经太迟了，不会起任何作用了。
+* 事件：cut，copy，paste: 这些事件发生于剪切/拷贝/粘贴一个值的时候。 它们属于 [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) 类，并提供了对剪切/拷贝/粘贴的数据的访问方法。 我们也可以使用 event.preventDefault() 来中止行为，然后什么都不会被复制/粘贴。我们不仅可以复制/粘贴文本，也可以复制/粘贴其他各种内容。例如，我们可以在操作系统的文件管理器中复制一个文件并进行粘贴。 这是因为 clipboardData 实现了 DataTransfer 接口，通常用于拖放和复制/粘贴。这超出了本文所讨论的范围，但你可以在 [DataTransfer](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface) 规范 中进行详细了解。 另外，还有一个可以访问剪切板的异步 API：navigator.clipboard，详见 [Clipboard API 和事件规范](https://www.w3.org/TR/clipboard-apis/), [火狐浏览器（Firefox）尚未支持](https://caniuse.com/async-clipboard).
+* 提交表单时，会触发 submit 事件，它通常用于在将表单发送到服务器之前对表单进行校验，或者中止提交，并使用 JavaScript 来处理表单。 form.submit() 方法允许从 JavaScript 启动表单发送。我们可以使用此方法动态地创建表单，并将其发送到服务器。
 * 
 
 
