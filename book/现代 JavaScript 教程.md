@@ -446,8 +446,35 @@
 * 如果我们想要处理对 <input> 的每次更改，那么此事件是最佳选择。 另一方面，input 事件不会在那些不涉及值更改的键盘输入或其他行为上触发，例如在输入时按方向键 ⇦ ⇨。无法阻止 oninput 中的任何事件: 当输入值更改后，就会触发 input 事件。 所以，我们无法使用 event.preventDefault() —— 已经太迟了，不会起任何作用了。
 * 事件：cut，copy，paste: 这些事件发生于剪切/拷贝/粘贴一个值的时候。 它们属于 [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) 类，并提供了对剪切/拷贝/粘贴的数据的访问方法。 我们也可以使用 event.preventDefault() 来中止行为，然后什么都不会被复制/粘贴。我们不仅可以复制/粘贴文本，也可以复制/粘贴其他各种内容。例如，我们可以在操作系统的文件管理器中复制一个文件并进行粘贴。 这是因为 clipboardData 实现了 DataTransfer 接口，通常用于拖放和复制/粘贴。这超出了本文所讨论的范围，但你可以在 [DataTransfer](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface) 规范 中进行详细了解。 另外，还有一个可以访问剪切板的异步 API：navigator.clipboard，详见 [Clipboard API 和事件规范](https://www.w3.org/TR/clipboard-apis/), [火狐浏览器（Firefox）尚未支持](https://caniuse.com/async-clipboard).
 * 提交表单时，会触发 submit 事件，它通常用于在将表单发送到服务器之前对表单进行校验，或者中止提交，并使用 JavaScript 来处理表单。 form.submit() 方法允许从 JavaScript 启动表单发送。我们可以使用此方法动态地创建表单，并将其发送到服务器。
+* 提交表单主要有两种方式： 第一种 —— 点击 <input type="submit"> 或 <input type="image">。 第二种 —— 在 input 字段中按下 Enter 键。 这两个行为都会触发表单的 submit 事件。处理程序可以检查数据，如果有错误，就显示出来，并调用 event.preventDefault()，这样表单就不会被发送到服务器了。
+* submit 和 click 的关系: 在输入框中使用 Enter 发送表单时，会在 <input type="submit"> 上触发一次 click 事件。 这很有趣，因为实际上根本没有点击。
+* 如果要手动将表单提交到服务器，我们可以调用 form.submit()。 这样就不会产生 submit 事件。这里假设如果开发人员调用 form.submit()，就意味着此脚本已经进行了所有相关处理。 有时该方法被用来手动创建和发送表单。
+* HTML 页面的生命周期包含三个重要事件：
+  * DOMContentLoaded —— 浏览器已完全加载 HTML，并构建了 DOM 树，但像 \<img\> 和样式表之类的外部资源可能尚未加载完成。
+  * load —— 浏览器不仅加载完成了 HTML，还加载完成了所有外部资源：图片，样式等。
+  * beforeunload/unload —— 当用户正在离开页面时。
+* 每个事件都是有用的：
+  * DOMContentLoaded 事件 —— DOM 已经就绪，因此处理程序可以查找 DOM 节点，并初始化接口。
+  * load 事件 —— 外部资源已加载完成，样式已被应用，图片大小也已知了。
+  * beforeunload 事件 —— 用户正在离开：我们可以检查用户是否保存了更改，并询问他是否真的要离开。
+  * unload 事件 —— 用户几乎已经离开了，但是我们仍然可以启动一些操作，例如发送统计数据。
+* 不会阻塞 DOMContentLoaded 的脚本: 此规则有两个例外： 具有 async 特性（attribute）的脚本不会阻塞 DOMContentLoaded，[稍后](https://zh.javascript.info/script-async-defer) 我们会讲到。 使用 document.createElement('script') 动态生成并添加到网页的脚本也不会阻塞 DOMContentLoaded。
+* 浏览器内建的自动填充: Firefox，Chrome 和 Opera 都会在 DOMContentLoaded 中自动填充表单。 例如，如果页面有一个带有登录名和密码的表单，并且浏览器记住了这些值，那么在 DOMContentLoaded 上，浏览器会尝试自动填充它们（如果得到了用户允许）。 因此，如果 DOMContentLoaded 被需要加载很长时间的脚本延迟触发，那么自动填充也会等待。你可能在某些网站上看到过（如果你使用浏览器自动填充）—— 登录名/密码字段不会立即自动填充，而是在页面被完全加载前会延迟填充。这实际上是 DOMContentLoaded 事件之前的延迟。
+* 如果我们在文档加载完成之后设置 DOMContentLoaded 事件处理程序，会发生什么？ 很自然地，它永远不会运行。 在某些情况下，我们不确定文档是否已经准备就绪。我们希望我们的函数在 DOM 加载完成时执行，无论现在还是以后。 document.readyState 属性可以为我们提供当前加载状态的信息。 它有 3 个可能值： loading —— 文档正在被加载。 interactive —— 文档被全部读取。 complete —— 文档被全部读取，并且所有资源（例如图片等）都已加载完成。 所以，我们可以检查 document.readyState 并设置一个处理程序，或在代码准备就绪时立即执行它。
+* 现代的网站中，脚本往往比 HTML 更“重”：它们的大小通常更大，处理时间也更长。 当浏览器加载 HTML 时遇到 <script>...</script> 标签，浏览器就不能继续构建 DOM。它必须立刻执行此脚本。对于外部脚本 <script src="..."></script> 也是一样的：浏览器必须等脚本下载完，并执行结束，之后才能继续处理剩余的页面。 这会导致两个重要的问题：
+  * 脚本不能访问到位于它们下面的 DOM 元素，因此，脚本无法给它们添加处理程序等。
+  * 如果页面顶部有一个笨重的脚本，它会“阻塞页面”。在该脚本下载并执行结束前，用户都不能看到页面内容
+* defer: defer 特性告诉浏览器不要等待脚本。相反，浏览器将继续处理 HTML，构建 DOM。脚本会“在后台”下载，然后等 DOM 构建完成后，脚本才会执行。具有 defer 特性的脚本保持其相对顺序，就像常规脚本一样。 defer 特性仅适用于外部脚本: 如果 <script> 脚本没有 src，则会忽略 defer 特性。
+* async 特性与 defer 有些类似。它也能够让脚本不阻塞页面。但是，在行为上二者有着重要的区别。 async 特性意味着脚本是完全独立的：
+  * 浏览器不会因 async 脚本而阻塞（与 defer 类似）。
+  * 其他脚本不会等待 async 脚本加载完成，同样，async 脚本也不会等待其他脚本。
+  * DOMContentLoaded 和异步脚本不会彼此等待：
+    * DOMContentLoaded 可能会发生在异步脚本之前（如果异步脚本在页面完成后才加载完成）
+    * DOMContentLoaded 也可能发生在异步脚本之后（如果异步脚本很短，或者是从 HTTP 缓存中加载的）
+* 换句话说，async 脚本会在后台加载，并在加载就绪时运行。DOM 和其他脚本不会等待它们，它们也不会等待其它的东西。async 脚本就是一个会在加载完成时执行的完全独立的脚本。就这么简单，现在明白了吧？当我们将独立的第三方脚本集成到页面时，此时采用异步加载方式是非常棒的：计数器，广告等，因为它们不依赖于我们的脚本，我们的脚本也不应该等待它们。
+* 在实际开发中，defer 用于需要整个 DOM 的脚本，和/或脚本的相对执行顺序很重要的时候。 async 用于独立脚本，例如计数器或广告，这些脚本的相对执行顺序无关紧要。
+* 没有脚本的页面应该也是可用的：请注意：如果你使用的是 defer 或 async，那么用于将在脚本加载完成 之前 先看到页面。 在这种情况下，某些图形组件可能尚未初始化完成。 因此，请记得添加一个“正在加载”的提示，并禁用尚不可用的按钮。以让用户可以清楚地看到，他现在可以在页面上做什么，以及还有什么是正在准备中的。
 * 
-
 
 
 
