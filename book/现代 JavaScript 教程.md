@@ -482,9 +482,15 @@
   * 无 crossorigin 特性 —— 禁止访问。 
   * crossorigin="anonymous" —— 如果服务器的响应带有包含 * 或我们的源（origin）的 header Access-Control-Allow-Origin，则允许访问。浏览器不会将授权信息和 cookie 发送到远程服务器。 
   * crossorigin="use-credentials" —— 如果服务器发送回带有我们的源的 header Access-Control-Allow-Origin 和 Access-Control-Allow-Credentials: true，则允许访问。浏览器会将授权信息和 cookie 发送到远程服务器。
-* MutationObserver 是一个内建对象，它观察 DOM 元素，并在检测到更改时触发回调。
+* MutationObserver 是一个内建对象，它观察 DOM 元素，并在检测到更改时触发回调。MutationObserver 可以对 DOM 的变化作出反应 —— 特性（attribute），文本内容，添加/删除元素。 我们可以用它来跟踪代码其他部分引入的更改，以及与第三方脚本集成。 MutationObserver 可以跟踪任何更改。config “要观察的内容”选项用于优化，避免不必要的回调调用以节省资源。
+* 浏览器中 JavaScript 的执行流程和 Node.js 中的流程都是基于 事件循环 的。 理解事件循环的工作方式对于代码优化很重要，有时对于正确的架构也很重要。事件循环 的概念非常简单。它是一个在 JavaScript 引擎等待任务，执行任务和进入休眠状态等待更多任务这几个状态之间转换的无限循环。 引擎的一般算法： 
+  1. 当有任务时： 从最先进入的任务开始执行。
+  2. 休眠直到出现任务，然后转到第 1 步。
+* 事件循环 的两个细节：
+  * 引擎执行任务时永远不会进行渲染（render）。如果任务执行需要很长一段时间也没关系。仅在任务完成后才会绘制对 DOM 的更改。
+  * 如果一项任务执行花费的时间过长，浏览器将无法执行其他任务，例如处理用户事件。因此，在一定时间后，浏览器会抛出一个如“页面未响应”之类的警报，建议你终止这个任务。这种情况常发生在有大量复杂的计算或导致死循环的程序错误时。
+* Web Workers: 对于不应该阻塞事件循环的耗时长的繁重计算任务，我们可以使用 [Web Workers](https://html.spec.whatwg.org/multipage/workers.html). 这是在另一个并行线程中运行代码的方式。 Web Workers 可以与主线程交换消息，但是它们具有自己的变量和事件循环。 Web Workers 没有访问 DOM 的权限，因此，它们对于同时使用多个 CPU 内核的计算非常有用。
 * 
-
 
 
 
