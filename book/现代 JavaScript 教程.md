@@ -499,8 +499,37 @@
 * “同源”策略规定：
   * 如果我们有对另外一个窗口（例如，一个使用 window.open 创建的弹窗，或者一个窗口中的 iframe）的引用，并且该窗口是同源的，那么我们就具有对该窗口的全部访问权限。
   * 否则，如果该窗口不是同源的，那么我们就无法访问该窗口中的内容：变量，文档，任何东西。唯一的例外是 location：我们可以修改它（进而重定向用户）。但是我们无法读取 location（因此，我们无法看到用户当前所处的位置，也就不会泄漏任何信息）。
+* 根据定义，两个具有不同域的 URL 具有不同的源。 但是，如果窗口的二级域相同，例如 john.site.com，peter.site.com 和 site.com（它们共同的二级域是 site.com），我们可以使浏览器忽略该差异，使得它们可以被作为“同源”的来对待，以便进行跨窗口通信。 为了做到这一点，每个这样的窗口都应该执行下面这行代码：`document.domain = 'site.com';`, 这样就可以了。现在它们可以无限制地进行交互了。但是再强调一遍，这仅适用于具有相同二级域的页面。
+* 请注意："sandbox" 特性的目的仅是 添加更多 限制。它无法移除这些限制。尤其是，如果 iframe 来自其他源，则无法放宽同源策略。
+* 我们以 Facebook 为例，解释点击劫持是如何完成的：
+  1. 访问者被恶意页面吸引。怎样吸引的不重要。
+  2. 页面上有一个看起来无害的链接（例如：“变得富有”或者“点我，超好玩！”）。
+  3. 恶意页面在该链接上方放置了一个透明的 <iframe>，其 src 来自于 facebook.com，这使得“点赞”按钮恰好位于该链接上面。这通常是通过 z-index 实现的。
+  4. 用户尝试点击该链接时，实际上点击的是“点赞”按钮。
+* 点击劫持是对点击事件，而非键盘事件: 此攻击仅影响鼠标行为（或者类似的行为，例如在手机上的点击）。 键盘输入很难重定向。从技术上讲，我们可以用 iframe 的文本区域覆盖原有的文本区域实现攻击。因此，当访问者试图聚焦页面中的输入时，实际上聚焦的是 iframe 中的输入。 但是这里有个问题。访问者键入的所有内容都会被隐藏，因为该 iframe 是不可见的。 当用户无法在屏幕上看到自己输入的字符时，通常会停止打字。
+* 点击劫持是一种“诱骗”用户在不知情的情况下点击恶意网站的方式。如果是重要的点击操作，这是非常危险的。 黑客可以通过信息发布指向他的恶意页面的链接，或者通过某些手段引诱访问者访问他的页面。当然还有很多其他变体。 一方面 —— 这种攻击方式是“浅层”的：黑客所做的只是拦截一次点击。但另一方面，如果黑客知道在点击之后将出现另一个控件，则他们可能还会使用狡猾的消息来迫使用户也点击它们。 这种攻击相当危险，因为在设计交互界面时，我们通常不会考虑到可能会有黑客代表用户点击界面。所以，在许多意想不到的地方可能发现攻击漏洞。 
+  * 建议在那些不希望被在 frame 中查看的页面上（或整个网站上）使用 X-Frame-Options: SAMEORIGIN。 
+  * 如果我们希望允许在 frame 中显示我们的页面，那我们使用一个 <div> 对整个页面进行遮盖，这样也是安全的。
+* 与其他语言相比，JavaScript 中的二进制数据是以非标准方式实现的。但是，当我们理清楚以后，一切就会变得相当简单了。 **基本的二进制对象是 ArrayBuffer —— 对固定长度的连续内存空间的引用。**
+* ArrayBuffer 不是某种东西的数组, 让我们先澄清一个可能的误区。ArrayBuffer 与 Array 没有任何共同之处：
+  * 它的长度是固定的，我们无法增加或减少它的长度。
+  * 它正好占用了内存中的那么多空间。
+  * 要访问单个字节，需要另一个“视图”对象，而不是 buffer\[index\]。
+* 所有这些视图（Uint8Array，Uint32Array 等）的通用术语是 [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). 它们都享有同一组方法和属性。 请注意，没有名为 TypedArray 的构造器，它只是表示 ArrayBuffer 上的视图之一的通用总称术语：Int8Array，Uint8Array 及其他，很快就会有完整列表。 当你看到 new TypedArray 之类的内容时，它表示 new Int8Array、new Uint8Array 及其他中之一。 类型化数组的行为类似于常规数组：具有索引，并且是可迭代的。 一个类型化数组的构造器（无论是 Int8Array 或 Float64Array，都无关紧要），其行为各不相同，并且取决于参数类型。
+* 没有 int8 或类似的单值类型: 请注意，尽管有类似 Int8Array 这样的名称，但 JavaScript 中并没有像 int，或 int8 这样的单值类型。 这是合乎逻辑的，因为 Int8Array 不是这些单值的数组，而是 ArrayBuffer 上的视图。
+* 如果二进制数据实际上是一个字符串怎么办？例如，我们收到了一个包含文本数据的文件。 内建的 [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) 对象在给定缓冲区（buffer）和编码格式（encoding）的情况下，能够将值读取到实际的 JavaScript 字符串中。
+* TextEncoder 做相反的事情 —— 将字符串转换为字节。语法为：`let encoder = new TextEncoder();`, 只支持 utf-8 编码。
+* arrayBuffer 和视图（view）都是 ECMA 标准的一部分，是 JavaScript 的一部分。 在浏览器中，还有其他更高级的对象，特别是 Blob，在 [File API](https://www.w3.org/TR/FileAPI/) 中有相关描述。 Blob 由一个可选的字符串 type（通常是 MIME 类型）和 blobParts 组成 —— 一系列其他 Blob 对象，字符串和 BufferSource。
+* Blob 对象是不可改变的: 我们无法直接在 Blob 中更改数据，但我们可以通过 slice 获得 Blob 的多个部分，从这些部分创建新的 Blob 对象，将它们组成新的 Blob，等。 这种行为类似于 JavaScript 字符串：我们无法更改字符串中的字符，但可以生成一个新的改动过的字符串。
+* Blob 转换为 base64: URL.createObjectURL 的一个替代方法是，将 Blob 转换为 base64-编码的字符串。 这种编码将二进制数据表示为一个由 0 到 64 的 ASCII 码组成的字符串，非常安全且“可读“。更重要的是 —— 我们可以在 [“data-url”](https://developer.mozilla.org/zh/docs/Web/http/Data_URIs) 中使用此编码。 “data-url” 的形式为 data:\[<mediatype>\]\[;base64\],<data>。我们可以在任何地方使用这种 url，和使用“常规” url 一样。
+* [File](https://www.w3.org/TR/FileAPI/#dfn-file) 对象继承自 Blob，并扩展了与文件系统相关的功能。
+* [FileReader](https://www.w3.org/TR/FileAPI/#dfn-filereader) 是一个对象，其唯一目的是从 Blob（因此也从 File）对象中读取数据。 它使用事件来传递数据，因为从磁盘读取数据可能比较费时间。
+* FileReader 用于 blob: 正如我们在 [Blob](https://zh.javascript.info/blob) 一章中所提到的，FileReader 不仅可读取文件，还可读取任何 blob。 我们可以使用它将 blob 转换为其他格式：
+  * readAsArrayBuffer(blob) —— 转换为 ArrayBuffer，
+  * readAsText(blob, \[encoding\]) —— 转换为字符串（TextDecoder 的一个替代方案），
+  * readAsDataURL(blob) —— 转换为 base64 的 data url。
+* 在 Web Workers 中可以使用 FileReaderSync: 对于 Web Worker，还有一种同步的 FileReader 变体，称为 [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync). 它的读取方法 read* 不会生成事件，但是会像常规函数那样返回一个结果。 不过，这仅在 Web Worker 中可用，因为在读取文件的时候，同步调用会有延迟，而在 Web Worker 中，这种延迟并不是很重要。它不会影响页面。
 * 
-
 
 
 
