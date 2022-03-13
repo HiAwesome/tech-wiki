@@ -381,6 +381,17 @@
 * 应用于 :visited 链接的样式被隐藏了！ 可以使用 CSS 伪类 :visited 对被访问过的链接进行着色。 但 getComputedStyle 没有给出访问该颜色的方式，因为否则，任意页面都可以通过在页面上创建它，并通过检查样式来确定用户是否访问了某链接。 JavaScript 看不到 :visited 所应用的样式。此外，CSS 中也有一个限制，即禁止在 :visited 中应用更改几何形状的样式。这是为了确保一个不好的页面无法测试链接是否被访问，进而窥探隐私。
 * JavaScript 中有许多属性可让我们读取有关元素宽度、高度和其他几何特征的信息。这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”，因此它们是像素测量值。
 * scrollLeft/scrollTop 是可修改的: 大多数几何属性是只读的，但是 scrollLeft/scrollTop 是可修改的，并且浏览器会滚动该元素。 如果你点击下面的元素，则会执行代码 elem.scrollTop += 10。这使得元素内容向下滚动 10px。将 scrollTop 设置为 0 或一个大的值，例如 1e9，将会使元素滚动到顶部/底部。
+* 不是 window.innerWidth/innerHeight: 浏览器也支持像 window.innerWidth/innerHeight 这样的属性。它们看起来像我们想要的，那为什么不使用它们呢？ 如果这里存在一个滚动条，并且滚动条占用了一些空间，那么 clientWidth/clientHeight 会提供没有滚动条（减去它）的 width/height。换句话说，它们返回的是可用于内容的文档的可见部分的 width/height。 window.innerWidth/innerHeight 包括了滚动条。 在大多数情况下，我们需要 可用 的窗口宽度以绘制或放置某些东西。也就是说，在滚动条内（如果有）。所以，我们应该使用 documentElement.clientHeight/clientWidth。
+* DOCTYPE 很重要: 请注意：当 HTML 中没有 <!DOCTYPE HTML> 时，顶层级（top-level）几何属性的工作方式可能就会有所不同。可能会出现一些稀奇古怪的情况。 在现代 HTML 中，我们始终都应该写 DOCTYPE。
+* 从理论上讲，由于根文档元素是 document.documentElement，并且它包围了所有内容，因此我们可以通过使用 documentElement.scrollWidth/scrollHeight 来测量文档的完整大小。 但是在该元素上，对于整个文档，这些属性均无法正常工作。在 Chrome/Safari/Opera 中，如果没有滚动条，documentElement.scrollHeight 甚至可能小于 documentElement.clientHeight！很奇怪，对吧？为什么这样？最好不要问。这些不一致来源于远古时代，而不是“聪明”的逻辑。
+* 必须在 DOM 完全构建好之后才能通过 JavaScript 滚动页面。 例如，如果我们尝试通过 <head> 中的脚本滚动页面，它将无法正常工作。
+* 禁止滚动: 有时候我们需要使文档“不可滚动”。例如，当我们需要用一条需要立即引起注意的大消息来覆盖文档时，我们希望访问者与该消息而不是与文档进行交互。 要使文档不可滚动，只需要设置 document.body.style.overflow = "hidden"。该页面将“冻结”在其当前滚动位置上。
+* 要移动页面的元素，我们应该先熟悉坐标。 大多数 JavaScript 方法处理的是以下两种坐标系中的一个：
+  * 相对于窗口 — 类似于 position:fixed，从窗口的顶部/左侧边缘计算得出。 我们将这些坐标表示为 clientX/clientY，当我们研究事件属性时，就会明白为什么使用这种名称来表示坐标。 
+  * 相对于文档 — 与文档根（document root）中的 position:absolute 类似，从文档的顶部/左侧边缘计算得出。 我们将它们表示为 pageX/pageY。
+* 为什么需要派生（derived）属性？如果有了 x/y，为什么还要还会存在 top/left？ 从数学上讲，一个矩形是使用其起点 (x,y) 和方向向量 (width,height) 唯一定义的。因此，其它派生属性是为了方便起见。 从技术上讲，width/height 可能为负数，从而允许“定向（directed）”矩形，例如代表带有正确标记的开始和结束的鼠标选择。 负的 width/height 值表示矩形从其右下角开始，然后向左上方“增长”。 这是一个矩形，其 width 和 height 均为负数（例如 width=-200，height=-100）：正如你所看到的，在这个例子中，left/top 与 x/y 不相等。 但是实际上，elem.getBoundingClientRect() 总是返回正数的 width/height，这里我们提及负的 width/height 只是为了帮助你理解，为什么这些看起来重复的属性，实际上并不是重复的。
+* 对于在窗口之外的坐标，elementFromPoint 返回 null: 方法 document.elementFromPoint(x,y) 只对在可见区域内的坐标 (x,y) 起作用。 如果任何坐标为负或者超过了窗口的 width/height，那么该方法就会返回 null。 在大多数情况下，这种行为并不是一个问题，但是我们应该记住这一点。
+* 事件处理程序: 事件 是某事发生的信号。所有的 DOM 节点都生成这样的信号（但事件不仅限于 DOM）。 为了对事件作出响应，我们可以分配一个 处理程序（handler）—— 一个在事件发生时运行的函数。 处理程序是在发生用户行为（action）时运行 JavaScript 代码的一种方式。
 * 
 
 
