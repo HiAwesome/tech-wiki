@@ -529,9 +529,73 @@
   * readAsText(blob, \[encoding\]) —— 转换为字符串（TextDecoder 的一个替代方案），
   * readAsDataURL(blob) —— 转换为 base64 的 data url。
 * 在 Web Workers 中可以使用 FileReaderSync: 对于 Web Worker，还有一种同步的 FileReader 变体，称为 [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync). 它的读取方法 read* 不会生成事件，但是会像常规函数那样返回一个结果。 不过，这仅在 Web Worker 中可用，因为在读取文件的时候，同步调用会有延迟，而在 Web Worker 中，这种延迟并不是很重要。它不会影响页面。
+* 对于来自 JavaScript 的网络请求，有一个总称术语 “AJAX”（Asynchronous JavaScript And XML 的简称）。但是，我们不必使用 XML：这个术语诞生于很久以前，所以这个词一直在那儿。 有很多方式可以向服务器发送网络请求，并从服务器获取信息。 fetch() 方法是一种现代通用的方法，那么我们就从它开始吧。旧版本的浏览器不支持它（可以 polyfill），但是它在现代浏览器中的支持情况很好。
+* [FormData](https://xhr.spec.whatwg.org/#interface-formdata) 对象用于捕获 HTML 表单，并使用 fetch 或其他网络方法提交。 我们可以从 HTML 表单创建 new FormData(form)，也可以创建一个完全没有表单的对象，然后使用以下方法附加字段：
+  * formData.append(name, value)
+  * formData.append(name, blob, fileName)
+  * formData.set(name, value)
+  * formData.set(name, blob, fileName)
+* fetch 方法允许去跟踪 下载 进度。 请注意：到目前为止，fetch 方法无法跟踪 上传 进度。对于这个目的，请使用 [XMLHttpRequest](https://zh.javascript.info/xmlhttprequest), 我们在后面章节会讲到。 要跟踪下载进度，我们可以使用 response.body 属性。它是 ReadableStream —— 一个特殊的对象，它可以逐块（chunk）提供 body。在 [Streams API](https://streams.spec.whatwg.org/#rs-class) 规范中有对 ReadableStream 的详细描述。 与 response.text()，response.json() 和其他方法不同，response.body 给予了对进度读取的完全控制，我们可以随时计算下载了多少。
+* AbortController 是一个简单的对象，当 abort() 方法被调用时，会在自身的 signal 属性上生成 abort 事件（并将 signal.aborted 设置为 true）。 fetch 与之集成：我们将 signal 属性作为可选参数（option）进行传递，之后 fetch 会监听它，因此它能够中止 fetch。 我们可以在我们的代码中使用 AbortController。“调用 abort()” → “监听 abort 事件”交互简单且通用。即使没有 fetch，我们也可以使用它。
+* 如果我们向另一个网站发送 fetch 请求，则该请求可能会失败。这里的核心概念是 源（origin）—— 域（domain）/端口（port）/协议（protocol）的组合。 跨源请求 —— 那些发送到其他域（即使是子域）、协议或端口的请求 —— 需要来自远程端的特殊 header。 这个策略被称为 “CORS”：跨源资源共享（Cross-Origin Resource Sharing）。
+* 这是所有可能的 fetch 选项及其默认值（注释中标注了可选值）的完整列表：
+  ```text
+  let promise = fetch(url, {
+    method: "GET", // POST，PUT，DELETE，等。
+    headers: {
+      // 内容类型 header 值通常是自动设置的
+      // 取决于 request body
+      "Content-Type": "text/plain;charset=UTF-8"
+    },
+    body: undefined // string，FormData，Blob，BufferSource，或 URLSearchParams
+    referrer: "about:client", // 或 "" 以不发送 Referer header，
+    // 或者是当前源的 url
+    referrerPolicy: "no-referrer-when-downgrade", // no-referrer，origin，same-origin...
+    mode: "cors", // same-origin，no-cors
+    credentials: "same-origin", // omit，include
+    cache: "default", // no-store，reload，no-cache，force-cache，或 only-if-cached
+    redirect: "follow", // manual，error
+    integrity: "", // 一个 hash，像 "sha256-abcdef1234567890"
+    keepalive: false, // true
+    signal: undefined, // AbortController 来中止请求
+    window: window // null
+  });
+  ```
+* 内建的 [URL](https://url.spec.whatwg.org/#api) 类提供了用于创建和解析 URL 的便捷接口。 没有任何一个网络方法一定需要使用 URL 对象，字符串就足够了。所以从技术上讲，我们并不是必须使用 URL。但是有些时候 URL 对象真的很有用。我们可以将 URL 对象传递给网络（和大多数其他）方法，而不是字符串: 我们可以在 fetch 或 XMLHttpRequest 中使用 URL 对象，几乎可以在任何需要 URL 字符串的地方都能使用 URL 对象。 通常，URL 对象可以替代字符串传递给任何方法，因为大多数方法都会执行字符串转换，这会将 URL 对象转换为具有完整 URL 的字符串。
+* 假设，我们想要创建一个具有给定搜索参数的 url，例如：`https://google.com/search?query=JavaScript`. 我们可以在 URL 字符串中提供它们。……但是，如果参数中包含空格，非拉丁字母等（具体参见下文），参数就需要被编码。 因此，有一个 URL 属性用于解决这个问题：url.searchParams，[URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams) 类型的对象。 它为搜索参数提供了简便的方法：
+  * append(name, value) —— 按照 name 添加参数，
+  * delete(name) —— 按照 name 移除参数，
+  * get(name) —— 按照 name 获取参数，
+  * getAll(name) —— 获取相同 name 的所有参数（这是可行的，例如 ?user=John&user=Pete），
+  * has(name) —— 按照 name 检查参数是否存在，
+  * set(name, value) —— set/replace 参数，
+  * sort() —— 按 name 对参数进行排序，很少使用，
+  * ……并且它是可迭代的，类似于 Map。
+* 我们可以看到，encodeURI 没有对 & 进行编码，因为它对于整个 URL 来说是合法的字符。 但是，我们应该编码在搜索参数中的 & 字符，否则，我们将得到 q=Rock&Roll —— 实际上是 q=Rock 加上某个晦涩的参数 Roll。不符合预期。 因此，对于每个搜索参数，我们应该使用 encodeURIComponent，以将其正确地插入到 URL 字符串中。最安全的方式是对 name 和 value 都进行编码，除非我们能够绝对确保它只包含允许的字符。
+* 在现代 Web 开发中，出于以下三种原因，我们还在使用 XMLHttpRequest：
+  * 历史原因：我们需要支持现有的使用了 XMLHttpRequest 的脚本。
+  * 我们需要兼容旧浏览器，并且不想用 polyfill（例如为了使脚本更小）。
+  * 我们需要做一些 fetch 目前无法做到的事情，例如跟踪上传进度。
+* Header 的限制: 一些 header 是由浏览器专门管理的，例如 Referer 和 Host。 完整列表请见 [规范](http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method). 为了用户安全和请求的正确性，XMLHttpRequest 不允许更改它们。
+* 不能移除 header: XMLHttpRequest 的另一个特点是不能撤销 setRequestHeader。 一旦设置了 header，就无法撤销了。其他调用会向 header 中添加信息，但不会覆盖它。
+* 长轮询是与服务器保持持久连接的最简单的方式，它不使用任何特定的协议，例如 WebSocket 或者 Server Sent Event。 它很容易实现，在很多场景下也很好用。
+* 服务器应该可以处理许多挂起的连接: 服务器架构必须能够处理许多挂起的连接。 某些服务器架构是每个连接对应一个进程，导致进程数和连接数一样多，而每个进程都会消耗相当多的内存。因此，过多的连接会消耗掉全部内存。 使用像 PHP 和 Ruby 语言编写的后端程序会经常遇到这个问题。 使用 Node.js 编写的服务端程序通常不会出现此类问题。 也就是说，这不是编程语言的问题。大多数现代编程语言，包括 PHP 和 Ruby，都允许实现更适当的后端程序。只是请确保你的服务器架构在同时有很多连接的情况下能够正常工作。
+* 在消息很少的情况下，长轮询很有效。 如果消息比较频繁，那么上面描绘的请求-接收（requesting-receiving）消息的图表就会变成锯状状（saw-like）。 每个消息都是一个单独的请求，并带有 header，身份验证开销（authentication overhead）等。 因此，在这种情况下，首选另一种方法，例如：[Websocket](https://zh.javascript.info/websocket) 或 [Server Sent Events](https://zh.javascript.info/server-sent-events).
+* 在 [RFC 6455](http://tools.ietf.org/html/rfc6455) 规范中描述的 WebSocket 协议提供了一种在浏览器和服务器之间建立持久连接来交换数据的方法。数据可以作为“数据包”在两个方向上传递，而不会断开连接和其他 HTTP 请求。 对于需要连续数据交换的服务，例如网络游戏，实时交易系统等，WebSocket 尤其有用。
+* 始终使用 wss://    wss:// 协议不仅是被加密的，而且更可靠。 因为 ws:// 数据不是加密的，对于任何中间人来说其数据都是可见的。并且，旧的代理服务器不了解 WebSocket，它们可能会因为看到“奇怪的” header 而中止连接。 另一方面，wss:// 是基于 TLS 的 WebSocket，类似于 HTTPS 是基于 TLS 的 HTTP），传输安全层在发送方对数据进行了加密，在接收方进行解密。因此，数据包是通过代理加密传输的。它们看不到传输的里面的内容，且会让这些数据通过。
+* 无法模拟 WebSocket 握手: 我们不能使用 XMLHttpRequest 或 fetch 来进行这种 HTTP 请求，因为不允许 JavaScript 设置这些 header。
+* WebSocket 是一种在浏览器和服务器之间建立持久连接的现代方式。
+  * WebSocket 没有跨源限制。
+  * 浏览器对 WebSocket 支持很好。
+  * 可以发送/接收字符串和二进制数据。
+* WebSocket 自身并不包含重新连接（reconnection），身份验证（authentication）和很多其他高级机制。因此，有针对于此的客户端/服务端的库，并且也可以手动实现这些功能。 有时为了将 WebSocket 集成到现有项目中，人们将主 HTTP 服务器与 WebSocket 服务器并行运行，并且它们之间共享同一个数据库。对于 WebSocket 请求使用一个通向 WebSocket 服务器的子域 wss://ws.site.com，而 https://site.com 则通向主 HTTP 服务器。 当然，其他集成方式也是可行的。
+* 与 WebSocket 相比，EventSource 是与服务器通信的一种不那么强大的方式。 我们为什么要使用它？ 主要原因：简单。在很多应用中，WebSocket 有点大材小用。 我们需要从服务器接收一个数据流：可能是聊天消息或者市场价格等。这正是 EventSource 所擅长的。它还支持自动重新连接，而在 WebSocket 中这个功能需要我们手动实现。此外，它是一个普通的旧的 HTTP，不是一个新协议。
+* EventSource 对象自动建立一个持久的连接，并允许服务器通过这个连接发送消息。 它提供了：
+  * 在可调的 retry 超时内自动重新连接。
+  * 用于恢复事件的消息 id，重新连接后，最后接收到的标识符被在 Last-Event-ID header 中发送出去。
+  * 当前状态位于 readyState 属性中。
+* 这使得 EventSource 成为 WebSocket 的一个可行的替代方案，因为 WebSocket 更低级（low-level），且缺乏这样的内建功能（尽管它们可以被实现）。 在很多实际应用中，EventSource 的功能就已经够用了。 EventSource 在所有现代浏览器（除了 IE）中都得到了支持。
 * 
-
-
 
 
 
