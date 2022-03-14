@@ -631,7 +631,7 @@
 * Shadow DOM 为封装而生。它可以让一个组件拥有自己的「影子」DOM 树，这个 DOM 树不能在主文档中被任意访问，可能拥有局部样式规则，还有其他特性。你是否曾经思考过复杂的浏览器控件是如何被创建和添加样式的？浏览器在内部使用 DOM/CSS 来绘制它们。这个 DOM 结构一般来说对我们是隐藏的，但我们可以在开发者工具里面看见它。比如，在 Chrome 里，我们需要打开「Show user agent shadow DOM」选项。
 * 内建的 \<template\> 元素用来存储 HTML 模板。浏览器将忽略它的内容，仅检查语法的有效性，但是我们可以在 JavaScript 中访问和使用它来创建其他元素。 从理论上讲，我们可以在 HTML 中的任何位置创建不可见元素来储存 HTML 模板。那 \<template\> 元素有什么优势？ 首先，其内容可以是任何有效的HTML，即使它通常需要特定的封闭标签。
 * 模板的 content 属性可看作 [DocumentFragment](https://zh.javascript.info/modifying-document#document-fragment) —— 一种特殊的 DOM 节点。 我们可以将其视为普通的DOM节点，除了它有一个特殊属性：将其插入某个位置时，会被插入的则是其子节点。
-* Template 总结一下：
+* \<template\> 总结一下：
   * \<template\> 的内容可以是任何语法正确的 HTML。
   * \<template\> 内容被视为“超出文档范围”，因此它不会产生任何影响。
   * 我们可以在JavaScript 中访问 template.content ，将其克隆以在新组件中重复使用。
