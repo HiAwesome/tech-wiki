@@ -640,6 +640,12 @@
   * 但允许使用任何顶级 HTML 标签，即使没有适当包装元素的无意义的元素（例如 <tr> ）。
   * 其内容是交互式的：插入其文档后，脚本会运行， <video autoplay> 会自动播放。
 * \<template\> 元素不具有任何迭代机制，数据绑定或变量替换的功能，但我们可以在其基础上实现这些功能。
+* 仅顶层子元素可以设置 slot="…" 特性: slot="..." 属性仅仅对 shadow host 的直接子代 (在我们的例子中的 <user-card> 元素) 有效。对于嵌套元素它将被忽略。
+* 最后让我们来谈谈与插槽相关的 JavaScript 方法。 正如我们之前所见，JavaScript 会查看真实的 DOM，不展开。但是如果 shadow 树有 {mode: 'open'} ，那么我们可以找出哪个元素被放进一个插槽，反之亦然，哪个插槽分配了给这个元素：
+  * node.assignedSlot – 返回 node 分配给的 <slot> 元素。
+  * slot.assignedNodes({flatten: true/false}) – 分配给插槽的 DOM 节点。默认情况下，flatten 选项为 false。如果显式地设置为 true，则它将更深入地查看扁平化 DOM ，如果嵌套了组件，则返回嵌套的插槽，如果未分配节点，则返回备用内容。
+  * slot.assignedElements({flatten: true/false}) – 分配给插槽的 DOM 元素（与上面相同，但仅元素节点）。
+* Shadow tree 背后的思想是封装组件的内部实现细节。假设，在 <user-card> 组件的 shadow DOM 内触发一个点击事件。但是主文档内部的脚本并不了解 shadow DOM 内部，尤其是当组件来自于第三方库。 所以，为了保持细节简单，浏览器会重新定位（retarget）事件。 **当事件在组件外部捕获时，shadow DOM 中发生的事件将会以 host 元素作为目标。**
 * 
 
 
