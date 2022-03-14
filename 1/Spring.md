@@ -1,5 +1,7 @@
 # Spring
 
+#### [设计模式 -- 策略模式+Spring Bean代替if/else](https://developer.aliyun.com/article/775879)
+
 #### [How to use Log4j 2 with Spring Boot](https://www.callicoder.com/spring-boot-log4j-2-example/)
 
 ### [Spring Bean Names](https://www.baeldung.com/spring-bean-names)
