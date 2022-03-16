@@ -1,5 +1,19 @@
 # Redis
 
+### [KES pattern](https://redis.io/commands/keys)
+
+在使用 [SCAN cursor \[MATCH pattern] \[COUNT count] \[TYPE type]](https://redis.io/commands/scan) 会用到这种匹配，即 keys 支持 glob 样式模式，而不是正则表达式。
+
+Supported glob-style patterns:
+
+* h?llo matches hello, hallo and hxllo
+* h*llo matches hllo and heeeello
+* h\[ae]llo matches hello and hallo, but not hillo
+* h\[^e]llo matches hallo, hbllo, ... but not hello
+* h\[a-b]llo matches hallo and hbllo
+
+Use \ to escape special characters if you want to match them verbatim.
+
 ### [Redis Programmability](https://redis.io/topics/programmability)
 
 ### [Introduction to Eval Scripts](https://redis.io/topics/eval-intro)
