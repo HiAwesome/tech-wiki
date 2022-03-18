@@ -1,5 +1,7 @@
 # 散装语录
 
+* NFT 绝对不会为你提供艺术品的版权、使用权或所有权，没有任何一个国家的法律承认 NFT。 你购买 NFT，实际得到的只是一张收据，其他什么都没有。NFT 的有趣之处是，它让你可以倒卖这张收据。    ——[《教你关于 NFT 的知识》](https://medium.com/@Timoth3y/what-three-card-monte-can-teach-you-about-nfts-48d9fcf38be7)
+* 加入微软 Xbox 团队时，我没有被分到 CPU 组，只是获得了阅读 CPU 开发文档的访问权限。 但是，我对 CPU 很有兴趣，简直到了狂热的地步。有一年冬天，暴雪压断了电线，我家停电了。我睡在客厅地板上，打着手电筒阅读文档，直到搞清楚每根连线的作用。后来，我就成了团队的 CPU 专家。    —— [Bruce Dawson](https://randomascii.wordpress.com/2022/01/12/5-5-mm-in-1-25-nanoseconds/)
 * 在我看来，技术公司的高管一旦有50%不是工程师，这家公司慢慢就不再是技术公司了，而向技术控股公司转变。    —— [Hacker News 读者](https://news.ycombinator.com/item?id=29905415)
 * 随着在家办公的盛行，员工为了让经理看见自己，表演性质的行为也变得盛行，比如始终在通讯软件上显示在线、分享安排得满满的日历、电子邮件的发出时间经常在清晨或下班后。     ——[《表演行为的兴起》](https://www.economist.com/business/2022/01/08/the-rise-of-performative-work)
 * 自由软件最好的部分是，它有时会产生你付钱也开发不出来的产品（比如 Linux），或者比你付钱得到的软件质量更好的软件（比如 SQLite）。 自由软件最糟糕的部分是，开发人员可能根本不理睬用户。    ——[apenwarr.ca](https://apenwarr.ca/log/20211229)
