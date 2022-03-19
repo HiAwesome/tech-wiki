@@ -14,7 +14,7 @@
 
 ### [HTTP cookies](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)
 
-
+### [跨源资源共享（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS)
 
 
 
