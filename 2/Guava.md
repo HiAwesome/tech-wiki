@@ -18,8 +18,9 @@
 
 ### RangeMap: [TreeRangeMapTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/TreeRangeMapTest.java)
 
+## [Collection Utilities Explained](https://github.com/google/guava/wiki/CollectionUtilitiesExplained)
 
-
+### Iterables: [IterablesTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/IterablesTest.java)
 
 
 
