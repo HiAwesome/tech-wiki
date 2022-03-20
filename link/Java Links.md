@@ -1,6 +1,12 @@
 # 与 Java 有关的链接
 
-#### [https://www.baeldung.com/java-thread-stop](https://www.baeldung.com/java-thread-stop)
+#### [An Introduction to Apache Commons Lang 3](https://www.baeldung.com/java-commons-lang-3)
+
+#### [A Guide to Apache Commons Collections CollectionUtils](https://www.baeldung.com/apache-commons-collection-utils)
+
+#### [Apache Commons Collections MapUtils](https://www.baeldung.com/apache-commons-map-utils)
+
+#### [How to Kill a Java Thread](https://www.baeldung.com/java-thread-stop)
 
 #### [java.lang.NoClassDefFoundError: sun/misc/BASE64Encoder](https://stackoverflow.com/a/29692535)
 
