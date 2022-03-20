@@ -26,5 +26,10 @@
 
 ### [Guide to Guava’s EventBus](https://www.baeldung.com/guava-eventbus)
 
+### [MathExplained](https://github.com/google/guava/wiki/MathExplained)
 
+Floating-point arithmetic
+
+* [roundToInt(double, RoundingMode)](https://guava.dev/releases/snapshot/api/docs/com/google/common/math/DoubleMath.html#roundToInt-double-java.math.RoundingMode-): Rounds the specified number and casts it to an int, if it fits into an int, failing fast otherwise.
+* [roundToLong(double, RoundingMode)](https://guava.dev/releases/snapshot/api/docs/com/google/common/math/DoubleMath.html#roundToLong-double-java.math.RoundingMode-): Rounds the specified number and casts it to a long, if it fits into a long, failing fast otherwise.
 
