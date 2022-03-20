@@ -72,12 +72,19 @@
   * 协议升级请求总是由客户端发起的；暂时没有服务端请求协议更改的机制。当客户端试图升级到一个新的协议时，可以先发送一个普通的请求（GET，POST等），不过这个请求需要进行特殊配置以包含升级请求。
   * 如果服务器决定升级这次连接，就会返回一个 101 Switching Protocols 响应状态码，和一个要切换到的协议的头部字段Upgrade。 如果服务器没有（或者不能）升级这次连接，它会忽略客户端发送的 "Upgrade 头部字段，返回一个常规的响应：例如一个200 OK).
 
+### [HTTP 请求方法](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods)
 
+### [HTTP 响应代码](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)
 
+### [Firefox 开发者工具](https://developer.mozilla.org/zh-CN/docs/Tools)
 
+### [Mozilla Observatory](https://observatory.mozilla.org/)
 
+一个旨在帮助开发人员，系统管理员和安全专业人员安全地配置其站点的项目。
 
+### [浏览器的工作原理](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
 
+一篇非常全面的关于浏览器内部实现与通过 HTTP 协议的请求流的文章。可以说是所有 Web 开发者的**必读内容**。
 
 
 
