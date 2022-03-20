@@ -82,7 +82,7 @@
 
 一个旨在帮助开发人员，系统管理员和安全专业人员安全地配置其站点的项目。
 
-### [浏览器的工作原理](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
+### [浏览器的工作原理](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
 
 一篇非常全面的关于浏览器内部实现与通过 HTTP 协议的请求流的文章。可以说是所有 Web 开发者的**必读内容**。
 
