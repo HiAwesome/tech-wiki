@@ -7,3 +7,22 @@
 ### Multiset: [MultisetsTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/MultisetsTest.java)
 
 ### Multimap: [MultimapsTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/MultimapsTest.java)
+
+### BiMap: [HashBiMapTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/HashBiMapTest.java)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
