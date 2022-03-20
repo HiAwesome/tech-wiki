@@ -22,6 +22,7 @@
 
 ### Iterables: [IterablesTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/IterablesTest.java)
 
+### [Bloom Filters by Example](http://llimllib.github.io/bloomfilter-tutorial/zh_CN/)
 
 
 
