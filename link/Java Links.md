@@ -12,6 +12,8 @@ new: ` new org.apache.commons.codec.binary.Base64.encodeBase64String `
 
 ### [Guide To CompletableFuture](https://www.baeldung.com/java-completablefuture)
 
+### [Java 9 CompletableFuture API Improvements](https://www.baeldung.com/java-9-completablefuture)
+
 ### [Correct way to check Java version from BASH script](https://stackoverflow.com/a/7335524)
 
 ```shell
