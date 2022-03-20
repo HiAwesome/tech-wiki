@@ -10,9 +10,9 @@
 
 ### BiMap: [HashBiMapTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/HashBiMapTest.java)
 
+### Table: [HashBasedTableTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/HashBasedTableTest.java)
 
-
-
+### ClassToInstanceMap: [MutableClassToInstanceMapTest](https://github.com/google/guava/blob/master/guava-tests/test/com/google/common/collect/MutableClassToInstanceMapTest.java)
 
 
 
