@@ -1,5 +1,8 @@
 # 散装语录
 
+* 大多数网站都有一个隐含的假设：它是为短期而设计的，最多存在五年。 十年以后？运气好的话，可能还在，但设计网站时不会考虑这点。十五年或二十年以后？算了吧，那时网站大概早就消失，或者换一种样子了。没有人为长期存在而设计网站。    ——[《大多数网站都是为短生命周期而设计的》](https://utcc.utoronto.ca/~cks/space/blog/web/WebsiteShortDesignLifetime?showcomments)
+* 技术团队的时间可以这样划分：70% 用于功能开发，20% 用于消除技术债务，10% 用于学习和实验。    ——[《管理技术债务》](https://leadership.garden/tips-on-prioritizing-tech-debt/)
+* 软件行业中，错误的做法往往得到更多的资源。下面是两个例子： 一个公司里面，技术债务最多的团队，员工最多。 问题最多的软件库或编程语言，产生最多的话题。    ——[HaskellForAll.com](https://www.haskellforall.com/2014/04/worst-practices-are-viral-for-wrong.html)
 * NFT 绝对不会为你提供艺术品的版权、使用权或所有权，没有任何一个国家的法律承认 NFT。 你购买 NFT，实际得到的只是一张收据，其他什么都没有。NFT 的有趣之处是，它让你可以倒卖这张收据。    ——[《教你关于 NFT 的知识》](https://medium.com/@Timoth3y/what-three-card-monte-can-teach-you-about-nfts-48d9fcf38be7)
 * 加入微软 Xbox 团队时，我没有被分到 CPU 组，只是获得了阅读 CPU 开发文档的访问权限。 但是，我对 CPU 很有兴趣，简直到了狂热的地步。有一年冬天，暴雪压断了电线，我家停电了。我睡在客厅地板上，打着手电筒阅读文档，直到搞清楚每根连线的作用。后来，我就成了团队的 CPU 专家。    —— [Bruce Dawson](https://randomascii.wordpress.com/2022/01/12/5-5-mm-in-1-25-nanoseconds/)
 * 在我看来，技术公司的高管一旦有50%不是工程师，这家公司慢慢就不再是技术公司了，而向技术控股公司转变。    —— [Hacker News 读者](https://news.ycombinator.com/item?id=29905415)
