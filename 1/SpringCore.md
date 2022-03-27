@@ -134,6 +134,13 @@
 * 在类型匹配的候选对象中，让限定符值针对目标 bean 名称进行选择，不需要@Qualifier在注入点进行注释。如果没有其他解析指示符（例如限定符或主标记），对于非唯一依赖情况，Spring 将注入点名称（即字段名称或参数名称）与目标 bean 名称匹配并选择同名候选人（如有）。
 * **也就是说，如果您打算按名称表达注解驱动的注入，请不要主要使用 @Autowired，即使它能够在类型匹配候选者中按 bean 名称进行选择。相反，使用 JSR-250 @Resource注释，它在语义上定义为通过其唯一名称标识特定目标组件，声明的类型与匹配过程无关。** @Autowired具有相当不同的语义：在按类型选择候选 bean 后，指定的String 限定符值仅在那些类型选择的候选者中考虑（例如，将account限定符与标记有相同限定符标签的 bean 匹配）。
 * 试图在同一配置类上注入@Bean方法的结果实际上也是一种自引用场景。要么在实际需要的方法签名中懒洋洋地解析此类引用（与配置类中的自动连接字段相反），要么将受影响的@Bean方法声明为静态，将它们与包含的配置类实例及其生命周期分离。否则，这类bean只会在回退阶段考虑，而其他配置类上的匹配bean会被选为主要候选项（如果可用）。
+* 除了 @Qualifier 注释之外，您还可以使用 Java 泛型类型作为限定的隐式形式。
+* Spring 还通过在字段或 bean 属性设置器方法上使用 JSR-250@Resource注释 ( )来支持注入。javax.annotation.Resource这是 Java EE 中的常见模式：例如，在 JSF 管理的 bean 和 JAX-WS 端点中。Spring 也支持 Spring 管理的对象的这种模式。 @Resource采用名称属性。默认情况下，Spring 将该值解释为要注入的 bean 名称。
+* @Value 通常用于注入外部属性。
+* 配置PropertySourcesPlaceholderConfigurer使用 JavaConfig 时， @Bean方法必须是static.
+* Spring Boot 默认配置一个PropertySourcesPlaceholderConfigurerbean，该 bean 将从application.properties和application.yml文件中获取属性。
+* 当 @Value 包含 SpEL 表达式时，该值将在运行时动态计算。
+* 就像@Resource，@PostConstruct和@PreDestroy注解类型是从 JDK 6 到 8 的标准 Java 库的一部分。但是，整个javax.annotation 包在 JDK 9 中与核心 Java 模块分离，并最终在 JDK 11 中被删除。如果需要，javax.annotation-api工件需要现在通过 Maven Central 获得，只需像任何其他库一样添加到应用程序的类路径中。
 * 
 
 
