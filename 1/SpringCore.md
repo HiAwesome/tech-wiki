@@ -118,6 +118,9 @@
 * 我们建议您不要使用DisposableBean回调接口，因为它不必要地将代码耦合到 Spring。或者，我们建议使用@PreDestroy注释或指定 bean 定义支持的通用方法。使用基于 XML 的配置元数据，您可以destroy-method使用<bean/>. 通过 Java 配置，您可以destroyMethod使用@Bean. 请参阅 接收生命周期回调。
 * 如果为一个 bean 配置了多个生命周期机制，并且每个机制都配置了不同的方法名称，那么每个配置的方法都按照本注释后列出的顺序运行。init()但是，如果为多个生命周期机制 配置了相同的方法名称（例如， 对于初始化方法），则该方法将运行一次。
 * ApplicationContext默认情况下预实例化所有单例。因此，重要的是（至少对于单例 bean），如果您有一个（父）bean 定义，您打算仅将其用作模板，并且此定义指定了一个类，则必须确保将抽象属性设置为true，否则应用程序上下文将实际（尝试）预实例化abstract bean。
+* BeanPostProcessor实例和 AOP 自动代理: 实现BeanPostProcessor接口的类是特殊的，被容器区别对待。它们直接引用的所有BeanPostProcessor实例和 bean 都在启动时实例化，作为ApplicationContext. 接下来，所有BeanPostProcessor实例都以排序方式注册并应用于容器中的所有其他 bean。因为 AOP 自动代理是作为BeanPostProcessor自身实现的，所以BeanPostProcessor 实例和它们直接引用的 bean 都没有资格进行自动代理，因此没有将方面编织到其中。 对于任何这样的 bean，您应该会看到一条信息性日志消息：Bean someBean is not eligible for getting processed by all BeanPostProcessor interfaces (for example: not eligible for auto-proxying). 如果您BeanPostProcessor使用自动装配或 @Resource（可能回退到自动装配）将 bean 连接到您的 bean，则 Spring 在搜索类型匹配依赖项候选时可能会访问意外的 bean，因此，使它们没有资格进行自动代理或其他类型的 bean 发布-加工。例如，如果您有一个依赖项，@Resource其中字段或 setter 名称不直接对应于 bean 的声明名称并且没有使用 name 属性，则 Spring 会访问其他 bean 以按类型匹配它们。
+* PropertySourcesPlaceholderConfigurer不仅在您指定的文件中查找属性Properties 。默认情况下，如果在指定的属性文件中找不到属性，它会检查 SpringEnvironment属性和常规 JavaSystem属性。
+* 在配置 Spring 时，注解是否比 XML 更好？基于注释的配置的引入提出了这种方法是否比 XML“更好”的问题。简短的回答是“视情况而定”。长答案是每种方法都有其优点和缺点，通常由开发人员决定哪种策略更适合他们。由于它们的定义方式，注释在其声明中提供了大量上下文，从而使配置更短、更简洁。然而，XML 擅长在不触及源代码或重新编译它们的情况下连接组件。一些开发人员更喜欢在源附近进行布线，而另一些开发人员则认为带注释的类不再是 POJO，此外，配置变得分散且更难控制。 无论选择如何，Spring 都可以同时适应这两种风格，甚至可以将它们混合在一起。值得指出的是，通过其JavaConfig选项，Spring 允许以非侵入性的方式使用注释，而无需触及目标组件的源代码，并且在工具方面， Spring Tools for Eclipse支持所有配置样式。
 * 
 
 
