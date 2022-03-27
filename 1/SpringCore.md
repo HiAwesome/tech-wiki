@@ -41,23 +41,67 @@
 * 带有 p 命名空间的 XML 快捷方式: p-namespace 允许您使用bean元素的属性（而不是嵌套 <property/>元素）来描述协作 bean 或两者的属性值。 Spring 支持带有命名空间的可扩展配置格式，它基于 XML 模式定义。本章讨论的beans配置格式在 XML Schema 文档中定义。但是，p-namespace 没有在 XSD 文件中定义，仅存在于 Spring 的核心中。 以下示例显示了解析为相同结果的两个 XML 片段（第一个使用标准 XML 格式，第二个使用 p-namespace）：
   ```text
   <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:p="http://www.springframework.org/schema/p"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
-      https://www.springframework.org/schema/beans/spring-beans.xsd">
-  
-  <bean name="classic" class="com.example.ExampleBean">
-      <property name="email" value="someone@somewhere.com"/>
-  </bean>
-  
-  <bean name="p-namespace" class="com.example.ExampleBean"
-      p:email="someone@somewhere.com"/>
-  </beans> 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="john-classic" class="com.example.Person">
+        <property name="name" value="John Doe"/>
+        <property name="spouse" ref="jane"/>
+    </bean>
+
+    <bean name="john-modern"
+        class="com.example.Person"
+        p:name="John Doe"
+        p:spouse-ref="jane"/>
+
+    <bean name="jane" class="com.example.Person">
+        <property name="name" value="Jane Doe"/>
+    </bean>
+  </beans>
   ```
 * p 命名空间不如标准 XML 格式灵活。例如，声明属性引用的格式与以 结尾的属性冲突Ref，而标准 XML 格式则不会。我们建议您仔细选择您的方法并将其传达给您的团队成员，以避免生成同时使用所有三种方法的 XML 文档。
+* 带有 c 命名空间的 XML 快捷方式: 与带有 p-namespace 的 XML Shortcut类似，Spring 3.1 中引入的 c-namespace 允许内联属性来配置构造函数参数，而不是嵌套constructor-arg元素。 以下示例使用c:命名空间执行与 基于构造函数的依赖注入相同的操作：
+  ```text
+  <beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:c="http://www.springframework.org/schema/c"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+          https://www.springframework.org/schema/beans/spring-beans.xsd">
+  
+      <bean id="beanTwo" class="x.y.ThingTwo"/>
+      <bean id="beanThree" class="x.y.ThingThree"/>
+  
+      <!-- traditional declaration with optional argument names -->
+      <bean id="beanOne" class="x.y.ThingOne">
+          <constructor-arg name="thingTwo" ref="beanTwo"/>
+          <constructor-arg name="thingThree" ref="beanThree"/>
+          <constructor-arg name="email" value="something@somewhere.com"/>
+      </bean>
+  
+      <!-- c-namespace declaration with argument names -->
+      <bean id="beanOne" class="x.y.ThingOne" c:thingTwo-ref="beanTwo"
+          c:thingThree-ref="beanThree" c:email="something@somewhere.com"/>
+  
+  </beans>
+  ```
+* 1.4.3. 使用depends-on: 如果一个 bean 是另一个 bean 的依赖项，这通常意味着一个 bean 被设置为另一个 bean 的属性。通常，您使用基于 XML 的配置元数据中的<ref/> 元素来完成此操作。但是，有时 bean 之间的依赖关系不那么直接。例如，当需要触发类中的静态初始化程序时，例如用于数据库驱动程序注册。在初始化使用此元素的 bean 之前，该depends-on属性可以显式强制初始化一个或多个 bean。以下示例使用该depends-on属性来表达对单个 bean 的依赖; 要表达对多个 bean 的依赖，请提供 bean 名称列表作为depends-on属性值（逗号、空格和分号是有效的分隔符）：
+  ```xml
+  <!-- single depends-on -->
+  <bean id="beanOne" class="ExampleBean" depends-on="manager"/>
+  <bean id="manager" class="ManagerBean" />
+  
+  
+  <!-- multi depends-on -->
+  <bean id="beanOne" class="ExampleBean" depends-on="manager,accountDao">
+      <property name="manager" ref="manager" />
+  </bean>
+  
+  <bean id="manager" class="ManagerBean" />
+  <bean id="accountDao" class="x.y.jdbc.JdbcAccountDao" />
+  ```
 * 
-
-
 
 
 
