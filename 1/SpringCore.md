@@ -101,9 +101,16 @@
   <bean id="manager" class="ManagerBean" />
   <bean id="accountDao" class="x.y.jdbc.JdbcAccountDao" />
   ```
+* 任意方法替换: 与查找方法注入相比，一种不太有用的方法注入形式是能够用另一种方法实现替换托管 bean 中的任意方法。在您真正需要此功能之前，您可以放心地跳过本节的其余部分。 使用基于 XML 的配置元数据，您可以使用该replaced-method元素将现有方法实现替换为另一个，用于已部署的 bean。
+* 从 Spring 3.0 开始，线程范围可用，但默认情况下未注册。有关详细信息，请参阅 SimpleThreadScope. 有关如何注册此或任何其他自定义范围的说明，请参阅 使用自定义范围。
+* Spring 的单例 bean 概念不同于四人组 (GoF) 模式书中定义的单例模式。GoF 单例对对象的范围进行硬编码，以便每个 ClassLoader 创建一个且仅一个特定类的实例。Spring 单例的范围最好描述为每个容器和每个 bean。这意味着，如果您在单个 Spring 容器中为特定类定义一个 bean，则 Spring 容器会创建该 bean 的定义而定义类的一个且仅一个实例。单例范围是 Spring 中的默认范围。要将 bean 定义为 XML 中的单例，您可以定义一个 bean，如下例所示：
+  ```xml
+  <bean id="accountService" class="com.something.DefaultAccountService"/>
+  
+  <!-- the following is equivalent, though redundant (singleton scope is the default) -->
+  <bean id="accountService" class="com.something.DefaultAccountService" scope="singleton"/> 
+  ```
 * 
-
-
 
 
 
