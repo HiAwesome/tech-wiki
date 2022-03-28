@@ -159,6 +159,12 @@
 * 完整的@Configuration 与“精简”@Bean 模式？当@Bean方法在没有用 注释的类中声明时 @Configuration，它们被称为以“精简”模式处理。在一个或什至在一个普通的旧类中声明的 Bean 方法@Component被认为是“精简版”，包含类的不同主要目的和一种@Bean方法在那里是一种奖励。例如，服务组件可以通过@Bean每个适用组件类上的附加方法向容器公开管理视图。在这种情况下，@Bean方法是一种通用的工厂方法机制。 与 full 不同@Configuration，lite@Bean方法不能声明 bean 间的依赖关系。相反，它们对其包含组件的内部状态进行操作，并且可以选择对它们可能声明的参数进行操作。因此，这种@Bean方法不应调用其他 @Bean方法。每个这样的方法实际上只是特定 bean 引用的工厂方法，没有任何特殊的运行时语义。这里的积极副作用是在运行时不必应用 CGLIB 子类化，因此在类设计方面没有限制（即包含类可能是final等等）。 在常见情况下，@Bean方法将在@Configuration类中声明，确保始终使用“完整”模式，并且跨方法引用因此被重定向到容器的生命周期管理。这可以防止 @Bean通过常规 Java 调用意外调用相同的方法，这有助于减少在“精简”模式下操作时难以追踪的细微错误。
 * 请记住，@Configuration类是用元注释 的@Component，因此它们是组件扫描的候选对象。在前面的示例中，假设AppConfig在com.acme包（或下面的任何包）中声明了 ，在调用scan(). 在 之后refresh()，它的所有@Bean 方法都被处理并注册为容器中的 bean 定义。 Remember that @Configuration classes are meta-annotated with @Component, so they are candidates for component-scanning. In the preceding example, assuming that AppConfig is declared within the com.acme package (or any package underneath), it is picked up during the call to scan(). Upon refresh(), all its @Bean methods are processed and registered as bean definitions within the container.
 * 对于编程用例， GenericWebApplicationContext 可以用作 AnnotationConfigWebApplicationContext. 有关详细信息，请参阅 [GenericWebApplicationContext](https://docs.spring.io/spring-framework/docs/5.3.17/javadoc-api/org/springframework/web/context/support/GenericWebApplicationContext.html) javadoc。
+* 要声明一个 bean，你可以用注解来注解一个方法@Bean。ApplicationContext您可以使用此方法在指定为方法返回值的类型中注册 bean 定义。默认情况下，bean 名称与方法名称相同。
+* 如果您始终通过声明的服务接口引用您的类型，则您的 @Bean返回类型可以安全地加入该设计决策。但是，对于实现多个接口的组件或可能由其实现类型引用的组件，声明最具体的返回类型可能更安全（至少与引用您的 bean 的注入点所要求的一样具体）。
+* @Bean 注解支持指定任意初始化和销毁回调方法，很像 Spring XML bean 元素中 init-method 和 destroy-method 属性。
+* 默认情况下，使用 Java 配置定义的具有公共close或shutdown 方法的 bean 会自动加入销毁回调。如果您有一个公共 close或shutdown方法并且您不希望在容器关闭时调用它，您可以添加@Bean(destroyMethod="")到您的 bean 定义以禁用默认(inferred)模式。
+* 当您直接在 Java 中工作时，您可以对您的对象做任何您喜欢的事情，而不必总是依赖容器生命周期。 When you work directly in Java, you can do anything you like with your objects and do not always need to rely on the container lifecycle.
+* 默认情况下，配置类使用 @Bean 方法的名称作为生成的 bean 的名称。但是，可以使用 name 属性覆盖此功能。
 * 
 
 
