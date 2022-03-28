@@ -238,6 +238,9 @@
   * 如果异步事件侦听器抛出Exception，它不会传播给调用者。有关 AsyncUncaughtExceptionHandler 更多详细信息，请参阅。 
   * 异步事件侦听器方法不能通过返回值来发布后续事件。如果您需要发布另一个事件作为处理的结果，请 ApplicationEventPublisher 手动注入一个来发布该事件。
 * ApplicationStartup仅在应用程序启动期间和核心容器中使用；这绝不是 Java 分析器或Micrometer等指标库的替代品。
+* "spring.*"开发人员在创建自定义启动步骤时 不应使用命名空间。这个命名空间是为内部 Spring 使用而保留的，并且可能会发生变化。
+* BeanFactory还是ApplicationContext？ BeanFactory本节解释了容器级别和 容器级别之间的差异ApplicationContext以及对引导的影响。 ApplicationContext除非您有充分的理由不这样做，否则 您应该使用 anGenericApplicationContext及其子类AnnotationConfigApplicationContext 作为自定义引导的常见实现。这些是 Spring 核心容器的主要入口点，用于所有常见目的：加载配置文件、触发类路径扫描、以编程方式注册 bean 定义和带注释的类，以及（从 5.0 开始）注册功能性 bean 定义。 因为 anApplicationContext包含 a 的所有功能BeanFactory，所以通常建议在 plain 上使用BeanFactory，除了需要完全控制 bean 处理的场景。在一个ApplicationContext（例如 GenericApplicationContext实现）中，按照约定（即按 bean 名称或按 bean 类型——特别是后处理器）检测几种 bean，而 plainDefaultListableBeanFactory对任何特殊 bean 是不可知的。 对于许多扩展容器特性，例如注解处理和 AOP 代理，BeanPostProcessor扩展点是必不可少的。如果您仅使用普通DefaultListableBeanFactory的，则默认情况下不会检测和激活此类后处理器。这种情况可能会令人困惑，因为您的 bean 配置实际上没有任何问题。相反，在这种情况下，需要通过额外的设置来完全引导容器。
+* 在这两种情况下，显式注册步骤都不方便，这就是为什么在 Spring 支持的应用程序中，各种ApplicationContext变体比普通的更受青睐 ，尤其是在典型企业设置中依赖实例来扩展容器功能时DefaultListableBeanFactory。BeanFactoryPostProcessorBeanPostProcessor. AnAnnotationConfigApplicationContext已注册所有常见的注释后处理器，并且可以通过配置注释引入额外的处理器，例如@EnableTransactionManagement. 在 Spring 的基于注解的配置模型的抽象级别上，bean 后处理器的概念变成了单纯的内部容器细节。
 * 
 
 
