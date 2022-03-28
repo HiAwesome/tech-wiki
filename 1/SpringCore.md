@@ -217,6 +217,27 @@
 * 在system-test-config.xml文件中，AppConfig <bean/>不声明id 元素。虽然这样做是可以接受的，但这是不必要的，因为没有其他 bean 曾经引用过它，并且不太可能通过名称从容器中显式获取。类似地，DataSourcebean 仅按类型自动装配，因此id 并不严格要求显式 bean。
 * 在@Configuration类是配置容器的主要机制的应用程序中，仍然可能至少需要使用一些 XML。在这些场景中，您可以根据@ImportResource需要使用和定义尽可能多的 XML。这样做实现了一种“以 Java 为中心”的方法来配置容器并将 XML 保持在最低限度。
 * Environment接口是集成在容器中的抽象，它对应用程序环境的两个关键方面进行建模：配置文件 和属性。 配置文件是一个命名的、逻辑的 bean 定义组，仅当给定的配置文件处于活动状态时才向容器注册。可以将 Bean 分配给配置文件，无论是在 XML 中定义还是使用注释定义。与配置文件相关的对象的作用Environment是确定哪些配置文件（如果有）当前处于活动状态，以及哪些配置文件（如果有）默认情况下应该是活动的。 属性在几乎所有应用程序中都发挥着重要作用，并且可能源自多种来源：属性文件、JVM 系统属性、系统环境变量、JNDI、servlet 上下文参数、ad-hocProperties对象、Map对象等等。与属性相关的对象的作用Environment是为用户提供一个方便的服务接口，用于配置属性源并从中解析属性。
+* 配置文件字符串可能包含一个简单的配置文件名称（例如，production）或配置文件表达式。配置文件表达式允许表达更复杂的配置文件逻辑（例如，production & us-east）。不能在不使用括号的情况下混合使用&and运算符。|例如， production & us-east | eu-central不是一个有效的表达式。它必须表示为 production & (us-east | eu-central)。
+* 如果一个@Configuration类用 标记，则与该类关联@Profile的所有@Bean方法和 注释都将被绕过，除非一个或多个指定的配置文件处于活动状态。@Import如果一个@Component或@Configuration类标有@Profile({"p1", "p2"})，则除非已激活配置文件“p1”或“p2”，否则不会注册或处理该类。如果给定配置文件以 NOT 运算符 ( ) 为前缀，!则仅当配置文件不活动时才注册带注释的元素。例如，@Profile({"p1", "!p2"})如果配置文件“p1”处于活动状态或配置文件“p2”未处于活动状态，则会发生注册。
+* 使用@Profileon@Bean方法，可能会应用一种特殊情况：在@Bean相同 Java 方法名称的重载方法的情况下（类似于构造函数重载），@Profile需要在所有重载方法上一致地声明一个条件。如果条件不一致，则仅重载方法中第一个声明的条件重要。因此，@Profile不能用于选择具有特定参数签名的重载方法而不是另一个。同一 bean 的所有工厂方法之间的解析在创建时遵循 Spring 的构造函数解析算法。 如果要定义具有不同配置文件条件的替代 bean，请使用不同的 Java 方法名称，这些方法名称通过使用@Beanname 属性指向相同的 bean 名称，如前面的示例所示。如果参数签名都相同（例如，所有变体都有无参数工厂方法），这是首先在有效 Java 类中表示这种安排的唯一方法（因为只能有一个特定名称和参数签名的方法）。
+* 激活配置文件可以通过多种方式完成，但最直接的方式是以编程方式针对Environment通过 ApplicationContext. 以下示例显示了如何执行此操作：
+  ```java
+  AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+  ctx.getEnvironment().setActiveProfiles("development");
+  ctx.register(SomeConfig.class, StandaloneDataConfig.class, JndiDataConfig.class);
+  ctx.refresh();
+  ```
+* default 配置文件表示默认启用的配置文件。如果没有激活的配置文件，dataSource则创建。您可以将此视为一种为一个或多个 bean 提供默认定义的方法。如果启用了任何配置文件，则默认配置文件不适用。 setDefaultProfiles() 您可以使用 onEnvironment 或以声明方式使用 spring.profiles.default 属性来更改默认配置文件的名称。
+* 根据@PropertySourceJava 8 约定，注释是可重复的。但是，所有此类@PropertySource注释都需要在同一级别声明，或者直接在配置类上声明，或者作为同一自定义注释中的元注释。不建议混合直接注释和元注释，因为直接注释有效地覆盖了元注释。
+* 因为 SpringMessageSource是基于 Java 的ResourceBundle，所以它不会合并具有相同基本名称的包，而只会使用找到的第一个包。具有相同基本名称的后续消息包将被忽略。
+* 作为 的替代方案ResourceBundleMessageSource，Spring 提供了一个 ReloadableResourceBundleMessageSource类。此变体支持相同的捆绑文件格式，但比基于标准 JDK 的 ResourceBundleMessageSource实现更灵活。特别是，它允许从任何 Spring 资源位置（不仅从类路径）读取文件，并支持捆绑属性文件的热重载（同时在它们之间有效地缓存它们）。有关详细信息，请参阅ReloadableResourceBundleMessageSource javadoc。
+* ApplicationContext 中的事件处理是通过 ApplicationEvent 类和 ApplicationListener 接口提供的。如果将实现 ApplicationListener接口的 bean 部署到上下文中，则每次 ApplicationEvent发布到 时ApplicationContext，都会通知该 bean。本质上，这是标准的观察者设计模式。从 Spring 4.2 开始，事件基础结构得到了显着改进，并提供了基于注释的模型以及发布任意事件的能力（即，不一定从 扩展的对象ApplicationEvent）。当这样的对象发布时，我们会为您将其包装在一个事件中。
+* 请注意，ApplicationListener它通常使用自定义事件的类型进行参数化（BlockedListEvent在前面的示例中）。这意味着该 onApplicationEvent()方法可以保持类型安全，避免任何向下转换的需要。您可以根据需要注册任意数量的事件侦听器，但请注意，默认情况下，事件侦听器会同步接收事件。这意味着该publishEvent()方法会阻塞，直到所有侦听器都完成了对事件的处理。这种同步和单线程方法的一个优点是，当侦听器接收到事件时，如果事务上下文可用，它会在发布者的事务上下文中运行。如果需要另一种事件发布策略，请参阅 javadoc 了解 Spring 的 ApplicationEventMulticaster接口和SimpleApplicationEventMulticaster 配置选项的实现。
+* Spring 的事件机制是为同一应用程序上下文中的 Spring bean 之间的简单通信而设计的。然而，对于更复杂的企业集成需求，单独维护的 Spring Integration项目为 构建基于众所周知的 Spring 编程模型的 轻量级、面向模式、事件驱动的架构提供了完整的支持。
+* 异步侦听器: 如果您希望特定侦听器异步处理事件，则可以重用 常规@Async支持。使用异步事件时请注意以下限制： 
+  * 如果异步事件侦听器抛出Exception，它不会传播给调用者。有关 AsyncUncaughtExceptionHandler 更多详细信息，请参阅。 
+  * 异步事件侦听器方法不能通过返回值来发布后续事件。如果您需要发布另一个事件作为处理的结果，请 ApplicationEventPublisher 手动注入一个来发布该事件。
+* ApplicationStartup仅在应用程序启动期间和核心容器中使用；这绝不是 Java 分析器或Micrometer等指标库的替代品。
 * 
 
 
