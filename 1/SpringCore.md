@@ -151,6 +151,9 @@
 * 当一个组件作为扫描过程的一部分被自动检测时，它的 bean 名称由该BeanNameGenerator扫描器已知的策略生成。默认情况下，任何包含名称的Spring 原型注解 ( @Component、@Repository、@Service和 ) 都会将该名称提供给相应的 bean 定义。
 * @Scope注释仅在具体 bean 类（用于注释组件）或工厂方法（用于@Bean方法）上进行自省。与 XML bean 定义相比，没有 bean 定义继承的概念，并且类级别的继承层次结构与元数据无关。
 * 与大多数基于注解的替代方案一样，请记住注解元数据绑定到类定义本身，而 XML 的使用允许相同类型的多个 bean 提供其限定符元数据的变体，因为元数据是根据每个-实例而不是每个类。 As with most annotation-based alternatives, keep in mind that the annotation metadata is bound to the class definition itself, while the use of XML allows for multiple beans of the same type to provide variations in their qualifier metadata, because that metadata is provided per-instance rather than per-class.
+* 虽然类路径扫描非常快，但可以通过在编译时创建静态候选列表来提高大型应用程序的启动性能。在这种模式下，作为组件扫描目标的所有模块都必须使用这种机制。	您现有的 @ComponentScan 或 `<context:component-scan/>` 指令必须保持不变，才能请求上下文以扫描某些包中的候选人。当 ApplicationContext检测到这样的索引时，它会自动使用它而不是扫描类路径。在 IDE 中使用此模式时，spring-context-indexer必须将其注册为注释处理器，以确保更新候选组件时索引是最新的。当在类路径中找到文件时，索引会自动启用META-INF/spring.components。如果索引对某些库（或用例）部分可用，但无法为整个应用程序构建，您可以通过设置回退到常规类路径安排（好像根本不存在索引）spring.index.ignore， true或者作为JVM 系统属性或通过 SpringProperties机制。
+* 从 Spring 3.0 开始，Spring 提供对 JSR-330 标准注解（依赖注入）的支持。这些注释的扫描方式与 Spring 注释相同。要使用它们，您需要在类路径中有相关的 jar。	
+如果您使用 Maven，则该javax.inject工件在标准 Maven 存储库 [javax.inject](https://repo1.maven.org/maven2/javax/inject/javax.inject/1/) 中可用。您可以将以下依赖项添加到文件 pom.xml 中。
 * 
 
 
