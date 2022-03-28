@@ -141,8 +141,11 @@
 * Spring Boot 默认配置一个PropertySourcesPlaceholderConfigurerbean，该 bean 将从application.properties和application.yml文件中获取属性。
 * 当 @Value 包含 SpEL 表达式时，该值将在运行时动态计算。
 * 就像@Resource，@PostConstruct和@PreDestroy注解类型是从 JDK 6 到 8 的标准 Java 库的一部分。但是，整个javax.annotation 包在 JDK 9 中与核心 Java 模块分离，并最终在 JDK 11 中被删除。如果需要，javax.annotation-api工件需要现在通过 Maven Central 获得，只需像任何其他库一样添加到应用程序的类路径中。
+* 从 Spring 3.0 开始，Spring JavaConfig 项目提供的许多特性都是核心 Spring Framework 的一部分。这允许您使用 Java 而不是使用传统的 XML 文件来定义 bean。查看@Configuration、@Bean、 @Import和@DependsOn注释，了解如何使用这些新功能的示例。
+* @Repository注释是满足存储库（也称为数据访问对象或 DAO）角色或原型的任何类的标记。此标记的用途之一是异常的自动翻译，如 [Exception Translation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#orm-exception-translation) 中所述。Spring 提供了更多的原型注解：@Component、@Service和 @Controller. @Component是任何 Spring 管理的组件的通用构造型。 @Repository, @Service, 和@Controller是@Component针对更具体用例（分别在持久层、服务层和表示层）的特化。因此，您可以使用 注释组件类 @Component，但是通过使用 、 注释它们@Repository，@Service或者@Controller 相反，您的类更适合工具处理或与方面关联。例如，这些原型注释是切入点的理想目标。@Repository, @Service, 并且@Controller还可以在 Spring 框架的未来版本中携带额外的语义。因此，如果您在使用@Component或者@Service对于你的服务层，@Service显然是更好的选择。同样，如前所述，@Repository已经支持作为持久层中自动异常转换的标记。
+* 要自动检测这些类并注册相应的 bean，您需要添加 @ComponentScan到您的@Configuration类中，其中basePackages属性是两个类的公共父包。（或者，您可以指定一个逗号或分号或空格分隔的列表，其中包括每个类的父包。）为简洁起见，前面的示例可能使用value了注释的属性（即 @ComponentScan("org.example") ）。
+* 使用 `<context:component-scan>` 隐式启用 `<context:annotation-config>`. 使用 `<context:component-scan>`  时通常不需要包含 `<context:annotation-config>`.
 * 
-
 
 
 
