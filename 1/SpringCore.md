@@ -208,6 +208,15 @@
       }
   }
   ```
+* 就像 `<import/>` 在 Spring XML 文件中使用该元素来帮助模块化配置一样，@Import 注释允许 @Bean 从另一个配置类加载定义。
+* 从 Spring Framework 4.2 开始，@Import还支持对常规组件类的引用，类似于AnnotationConfigApplicationContext.register方法。如果您想通过使用一些配置类作为入口点来显式定义所有组件来避免组件扫描，这将特别有用。
+* 确保您以这种方式注入的依赖项只是最简单的类型。@Configuration 类在上下文初始化期间很早就被处理，并且强制以这种方式注入依赖项可能会导致意外的早期初始化。尽可能使用基于参数的注入，如前面的示例所示。 此外，请特别注意BeanPostProcessor和的BeanFactoryPostProcessor定义@Bean。这些通常应该被声明为static @Bean方法，而不是触发它们包含的配置类的实例化。否则，@Autowired可能@Value无法在配置类本身上工作，因为可以将其创建为早于 AutowiredAnnotationBeanPostProcessor.
+* @Configuration仅从 Spring Framework 4.3 开始支持类中的 构造函数注入。另请注意，如果目标 bean 仅定义一个构造函数 ，则无需指定 @Autowired。
+* 如果您想影响某些 bean 的启动创建顺序，请考虑将其中一些声明为@Lazy（用于在首次访问时创建而不是在启动时创建）或@DependsOn某些其他 bean（确保在当前 bean 之前创建特定的其他 bean，超出后者的直接依赖意味着什么）。
+* Spring 的@Configuration类支持并非旨在 100% 完全替代 Spring XML。一些工具，例如 Spring XML 命名空间，仍然是配置容器的理想方式。在 XML 方便或必要的情况下，您可以选择：或者以“以 XML 为中心”的方式实例化容器，例如使用 ， ClassPathXmlApplicationContext或者以“以 Java 为中心”的方式实例化它 AnnotationConfigApplicationContext，@ImportResource使用根据需要导入 XML。
+* 在system-test-config.xml文件中，AppConfig <bean/>不声明id 元素。虽然这样做是可以接受的，但这是不必要的，因为没有其他 bean 曾经引用过它，并且不太可能通过名称从容器中显式获取。类似地，DataSourcebean 仅按类型自动装配，因此id 并不严格要求显式 bean。
+* 在@Configuration类是配置容器的主要机制的应用程序中，仍然可能至少需要使用一些 XML。在这些场景中，您可以根据@ImportResource需要使用和定义尽可能多的 XML。这样做实现了一种“以 Java 为中心”的方法来配置容器并将 XML 保持在最低限度。
+* Environment接口是集成在容器中的抽象，它对应用程序环境的两个关键方面进行建模：配置文件 和属性。 配置文件是一个命名的、逻辑的 bean 定义组，仅当给定的配置文件处于活动状态时才向容器注册。可以将 Bean 分配给配置文件，无论是在 XML 中定义还是使用注释定义。与配置文件相关的对象的作用Environment是确定哪些配置文件（如果有）当前处于活动状态，以及哪些配置文件（如果有）默认情况下应该是活动的。 属性在几乎所有应用程序中都发挥着重要作用，并且可能源自多种来源：属性文件、JVM 系统属性、系统环境变量、JNDI、servlet 上下文参数、ad-hocProperties对象、Map对象等等。与属性相关的对象的作用Environment是为用户提供一个方便的服务接口，用于配置属性源并从中解析属性。
 * 
 
 
