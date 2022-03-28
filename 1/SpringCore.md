@@ -165,6 +165,49 @@
 * 默认情况下，使用 Java 配置定义的具有公共close或shutdown 方法的 bean 会自动加入销毁回调。如果您有一个公共 close或shutdown方法并且您不希望在容器关闭时调用它，您可以添加@Bean(destroyMethod="")到您的 bean 定义以禁用默认(inferred)模式。
 * 当您直接在 Java 中工作时，您可以对您的对象做任何您喜欢的事情，而不必总是依赖容器生命周期。 When you work directly in Java, you can do anything you like with your objects and do not always need to rely on the container lifecycle.
 * 默认情况下，配置类使用 @Bean 方法的名称作为生成的 bean 的名称。但是，可以使用 name 属性覆盖此功能。
+* 正如命名 Bean中所讨论的，有时需要为单个 bean 提供多个名称，也称为 bean 别名。注释的name属性@Bean 为此目的接受一个字符串数组。以下示例显示了如何为 bean 设置多个别名：`@Bean({"dataSource", "subsystemA-dataSource", "subsystemB-dataSource"})`.
+* @Configuration 是一个类级别的注解，表明一个对象是 bean 定义的来源。类通过-annotated 方法 @Configuration 声明 bean 。对类上的方法的@Bean调用也可用于定义 bean 间的依赖关系。
+* 这种声明 bean 间依赖关系的方法仅在该@Bean方法在@Configuration类中声明时才有效。 您不能使用普通@Component类来声明 bean 间的依赖关系。
+  ```java
+  @Configuration
+  public class AppConfig {
+  
+      @Bean
+      public BeanOne beanOne() {
+          return new BeanOne(beanTwo());
+      }
+  
+      @Bean
+      public BeanTwo beanTwo() {
+          return new BeanTwo();
+      }
+  }
+  ```
+* 考虑下面的例子，它显示了一个@Bean被注解的方法被调用了两次。clientDao()已被调用一次clientService1()和一次clientService2()。由于此方法会创建一个新实例ClientDaoImpl并返回它，因此您通常会期望有两个实例（每个服务一个实例）。那肯定会有问题：在 Spring 中，实例化的 beansingleton默认有一个作用域。这就是神奇之处：所有@Configuration类在启动时都使用CGLIB. 在子类中，子方法在调用父方法并创建新实例之前，首先检查容器中是否有任何缓存（作用域）bean。根据 bean 的范围，行为可能会有所不同。我们在这里谈论单例。从 Spring 3.2 开始，不再需要将 CGLIB 添加到类路径中，因为 CGLIB 类已被重新打包org.springframework.cglib并直接包含在 spring-core JAR 中。由于 CGLIB 在启动时动态添加功能，因此存在一些限制。特别是，配置类不能是最终的。但是，从 4.3 开始，配置类上允许使用任何构造函数，包括使用 @Autowired或使用单个非默认构造函数声明进行默认注入。 如果您希望避免任何 CGLIB 强加的限制，请考虑@Bean 在非@Configuration类上声明您的方法（例如，@Component改为在普通类上）。方法之间的跨方法调用@Bean不会被拦截，因此您必须完全依赖构造函数或方法级别的依赖注入。
+  ```java
+  @Configuration
+  public class AppConfig {
+  
+      @Bean
+      public ClientService clientService1() {
+          ClientServiceImpl clientService = new ClientServiceImpl();
+          clientService.setClientDao(clientDao());
+          return clientService;
+      }
+  
+      @Bean
+      public ClientService clientService2() {
+          ClientServiceImpl clientService = new ClientServiceImpl();
+          clientService.setClientDao(clientDao());
+          return clientService;
+      }
+  
+      @Bean
+      public ClientDao clientDao() {
+          return new ClientDaoImpl();
+      }
+  }
+  ```
 * 
 
 
