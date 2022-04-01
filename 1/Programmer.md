@@ -1,5 +1,10 @@
 # 散装语录
 
+* 如果以区块链为基础的 Web3 得到推广，用户将没有隐私。一个账户（钱包）的所有资产和交易都是公开在区块链上的，只要别人知道你的钱包地址，就可以查询你拥有多少货币、向谁发送了加密货币等等信息。     ——[《Web3 的隐私与透明度》](https://coinsights.substack.com/p/the-duality-of-web3)
+* 互联网时代的信息质量，呈现两极化。信息的平均质量变得越来越差，但是你能从网上找到的最有用信息，质量正越来越好。 这就好比一个商品极大丰富的市场，对普通消费者是不利的，因为他不知道怎么选择琳琅满目的商品；但对高水平消费者非常有利，因为他能找到最满足自己需要的商品。     ——[《丰富市场的悖论》](https://perell.com/note/the-paradox-of-abundance/)
+* 汽车是一种快速折旧的昂贵资产，生命周期的绝大部分时间都无所事事地停在车库。大都市地区必须拿出大量土地，当作停车场，才能放置所有的闲置车辆。 我们越早实现无人驾驶和大规模的按需运输，就能越早摆脱这种巨大的浪费。    ——[Hacker News 读者](https://news.ycombinator.com/item?id=30170877)
+* 互联网开发已经变了，我们不再为互相链接和长期展示而创建内容，而是为了展示广告而创建内容。 内容的消费时间已经从几分钟下降到几秒钟，Facebook、Instagram 和 TikTok 这样的成瘾机器被认为是互联网的正确形式。     ——[《Web 的现状》](https://christianheilmann.com/2021/12/20/the-web-starts-on-page-four/)
+* 整个自由软件社区，弥漫着一种不信任的气氛：不信任大公司，不信任政府，不信任专有软件。 这些不信任的根源在于，自由软件社区不信任集中化，更喜欢去中心的设计。    ——[《去中心化的迷思》](https://rosenzweig.io/blog/the-federation-fallacy.html)
 * 大多数网站都有一个隐含的假设：它是为短期而设计的，最多存在五年。 十年以后？运气好的话，可能还在，但设计网站时不会考虑这点。十五年或二十年以后？算了吧，那时网站大概早就消失，或者换一种样子了。没有人为长期存在而设计网站。    ——[《大多数网站都是为短生命周期而设计的》](https://utcc.utoronto.ca/~cks/space/blog/web/WebsiteShortDesignLifetime?showcomments)
 * 技术团队的时间可以这样划分：70% 用于功能开发，20% 用于消除技术债务，10% 用于学习和实验。    ——[《管理技术债务》](https://leadership.garden/tips-on-prioritizing-tech-debt/)
 * 软件行业中，错误的做法往往得到更多的资源。下面是两个例子： 一个公司里面，技术债务最多的团队，员工最多。 问题最多的软件库或编程语言，产生最多的话题。    ——[HaskellForAll.com](https://www.haskellforall.com/2014/04/worst-practices-are-viral-for-wrong.html)
