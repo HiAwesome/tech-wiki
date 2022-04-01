@@ -1,5 +1,26 @@
 # 与 Java 有关的链接
 
+#### [lombok: Add jdk9 compiler support](https://github.com/projectlombok/lombok/issues/985)
+
+Some module:
+
+```shell
+
+javac \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+-J--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
+-cp lombok.jar \
+Test.java
+
+```
+
 #### [An Introduction to Apache Commons Lang 3](https://www.baeldung.com/java-commons-lang-3)
 
 #### [A Guide to Apache Commons Collections CollectionUtils](https://www.baeldung.com/apache-commons-collection-utils)
