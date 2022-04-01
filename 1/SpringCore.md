@@ -241,6 +241,8 @@
 * "spring.*"开发人员在创建自定义启动步骤时 不应使用命名空间。这个命名空间是为内部 Spring 使用而保留的，并且可能会发生变化。
 * BeanFactory还是ApplicationContext？ BeanFactory本节解释了容器级别和 容器级别之间的差异ApplicationContext以及对引导的影响。 ApplicationContext除非您有充分的理由不这样做，否则 您应该使用 anGenericApplicationContext及其子类AnnotationConfigApplicationContext 作为自定义引导的常见实现。这些是 Spring 核心容器的主要入口点，用于所有常见目的：加载配置文件、触发类路径扫描、以编程方式注册 bean 定义和带注释的类，以及（从 5.0 开始）注册功能性 bean 定义。 因为 anApplicationContext包含 a 的所有功能BeanFactory，所以通常建议在 plain 上使用BeanFactory，除了需要完全控制 bean 处理的场景。在一个ApplicationContext（例如 GenericApplicationContext实现）中，按照约定（即按 bean 名称或按 bean 类型——特别是后处理器）检测几种 bean，而 plainDefaultListableBeanFactory对任何特殊 bean 是不可知的。 对于许多扩展容器特性，例如注解处理和 AOP 代理，BeanPostProcessor扩展点是必不可少的。如果您仅使用普通DefaultListableBeanFactory的，则默认情况下不会检测和激活此类后处理器。这种情况可能会令人困惑，因为您的 bean 配置实际上没有任何问题。相反，在这种情况下，需要通过额外的设置来完全引导容器。
 * 在这两种情况下，显式注册步骤都不方便，这就是为什么在 Spring 支持的应用程序中，各种ApplicationContext变体比普通的更受青睐 ，尤其是在典型企业设置中依赖实例来扩展容器功能时DefaultListableBeanFactory。BeanFactoryPostProcessorBeanPostProcessor. AnAnnotationConfigApplicationContext已注册所有常见的注释后处理器，并且可以通过配置注释引入额外的处理器，例如@EnableTransactionManagement. 在 Spring 的基于注解的配置模型的抽象级别上，bean 后处理器的概念变成了单纯的内部容器细节。
+* Spring 本身广泛使用抽象 Resource，在需要资源时作为许多方法签名中的参数类型。某些 Spring API 中的其他方法（例如各种ApplicationContext实现的构造函数）采用 String朴素或简单的形式来创建 Resource 适合于该上下文实现的方法，或者通过 String 路径上的特殊前缀，让调用者指定特定的 Resource 实现必须创建和使用。 虽然Resource接口在 Spring 和 Spring 中被大量使用，但在您自己的代码中将其本身用作通用实用程序类实际上非常方便，用于访问资源，即使您的代码不知道或不关心任何 Spring 的其他部分。虽然这会将您的代码与 Spring 耦合，但它实际上只是将它耦合到这一小部分实用程序类，它可以作为更强大的替代品，URL并且可以被认为等同于您将用于此目的的任何其他库。
+* Resource 抽象不会取代功能，它尽可能地包裹它。例如，UrlResource 包装一个 URL 并使用被包装 URL 的来完成它的工作。
 * 
 
 
