@@ -243,6 +243,7 @@
 * 在这两种情况下，显式注册步骤都不方便，这就是为什么在 Spring 支持的应用程序中，各种ApplicationContext变体比普通的更受青睐 ，尤其是在典型企业设置中依赖实例来扩展容器功能时DefaultListableBeanFactory。BeanFactoryPostProcessorBeanPostProcessor. AnAnnotationConfigApplicationContext已注册所有常见的注释后处理器，并且可以通过配置注释引入额外的处理器，例如@EnableTransactionManagement. 在 Spring 的基于注解的配置模型的抽象级别上，bean 后处理器的概念变成了单纯的内部容器细节。
 * Spring 本身广泛使用抽象 Resource，在需要资源时作为许多方法签名中的参数类型。某些 Spring API 中的其他方法（例如各种ApplicationContext实现的构造函数）采用 String朴素或简单的形式来创建 Resource 适合于该上下文实现的方法，或者通过 String 路径上的特殊前缀，让调用者指定特定的 Resource 实现必须创建和使用。 虽然Resource接口在 Spring 和 Spring 中被大量使用，但在您自己的代码中将其本身用作通用实用程序类实际上非常方便，用于访问资源，即使您的代码不知道或不关心任何 Spring 的其他部分。虽然这会将您的代码与 Spring 耦合，但它实际上只是将它耦合到这一小部分实用程序类，它可以作为更强大的替代品，URL并且可以被认为等同于您将用于此目的的任何其他库。
 * Resource 抽象不会取代功能，它尽可能地包裹它。例如，UrlResource 包装一个 URL 并使用被包装 URL 的来完成它的工作。
+* 所有应用程序上下文都实现了该ResourceLoader接口。因此，所有应用程序上下文都可以用于获取Resource实例。 当您调用getResource()特定的应用程序上下文，并且指定的位置路径没有特定的前缀时，您将返回Resource适合该特定应用程序上下文的类型。例如，假设下面的代码片段是针对一个ClassPathXmlApplicationContext实例运行的: `Resource template = ctx.getResource("some/resource/path/myTemplate.txt");`, 针对 a ClassPathXmlApplicationContext，该代码返回 a ClassPathResource。如果对FileSystemXmlApplicationContext实例运行相同的方法，它将返回一个FileSystemResource. 对于 a WebApplicationContext，它将返回 a ServletContextResource。它同样会为每个上下文返回适当的对象。 因此，您可以以适合特定应用程序上下文的方式加载资源。
 * 
 
 
