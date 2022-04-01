@@ -244,6 +244,12 @@
 * Spring 本身广泛使用抽象 Resource，在需要资源时作为许多方法签名中的参数类型。某些 Spring API 中的其他方法（例如各种ApplicationContext实现的构造函数）采用 String朴素或简单的形式来创建 Resource 适合于该上下文实现的方法，或者通过 String 路径上的特殊前缀，让调用者指定特定的 Resource 实现必须创建和使用。 虽然Resource接口在 Spring 和 Spring 中被大量使用，但在您自己的代码中将其本身用作通用实用程序类实际上非常方便，用于访问资源，即使您的代码不知道或不关心任何 Spring 的其他部分。虽然这会将您的代码与 Spring 耦合，但它实际上只是将它耦合到这一小部分实用程序类，它可以作为更强大的替代品，URL并且可以被认为等同于您将用于此目的的任何其他库。
 * Resource 抽象不会取代功能，它尽可能地包裹它。例如，UrlResource 包装一个 URL 并使用被包装 URL 的来完成它的工作。
 * 所有应用程序上下文都实现了该ResourceLoader接口。因此，所有应用程序上下文都可以用于获取Resource实例。 当您调用getResource()特定的应用程序上下文，并且指定的位置路径没有特定的前缀时，您将返回Resource适合该特定应用程序上下文的类型。例如，假设下面的代码片段是针对一个ClassPathXmlApplicationContext实例运行的: `Resource template = ctx.getResource("some/resource/path/myTemplate.txt");`, 针对 a ClassPathXmlApplicationContext，该代码返回 a ClassPathResource。如果对FileSystemXmlApplicationContext实例运行相同的方法，它将返回一个FileSystemResource. 对于 a WebApplicationContext，它将返回 a ServletContextResource。它同样会为每个上下文返回适当的对象。 因此，您可以以适合特定应用程序上下文的方式加载资源。
+* ResourceLoader 任何标准中的默认值 ApplicationContext 实际上都是 PathMatchingResourcePatternResolver 实现 ResourcePatternResolver  接口的实例。 ApplicationContext 实例本身也是如此，它也实现了 ResourcePatternResolver 接口并委托给  default PathMatchingResourcePatternResolver 。
+* Resource要为包含通配符或使用特殊资源前缀的资源路径 加载一个或多个对象classpath*:，请考虑将 autowired 实例 ResourcePatternResolver而不是ResourceLoader. To load one or more Resource objects for a resource path that contains wildcards or makes use of the special classpath*: resource prefix, consider having an instance of ResourcePatternResolver autowired into your application components instead of ResourceLoader.
+* 请注意，资源路径没有前缀。因此，由于应用程序上下文本身将用作ResourceLoader，因此资源通过 ClassPathResource、 FileSystemResource或 加载ServletContextResource，具体取决于应用程序上下文的确切类型。 如果需要强制使用特定Resource类型，可以使用前缀。以下两个示例展示了如何强制使用 ClassPathResource和 UrlResource（后者用于访问文件系统中的文件）
+  * `<property name="template" value="classpath:some/resource/path/myTemplate.txt">`
+  * `<property name="template" value="file:///some/resource/path/myTemplate.txt"/>`
+* 通配符类路径依赖于getResources()底层的方法 ClassLoader。由于现在大多数应用程序服务器都提供自己的ClassLoader 实现，因此行为可能会有所不同，尤其是在处理 jar 文件时。检查是否classpath*有效的一个简单测试是使用ClassLoader从类路径上的 jar 中加载文件： getClass().getClassLoader().getResources("<someFileInsideTheJar>"). 尝试使用具有相同名称但位于两个不同位置的文件进行此测试 - 例如，具有相同名称和相同路径但在类路径上的不同 jar 中的文件。如果返回不适当的结果，请检查应用程序服务器文档以获取可能影响ClassLoader行为的设置。
 * 
 
 
