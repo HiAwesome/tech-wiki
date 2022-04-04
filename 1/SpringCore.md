@@ -442,8 +442,48 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 最后一种建议是围绕建议。围绕通知“围绕”匹配方法的执行。它有机会在方法运行之前和之后进行工作，并确定该方法何时、如何以及是否真正开始运行。如果您需要以线程安全的方式在方法执行之前和之后共享状态（例如，启动和停止计时器），则通常使用环绕通知。始终使用满足您要求的最不强大的建议形式。 例如，如果之前的建议足以满足您的需求，请不要使用环绕建议。	
 Always use the least powerful form of advice that meets your requirements.  For example, do not use around advice if before advice is sufficient for your needs.
 * 如果您将周围建议方法的返回类型声明为void,null 将始终返回给调用者，有效地忽略任何调用的结果proceed()。因此，建议使用 around 通知方法声明返回类型为Object. 建议方法通常应该返回从调用返回的值proceed()，即使底层方法具有void返回类型。但是，根据用例，建议可以选择返回缓存值、包装值或其他值。	If you declare the return type of your around advice method as void, null will always be returned to the caller, effectively ignoring the result of any invocation of proceed(). It is therefore recommended that an around advice method declare a return type of Object. The advice method should typically return the value returned from an invocation of proceed(), even if the underlying method has a void return type. However, the advice may optionally return a cached value, a wrapped value, or some other value depending on the use case.
-* 
+* 使用argNames属性有点笨拙，所以如果argNames没有指定属性，Spring AOP 会查看类的调试信息并尝试从局部变量表中确定参数名称。只要使用调试信息（-g:vars至少）编译了类，就会出现此信息。使用此标志进行编译的后果是：（1）您的代码更容易理解（逆向工程），（2）类文件大小稍微大一点（通常无关紧要），（3）优化以删除未使用的本地您的编译器未应用变量。换句话说，打开此标志进行构建应该不会遇到任何困难。  如果 AspectJ 编译器 ( ) 已经编译了 @AspectJ 方面，ajc即使没有调试信息，您也不需要添加argNames属性，因为编译器会保留所需的信息。
+* 当多条建议都想在同一个连接点运行时会发生什么？Spring AOP 遵循与 AspectJ 相同的优先级规则来确定通知执行的顺序。最高优先级的建议首先“在进入的路上”运行（因此，给定两条之前的建议，优先级最高的一条首先运行）。从连接点“退出”时，优先级最高的通知最后运行（因此，给定两条后通知，具有最高优先级的一条将运行第二个）。 当在不同方面定义的两条通知都需要在同一个连接点运行时，除非您另外指定，否则执行顺序是未定义的。您可以通过指定优先级来控制执行顺序。这是通过在org.springframework.core.Ordered方面类中实现接口或使用注释对其进行@Order注释以正常的 Spring 方式完成的。给定两个方面，从Ordered.getOrder()（或注释值）返回较低值的方面具有较高的优先级。特定方面的每个不同的建议类型在概念上意味着直接应用于连接点。因此，建议方法不应该从伴随的/方法@AfterThrowing接收异常。@After@AfterReturning. 从 Spring Framework 5.2.7 开始，在同一个@Aspect类中定义的需要在同一个连接点运行的通知方法根据它们的通知类型按以下顺序分配优先级，从最高到最低优先级：@Around, @Before, @After, @AfterReturning, @AfterThrowing。但是请注意，根据@AfterAspectJ对.@AfterReturning@AfterThrowing@After. 当同一个类中定义的两条相同类型的advice（例如两个@Afteradvice方法）@Aspect都需要运行在同一个join point时，排序是未定义的（因为无法通过javac 编译类的反射）。考虑将此类建议方法折叠为每个@Aspect类中每个连接点的一个建议方法，或者将建议片段重构为单独的@Aspect类，您可以通过Ordered或在方面级别对这些类进行排序@Order。
+* 现在您已经了解了所有组成部分的工作原理，我们可以将它们组合在一起做一些有用的事情。 由于并发问题（例如，死锁失败者），业务服务的执行有时会失败。如果该操作被重试，则很可能在下一次尝试时成功。对于在这种情况下适合重试的业务服务（不需要返回给用户解决冲突的幂等操作），我们希望透明地重试操作以避免客户端看到 PessimisticLockingFailureException. 这是一个明确跨越服务层中多个服务的要求，因此非常适合通过方面实现。 因为我们要重试操作，所以我们需要使用around通知，以便我们可以proceed多次调用。以下清单显示了基本方面的实现:
+  ```java
+  @Aspect
+  public class ConcurrentOperationExecutor implements Ordered {
 
+      private static final int DEFAULT_MAX_RETRIES = 2;
+
+      private int maxRetries = DEFAULT_MAX_RETRIES;
+      private int order = 1;
+
+      public void setMaxRetries(int maxRetries) {
+          this.maxRetries = maxRetries;
+      }
+
+      public int getOrder() {
+          return this.order;
+      }
+
+      public void setOrder(int order) {
+          this.order = order;
+      }
+
+      @Around("com.xyz.myapp.CommonPointcuts.businessService()")
+      public Object doConcurrentOperation(ProceedingJoinPoint pjp) throws Throwable {
+          int numAttempts = 0;
+          PessimisticLockingFailureException lockFailureException;
+          do {
+              numAttempts++;
+              try {
+                  return pjp.proceed();
+              }
+              catch(PessimisticLockingFailureException ex) {
+                  lockFailureException = ex;
+              }
+          } while(numAttempts <= this.maxRetries);
+          throw lockFailureException;
+      }
+  }
+  ```
+* 
 
 
 
