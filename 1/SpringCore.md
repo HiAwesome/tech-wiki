@@ -424,6 +424,19 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
   * 服务包中的任何连接点（仅在 Spring AOP 中执行方法）：`within(com.xyz.service.*)`
   * 服务包或其子包之一中的任何连接点（仅在 Spring AOP 中执行方法）：`within(com.xyz.service..*)`
   * AccountService代理实现接口的任何连接点（仅在 Spring AOP 中执行方法）：`this(com.xyz.service.AccountService)`
+  * AccountService目标对象实现接口的任何连接点（仅在 Spring AOP 中执行方法）：`target(com.xyz.service.AccountService)`
+  * 任何接受单个参数且在运行时传递的参数为的连接点（仅在 Spring AOP 中执行方法）Serializable：`args(java.io.Serializable)`
+  * 目标对象具有 @Transactional注释的任何连接点（仅在 Spring AOP 中执行方法）：`@target(org.springframework.transaction.annotation.Transactional)`
+  * 目标对象的声明类型具有@Transactional注释的任何连接点（仅在 Spring AOP 中执行方法）：`@within(org.springframework.transaction.annotation.Transactional)`
+  * 执行方法具有 @Transactional注释的任何连接点（仅在 Spring AOP 中执行方法）：`@annotation(org.springframework.transaction.annotation.Transactional)`
+  * 任何接受单个参数的连接点（仅在 Spring AOP 中执行方法），并且传递的参数的运行时类型具有@Classified注释：`@args(com.xyz.security.Classified)`
+  * Spring bean 上的任何连接点（方法仅在 Spring AOP 中执行）名为 tradeService：`bean(tradeService)`
+  * 名称与通配符表达式匹配的 Spring bean 上的任何连接点（仅在 Spring AOP 中执行方法）*Service：`bean(*Service)`
+* 在编译期间，AspectJ 处理切入点以优化匹配性能。检查代码并确定每个连接点是否（静态或动态）匹配给定的切入点是一个代价高昂的过程。（动态匹配意味着无法从静态分析中完全确定匹配，并且在代码中放置测试以确定代码运行时是否存在实际匹配）。在第一次遇到切入点声明时，AspectJ 将其重写为匹配过程的最佳形式。这是什么意思？基本上，切入点在 DNF（析取范式）中被重写，切入点的组件被排序，以便首先检查那些评估成本较低的组件。 然而，AspectJ 只能使用它被告知的内容。为了获得最佳匹配性能，您应该考虑他们试图实现的目标，并在定义中尽可能缩小匹配的搜索空间。现有的指示符自然属于以下三组之一：kinded、scoping 和 contextual：
+  * 种类指示符选择一种特定类型的连接点： execution、get、set、call和handler。 
+  * 范围指示符选择一组连接兴趣点（可能有多种）：within和withincode 
+  * 上下文指示符根据上下文匹配（并且可以选择绑定）： this、、target和@annotation
+* 一个写得很好的切入点应该至少包括前两种类型（种类和范围）。您可以包含上下文指示符以根据连接点上下文进行匹配，或绑定该上下文以在建议中使用。由于额外的处理和分析，只提供一个 kinded 指示符或只提供一个上下文指示符是可行的，但可能会影响编织性能（使用的时间和内存）。范围指示符的匹配速度非常快，使用它们意味着 AspectJ 可以非常快速地消除不应进一步处理的连接点组。如果可能，一个好的切入点应始终包含一个切入点。
 * 
 
 
