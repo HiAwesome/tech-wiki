@@ -308,7 +308,10 @@
 * 小心原始类型，因为它们会立即被装箱到它们的包装类型。例如，1 instanceof T(int)计算结果为false，而 1 instanceof T(Integer)计算结果为true，如预期的那样。
 * 如果评估上下文已经配置了 bean 解析器，您可以使用 @ 符号从表达式中查找 bean。要访问工厂 bean 本身，您应该在 bean 名称前加上一个 & 符号。
 * 安全导航运算符用于避免 NullPointerException 和来自 [Groovy](http://www.groovy-lang.org/operators.html#_safe_navigation_operator) 语言。通常，当您有一个对象的引用时，您可能需要在访问该对象的方法或属性之前验证它不为空。为避免这种情况，安全导航运算符返回 null 而不是抛出异常。
-* 选择是一种强大的表达式语言功能，可让您通过从其条目中进行选择将源集合转换为另一个集合。 选择使用 `.?[selectionExpression]`. 它过滤集合并返回一个包含原始元素子集的新集合。
+* 选择是一种强大的表达式语言功能，可让您通过从其条目中进行选择将源集合转换为另一个集合。 选择使用 `.?[selectionExpression]`. 它过滤集合并返回一个包含原始元素子集的新集合。数组或任何实现 java.lang.Iterable 的东西都支持选择。对于列表或数组，将针对每个单独的元素评估选择标准。针对映射，针对每个映射条目（Java 类型的对象）评估选择标准Map.Entry。每个地图条目都有其key可value 访问的属性，以便在选择中使用。
+  * `List<Inventor> list = (List<Inventor>) parser.parseExpression("members.?[nationality == 'Serbian']").getValue(societyContext);`
+  * `Map newMap = parser.parseExpression("map.?[value<27]").getValue();`
+* 除了返回所有选定的元素之外，您还可以只检索第一个或最后一个元素。要获取与选择匹配的第一个元素，语法为 `.^[selectionExpression]`. 要获得最后一个匹配的选择，语法是 `.$[selectionExpression]`.
 * 
 
 
