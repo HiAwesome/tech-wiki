@@ -488,6 +488,8 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * Spring AOP 使用 JDK 动态代理或 CGLIB 为给定的目标对象创建代理。JDK 动态代理内置在 JDK 中，而 CGLIB 是一个通用的开源类定义库（重新打包到spring-core). 如果要代理的目标对象实现了至少一个接口，则使用 JDK 动态代理。目标类型实现的所有接口都被代理。如果目标对象没有实现任何接口，则创建一个 CGLIB 代理。 如果您想强制使用 CGLIB 代理（例如，代理为目标对象定义的每个方法，而不仅仅是那些由其接口实现的方法），您可以这样做。但是，您应该考虑以下问题： 
   * 使用 CGLIB，final不能建议方法，因为它们不能在运行时生成的子类中被覆盖。 
   * 从 Spring 4.0 开始，代理对象的构造函数不再被调用两次，因为 CGLIB 代理实例是通过 Objenesis 创建的。仅当您的 JVM 不允许绕过构造函数时，您可能会看到来自 Spring 的 AOP 支持的双重调用和相应的调试日志条目。
+* 多个 `<aop:config/>` 部分在运行时被折叠成一个统一的自动代理创建器，它应用任何 部分（通常来自不同的 XML bean 定义文件）指定的最强代理设置。`<aop:config/>` 这也适用于`<tx:annotation-driven/>` and `<aop:aspectj-autoproxy/>` 元素。 需要明确的是，使用 proxy-target-class="true" on `<tx:annotation-driven/>`、 `<aop:aspectj-autoproxy/>` 或 `<aop:config/>` 元素会强制对所有三个使用 CGLIB 代理。
+* 这里要理解的关键是类的main(..)方法内部的客户端代码Main有对代理的引用。这意味着对该对象引用的方法调用是对代理的调用。因此，代理可以委托给与该特定方法调用相关的所有拦截器（建议）。但是，一旦调用最终到达目标对象（SimplePojo在这种情况下为引用），它可能对自身进行的任何方法调用，例如this.bar()or this.foo()，都将针对this引用而不是代理调用。这具有重要意义。这意味着自调用不会导致与方法调用相关的建议有机会运行。 好的，那该怎么办呢？最好的方法（术语“最好”在这里被松散地使用）是重构你的代码，这样自调用就不会发生。这确实需要您做一些工作，但它是最好的、侵入性最小的方法。下一种方法绝对可怕，我们不愿指出，正是因为它太可怕了。您可以（对我们来说很痛苦）将您的类中的逻辑完全绑定到 Spring AOP.
 * 
 
 
