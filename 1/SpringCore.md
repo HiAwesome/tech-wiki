@@ -318,6 +318,7 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 带有 AspectJ 切入点的 Spring AOP: Spring 通过使用 [基于模式的方法](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-schema) 或 [@AspectJ 注释样式](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-ataspectj) 提供了编写自定义切面的简单而强大的方法。这两种风格都提供了完全类型化的建议和使用 AspectJ 切入点语言，同时仍然使用 Spring AOP 进行编织。AOP 在 Spring Framework 中用于：
   * 提供声明式企业服务。最重要的此类服务是 [声明式事务管理](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative).
   * 让用户实现自定义方面，用 AOP 补充他们对 OOP 的使用。
+* 环绕建议是最一般的建议。由于 Spring AOP 与 AspectJ 一样，提供了全方位的通知类型，因此我们建议您使用可以实现所需行为的最不强大的通知类型。例如，如果您只需要使用方法的返回值来更新缓存，那么您最好实现一个后返回通知而不是一个环绕通知，尽管一个环绕通知可以完成同样的事情。使用最具体的通知类型提供了一个更简单的编程模型，并且出错的可能性更小。例如，您不需要proceed() 在 used for around 建议上调用方法JoinPoint，因此，您不能不调用它。 所有建议参数都是静态类型的，因此您可以使用适当类型的建议参数（例如，方法执行的返回值的类型）而不是Object数组。 切入点匹配的连接点的概念是 AOP 的关键，这将它与仅提供拦截的旧技术区分开来。切入点使建议的目标独立于面向对象的层次结构。例如，您可以将提供声明性事务管理的环绕建议应用到一组跨越多个对象（例如服务层中的所有业务操作）的方法。
 * 
 
 
