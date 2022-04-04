@@ -318,7 +318,22 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 带有 AspectJ 切入点的 Spring AOP: Spring 通过使用 [基于模式的方法](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-schema) 或 [@AspectJ 注释样式](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-ataspectj) 提供了编写自定义切面的简单而强大的方法。这两种风格都提供了完全类型化的建议和使用 AspectJ 切入点语言，同时仍然使用 Spring AOP 进行编织。AOP 在 Spring Framework 中用于：
   * 提供声明式企业服务。最重要的此类服务是 [声明式事务管理](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative).
   * 让用户实现自定义方面，用 AOP 补充他们对 OOP 的使用。
-* 环绕建议是最一般的建议。由于 Spring AOP 与 AspectJ 一样，提供了全方位的通知类型，因此我们建议您使用可以实现所需行为的最不强大的通知类型。例如，如果您只需要使用方法的返回值来更新缓存，那么您最好实现一个后返回通知而不是一个环绕通知，尽管一个环绕通知可以完成同样的事情。使用最具体的通知类型提供了一个更简单的编程模型，并且出错的可能性更小。例如，您不需要proceed() 在 used for around 建议上调用方法JoinPoint，因此，您不能不调用它。 所有建议参数都是静态类型的，因此您可以使用适当类型的建议参数（例如，方法执行的返回值的类型）而不是Object数组。 切入点匹配的连接点的概念是 AOP 的关键，这将它与仅提供拦截的旧技术区分开来。切入点使建议的目标独立于面向对象的层次结构。例如，您可以将提供声明性事务管理的环绕建议应用到一组跨越多个对象（例如服务层中的所有业务操作）的方法。
+* 让我们从定义一些核心 AOP 概念和术语开始。这些术语不是 Spring 特定的。不幸的是，AOP 术语并不是特别直观。但是，如果 Spring 使用它自己的术语，那就更令人困惑了。
+  * Aspect：跨多个类的关注点的模块化。事务管理是企业 Java 应用程序中横切关注点的一个很好的例子。在 Spring AOP 中，方面是通过使用常规类（基于模式的方法）或使用 @Aspect注解注释的常规类（@AspectJ 样式）来实现的。
+  * Join point：程序执行过程中的一个点，例如方法的执行或异常的处理。在 Spring AOP 中，一个连接点总是代表一个方法执行。
+  * Advice：方面在特定连接点采取的行动。不同类型的建议包括“周围”、“之前”和“之后”建议。（通知类型将在后面讨论。）包括 Spring 在内的许多 AOP 框架将通知建模为拦截器，并在连接点周围维护一个拦截器链。
+  * Pointcut：匹配连接点的谓词。Advice 与切入点表达式相关联，并在与切入点匹配的任何连接点处运行（例如，执行具有特定名称的方法）。切入点表达式匹配的连接点的概念是 AOP 的核心，Spring 默认使用 AspectJ 切入点表达式语言。
+  * Introduction：代表一个类型声明额外的方法或字段。Spring AOP 允许您向任何建议的对象引入新接口（和相应的实现）。例如，您可以使用介绍使 bean 实现 IsModified接口，以简化缓存。（介绍在 AspectJ 社区中称为类型间声明。）
+  * Target object：一个或多个方面建议的对象。也称为“建议对象”。由于 Spring AOP 是使用运行时代理实现的，因此该对象始终是代理对象。
+  * AOP proxy：由 AOP 框架创建的对象，用于实现方面协定（建议方法执行等）。在 Spring Framework 中，AOP 代理是 JDK 动态代理或 CGLIB 代理。
+  * Weaving：将方面与其他应用程序类型或对象链接以创建建议对象。这可以在编译时（例如，使用 AspectJ 编译器）、加载时或运行时完成。Spring AOP 与其他纯 Java AOP 框架一样，在运行时执行编织。
+* Spring AOP 包括以下类型的通知：
+  * 通知前（Before advice）：在连接点之前运行但不能阻止执行流继续到连接点的通知（除非它抛出异常）。
+  * 返回通知后（After returning advice）：在连接点正常完成后运行的通知（例如，如果方法返回而没有引发异常）。
+  * 抛出建议后（After throwing advice）：如果方法因抛出异常而退出，则运行建议。
+  * 在（最终）通知之后（After (finally) advice）：无论连接点以何种方式退出（正常或异常返回），都将运行建议。
+  * 围绕建议（Around advice）：围绕连接点的建议，例如方法调用。这是最有力的建议。环绕通知可以在方法调用之前和之后执行自定义行为。它还负责选择是继续到连接点还是通过返回自己的返回值或抛出异常来缩短建议的方法执行。
+* 环绕建议（Around advice）是最一般的建议。由于 Spring AOP 与 AspectJ 一样，提供了全方位的通知类型，因此我们建议您使用可以实现所需行为的最不强大的通知类型。例如，如果您只需要使用方法的返回值来更新缓存，那么您最好实现一个后返回通知而不是一个环绕通知，尽管一个环绕通知可以完成同样的事情。使用最具体的通知类型提供了一个更简单的编程模型，并且出错的可能性更小。例如，您不需要proceed() 在 used for around 建议上调用方法JoinPoint，因此，您不能不调用它。 所有建议参数都是静态类型的，因此您可以使用适当类型的建议参数（例如，方法执行的返回值的类型）而不是Object数组。 切入点匹配的连接点的概念是 AOP 的关键，这将它与仅提供拦截的旧技术区分开来。切入点使建议的目标独立于面向对象的层次结构。例如，您可以将提供声明性事务管理的环绕建议应用到一组跨越多个对象（例如服务层中的所有业务操作）的方法。
 * 
 
 
