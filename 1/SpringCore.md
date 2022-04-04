@@ -441,6 +441,7 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 请注意，@AfterAspectJ 中的通知被定义为“在 finally 通知之后”，类似于 try-catch 语句中的 finally 块。对于从连接点（用户声明的目标方法）抛出的任何结果、正常返回或异常，都会调用它，与之相反，@AfterReturning它仅适用于成功的正常返回。
 * 最后一种建议是围绕建议。围绕通知“围绕”匹配方法的执行。它有机会在方法运行之前和之后进行工作，并确定该方法何时、如何以及是否真正开始运行。如果您需要以线程安全的方式在方法执行之前和之后共享状态（例如，启动和停止计时器），则通常使用环绕通知。始终使用满足您要求的最不强大的建议形式。 例如，如果之前的建议足以满足您的需求，请不要使用环绕建议。	
 Always use the least powerful form of advice that meets your requirements.  For example, do not use around advice if before advice is sufficient for your needs.
+* 如果您将周围建议方法的返回类型声明为void,null 将始终返回给调用者，有效地忽略任何调用的结果proceed()。因此，建议使用 around 通知方法声明返回类型为Object. 建议方法通常应该返回从调用返回的值proceed()，即使底层方法具有void返回类型。但是，根据用例，建议可以选择返回缓存值、包装值或其他值。	If you declare the return type of your around advice method as void, null will always be returned to the caller, effectively ignoring the result of any invocation of proceed(). It is therefore recommended that an around advice method declare a return type of Object. The advice method should typically return the value returned from an invocation of proceed(), even if the underlying method has a void return type. However, the advice may optionally return a cached value, a wrapped value, or some other value depending on the use case.
 * 
 
 
