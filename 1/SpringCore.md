@@ -438,6 +438,9 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
   * 上下文指示符根据上下文匹配（并且可以选择绑定）： this、、target和@annotation
 * 一个写得很好的切入点应该至少包括前两种类型（种类和范围）。您可以包含上下文指示符以根据连接点上下文进行匹配，或绑定该上下文以在建议中使用。由于额外的处理和分析，只提供一个 kinded 指示符或只提供一个上下文指示符是可行的，但可能会影响编织性能（使用的时间和内存）。范围指示符的匹配速度非常快，使用它们意味着 AspectJ 可以非常快速地消除不应进一步处理的连接点组。如果可能，一个好的切入点应始终包含一个切入点。
 * 请注意，@AfterThrowing这并不表示一般的异常处理回调。具体来说，@AfterThrowing建议方法只应该从连接点（用户声明的目标方法）本身接收异常，而不是从伴随的 @After/@AfterReturning方法接收异常。
+* 请注意，@AfterAspectJ 中的通知被定义为“在 finally 通知之后”，类似于 try-catch 语句中的 finally 块。对于从连接点（用户声明的目标方法）抛出的任何结果、正常返回或异常，都会调用它，与之相反，@AfterReturning它仅适用于成功的正常返回。
+* 最后一种建议是围绕建议。围绕通知“围绕”匹配方法的执行。它有机会在方法运行之前和之后进行工作，并确定该方法何时、如何以及是否真正开始运行。如果您需要以线程安全的方式在方法执行之前和之后共享状态（例如，启动和停止计时器），则通常使用环绕通知。始终使用满足您要求的最不强大的建议形式。 例如，如果之前的建议足以满足您的需求，请不要使用环绕建议。	
+Always use the least powerful form of advice that meets your requirements.  For example, do not use around advice if before advice is sufficient for your needs.
 * 
 
 
