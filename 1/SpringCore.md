@@ -256,6 +256,8 @@
 * 默认情况下，未使用注释的日期和时间字段是使用样式@DateTimeFormat从字符串转换而来的。DateFormat.SHORT如果您愿意，可以通过定义自己的全局格式来更改它。 为此，请确保 Spring 不注册默认格式化程序。相反，请在以下帮助下手动注册格式化程序：
   * org.springframework.format.datetime.standard.DateTimeFormatterRegistrar
   * org.springframework.format.datetime.DateFormatterRegistrar
+* 为了符合 Spring 驱动的方法验证的条件，所有目标类都需要使用 Spring 的@Validated注解进行注解，它还可以选择声明要使用的验证组。有关 [MethodValidationPostProcessor](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/validation/beanvalidation/MethodValidationPostProcessor.html) Hibernate Validator 和 Bean Validation 1.1 提供程序的设置详细信息，请参阅。
+* 方法验证依赖于目标类周围的 [AOP 代理，要么是接口上方法的 JDK 动态代理，要么是 CGLIB 代理](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-introduction-proxies). 使用代理有某些限制，其中一些在 [了解 AOP 代理](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-understanding-aop-proxies) 中进行了描述。此外，请记住始终在代理类上使用方法和访问器；直接字段访问将不起作用。
 * 
 
 
