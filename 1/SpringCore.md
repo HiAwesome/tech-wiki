@@ -351,8 +351,10 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
   * @within：将匹配限制为具有给定注释的类型内的连接点（使用 Spring AOP 时执行在具有给定注释的类型中声明的方法）。
   * @annotation：限制匹配到连接点的主题（在 Spring AOP 中运行的方法）具有给定注释的连接点。
 * 其他切入点类型：完整的 AspectJ 切入点语言支持 Spring 中不支持的其他切入点指示符：call、get、set、preinitialization、 staticinitialization、initialization、handler、adviceexecution、withincode、cflow、 cflowbelow、if、@this和@withincode。在 Spring AOP 解释的切入点表达式中使用这些切入点指示符会导致IllegalArgumentException抛出异常。 Spring AOP 支持的切入点指示符集可能会在未来的版本中扩展，以支持更多的 AspectJ 切入点指示符。
+* 由于 Spring AOP 将匹配限制为仅方法执行连接点，因此前面对切入点指示符的讨论给出了比您在 AspectJ 编程指南中找到的更窄的定义。此外，AspectJ 本身具有基于类型的语义，并且在执行连接点处，两者都this引用target同一个对象：执行方法的对象。Spring AOP 是一个基于代理的系统，它区分代理对象本身（绑定到this）和代理背后的目标对象（绑定到target）。
+* 由于 Spring 的 AOP 框架基于代理的特性，根据定义，目标对象内的调用不会被拦截。对于 JDK 代理，只能拦截代理上的公共接口方法调用。使用 CGLIB，代理上的公共和受保护的方法调用被拦截（如果需要，甚至包可见的方法）。但是，通过代理的常见交互应始终通过公共签名进行设计。 请注意，切入点定义通常与任何拦截的方法匹配。如果切入点严格来说是只公开的，即使在 CGLIB 代理场景中，通过代理进行潜在的非公开交互，也需要相应地定义它。 如果您的拦截需求包括目标类中的方法调用甚至构造函数，请考虑使用 Spring 驱动的原生 AspectJ 编织，而不是 Spring 的基于代理的 AOP 框架。这就构成了具有不同特点的不同AOP使用模式，所以在做决定之前一定要让自己熟悉编织。
+* beanPCD 仅在 Spring AOP 中受支持，在本机 AspectJ 编织中不支持。它是 AspectJ 定义的标准 PCD 的特定于 Spring 的扩展，因此不适用于@Aspect模型中声明的方面。 PCD在bean实例级别（基于 Spring bean 名称概念）而不是仅在类型级别（基于编织的 AOP 受限）运行。基于实例的切入点指示符是 Spring 的基于代理的 AOP 框架的一种特殊功能，它与 Spring bean 工厂的紧密集成，通过名称来识别特定的 bean 是自然而直接的。
 * 
-
 
 
 
