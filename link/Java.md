@@ -1,4 +1,6 @@
-# 与 Java 有关的链接
+# Java
+
+#### [Guide to UUID in Java](https://www.baeldung.com/java-uuid)
 
 #### [lombok: Add jdk9 compiler support](https://github.com/projectlombok/lombok/issues/985)
 
