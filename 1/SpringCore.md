@@ -340,6 +340,17 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 通过组件扫描自动检测方面: 您可以通过类中的@Bean方法将方面类注册为 Spring XML 配置中的常规 bean @Configuration，或者让 Spring 通过类路径扫描自动检测它们——与任何其他 Spring 管理的 bean 相同。但是，请注意， @Aspect注释不足以在类路径中进行自动检测。为此，您需要添加一个单独的@Component注释（或者，根据 Spring 组件扫描器的规则，一个符合条件的自定义构造型注释）。
 * 建议方面与其他方面（Advising aspects with other aspects）？ 在 Spring AOP 中，切面本身不能成为其他切面通知的目标。类上的@Aspect注释将其标记为方面，因此将其排除在自动代理之外。
 * 形成 @Pointcut 注释值的切入点表达式是常规的 AspectJ 切入点表达式。有关 AspectJ 切入点语言的完整讨论，请参阅 [AspectJ Programming Guide](https://www.eclipse.org/aspectj/doc/released/progguide/index.html) （以及扩展的 [AspectJ 5 Developer's Notebook](https://www.eclipse.org/aspectj/doc/released/adk15notebook/index.html) ）或有关 AspectJ 的书籍之一（例如Colyer 等人的Eclipse AspectJ或AspectJ in Action，拉姆尼瓦斯·拉达德）。
+* Spring AOP 支持在切入点表达式中使用以下 AspectJ 切入点指示符 (PCD)：
+  * execution：用于匹配方法执行连接点。这是使用 Spring AOP 时使用的主要切入点指示符。
+  * within: 限制匹配到特定类型内的连接点（使用 Spring AOP 时执行匹配类型内声明的方法）。
+  * this：限制匹配到连接点（使用 Spring AOP 时方法的执行），其中 bean 引用（Spring AOP 代理）是给定类型的实例。
+  * target：将匹配限制在目标对象（被代理的应用程序对象）是给定类型的实例的连接点（使用 Spring AOP 时方法的执行）。
+  * args: 限制匹配到参数是给定类型的实例的连接点（使用 Spring AOP 时方法的执行）。
+  * @target：限制匹配到连接点（使用 Spring AOP 时方法的执行），其中执行对象的类具有给定类型的注释。
+  * @args：将匹配限制为连接点（使用 Spring AOP 时方法的执行），其中传递的实际参数的运行时类型具有给定类型的注释。
+  * @within：将匹配限制为具有给定注释的类型内的连接点（使用 Spring AOP 时执行在具有给定注释的类型中声明的方法）。
+  * @annotation：限制匹配到连接点的主题（在 Spring AOP 中运行的方法）具有给定注释的连接点。
+* 其他切入点类型：完整的 AspectJ 切入点语言支持 Spring 中不支持的其他切入点指示符：call、get、set、preinitialization、 staticinitialization、initialization、handler、adviceexecution、withincode、cflow、 cflowbelow、if、@this和@withincode。在 Spring AOP 解释的切入点表达式中使用这些切入点指示符会导致IllegalArgumentException抛出异常。 Spring AOP 支持的切入点指示符集可能会在未来的版本中扩展，以支持更多的 AspectJ 切入点指示符。
 * 
 
 
