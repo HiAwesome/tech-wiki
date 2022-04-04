@@ -483,6 +483,8 @@ Always use the least powerful form of advice that meets your requirements.  For 
       }
   }
   ```
+* 一旦你决定一个切面是实现给定需求的最佳方法，你如何在使用 Spring AOP 或 AspectJ 以及在 Aspect 语言（代码）风格、@AspectJ 注释风格或 Spring XML 风格之间做出决定？这些决策受到许多因素的影响，包括应用程序需求、开发工具和团队对 AOP 的熟悉程度。使用可以工作的最简单的东西。Spring AOP 比使用完整的 AspectJ 更简单，因为不需要将 AspectJ 编译器/编织器引入您的开发和构建过程。如果您只需要建议对 Spring bean 执行操作，那么 Spring AOP 是正确的选择。如果您需要通知不由 Spring 容器管理的对象（例如域对象，通常是），则需要使用 AspectJ。如果您希望建议连接点而不是简单的方法执行（例如，字段获取或设置连接点等），您还需要使用 AspectJ。 当您使用 AspectJ 时，您可以选择 AspectJ 语言语法（也称为“代码样式”）或 @AspectJ 注释样式。显然，如果您不使用 Java 5+，那么已经为您做出了选择：使用代码风格。如果方面在您的设计中扮演重要角色，并且您能够使用 Eclipse 的AspectJ 开发工具 (AJDT)插件，那么 AspectJ 语言语法是首选选项。它更简洁，因为该语言是专门为编写方面而设计的。如果您不使用 Eclipse 或只有几个方面在您的应用程序中没有发挥主要作用，您可能需要考虑使用 @AspectJ 样式，在您的 IDE 中坚持常规 Java 编译，并添加一个方面编织阶段你的构建脚本。
+* 如果您选择使用 Spring AOP，您可以选择 @AspectJ 或 XML 样式。有各种权衡需要考虑。 现有 Spring 用户可能最熟悉 XML 样式，并且它由真正的 POJO 支持。当使用 AOP 作为配置企业服务的工具时，XML 可能是一个不错的选择（一个很好的测试是您是否将切入点表达式视为您可能想要独立更改的配置的一部分）。使用 XML 样式，可以说从您的配置中更清楚系统中存在哪些方面。 XML 样式有两个缺点。首先，它没有将它所解决的需求的实现完全封装在一个地方。**DRY 原则说，系统内的任何知识都应该有一个单一的、明确的、权威的表示。The DRY principle says that there should be a single, unambiguous, authoritative representation of any piece of knowledge within a system.** 使用 XML 样式时，如何实现需求的知识被拆分为支持 bean 类的声明和配置文件中的 XML。当您使用@AspectJ 样式时，此信息被封装在一个模块中：方面。其次，与@AspectJ 风格相比，XML 风格在表达方面稍有限制：仅支持“单例”切面实例化模型，并且无法组合 XML 中声明的命名切入点。
 * 
 
 
