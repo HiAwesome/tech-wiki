@@ -312,6 +312,8 @@
   * `List<Inventor> list = (List<Inventor>) parser.parseExpression("members.?[nationality == 'Serbian']").getValue(societyContext);`
   * `Map newMap = parser.parseExpression("map.?[value<27]").getValue();`
 * 除了返回所有选定的元素之外，您还可以只检索第一个或最后一个元素。要获取与选择匹配的第一个元素，语法为 `.^[selectionExpression]`. 要获得最后一个匹配的选择，语法是 `.$[selectionExpression]`.
+* 投影让集合驱动子表达式的评估，结果是一个新的集合。投影的语法是 `.![projectionExpression]`. 例如，假设我们有一个发明者列表，但想要他们出生的城市列表。实际上，我们希望为发明者列表中的每个条目评估“placeOfBirth.city”。以下示例使用投影来执行此操作：`// returns ['Smiljan', 'Idvor' ]
+List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]");`.
 * 
 
 
