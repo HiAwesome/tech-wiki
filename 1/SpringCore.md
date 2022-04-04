@@ -500,6 +500,7 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * 使用池化目标源提供了与无状态会话 EJB 类似的编程模型，其中维护了相同实例的池，方法调用将释放池中的对象。 Spring pooling 和 SLSB pooling 的一个关键区别是 Spring pooling 可以应用于任何 POJO。与一般的 Spring 一样，此服务可以以非侵入方式应用。 Spring 提供对 Commons Pool 2.2 的支持，它提供了相当高效的池化实现。您需要commons-pool应用程序类路径中的 Jar 才能使用此功能。您还可以子类化 org.springframework.aop.target.AbstractPoolingTargetSource以支持任何其他池 API。 Commons Pool 1.5+ 也受支持，但自 Spring Framework 4.2 起已弃用。
 * **通常不需要池化无状态服务对象。我们不认为它应该是默认选择，因为大多数无状态对象自然是线程安全的，如果资源被缓存，实例池是有问题的。**
 * ThreadLocal当在多线程和多类加载器环境中错误地使用它们时，实例会出现严重的问题（可能导致内存泄漏）。您应该始终考虑将 threadlocal 包装在其他类中，并且永远不要直接使用它ThreadLocal本身（包装类除外）。此外，您应该始终记住正确设置和取消设置（后者仅涉及对 的调用 ThreadLocal.set(null)）线程本地的资源。在任何情况下都应该取消设置，因为不取消设置可能会导致有问题的行为。Spring 的 ThreadLocal支持为您执行此操作，并且应该始终考虑支持在 ThreadLocal没有其他适当处理代码的情况下使用实例。
+* Spring 注释使用JSR 305 注释（一种休眠但广泛传播的 JSR）进行元注释。JSR-305 元注释让 IDEA 或 Kotlin 等工具供应商以通用方式提供空安全支持，而无需对 Spring 注释进行硬编码支持。 没有必要也不建议将 [JSR-305](https://jcp.org/en/jsr/detail?id=305) 依赖项添加到项目类路径以利用 Spring 空安全 API。只有在代码库中使用空安全注解的项目（例如基于 Spring 的库）才应添加 com.google.code.findbugs:jsr305:3.0.2 Gradle compileOnly 配置或 Maven provided范围以避免编译警告。
 * 
 
 
