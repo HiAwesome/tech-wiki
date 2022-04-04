@@ -354,8 +354,77 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
 * 由于 Spring AOP 将匹配限制为仅方法执行连接点，因此前面对切入点指示符的讨论给出了比您在 AspectJ 编程指南中找到的更窄的定义。此外，AspectJ 本身具有基于类型的语义，并且在执行连接点处，两者都this引用target同一个对象：执行方法的对象。Spring AOP 是一个基于代理的系统，它区分代理对象本身（绑定到this）和代理背后的目标对象（绑定到target）。
 * 由于 Spring 的 AOP 框架基于代理的特性，根据定义，目标对象内的调用不会被拦截。对于 JDK 代理，只能拦截代理上的公共接口方法调用。使用 CGLIB，代理上的公共和受保护的方法调用被拦截（如果需要，甚至包可见的方法）。但是，通过代理的常见交互应始终通过公共签名进行设计。 请注意，切入点定义通常与任何拦截的方法匹配。如果切入点严格来说是只公开的，即使在 CGLIB 代理场景中，通过代理进行潜在的非公开交互，也需要相应地定义它。 如果您的拦截需求包括目标类中的方法调用甚至构造函数，请考虑使用 Spring 驱动的原生 AspectJ 编织，而不是 Spring 的基于代理的 AOP 框架。这就构成了具有不同特点的不同AOP使用模式，所以在做决定之前一定要让自己熟悉编织。
 * beanPCD 仅在 Spring AOP 中受支持，在本机 AspectJ 编织中不支持。它是 AspectJ 定义的标准 PCD 的特定于 Spring 的扩展，因此不适用于@Aspect模型中声明的方面。 PCD在bean实例级别（基于 Spring bean 名称概念）而不是仅在类型级别（基于编织的 AOP 受限）运行。基于实例的切入点指示符是 Spring 的基于代理的 AOP 框架的一种特殊功能，它与 Spring bean 工厂的紧密集成，通过名称来识别特定的 bean 是自然而直接的。
+* 在使用企业应用程序时，开发人员通常希望从多个方面引用应用程序的模块和特定的操作集。我们建议CommonPointcuts为此目的定义一个捕获通用切入点表达式的切面。这样的方面通常类似于以下示例：
+  ```java
+  package com.xyz.myapp;
+  
+  import org.aspectj.lang.annotation.Aspect;
+  import org.aspectj.lang.annotation.Pointcut;
+  
+  @Aspect
+  public class CommonPointcuts {
+  
+      /**
+       * A join point is in the web layer if the method is defined
+       * in a type in the com.xyz.myapp.web package or any sub-package
+       * under that.
+       */
+      @Pointcut("within(com.xyz.myapp.web..*)")
+      public void inWebLayer() {}
+  
+      /**
+       * A join point is in the service layer if the method is defined
+       * in a type in the com.xyz.myapp.service package or any sub-package
+       * under that.
+       */
+      @Pointcut("within(com.xyz.myapp.service..*)")
+      public void inServiceLayer() {}
+  
+      /**
+       * A join point is in the data access layer if the method is defined
+       * in a type in the com.xyz.myapp.dao package or any sub-package
+       * under that.
+       */
+      @Pointcut("within(com.xyz.myapp.dao..*)")
+      public void inDataAccessLayer() {}
+  
+      /**
+       * A business service is the execution of any method defined on a service
+       * interface. This definition assumes that interfaces are placed in the
+       * "service" package, and that implementation types are in sub-packages.
+       *
+       * If you group service interfaces by functional area (for example,
+       * in packages com.xyz.myapp.abc.service and com.xyz.myapp.def.service) then
+       * the pointcut expression "execution(* com.xyz.myapp..service.*.*(..))"
+       * could be used instead.
+       *
+       * Alternatively, you can write the expression using the 'bean'
+       * PCD, like so "bean(*Service)". (This assumes that you have
+       * named your Spring service beans in a consistent fashion.)
+       */
+      @Pointcut("execution(* com.xyz.myapp..service.*.*(..))")
+      public void businessService() {}
+  
+      /**
+       * A data access operation is the execution of any method defined on a
+       * dao interface. This definition assumes that interfaces are placed in the
+       * "dao" package, and that implementation types are in sub-packages.
+       */
+      @Pointcut("execution(* com.xyz.myapp.dao.*.*(..))")
+      public void dataAccessOperation() {}
+  
+  }
+  ```
+* 以下示例显示了一些常见的切入点表达式：
+  * 任何公共方法的执行：`execution(public * *(..))`
+  * 名称以 set 开头的任何方法的执行：`execution(* set*(..))`
+  * AccountService 接口定义的任何方法的执行：`execution(* com.xyz.service.AccountService.*(..))`
+  * service 包中定义的任何方法的执行：`execution(* com.xyz.service.*.*(..))`
+  * 服务包或其子包之一中定义的任何方法的执行：`execution(* com.xyz.service..*.*(..))`
+  * 服务包中的任何连接点（仅在 Spring AOP 中执行方法）：`within(com.xyz.service.*)`
+  * 服务包或其子包之一中的任何连接点（仅在 Spring AOP 中执行方法）：`within(com.xyz.service..*)`
+  * AccountService代理实现接口的任何连接点（仅在 Spring AOP 中执行方法）：`this(com.xyz.service.AccountService)`
 * 
-
 
 
 
