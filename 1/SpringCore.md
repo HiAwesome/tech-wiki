@@ -319,7 +319,7 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
   * 提供声明式企业服务。最重要的此类服务是 [声明式事务管理](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative).
   * 让用户实现自定义方面，用 AOP 补充他们对 OOP 的使用。
 * 让我们从定义一些核心 AOP 概念和术语开始。这些术语不是 Spring 特定的。不幸的是，AOP 术语并不是特别直观。但是，如果 Spring 使用它自己的术语，那就更令人困惑了。
-  * Aspect：跨多个类的关注点的模块化。事务管理是企业 Java 应用程序中横切关注点的一个很好的例子。在 Spring AOP 中，方面是通过使用常规类（基于模式的方法）或使用 @Aspect注解注释的常规类（@AspectJ 样式）来实现的。
+  * Aspect：跨多个类的关注点的模块化。事务管理是企业 Java 应用程序中横切关注点的一个很好的例子。在 Spring AOP 中，方面是通过使用常规类（ [基于模式的方法](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-schema) ）或使用 @Aspect注解注释的常规类（ [@AspectJ 样式](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-ataspectj) ）来实现的。
   * Join point：程序执行过程中的一个点，例如方法的执行或异常的处理。在 Spring AOP 中，一个连接点总是代表一个方法执行。
   * Advice：方面在特定连接点采取的行动。不同类型的建议包括“周围”、“之前”和“之后”建议。（通知类型将在后面讨论。）包括 Spring 在内的许多 AOP 框架将通知建模为拦截器，并在连接点周围维护一个拦截器链。
   * Pointcut：匹配连接点的谓词。Advice 与切入点表达式相关联，并在与切入点匹配的任何连接点处运行（例如，执行具有特定名称的方法）。切入点表达式匹配的连接点的概念是 AOP 的核心，Spring 默认使用 AspectJ 切入点表达式语言。
