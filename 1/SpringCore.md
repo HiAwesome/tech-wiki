@@ -314,6 +314,7 @@
 * 除了返回所有选定的元素之外，您还可以只检索第一个或最后一个元素。要获取与选择匹配的第一个元素，语法为 `.^[selectionExpression]`. 要获得最后一个匹配的选择，语法是 `.$[selectionExpression]`.
 * 投影让集合驱动子表达式的评估，结果是一个新的集合。投影的语法是 `.![projectionExpression]`. 例如，假设我们有一个发明者列表，但想要他们出生的城市列表。实际上，我们希望为发明者列表中的每个条目评估“placeOfBirth.city”。以下示例使用投影来执行此操作：`// returns ['Smiljan', 'Idvor' ]
 List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]");`.
+* 面向方面编程 (AOP) 通过提供另一种思考程序结构的方式来补充面向对象编程 (OOP)。OOP 中模块化的关键单元是类，而 AOP 中模块化的单元是方面。方面支持跨多种类型和对象的关注点（例如事务管理）的模块化。（这种关注点在 AOP 文献中通常被称为“横切”关注点。） Spring 的关键组件之一是 AOP 框架。虽然 Spring IoC 容器不依赖 AOP（这意味着如果您不想使用 AOP，则不需要使用 AOP），AOP 补充了 Spring IoC 以提供非常强大的中间件解决方案。
 * 
 
 
