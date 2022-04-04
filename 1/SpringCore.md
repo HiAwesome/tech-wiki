@@ -259,6 +259,9 @@
 * 为了符合 Spring 驱动的方法验证的条件，所有目标类都需要使用 Spring 的@Validated注解进行注解，它还可以选择声明要使用的验证组。有关 [MethodValidationPostProcessor](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/validation/beanvalidation/MethodValidationPostProcessor.html) Hibernate Validator 和 Bean Validation 1.1 提供程序的设置详细信息，请参阅。
 * 方法验证依赖于目标类周围的 [AOP 代理，要么是接口上方法的 JDK 动态代理，要么是 CGLIB 代理](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-introduction-proxies). 使用代理有某些限制，其中一些在 [了解 AOP 代理](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-understanding-aop-proxies) 中进行了描述。此外，请记住始终在代理类上使用方法和访问器；直接字段访问将不起作用。
 * 从 Spring 3 开始，您可以DataBinder使用Validator. 配置完成后，您可以通过调用Validator来调用binder.validate(). 任何验证都会 Errors自动添加到活页夹的BindingResult.
+* Spring 表达式语言（简称“SpEL”）是一种强大的表达式语言，支持在运行时查询和操作对象图。语言语法类似于 Unified EL，但提供了额外的功能，最值得注意的是方法调用和基本的字符串模板功能。 
+* 虽然还有其他几种可用的 Java 表达式语言——OGNL、MVEL 和 JBoss EL 等等——但创建 Spring 表达式语言的目的是为 Spring 社区提供一种受良好支持的表达式语言，该语言可以在所有产品中使用春季投资组合。它的语言特性由 Spring 产品组合中的项目需求驱动，包括Spring Tools for Eclipse中代码完成支持的工具需求。也就是说，SpEL 基于与技术无关的 API，如果需要，可以集成其他表达式语言实现。 
+* 虽然 SpEL 是 Spring 产品组合中表达式评估的基础，但它不直接与 Spring 绑定，可以独立使用。为了独立起见，本章中的许多示例都使用 SpEL，就好像它是一种独立的表达语言一样。这需要创建一些引导基础设施类，例如解析器。大多数 Spring 用户不需要处理这个基础设施，而是可以只编写表达式字符串进行评估。这种典型用途的一个示例是将 SpEL 集成到创建 XML 或基于注释的 bean 定义中，如 定义 bean 定义的表达式支持中所示。
 * 
 
 
