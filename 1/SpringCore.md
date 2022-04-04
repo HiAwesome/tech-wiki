@@ -308,6 +308,7 @@
 * 小心原始类型，因为它们会立即被装箱到它们的包装类型。例如，1 instanceof T(int)计算结果为false，而 1 instanceof T(Integer)计算结果为true，如预期的那样。
 * 如果评估上下文已经配置了 bean 解析器，您可以使用 @ 符号从表达式中查找 bean。要访问工厂 bean 本身，您应该在 bean 名称前加上一个 & 符号。
 * 安全导航运算符用于避免 NullPointerException 和来自 [Groovy](http://www.groovy-lang.org/operators.html#_safe_navigation_operator) 语言。通常，当您有一个对象的引用时，您可能需要在访问该对象的方法或属性之前验证它不为空。为避免这种情况，安全导航运算符返回 null 而不是抛出异常。
+* 选择是一种强大的表达式语言功能，可让您通过从其条目中进行选择将源集合转换为另一个集合。 选择使用 `.?[selectionExpression]`. 它过滤集合并返回一个包含原始元素子集的新集合。
 * 
 
 
