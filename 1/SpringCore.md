@@ -252,6 +252,10 @@
 * 通配符类路径依赖于getResources()底层的方法 ClassLoader。由于现在大多数应用程序服务器都提供自己的ClassLoader 实现，因此行为可能会有所不同，尤其是在处理 jar 文件时。检查是否classpath*有效的一个简单测试是使用ClassLoader从类路径上的 jar 中加载文件： getClass().getClassLoader().getResources("<someFileInsideTheJar>"). 尝试使用具有相同名称但位于两个不同位置的文件进行此测试 - 例如，具有相同名称和相同路径但在类路径上的不同 jar 中的文件。如果返回不适当的结果，请检查应用程序服务器文档以获取可能影响ClassLoader行为的设置。
 * Spring 使用java.beans.PropertyEditorManager为可能需要的属性编辑器设置搜索路径。搜索路径还包括sun.bean.editors，其中包括PropertyEditor诸如Font、Color和大多数基本类型的实现。另请注意，标准 JavaBeans 基础结构会自动发现PropertyEditor类（无需显式注册它们），如果它们与它们处理的类在同一个包中并且与该类具有相同的名称，并带有Editor附加。例如，可以具有以下类和包结构，这足以使SomethingEditor该类被识别并用作PropertyEditorforSomething类型的属性。请注意，您也可以在此处使用标准JavaBeans 机制（在 [此处](https://docs.oracle.com/javase/tutorial/javabeans/advanced/customization.html) BeanInfo进行了一定程度的描述 ）。以下示例使用该机制显式注册一个或多个 具有关联类属性的实例：BeanInfoPropertyEditor.
 * Spring 3 引入了一个core.convert提供通用类型转换系统的包。系统定义了一个 SPI 来实现类型转换逻辑和一个 API 来在运行时执行类型转换。在 Spring 容器中，您可以使用此系统作为实现的替代PropertyEditor方案，将外部化的 bean 属性值字符串转换为所需的属性类型。您还可以在应用程序中需要类型转换的任何地方使用公共 API。参考: [Spring Core Converter](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/convert/converter/Converter.html).
+* 因为GenericConverter是比较复杂的 SPI 接口，所以应该只在需要的时候使用。支持Converter或ConverterFactory满足基本类型转换需求。Because GenericConverter is a more complex SPI interface, you should use it only when you need it. Favor Converter or ConverterFactory for basic type conversion needs.
+* 默认情况下，未使用注释的日期和时间字段是使用样式@DateTimeFormat从字符串转换而来的。DateFormat.SHORT如果您愿意，可以通过定义自己的全局格式来更改它。 为此，请确保 Spring 不注册默认格式化程序。相反，请在以下帮助下手动注册格式化程序：
+  * org.springframework.format.datetime.standard.DateTimeFormatterRegistrar
+  * org.springframework.format.datetime.DateFormatterRegistrar
 * 
 
 
