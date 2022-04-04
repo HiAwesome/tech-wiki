@@ -307,6 +307,7 @@
 * 大于和小于比较null遵循一个简单的规则：null被视为无（即不为零）。因此，任何其他值总是大于null（X > null总是true），并且没有其他值永远小于零（X < null总是false）。 如果您更喜欢数字比较，请避免基于数字的比较，而null倾向于与零进行比较（例如，X > 0或X < 0）。
 * 小心原始类型，因为它们会立即被装箱到它们的包装类型。例如，1 instanceof T(int)计算结果为false，而 1 instanceof T(Integer)计算结果为true，如预期的那样。
 * 如果评估上下文已经配置了 bean 解析器，您可以使用 @ 符号从表达式中查找 bean。要访问工厂 bean 本身，您应该在 bean 名称前加上一个 & 符号。
+* 安全导航运算符用于避免 NullPointerException 和来自 [Groovy](http://www.groovy-lang.org/operators.html#_safe_navigation_operator) 语言。通常，当您有一个对象的引用时，您可能需要在访问该对象的方法或属性之前验证它不为空。为避免这种情况，安全导航运算符返回 null 而不是抛出异常。
 * 
 
 
