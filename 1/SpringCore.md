@@ -272,6 +272,37 @@
   * OFF（默认）：编译器关闭。
   * IMMEDIATE: 在立即模式下，表达式会尽快编译。这通常是在第一次解释评估之后。如果编译表达式失败（通常是由于类型更改，如前所述），则表达式求值的调用者会收到异常。
   * MIXED：在混合模式下，表达式会随着时间在解释模式和编译模式之间静默切换。在经过一定次数的解释运行后，它们会切换到编译形式，如果编译形式出现问题（例如类型更改，如前所述），表达式会自动再次切换回解释形式。一段时间后，它可能会生成另一个已编译的表单并切换到它。基本上，用户进入IMMEDIATE模式的异常是在内部处理的。
+* 您可以将 SpEL 表达式与基于 XML 或基于注释的配置元数据一起使用来定义BeanDefinition实例。在这两种情况下，定义表达式的语法都是 `#{ <expression string> }.`:
+  * 可以使用表达式设置属性或构造函数参数值，如以下示例所示：
+    ```xml
+    <bean id="numberGuess" class="org.spring.samples.NumberGuess">
+        <property name="randomNumber" value="#{ T(java.lang.Math).random() * 100.0 }"/>
+    
+        <!-- other properties -->
+    </bean>
+    ```
+  * 以下示例显示了对systemProperties作为 SpEL 变量的 bean 的访问：
+    ```xml
+    <bean id="taxCalculator" class="org.spring.samples.TaxCalculator">
+        <property name="defaultLocale" value="#{ systemProperties['user.region'] }"/>
+    
+        <!-- other properties -->
+    </bean>
+    ```
+  * 您还可以按名称引用其他 bean 属性，如以下示例所示：
+    ```xml
+    <bean id="numberGuess" class="org.spring.samples.NumberGuess">
+        <property name="randomNumber" value="#{ T(java.lang.Math).random() * 100.0 }"/>
+    
+        <!-- other properties -->
+    </bean>
+    
+    <bean id="shapeGuess" class="org.spring.samples.ShapeGuess">
+        <property name="initialShapeSeed" value="#{ numberGuess.randomNumber }"/>
+    
+        <!-- other properties -->
+    </bean>
+    ```
 * 
 
 
