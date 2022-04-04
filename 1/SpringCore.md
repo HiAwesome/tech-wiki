@@ -437,6 +437,7 @@ List placesOfBirth = (List)parser.parseExpression("members.![placeOfBirth.city]"
   * 范围指示符选择一组连接兴趣点（可能有多种）：within和withincode 
   * 上下文指示符根据上下文匹配（并且可以选择绑定）： this、、target和@annotation
 * 一个写得很好的切入点应该至少包括前两种类型（种类和范围）。您可以包含上下文指示符以根据连接点上下文进行匹配，或绑定该上下文以在建议中使用。由于额外的处理和分析，只提供一个 kinded 指示符或只提供一个上下文指示符是可行的，但可能会影响编织性能（使用的时间和内存）。范围指示符的匹配速度非常快，使用它们意味着 AspectJ 可以非常快速地消除不应进一步处理的连接点组。如果可能，一个好的切入点应始终包含一个切入点。
+* 请注意，@AfterThrowing这并不表示一般的异常处理回调。具体来说，@AfterThrowing建议方法只应该从连接点（用户声明的目标方法）本身接收异常，而不是从伴随的 @After/@AfterReturning方法接收异常。
 * 
 
 
