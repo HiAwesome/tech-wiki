@@ -250,6 +250,7 @@
   * `<property name="template" value="classpath:some/resource/path/myTemplate.txt">`
   * `<property name="template" value="file:///some/resource/path/myTemplate.txt"/>`
 * 通配符类路径依赖于getResources()底层的方法 ClassLoader。由于现在大多数应用程序服务器都提供自己的ClassLoader 实现，因此行为可能会有所不同，尤其是在处理 jar 文件时。检查是否classpath*有效的一个简单测试是使用ClassLoader从类路径上的 jar 中加载文件： getClass().getClassLoader().getResources("<someFileInsideTheJar>"). 尝试使用具有相同名称但位于两个不同位置的文件进行此测试 - 例如，具有相同名称和相同路径但在类路径上的不同 jar 中的文件。如果返回不适当的结果，请检查应用程序服务器文档以获取可能影响ClassLoader行为的设置。
+* Spring 使用java.beans.PropertyEditorManager为可能需要的属性编辑器设置搜索路径。搜索路径还包括sun.bean.editors，其中包括PropertyEditor诸如Font、Color和大多数基本类型的实现。另请注意，标准 JavaBeans 基础结构会自动发现PropertyEditor类（无需显式注册它们），如果它们与它们处理的类在同一个包中并且与该类具有相同的名称，并带有Editor附加。例如，可以具有以下类和包结构，这足以使SomethingEditor该类被识别并用作PropertyEditorforSomething类型的属性。请注意，您也可以在此处使用标准JavaBeans 机制（在 [此处](https://docs.oracle.com/javase/tutorial/javabeans/advanced/customization.html) BeanInfo进行了一定程度的描述 ）。以下示例使用该机制显式注册一个或多个 具有关联类属性的实例：BeanInfoPropertyEditor.
 * 
 
 
