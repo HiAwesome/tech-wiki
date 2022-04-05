@@ -518,69 +518,9 @@ Always use the least powerful form of advice that meets your requirements.  For 
   3. 编写一个或多个实现 [代码](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-parser) BeanDefinitionParser（这是完成实际工作的地方）。 
   4. 使用 Spring [注册您的新工件](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-registration).
 * 创建配置格式的基于模式的方法允许与具有模式感知 XML 编辑器的 IDE 紧密集成。通过使用正确编写的模式，您可以使用自动完成功能让用户在枚举中定义的多个配置选项之间进行选择。
-* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* 除了模式之外，我们还需要NamespaceHandler解析 Spring 在解析配置文件时遇到的这个特定命名空间的所有元素。对于这个例子， NamespaceHandler应该负责myns:dateformat 元素的解析。 该NamespaceHandler接口具有三种方法： 
+  * init(): 允许NamespaceHandler在使用处理程序之前由 Spring 调用 and 的初始化。 
+  * BeanDefinition parse(Element, ParserContext)：当 Spring 遇到顶级元素（未嵌套在 bean 定义或不同的命名空间内）时调用。此方法本身可以注册 bean 定义、返回 bean 定义或两者兼而有之。 
+  * BeanDefinitionHolder decorate(Node, BeanDefinitionHolder, ParserContext)：当 Spring 遇到不同命名空间的属性或嵌套元素时调用。一个或多个 bean 定义的装饰（例如）与 [Spring 支持的范围](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes) 一起使用。我们首先突出一个简单的例子，不使用装饰，然后我们在一个更高级的例子中展示装饰。
+* “普通”元素的自定义属性: 编写您自己的自定义解析器和相关的工件并不难。但是，有时这不是正确的做法。考虑一个场景，您需要将元数据添加到已经存在的 bean 定义中。在这种情况下，您当然不想编写自己的整个自定义扩展。相反，您只想向现有的 bean 定义元素添加一个附加属性。
+* [应用程序启动步骤](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#application-startup-steps): 附录的这一部分列出了StartupSteps核心容器被检测的现有内容。每个启动步骤的名称和详细信息不是公共合同的一部分，可能会发生变化；这被认为是核心容器的实现细节，并将跟随其行为变化。
