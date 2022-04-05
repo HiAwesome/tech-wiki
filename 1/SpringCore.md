@@ -601,6 +601,10 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * 如果@RequestMapping method未指定该属性，则将匹配所有 HTTP 方法，而不仅仅是GET方法。
 * Spring 中动态语言支持的一个（也许是唯一的）最引人注目的增值是“可刷新 bean”特性。 可刷新 bean 是动态语言支持的 bean。通过少量配置，动态语言支持的 bean 可以监视其底层源文件资源的变化，然后在动态语言源文件发生变化时重新加载自己（例如，当您在文件系统）。 这使您可以将任意数量的动态语言源文件部署为应用程序的一部分，配置 Spring 容器以创建由动态语言源文件支持的 bean（使用本章中描述的机制），以及（稍后，随着需求的变化或其他一些外部因素起作用）编辑动态语言源文件，并让他们所做的任何更改反映在由更改的动态语言源文件支持的 bean 中。无需关闭正在运行的应用程序（或在 Web 应用程序的情况下重新部署）。如此修改的动态语言支持的 bean 从更改的动态语言源文件中获取新的状态和逻辑。**此功能默认关闭。**
 * 每个 Groovy 源文件不能定义一个以上的类。虽然这在 Groovy 中是完全合法的，但它（可以说）是一种不好的做法。为了获得一致的方法，您应该（在 Spring 团队的意见中）尊重每个源文件一个（公共）类的标准 Java 约定。
+* Spring Framework 提供了两种调用 REST 端点的选择：
+  * [RestTemplate](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#rest-resttemplate): 具有同步模板方法 API 的原始 Spring REST 客户端。
+  * [WebClient](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client): 一种非阻塞、反应式的替代方案，支持同步和异步以及流式场景。
+* **从 5.0 开始，RestTemplate它处于维护模式，只有较小的更改请求和错误被接受。请考虑使用 提供更现代 API 并支持同步、异步和流式传输方案 的 [WebClient](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client).**
 * 
 
 
