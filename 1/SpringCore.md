@@ -651,6 +651,18 @@ Always use the least powerful form of advice that meets your requirements.  For 
       ScheduledFuture scheduleWithFixedDelay(Runnable task, long delay);
   }
   ```
+* 默认情况下，毫秒将用作固定延迟、固定速率和初始延迟值的时间单位。如果您想使用不同的时间单位，例如秒或分钟，您可以通过 中的timeUnit属性进行配置@Scheduled。
+* 从 Spring Framework 4.3 开始，@Scheduled任何范围的 bean 都支持方法。 确保您没有@Scheduled 在运行时初始化同一注释类的多个实例，除非您确实想为每个此类实例安排回调。与此相关，请确保您不要在使用容器@Configurable注释@Scheduled并注册为常规 Spring bean 的 bean 类上使用。否则，您将获得双重初始化（一次通过容器，一次通过@Configurable方面），结果是每个 @Scheduled方法被调用两次。
+* @Async方法不仅可以声明常规java.util.concurrent.Future返回类型，还可以声明 Springorg.springframework.util.concurrent.ListenableFuture或从 Spring 4.2 开始，JDK 8 的java.util.concurrent.CompletableFuture，以便与异步任务进行更丰富的交互并与进一步的处理步骤进行即时组合。
+* **[Cron Expressions](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#scheduling-cron-expression)**, 所有 Spring cron 表达式都必须符合相同的格式，无论您是在 [@Scheduled annotations](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#scheduling-annotation-support-scheduled), [task:scheduled-tasks](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#scheduling-task-namespace-scheduled-tasks) elements 还是在其他地方使用它们。一个格式良好的 cron 表达式，例如* * * * * *，由六个以空格分隔的时间和日期字段组成，每个字段都有自己的有效值范围。
+* 从 3.1 版开始，Spring 框架支持透明地向现有 Spring 应用程序添加缓存。与 [事务](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction) 支持类似，缓存抽象允许一致使用各种缓存解决方案，而对代码的影响最小。 在 Spring Framework 4.1 中，缓存抽象显着扩展，支持 [JSR-107](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#cache-jsr-107) 注释和更多自定义选项。
+* 缓存与缓冲区: “缓冲区”和“缓存”这两个术语往往可以互换使用。但是请注意，它们代表不同的事物。传统上，缓冲区用作快速实体和慢速实体之间的数据的中间临时存储。由于一方必须等待另一方（这会影响性能），缓冲区通过允许整个数据块一次移动而不是小块移动来缓解这种情况。数据仅从缓冲区写入和读取一次。此外，缓冲区对于知道它的至少一方是可见的。 另一方面，根据定义，缓存是隐藏的，并且任何一方都不知道发生了缓存。它还提高了性能，但通过让相同的数据以快速方式多次读取来实现。 [您可以在此处](https://en.wikipedia.org/wiki/Cache_(computing)#The_difference_between_buffer_and_cache) 找到有关缓冲区和缓存之间差异的进一步说明。
+* 缓存抽象的核心是将缓存应用于 Java 方法，从而根据缓存中可用的信息减少执行次数。也就是说，每次调用目标方法时，抽象都会应用缓存行为来检查是否已经为给定参数调用了该方法。如果已调用，则返回缓存的结果，而无需调用实际方法。如果没有调用该方法，则调用该方法，并将结果缓存并返回给用户，以便下次调用该方法时，返回缓存的结果。这样，对于给定的一组参数，昂贵的方法（无论是 CPU 还是 IO 绑定）只能被调用一次，并且结果可以重用，而不必再次实际调用该方法。**此方法仅适用于保证为给定输入（或参数）返回相同输出（结果）的方法，无论调用多少次。**
+* 缓存抽象对多线程和多进程环境没有特殊处理，因为这些功能由缓存实现处理。
+* 通常强烈建议不要在同一方法上 使用@CachePut和注释，因为它们具有不同的行为。@Cacheable后者通过使用缓存导致方法调用被跳过，而前者强制调用以运行缓存更新。这会导致意外行为，并且除了特定的极端情况（例如具有将它们彼此排除的条件的注释）外，应避免此类声明。另请注意，此类条件不应依赖于结果对象（即#result变量），因为这些条件已预先验证以确认排除。
+* 处理缓存注释的默认建议模式是proxy，它只允许通过代理拦截调用。同一类中的本地调用不能以这种方式被拦截。对于更高级的拦截模式，请考虑切换到aspectj结合编译时或加载时编织的模式。
+* 方法可见性和缓存注释: 当您使用代理时，您应该只将缓存注释应用于具有公共可见性的方法。如果您使用这些注释对受保护的、私有的或包可见的方法进行注释，则不会引发错误，但带注释的方法不会显示配置的缓存设置。如果您需要注释非公共方法，请考虑使用 AspectJ（请参阅本节的其余部分），因为它会更改字节码本身。Spring 建议您只使用注解来注解具体类（和具体类的方法）@Cache*，而不是注解接口。您当然可以在接口（或接口方法）上放置@Cache*注释，但这仅在您使用代理模式（mode="proxy"）时才有效。如果您使用基于编织的方面 ( mode="aspectj")，则编织基础结构在接口级声明中无法识别缓存设置。	在代理模式（默认）下，仅拦截通过代理传入的外部方法调用。这意味着自调用（实际上，目标对象中的一个方法调用目标对象的另一个方法）不会导致运行时的实际缓存，即使调用的方法被标记为@Cacheable. 在这种情况下考虑使用该aspectj模式。此外，代理必须完全初始化以提供预期的行为，因此您不应在初始化代码（即@PostConstruct）中依赖此功能。
+* 自定义注释和 AspectJ: 此功能仅适用于基于代理的方法，但可以通过使用 AspectJ 进行一些额外的工作来启用。 该spring-aspects模块仅为标准注释定义了一个方面。如果您已经定义了自己的注解，您还需要为这些注解定义一个方面。检查AnnotationCacheAspect一个例子。
 * 
 
 
