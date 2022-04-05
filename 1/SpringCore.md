@@ -512,6 +512,12 @@ Always use the least powerful form of advice that meets your requirements.  For 
           <!-- bean definitions here -->
   </beans>
   ```
+* XML 模式创作: 从 2.0 版开始，Spring 提供了一种机制，可以将基于模式的扩展添加到基本的 Spring XML 格式中，用于定义和配置 bean。本节介绍如何编写自己的自定义 XML bean 定义解析器并将此类解析器集成到 Spring IoC 容器中。 为了便于编写使用模式感知 XML 编辑器的配置文件，Spring 的可扩展 XML 配置机制基于 XML Schema。如果您不熟悉标准 Spring 发行版附带的 Spring 当前 XML 配置扩展，您应该首先阅读 [XML Schemas](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-schemas) 的上一节。 要创建新的 XML 配置扩展：
+  1. [创作](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-schema) 一个 XML 模式来描述您的自定义元素。
+  2. 编写自定义 NamespaceHandler 实现 [代码](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-namespacehandler).
+  3. 编写一个或多个实现 [代码](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-parser) BeanDefinitionParser（这是完成实际工作的地方）。 
+  4. 使用 Spring [注册您的新工件](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#xsd-custom-registration).
+* 创建配置格式的基于模式的方法允许与具有模式感知 XML 编辑器的 IDE 紧密集成。通过使用正确编写的模式，您可以使用自动完成功能让用户在枚举中定义的多个配置选项之间进行选择。
 * 
 
 
