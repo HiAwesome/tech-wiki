@@ -530,6 +530,7 @@ Always use the least powerful form of advice that meets your requirements.  For 
   * Spring 对注解（例如 、 和 ）的支持，这些注解@Autowired为@Injector字段、setter 方法和配置方法@Resource提供依赖注入。private protected 
   * @PostConstruct使用注解，例如@PreDestroy生命周期回调方法。
 * [AopTestUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/test/util/AopTestUtils.html) 是 AOP 相关实用方法的集合。您可以使用这些方法来获取对隐藏在一个或多个 Spring 代理后面的底层目标对象的引用。例如，如果您使用 EasyMock 或 Mockito 等库将 bean 配置为动态模拟，并且模拟被包装在 Spring 代理中，您可能需要直接访问底层模拟以对其配置期望并执行验证. 有关 Spring 的核心 AOP 实用程序，请参阅 [AopUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/aop/support/AopUtils.html) 和 [AopProxyUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/aop/framework/AopProxyUtils.html).
+* 单元测试 Spring MVC 控制器: 要将 Spring MVCController类作为 POJO 进行单元测试，请使用Spring 的 [Servlet API 模拟](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#mock-objects-servlet) ModelAndViewAssert中的 with MockHttpServletRequest、等组合。 要结合 Spring MVC 的配置对 Spring MVC 和 REST类进行彻底的集成测试，请改用 [Spring MVC 测试框架](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-framework). MockHttpSession Controller WebApplicationContext
 * 
 
 
