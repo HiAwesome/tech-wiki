@@ -597,6 +597,10 @@ Always use the least powerful form of advice that meets your requirements.  For 
   * **综合交易管理**。@Transactional您可以通过注释或通过在 XML 配置文件中显式配置事务 AOP 建议，使用声明性、面向方面编程 (AOP) 样式的方法拦截器来包装您的 ORM 代码 。在这两种情况下，都会为您处理事务语义和异常处理（回滚等）。如 [资源和事务管理中所述](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#orm-resource-mngmnt), 你还可以互换各种事务管理器，而不影响你的ORM相关代码。例如，您可以在本地事务和 JTA 之间进行交换，在这两种情况下都可以使用相同的完整服务（例如声明性事务）。此外，与 JDBC 相关的代码可以与用于执行 ORM 的代码在事务上完全集成。这对于不适合 ORM（例如批处理和 BLOB 流）但仍需要与 ORM 操作共享公共事务的数据访问很有用。
 * 从 Spring Framework 5.3 开始，Spring 需要 Hibernate ORM 5.2+ 用于 Spring HibernateJpaVendorAdapter以及原生 HibernateSessionFactory设置。对于新启动的应用程序，强烈建议使用 Hibernate ORM 5.4。要与 一起使用HibernateJpaVendorAdapter，Hibernate Search 需要升级到 5.11.6。
 * 什么时候需要加载时间编织？ 并非所有 JPA 提供程序都需要 JVM 代理。Hibernate 就是一个不这样做的例子。如果您的提供者不需要代理或您有其他替代方案，例如在构建时通过自定义编译器或 Ant 任务应用增强功能，则不应使用加载时编织器。
+* 默认情况下，[Kotlin 中的所有类都是final](https://discuss.kotlinlang.org/t/classes-final-by-default/166). 类上的open修饰符与 Java 的相反final：它允许其他人从该类继承。这也适用于成员函数，因为它们需要被标记为open被覆盖。 虽然 Kotlin 的 JVM 友好设计通常与 Spring 没有摩擦，但如果不考虑这一事实，这个特定的 Kotlin 特性可能会阻止应用程序启动。这是因为 Spring bean（例如由于@Configuration技术原因默认需要在运行时扩展的带注释的类）通常由 CGLIB 代理。open解决方法是在由 CGLIB 代理的 Spring bean 的每个类和成员函数上添加一个关键字，这很快就会变得很痛苦，并且违反了 Kotlin 保持代码简洁和可预测的原则。
+* 如果@RequestMapping method未指定该属性，则将匹配所有 HTTP 方法，而不仅仅是GET方法。
+* Spring 中动态语言支持的一个（也许是唯一的）最引人注目的增值是“可刷新 bean”特性。 可刷新 bean 是动态语言支持的 bean。通过少量配置，动态语言支持的 bean 可以监视其底层源文件资源的变化，然后在动态语言源文件发生变化时重新加载自己（例如，当您在文件系统）。 这使您可以将任意数量的动态语言源文件部署为应用程序的一部分，配置 Spring 容器以创建由动态语言源文件支持的 bean（使用本章中描述的机制），以及（稍后，随着需求的变化或其他一些外部因素起作用）编辑动态语言源文件，并让他们所做的任何更改反映在由更改的动态语言源文件支持的 bean 中。无需关闭正在运行的应用程序（或在 Web 应用程序的情况下重新部署）。如此修改的动态语言支持的 bean 从更改的动态语言源文件中获取新的状态和逻辑。**此功能默认关闭。**
+* 每个 Groovy 源文件不能定义一个以上的类。虽然这在 Groovy 中是完全合法的，但它（可以说）是一种不好的做法。为了获得一致的方法，您应该（在 Spring 团队的意见中）尊重每个源文件一个（公共）类的标准 Java 约定。
 * 
 
 
