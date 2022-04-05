@@ -613,6 +613,44 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * 这里介绍的每一项技术都有其缺点。在选择技术时，您应该仔细考虑您的需求、您公开的服务以及您通过网络发送的对象。 使用 RMI 时，您无法通过 HTTP 协议访问对象，除非您通过隧道传输 RMI 流量。RMI 是一个相当重量级的协议，因为它支持全对象序列化，这在您使用需要通过网络进行序列化的复杂数据模型时非常重要。但是，RMI-JRMP 与 Java 客户端相关联。它是一种 Java 到 Java 的远程解决方案。 如果您需要基于 HTTP 的远程处理但又依赖于 Java 序列化，那么 Spring 的 HTTP 调用程序是一个不错的选择。它与 RMI 调用程序共享基本基础架构，但使用 HTTP 作为传输。请注意，HTTP 调用程序不仅限于 Java 到 Java 远程处理，还包括客户端和服务器端的 Spring。（后者也适用于 Spring 的非 RMI 接口的 RMI 调用程序。） 在异构环境中运行时，Hessian 可能会提供重要的价值，因为它们明确允许非 Java 客户端。但是，非 Java 支持仍然有限。已知问题包括 Hibernate 对象的序列化与延迟初始化的集合相结合。如果您有这样的数据模型，请考虑使用 RMI 或 HTTP 调用程序而不是 Hessian。 JMS 可用于提供服务集群并让 JMS 代理负责负载平衡、发现和自动故障转移。默认情况下，Java 序列化用于 JMS 远程处理，但 JMS 提供者可以使用不同的机制进行有线格式化，例如 XStream 以让服务器在其他技术中实现。 最后但同样重要的是，EJB 优于 RMI，因为它支持标准的基于角色的身份验证和授权以及远程事务传播。也可以让 RMI 调用程序或 HTTP 调用程序支持安全上下文传播，尽管核心 Spring 不提供这一点。Spring 仅提供适当的钩子用于插入第三方或自定义解决方案。
 * 请注意由于不安全的 Java 反序列化导致的漏洞：被操纵的输入流可能会导致在反序列化步骤期间在服务器上执行不需要的代码。因此，不要将 HTTP 调用程序端点暴露给不受信任的客户端。相反，仅在您自己的服务之间公开它们。通常，我们强烈建议使用任何其他消息格式（例如 JSON）。 如果您担心 Java 序列化导致的安全漏洞，请考虑核心 JVM 级别的通用序列化过滤机制，该机制最初是为 JDK 9 开发的，但同时向后移植到 JDK 8、7 和 6。请参阅 [https://blogs.oracle.com/java-platform-group/entry/incoming_filter_serialization_data_a](https://blogs.oracle.com/java-platform-group/entry/incoming_filter_serialization_data_a) 和 [https://openjdk.java.net/jeps/290](https://openjdk.java.net/jeps/290).
 * 作为轻量级容器，Spring 通常被认为是 EJB 的替代品。我们确实相信，对于许多（如果不是大多数）应用程序和用例，Spring 作为一个容器，结合其在事务、ORM 和 JDBC 访问领域的丰富支持功能，是比通过 EJB 实现等效功能更好的选择容器和 EJB。 但是，重要的是要注意使用 Spring 不会阻止您使用 EJB。事实上，Spring 使得访问 EJB 和在其中实现 EJB 和功能变得更加容易。此外，使用 Spring 访问 EJB 提供的服务允许这些服务的实现稍后在本地 EJB、远程 EJB 或 POJO（普通旧 Java 对象）变体之间透明地切换，而无需更改客户端代码。 在本章中，我们将了解 Spring 如何帮助您访问和实现 EJB。Spring 在访问无状态会话 bean (SLSB) 时提供了特殊的价值，因此我们从讨论这个主题开始。
+* 从 Spring Framework 5 开始，Spring 的 JMS 包完全支持 JMS 2.0，并且要求 JMS 2.0 API 在运行时存在。我们建议使用与 JMS 2.0 兼容的提供程序。 如果您碰巧在系统中使用了较旧的消息代理，您可以尝试为现有代理生成升级到与 JMS 2.0 兼容的驱动程序。或者，您也可以尝试针对基于 JMS 1.1 的驱动程序运行，只需将 JMS 2.0 API jar 放在类路径中，但仅针对您的驱动程序使用与 JMS 1.1 兼容的 API。Spring 的 JMS 支持默认遵循 JMS 1.1 约定，因此通过相应的配置，它确实支持这种情况。但是，请仅在过渡场景中考虑这一点。
+* 一旦配置，该类的实例JmsTemplate是线程安全的。这很重要，因为这意味着您可以配置 a 的单个实例，JmsTemplate 然后安全地将这个共享引用注入到多个协作者中。需要明确的是，JmsTemplate是有状态的，因为它维护对 a 的引用 ConnectionFactory，但这种状态不是会话状态。
+* Spring 中的 JMX（Java 管理扩展）支持提供了一些功能，可让您轻松、透明地将 Spring 应用程序集成到 JMX 基础架构中。JMX？ 本章不是对 JMX 的介绍。它没有试图解释为什么您可能想要使用 JMX。如果您是 JMX 新手，请参阅本章末尾的 [更多资源](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#jmx-resources).
+* 本节介绍如何使用 Spring Framework 发送电子邮件。库依赖项: 为了使用 Spring Framework 的电子邮件库，以下 JAR 需要位于应用程序的类路径中： JavaMail / [Jakarta Mail 1.6](https://eclipse-ee4j.github.io/mail/) 库 这个库可以在网络上免费获得——例如，在 Maven Central 中作为 com.sun.mail:jakarta.mail. 请确保使用最新的 1.6.x 版本而不是 Jakarta Mail 2.0（带有不同的包命名空间）。
+* Spring 包括许多预构建的TaskExecutor. 很可能，您永远不需要实现自己的。Spring提供的变体如下：
+  * SyncTaskExecutor：此实现不会异步运行调用。相反，每次调用都发生在调用线程中。它主要用于不需要多线程的情况，例如简单的测试用例。
+  * SimpleAsyncTaskExecutor：此实现不重用任何线程。相反，它为每次调用启动一个新线程。但是，它确实支持并发限制，该限制会阻止任何超过限制的调用，直到插槽被释放。如果您正在寻找真正的池化，请参阅ThreadPoolTaskExecutor此列表后面的 。
+  * ConcurrentTaskExecutor：这个实现是一个java.util.concurrent.Executor实例的适配器。有一个替代方法 ( ThreadPoolTaskExecutor) 将Executor 配置参数公开为 bean 属性。很少需要 ConcurrentTaskExecutor直接使用。但是，如果ThreadPoolTaskExecutor它对您的需求不够灵活，ConcurrentTaskExecutor则可以选择。
+  * ThreadPoolTaskExecutor: 这个实现是最常用的。它公开了用于配置 a 的 bean 属性java.util.concurrent.ThreadPoolExecutor并将其包装在 a 中TaskExecutor。如果您需要适应不同类型的java.util.concurrent.Executor，我们建议您使用 aConcurrentTaskExecutor来代替。
+  * WorkManagerTaskExecutor：此实现使用 CommonJWorkManager作为其支持服务提供者，并且是在 Spring 应用程序上下文中在 WebLogic 或 WebSphere 上设置基于 CommonJ 的线程池集成的中心便利类。
+  * DefaultManagedTaskExecutor：此实现使用ManagedExecutorService在与 JSR-236 兼容的运行时环境（例如 Java EE 7+ 应用程序服务器）中获得的 JNDI，为此目的替换了 CommonJ WorkManager。
+* 除了TaskExecutor抽象之外，Spring 3.0 还引入了TaskScheduler 一种用于调度任务以在未来某个时间点运行的多种方法。schedule最简单的方法是仅采用 aRunnable和 a的命名方法Date。这会导致任务在指定时间后运行一次。所有其他方法都能够安排任务重复运行。固定速率和固定延迟方法用于简单的周期性执行，但接受 Trigger 的方法要灵活得多。以下清单显示了TaskScheduler接口定义：
+  ```java
+  public interface TaskScheduler {
+  
+      ScheduledFuture schedule(Runnable task, Trigger trigger);
+  
+      ScheduledFuture schedule(Runnable task, Instant startTime);
+  
+      ScheduledFuture schedule(Runnable task, Date startTime);
+  
+      ScheduledFuture scheduleAtFixedRate(Runnable task, Instant startTime, Duration period);
+  
+      ScheduledFuture scheduleAtFixedRate(Runnable task, Date startTime, long period);
+  
+      ScheduledFuture scheduleAtFixedRate(Runnable task, Duration period);
+  
+      ScheduledFuture scheduleAtFixedRate(Runnable task, long period);
+  
+      ScheduledFuture scheduleWithFixedDelay(Runnable task, Instant startTime, Duration delay);
+  
+      ScheduledFuture scheduleWithFixedDelay(Runnable task, Date startTime, long delay);
+  
+      ScheduledFuture scheduleWithFixedDelay(Runnable task, Duration delay);
+  
+      ScheduledFuture scheduleWithFixedDelay(Runnable task, long delay);
+  }
+  ```
 * 
 
 
