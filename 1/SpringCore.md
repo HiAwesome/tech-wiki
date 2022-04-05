@@ -572,6 +572,11 @@ Always use the least powerful form of advice that meets your requirements.  For 
   * 与 Spring 的数据访问抽象完美集成。
 * Spring 解决了全局和本地事务的缺点。它允许应用程序开发人员在任何环境中使用一致的编程模型。您只需编写一次代码，它就可以从不同环境中的不同事务管理策略中受益。Spring Framework 提供声明式和编程式事务管理。大多数用户更喜欢声明式事务管理，我们在大多数情况下都推荐这种方式。 通过程序化事务管理，开发人员可以使用 Spring Framework 事务抽象，它可以在任何底层事务基础设施上运行。使用首选的声明性模型，开发人员通常编写很少或根本不编写与事务管理相关的代码，因此不依赖 Spring Framework 事务 API 或任何其他事务 API。
 * 您需要应用服务器来进行事务管理吗？Spring Framework 的事务管理支持改变了关于企业 Java 应用程序何时需要应用程序服务器的传统规则。 特别是，您不需要纯粹用于通过 EJB 进行声明性事务的应用程序服务器。事实上，即使您的应用程序服务器具有强大的 JTA 功能，您也可能会认为 Spring Framework 的声明式事务提供了比 EJB CMT 更强大的编程模型和更高效的编程模型。 通常，只有当您的应用程序需要处理跨多个资源的事务时，您才需要应用程序服务器的 JTA 功能，而这对许多应用程序来说不是必需的。许多高端应用程序使用单一的、高度可扩展的数据库（例如 Oracle RAC）。独立的事务管理器（例如 [Atomikos Transactions](https://www.atomikos.com/) 和 [JOTM](http://jotm.objectweb.org/) ）是其他选项。当然，您可能需要其他应用服务器功能，例如 Java 消息服务 (JMS) 和 Java EE 连接器架构 (JCA)。 Spring 框架让您可以选择何时将应用程序扩展到完全加载的应用程序服务器。使用 EJB CMT 或 JTA 的唯一替代方法是使用本地事务（例如 JDBC 连接上的事务）编写代码并且如果您需要该代码在全局、容器管理的事务中运行则面临大量返工的日子已经一去不复返了。使用 Spring Framework，只需更改配置文件中的一些 bean 定义（而不是您的代码）。
+* 如果您使用 JTA，那么无论您使用哪种数据访问技术，无论是 JDBC、Hibernate JPA 还是任何其他受支持的技术，您的事务管理器定义都应该看起来相同。这是因为 JTA 事务是全局事务，它可以征用任何事务资源。在所有 Spring 事务设置中，应用程序代码不需要更改。您可以仅通过更改配置来更改事务的管理方式，即使该更改意味着从本地事务转移到全局事务，反之亦然。
+* 大多数 Spring Framework 用户选择声明式事务管理。此选项对应用程序代码的影响最小，因此最符合非侵入式轻量级容器的理想。
+* Spring Framework 的声明式事务管理是通过 Spring 面向方面编程 (AOP) 实现的。然而，由于事务方面代码随 Spring Framework 发行版一起提供并且可以以样板方式使用，因此通常不必理解 AOP 概念即可有效地使用此代码。
+* @Transactional 仅仅告诉你用注释来注释你的类，添加 @EnableTransactionManagement 到你的配置中，并期望你理解它是如何工作的是不够的 。为了提供更深入的理解，本节将在事务相关问题的上下文中解释 Spring 框架的声明式事务基础结构的内部工作原理。Spring FrameworkTransactionInterceptor为命令式和反应式编程模型提供事务管理。拦截器通过检查方法返回类型来检测所需的事务管理风格。返回响应式类型的方法，例如PublisherKotlin Flow（或其子类型）有资格进行响应式事务管理。所有其他返回类型，包括void使用代码路径进行命令式事务管理。下图显示了在事务代理上调用方法的概念视图：
+  * ![](https://docs.spring.io/spring-framework/docs/current/reference/html/images/tx.png)
 * 
 
 
