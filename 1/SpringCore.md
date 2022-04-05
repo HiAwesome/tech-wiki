@@ -503,6 +503,15 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * Spring 注释使用JSR 305 注释（一种休眠但广泛传播的 JSR）进行元注释。JSR-305 元注释让 IDEA 或 Kotlin 等工具供应商以通用方式提供空安全支持，而无需对 Spring 注释进行硬编码支持。 没有必要也不建议将 [JSR-305](https://jcp.org/en/jsr/detail?id=305) 依赖项添加到项目类路径以利用 Spring 空安全 API。只有在代码库中使用空安全注解的项目（例如基于 Spring 的库）才应添加 com.google.code.findbugs:jsr305:3.0.2 Gradle compileOnly 配置或 Maven provided范围以避免编译警告。
 * 正如 [ByteBuffer](https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html) 的 Javadoc 中所解释的，字节缓冲区可以是直接的或非直接的。直接缓冲区可以驻留在 Java 堆之外，这消除了对本地 I/O 操作进行复制的需要。这使得直接缓冲区对于通过套接字接收和发送数据特别有用，但它们的创建和释放成本也更高，这导致了池化缓冲区的想法。 PooledDataBuffer是它的扩展，DataBuffer它有助于引用计数，这对于字节缓冲池至关重要。它是如何工作的？当 aPooledDataBuffer被分配时，引用计数为 1。调用retain()递增计数，调用release()递减计数。只要计数大于0，就保证缓冲区不会被释放。当计数减少到 0 时，可以释放池化缓冲区，这实际上可能意味着为缓冲区保留的内存返回到内存池。 请注意，PooledDataBuffer与其直接操作，在大多数情况下，最好使用DataBufferUtils应用版本中的便捷方法或 DataBuffer仅当它是PooledDataBuffer.
 * spring-jcl从 Spring Framework 5.0 开始，Spring 在模块中实现了自己的 Commons Logging 桥接器。该实现检查类路径中是否存在 Log4j 2.x API 和 SLF4J 1.7 API，并使用找到的第一个作为日志实现，回退到 Java 平台的核心日志工具（也称为JUL或java.util.logging）如果 Log4j 2.x 和 SLF4J 都不可用。 将 Log4j 2.x 或 Logback（或其他 SLF4J 提供程序）放入您的类路径中，无需任何额外的桥梁，并让框架自动适应您的选择。有关详细信息，请参阅 [Spring Boot 日志记录参考文档](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-logging). Spring 的 Commons Logging 变体仅用于核心框架和扩展中的基础设施日志记录目的。对于应用程序代码中的日志记录需求，更喜欢直接使用 Log4j 2.x、SLF4J 或 JUL。
+* The util Schema: As the name implies, the util tags deal with common, utility configuration issues, such as configuring collections, referencing constants, and so forth. To use the tags in the util schema, you need to have the following preamble at the top of your Spring XML configuration file (the text in the snippet references the correct schema so that the tags in the util namespace are available to you): 顾名思义，util标签处理常见的实用程序配置问题，例如配置集合、引用常量等。要使用util架构中的标签，您需要在 Spring XML 配置文件的顶部添加以下前导码（片段中的文本引用正确的架构，以便util您可以使用命名空间中的标签）：
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:util="http://www.springframework.org/schema/util"
+          <!-- bean definitions here -->
+  </beans>
+  ```
 * 
 
 
