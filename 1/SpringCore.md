@@ -525,6 +525,11 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * “普通”元素的自定义属性: 编写您自己的自定义解析器和相关的工件并不难。但是，有时这不是正确的做法。考虑一个场景，您需要将元数据添加到已经存在的 bean 定义中。在这种情况下，您当然不想编写自己的整个自定义扩展。相反，您只想向现有的 bean 定义元素添加一个附加属性。
 * [应用程序启动步骤](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#application-startup-steps): 附录的这一部分列出了StartupSteps核心容器被检测的现有内容。每个启动步骤的名称和详细信息不是公共合同的一部分，可能会发生变化；这被认为是核心容器的实现细节，并将跟随其行为变化。
 * 本章介绍 Spring 对集成测试的支持和单元测试的最佳实践。**Spring 团队提倡测试驱动开发 (TDD)。**Spring 团队发现，正确使用控制反转 (IoC) 确实确实使单元测试和集成测试更容易（因为类上存在 setter 方法和适当的构造函数使它们更容易在测试中连接在一起，而不必建立服务定位器注册表和类似结构）。与传统 Java EE 开发相比，依赖注入应该使您的代码对容器的依赖更少。组成应用程序的 POJO 应该可以在 JUnit 或 TestNG 测试中进行测试，使用new 操作符实例化对象，无需 Spring 或任何其他容器。您可以使用 [模拟对象](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#mock-objects) （结合其他有价值的测试技术）来单独测试您的代码。如果您遵循 Spring 的架构建议，那么代码库的干净分层和组件化将有助于更轻松的单元测试。例如，您可以通过存根或模拟 DAO 或存储库接口来测试服务层对象，而无需在运行单元测试时访问持久数据。 真正的单元测试通常运行得非常快，因为不需要设置运行时基础设施。强调真正的单元测试作为开发方法的一部分可以提高您的生产力。您可能不需要测试章节的这一部分来帮助您为基于 IoC 的应用程序编写有效的单元测试。然而，对于某些单元测试场景，Spring 框架提供了模拟对象和测试支持类，本章将对此进行介绍。
+* 该org.springframework.test.util软件包包含几个用于单元和集成测试的通用实用程序。 **ReflectionTestUtils 是基于反射的实用方法的集合。您可以在需要更改常量值、设置非 public 字段、调用非public setter 方法或 public 在测试应用程序代码等用例时调用非配置或生命周期回调方法的测试场景中使用这些方法如下**： 
+  * ORM 框架（例如 JPA 和 Hibernate）允许private或protected字段访问，而不是public域实体中属性的 setter 方法。 
+  * Spring 对注解（例如 、 和 ）的支持，这些注解@Autowired为@Injector字段、setter 方法和配置方法@Resource提供依赖注入。private protected 
+  * @PostConstruct使用注解，例如@PreDestroy生命周期回调方法。
+* [AopTestUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/test/util/AopTestUtils.html) 是 AOP 相关实用方法的集合。您可以使用这些方法来获取对隐藏在一个或多个 Spring 代理后面的底层目标对象的引用。例如，如果您使用 EasyMock 或 Mockito 等库将 bean 配置为动态模拟，并且模拟被包装在 Spring 代理中，您可能需要直接访问底层模拟以对其配置期望并执行验证. 有关 Spring 的核心 AOP 实用程序，请参阅 [AopUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/aop/support/AopUtils.html) 和 [AopProxyUtils](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/aop/framework/AopProxyUtils.html).
 * 
 
 
