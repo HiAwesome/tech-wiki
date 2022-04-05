@@ -554,6 +554,11 @@ Always use the least powerful form of advice that meets your requirements.  For 
   * JUnit 4 的@Test(timeout = …)支持和TimeOut规则
   * JUnit Jupiter类assertTimeoutPreemptively(…)中的方法 org.junit.jupiter.api.Assertions
   * TestNG 的@Test(timeOut = …)支持
+* 方法级别的生命周期方法——例如，使用 JUnit Jupiter's @BeforeEachor注释的方法——@AfterEach在测试管理的事务中运行。另一方面，套件级和类级生命周期方法——例如，使用 JUnit Jupiter 的@BeforeAllor@AfterAll注释的方法和使用 TestNG 的 @BeforeSuite、@AfterSuite、@BeforeClass或注释的方法@AfterClass——不在测试管理的事务中运行。 如果您需要在事务中的套件级或类级生命周期方法中运行代码，您可能希望将相应的注入PlatformTransactionManager到您的测试类中，然后将其与TransactionTemplate编程事务管理一起使用。
+* 有时，您可能需要在事务测试方法之前或之后但在事务上下文之外运行某些代码 - 例如，在运行测试之前验证初始数据库状态或在测试运行后验证预期的事务提交行为（如果test 被配置为提交事务）。 TransactionalTestExecutionListener完全支持此类场景的@BeforeTransaction和 @AfterTransaction注释。您可以使用这些注释之一来注释void 测试类中的任何方法或void测试接口中的任何默认方法，并TransactionalTestExecutionListener确保您的事务前方法或事务后方法在适当的时间运行。任何 before 方法（例如使用 JUnit Jupiter's 注释的方法@BeforeEach）和任何 after 方法（例如使用 JUnit Jupiter's 注释的方法@AfterEach）都在事务中运行。此外，对于未配置为在事务中运行的测试方法，使用注释@BeforeTransaction或 @AfterTransaction不运行的方法。
+* 除了上述以编程方式运行 SQL 脚本的机制之外，您还可以在 Spring TestContext Framework 中以声明方式配置 SQL 脚本。具体来说，您可以@Sql在测试类或测试方法上声明注释，以配置单个 SQL 语句或 SQL 脚本的资源路径，这些脚本应在集成测试方法之前或之后针对给定数据库运行。支持 @Sql由 提供SqlScriptsTestExecutionListener，默认情况下启用。默认情况下，方法级别的@Sql声明会覆盖类级别的声明。但是，从 Spring Framework 5.2 开始，可以通过每个测试类或每个测试方法配置此行为@SqlMergeMode。有关详细信息，请参阅 合并和覆盖配置@SqlMergeMode。
+* Spring Framework 5.0 引入了在使用 Spring TestContext Framework 时在单个 JVM 中并行执行测试的基本支持。一般来说，这意味着大多数测试类或测试方法可以并行运行，而无需对测试代码或配置进行任何更改。有关如何设置并行测试执行的详细信息，请参阅测试框架、构建工具或 IDE 的文档。
+* Spring TestContext 框架通过自定义运行程序（在 JUnit 4.12 或更高版本上受支持）提供与 JUnit 4 的完全集成。通过使用 @RunWith(SpringJUnit4ClassRunner.class)或更短的@RunWith(SpringRunner.class) 变体注释测试类，开发人员可以实现标准的基于 JUnit 4 的单元和集成测试，同时获得 TestContext 框架的好处，例如支持加载应用程序上下文、测试实例的依赖注入、事务测试方法执行， 等等。如果您想将 Spring TestContext Framework 与替代运行程序（例如 JUnit 4 的Parameterized运行程序）或第三方运行程序（例如MockitoJUnitRunner）一起使用，您可以选择使用 [Spring 对 JUnit 规则的支持](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#testcontext-junit4-rules).
 * 
 
 
