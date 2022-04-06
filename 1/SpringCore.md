@@ -674,6 +674,15 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * 从 5.3 开始，即使在类型转换之后也将强制执行非空参数。如果您的处理程序方法也打算接受空值，请将您的参数声明为@Nullable 或将其标记为required=false相应@RequestParam的 等注释。这是 5.3 升级中遇到的回归问题的最佳实践和推荐解决方案。 或者，您可以MissingPathVariableException 在 required 的情况下专门处理例如结果@PathVariable。转换后的空值将被视为空原始值，因此Missing…Exception将抛出相应的变体。
 * 内置支持可用于将逗号分隔的字符串转换为数组或字符串集合或类型转换系统已知的其他类型。例如，带有注释的方法参数@RequestHeader("Accept")可以是类型 String，也可以是String[]或List<String>。
 * 将请求与闪存属性匹配: flash 属性的概念存在于许多其他 Web 框架中，并且已被证明有时会遇到并发问题。这是因为，根据定义，闪存属性将被存储到下一个请求。然而，“下一个”请求可能不是预期的接收者，而是另一个异步请求（例如，轮询或资源请求），在这种情况下，闪存属性被删除得太早。 为了减少出现此类问题的可能性，请使用目标重定向 URL 的路径和查询参数RedirectView自动“标记” 实例。FlashMap反过来，默认值FlashMapManager会在查找“输入”时将该信息与传入请求匹配FlashMap。 这并不能完全消除并发问题的可能性，但可以通过重定向 URL 中已有的信息大大减少它。因此，我们建议您将 flash 属性主要用于重定向场景。
+* Spring 提供对 Jackson JSON 库的支持。
+* 根异常匹配和原因异常匹配之间的区别可能令人惊讶。 在IOException前面显示的变体中，通常以实际FileSystemException或RemoteException实例作为参数调用该方法，因为它们都扩展自IOException. 但是，如果任何此类匹配异常在本身为 的包装异常中传播IOException，则传入的异常实例就是该包装异常。 变体中的行为甚至更简单handle(Exception)。这总是在包装场景中使用包装器异常调用，ex.getCause()在这种情况下可以找到实际匹配的异常。只有当这些异常作为顶级异常抛出时，传入的异常才是实际的 FileSystemException 或 RemoteException 实例。
+* UriComponentsBuilder在两个级别公开编码选项：
+  * [UriComponentsBuilder#encode()](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/web/util/UriComponentsBuilder.html#encode--): 先对 URI 模板进行预编码，然后在展开时对 URI 变量进行严格编码。
+  * [UriComponents#encode()](https://docs.spring.io/spring-framework/docs/5.3.18/javadoc-api/org/springframework/web/util/UriComponents.html#encode--): 在URI 变量展开后对URI 组件进行编码。
+* Spring MVC 与 Servlet 3.0 异步请求处理有广泛的集成 ：
+  * DeferredResult控制器方法中的返回值和Callable 返回值为单个异步返回值提供了基本支持。
+  * 控制器可以流式传输多个值，包括 SSE和原始数据。
+  * 控制器可以使用响应式客户端并返回 响应式类型以进行响应处理。
 * 
 
 
