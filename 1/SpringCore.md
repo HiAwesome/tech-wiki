@@ -683,6 +683,8 @@ Always use the least powerful form of advice that meets your requirements.  For 
   * DeferredResult控制器方法中的返回值和Callable 返回值为单个异步返回值提供了基本支持。
   * 控制器可以流式传输多个值，包括 SSE和原始数据。
   * 控制器可以使用响应式客户端并返回 响应式类型以进行响应处理。
+* Servlet API 最初是为单次通过 Filter-Servlet 链而构建的。Servlet 3.0 中添加的异步请求处理允许应用程序退出 Filter-Servlet 链，但保留响应以供进一步处理。Spring MVC 异步支持是围绕该机制构建的。当控制器返回 aDeferredResult时，Filter-Servlet 链退出，Servlet 容器线程被释放。稍后，当DeferredResult设置 时，将进行ASYNC调度（到相同的 URL），在此期间再次映射控制器，但不是调用它，而是DeferredResult使用该值（就像控制器返回它一样）来恢复处理。 相比之下，Spring WebFlux 既不是基于 Servlet API 构建的，也不需要这样的异步请求处理特性，因为它在设计上是异步的。异步处理内置于所有框架契约中，并且在请求处理的所有阶段都得到内在支持。 从编程模型的角度来看，Spring MVC 和 Spring WebFlux 都支持异步和响应式类型作为控制器方法中的返回值。Spring MVC 甚至支持流式传输，包括响应式背压。但是，对响应的单个写入仍然是阻塞的（并且在单独的线程上执行），这与 WebFlux 不同，WebFlux 依赖于非阻塞 I/O，并且每次写入都不需要额外的线程。 另一个根本区别是 Spring MVC 不支持控制器方法参数中的异步或反应类型（例如，、@RequestBody等@RequestPart），也不明确支持异步和反应类型作为模型属性。Spring WebFlux 确实支持所有这些。
+* HTTP 缓存可以显着提高 Web 应用程序的性能。HTTP 缓存围绕Cache-Control响应标头以及随后的条件请求标头（例如Last-Modified和ETag）。Cache-Control建议私有（例如，浏览器）和公共（例如，代理）缓存如何缓存和重用响应。如果ETag内容未更改，标头用于发出可能导致没有正文的 304 (NOT_MODIFIED) 的条件请求。ETag可以看作是Last-Modified头部的更复杂的继承者。
 * 
 
 
