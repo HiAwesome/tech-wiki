@@ -2,6 +2,8 @@
 
 #### [How Fast is Spring?](https://spring.io/blog/2018/12/12/how-fast-is-spring)
 
+#### [Spring MVC Async vs Spring WebFlux](https://www.baeldung.com/spring-mvc-async-vs-webflux)
+
 #### [Spring 5 WebClient](https://www.baeldung.com/spring-5-webclient)
 
 #### [设计模式 -- 策略模式+Spring Bean代替if/else](https://developer.aliyun.com/article/775879)
