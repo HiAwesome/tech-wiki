@@ -1,5 +1,15 @@
 # Docker
 
+#### docker pull with sha256
+
+以 [maven:3.8.5-openjdk-17: linux/arm64](https://hub.docker.com/layers/maven/library/maven/3.8.5-openjdk-17/images/sha256-e299c7dd06091386e49ce6658b30d61bbf62b4287608e156c3468b52c0c78305?context=explore) 为例:
+
+```shell
+
+docker pull maven@sha256:e299c7dd06091386e49ce6658b30d61bbf62b4287608e156c3468b52c0c78305
+
+```
+
 #### [docker 容器使用 systemctl 命令是报错](https://www.cnblogs.com/infoo/p/11900607.html)
 
 看了许多解决方案，但是对于新手来说并不友好，不是特别清楚
