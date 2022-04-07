@@ -689,6 +689,15 @@ Always use the least powerful form of advice that meets your requirements.  For 
 * REST 的一个关键原则是使用“统一接口”。这意味着可以使用相同的四种 HTTP 方法来操作所有资源 (URL)：GET、PUT、POST 和 DELETE。对于每种方法，HTTP 规范定义了确切的语义。例如，GET 应该始终是一个安全的操作，这意味着它没有副作用，而 PUT 或 DELETE 应该是幂等的，这意味着您可以一遍又一遍地重复这些操作，但最终结果应该是相同的。虽然 HTTP 定义了这四种方法，但 HTML 只支持两种：GET 和 POST。幸运的是，有两种可能的解决方法：您可以使用 JavaScript 执行 PUT 或 DELETE，或者您可以使用“真实”方法作为附加参数（建模为 HTML 表单中的隐藏输入字段）执行 POST。春天的HiddenHttpMethodFilter使用后一种技巧。这个过滤器是一个普通的 Servlet 过滤器，因此，它可以与任何 Web 框架（不仅仅是 Spring MVC）结合使用。将此过滤器添加到您的 web.xml 中，带有隐藏method参数的 POST 将转换为相应的 HTTP 方法请求。
 * HTML 页面并不总是用户查看模型输出的最佳方式，Spring 使得从模型数据动态生成 PDF 文档或 Excel 电子表格变得简单。该文档是视图，从服务器以正确的内容类型流式传输，以（希望）使客户端 PC 能够运行其电子表格或 PDF 查看器应用程序作为响应。 为了使用 Excel 视图，您需要将 Apache POI 库添加到您的类路径中。对于 PDF 生成，您需要（最好）添加 OpenPDF 库。	如果可能，您应该使用最新版本的底层文档生成库。特别是，我们强烈推荐 OpenPDF（例如，OpenPDF 1.2.12）而不是过时的原始 iText 2.1.7，因为 OpenPDF 得到积极维护并修复了不受信任的 PDF 内容的重要漏洞。
 * RestTemplate是执行 HTTP 请求的同步客户端。它是原始的 Spring REST 客户端，并在底层 HTTP 客户端库上公开了一个简单的模板方法 API。从 5.0 开始，RestTemplate它处于维护模式，只有较小的更改请求和错误被接受。请考虑使用 提供更现代 API 并支持同步、异步和流式传输方案 的 [WebClient](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client) 。
+* WebClient是一个非阻塞的响应式客户端来执行 HTTP 请求。它是在 5.0 中引入的，并提供了 . 的现代替代方案RestTemplate，有效支持同步和异步以及流场景。
+  * 与 相比RestTemplate，WebClient支持以下内容：
+  * 非阻塞 I/O。
+  * Reactive Streams 背压。
+  * 高并发，硬件资源少。
+  * 利用 Java 8 lambda 的函数式、流畅的 API。
+  * 同步和异步交互。
+  * 流式传输到服务器或从服务器流式传输。
+  * 有关详细信息，请参阅 [WebClient](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client) 。
 * 
 
 
