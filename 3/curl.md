@@ -1,5 +1,13 @@
 # [curl](https://curl.se/docs/manpage.html)
 
+## [curl on docker](https://everything.curl.dev/get/docker)
+
+```shell
+
+docker run -it --rm curlimages/curl www.example.com
+
+```
+
 ## --json 参数
 
 [7.82.0](https://curl.se/changes.html#7_82_0) 增加了新参数 --json, `--json <data>` is a shortcut for `--data-binary <data> -H "Content-Type: application/json" -H "Accept: application/json"`, 详见:
