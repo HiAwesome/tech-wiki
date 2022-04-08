@@ -1,5 +1,15 @@
 # zsh
 
+### set PROMPT_EOL_MARK
+
+在默认情况下，如果在 bash/zsh 里输出一个不带换行的字符串，bash/zsh 会给字符串增加一个后缀 %，可以去掉
+
+```shell
+
+export PROMPT_EOL_MARK=''
+
+```
+
 ## [scalar parameter xxxxx created globally in function xxxx](https://m.tqwba.com/x_d/jishu/139046.html)
 
 build_prompt:1: scalar parameter RETVAL created globally in function build_prompt
