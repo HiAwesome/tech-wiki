@@ -1,5 +1,16 @@
 # Github
 
+### Feature Preview
+
+Command Palette
+
+Quickly navigate and jump between your organizations or repositories and search recent issues, pull requests, projects and more with the new command palette. You can also execute time saving commands all without lifting your fingers off the keyboard!
+
+To open the command palette:
+
+* macOS: ⌘ k or ⌘ opt k
+* other: Ctrl k or Ctrl alt k
+
 ### [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 ```shell
