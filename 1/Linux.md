@@ -1,5 +1,23 @@
 # Linux
 
+#### [OS X Terminal: -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory Fix](https://www.cyberciti.biz/faq/os-x-terminal-bash-warning-setlocale-lc_ctype-cannot-change-locale/)
+
+Preventing OpenSSH Client from sending the LC_* variables on OS X / Linux / Unix desktop
+
+Edit /etc/ssh/ssh_config or /etc/ssh_config file, enter:
+
+```shell
+sudo vim ~/.ssh/config
+```
+
+Remove or comment out as follows:
+
+```shell
+# SendEnv LANG LC_*
+```
+
+Save and close the file.
+
 #### [How to Print the Longest Line(s) in a File](https://www.baeldung.com/linux/print-longest-lines-in-file)
 
 应用: `awk '{printf "line #%d has length:%d\n",NR,length}' 20220120_web_long_info.log | awk -F ":" '{if($2 > 5000){print $0}}' | sort -nk 2 -t':' -r | head`
