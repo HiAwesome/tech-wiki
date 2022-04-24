@@ -1,5 +1,7 @@
 # Linux
 
+#### [How to Check Memory Usage Per Process on Linux](https://linuxhint.com/check_memory_usage_process_linux/)
+
 #### [OS X Terminal: -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory Fix](https://www.cyberciti.biz/faq/os-x-terminal-bash-warning-setlocale-lc_ctype-cannot-change-locale/)
 
 Preventing OpenSSH Client from sending the LC_* variables on OS X / Linux / Unix desktop
