@@ -1,5 +1,11 @@
 # Linux
 
+#### [How to tar a file in Linux using command line](https://www.cyberciti.biz/faq/how-to-tar-a-file-in-linux-using-command-line/)
+
+* Compress an entire directory by running `tar -zcvf file.tar.gz /path/to/dir/` command in Linux.
+* To compress a single file by running `tar -zcvf file.tar.gz /path/to/filename` command on Linux.
+* Tar and compress multiple directories file by running `tar -zcvf file.tar.gz dir1 dir2 dir3` command in Linux.
+
 #### [Understanding Linux CPU Load - when should you be worried?](https://scoutapm.com/blog/understanding-load-averages)
 
 #### [How to Check Memory Usage Per Process on Linux](https://linuxhint.com/check_memory_usage_process_linux/)
