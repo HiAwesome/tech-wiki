@@ -1,5 +1,11 @@
 # Netcat
 
+### [netcat - keep listening for connection in Debian](https://superuser.com/a/1530614)
+
+```shell
+while true; do nc -lv <listeningport> ; done
+```
+
 ### [How to make a webserver with netcat (nc)](https://jameshfisher.com/2018/12/31/how-to-make-a-webserver-with-netcat-nc/)
 
 once:
