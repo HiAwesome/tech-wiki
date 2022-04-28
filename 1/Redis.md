@@ -1,5 +1,21 @@
 # Redis
 
+#### [Where is redis installed on MacOS?](https://stackoverflow.com/a/63179012)
+
+Redis 启动报错
+
+```shell
+23522:M 28 Apr 2022 10:08:45.702 # Internal error in RDB reading offset 0, function at rdb.c:2273 -> The RDB file contains module data I can't load: no matching module type 'ReJSON-RL'
+```
+
+原因，之前安装了 redis-json 模块，有相关的数据存储在 dump.rdb 中，无法移除。
+
+解决方案： 删除 dump.rdb
+
+```shell
+rm -rf /usr/local/var/db/redis/dump.rdb
+```
+
 ### [KES pattern](https://redis.io/commands/keys)
 
 在使用 [SCAN cursor \[MATCH pattern] \[COUNT count] \[TYPE type]](https://redis.io/commands/scan) 会用到这种匹配，即 keys 支持 glob 样式模式，而不是正则表达式。
