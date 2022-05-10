@@ -1,5 +1,11 @@
 # Gradle
 
+#### [What is detachedConfiguration? I have a lots of them for each subproject and resolving them takes 95% of build time](https://discuss.gradle.org/t/what-is-detachedconfiguration-i-have-a-lots-of-them-for-each-subproject-and-resolving-them-takes-95-of-build-time/31595)
+
+can’t explain what exactly a detached configuration is, but I remember similar problems from when we were using the Spring dependency management plugin. I think it has to do with how the Spring plugin “misuses” configurations to achieve it’s goal.
+
+**移除奇怪的 plugin 解决这个问题。**
+
 #### IDEA show: The JavaExec.main property has been deprecated.
 
 * [Lot's of deprecation warnings when running against Gradle 7.1](https://github.com/JetBrains/gradle-intellij-plugin/issues/700)
