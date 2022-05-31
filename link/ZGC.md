@@ -20,6 +20,9 @@
 
 #### [TencentKona-11: ZGC使用手册](https://github.com/Tencent/TencentKona-11/wiki/ZGC%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C)
 
-#### [Tencent Kona JDK11 无暂停内存管理 ZGC 生产实践](https://cloud.tencent.com/developer/article/1836895) 
+#### Tencent Kona JDK11 无暂停内存管理 ZGC 生产实践
+
+* [cloud](https://cloud.tencent.com/developer/article/1836895)
+* [local](../html/Tencent%20Kona%20JDK11%20无暂停内存管理.html)
 
 #### [云原生时代的 Java 应用优化实践](https://cloud.tencent.com/developer/article/1949451)
