@@ -17,3 +17,8 @@
 #### [zgc Allocation Stall 问题](https://www.cnblogs.com/lizo/p/14270686.html) 
 
 #### [ZGC: Allocation Stall issue](https://answers.ycrash.io/question/zgc-allocation-stall-issue?q=446)
+
+#### [TencentKona-11: ZGC使用手册](https://github.com/Tencent/TencentKona-11/wiki/ZGC%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C)
+
+
+
