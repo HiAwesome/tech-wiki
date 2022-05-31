@@ -1,6 +1,9 @@
 # [Java ZGC](https://wiki.openjdk.java.net/display/zgc/Main)
 
-#### [ZGC: The Next Generation Low-Latency Garbage Collector](http://cr.openjdk.java.net/~pliden/slides/ZGC-OracleDevLive-2020.pdf)
+#### ZGC: The Next Generation Low-Latency Garbage Collector
+
+* [cloud](http://cr.openjdk.java.net/~pliden/slides/ZGC-OracleDevLive-2020.pdf)
+* [local](../pdf/ZGC-OracleDevLive-2020.pdf)
 
 ### [perliden: Oracle ZGC Team Leader Blog](https://malloc.se/)
 
