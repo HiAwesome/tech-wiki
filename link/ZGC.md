@@ -8,6 +8,6 @@
 
 #### [Embracing JVM unified logging (JEP-158 / JEP-271)](https://blog.arkey.fr/2020/07/28/embracing-jvm-unified-logging-jep-158-jep-271/)
 
-
+#### [只有 FullGC 才会 STW 吗?](https://www.zhihu.com/question/371699670/answer/1348382472)
 
 
