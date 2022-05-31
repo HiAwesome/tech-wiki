@@ -5,3 +5,9 @@
 #### [Getting 'allocation stall' when enabling ZGC](https://stackoverflow.com/a/61923235)
 
 #### [high cpu usage on openjdk zgc](https://stackoverflow.com/q/64815418)
+
+#### [Embracing JVM unified logging (JEP-158 / JEP-271)](https://blog.arkey.fr/2020/07/28/embracing-jvm-unified-logging-jep-158-jep-271/)
+
+
+
+
