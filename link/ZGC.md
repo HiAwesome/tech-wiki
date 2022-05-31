@@ -2,7 +2,7 @@
 
 #### [ZGC: The Next Generation Low-Latency Garbage Collector](http://cr.openjdk.java.net/~pliden/slides/ZGC-OracleDevLive-2020.pdf)
 
-### [perliden: Oracle ZGC Team Blog](https://malloc.se/)
+### [perliden: Oracle ZGC Team Leader Blog](https://malloc.se/)
 
 #### [perliden: ZGC | What's new in JDK 17](https://malloc.se/blog/zgc-jdk17)
 
