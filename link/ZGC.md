@@ -29,3 +29,5 @@
 * [local](../html/Tencent%20Kona%20JDK11%20无暂停内存管理.html)
 
 #### [云原生时代的 Java 应用优化实践](https://cloud.tencent.com/developer/article/1949451)
+
+#### [58同城 HBase 平台 ZGC 应用实践](https://heapdump.cn/article/3706373)
