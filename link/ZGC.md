@@ -15,3 +15,5 @@
 #### [只有 FullGC 才会 STW 吗?](https://www.zhihu.com/question/371699670/answer/1348382472)
 
 #### [zgc Allocation Stall 问题](https://www.cnblogs.com/lizo/p/14270686.html) 
+
+#### [ZGC: Allocation Stall issue](https://answers.ycrash.io/question/zgc-allocation-stall-issue?q=446)
