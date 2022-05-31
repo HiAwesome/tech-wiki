@@ -1,5 +1,7 @@
 # [Java ZGC](https://wiki.openjdk.java.net/display/zgc/Main)
 
+#### [Inside Java: GC](https://inside.java/tag/gc)
+
 #### ZGC: The Next Generation Low-Latency Garbage Collector
 
 * [cloud](http://cr.openjdk.java.net/~pliden/slides/ZGC-OracleDevLive-2020.pdf)
