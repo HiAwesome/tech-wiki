@@ -1,5 +1,7 @@
 # [Java ZGC](https://wiki.openjdk.java.net/display/zgc/Main)
 
+### [perliden: Oracle ZGC Team Blog](https://malloc.se/)
+
 #### [perliden: ZGC | What's new in JDK 17](https://malloc.se/blog/zgc-jdk17)
 
 #### [Getting 'allocation stall' when enabling ZGC](https://stackoverflow.com/a/61923235)
