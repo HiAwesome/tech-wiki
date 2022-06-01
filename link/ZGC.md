@@ -33,3 +33,5 @@
 #### [云原生时代的 Java 应用优化实践](https://cloud.tencent.com/developer/article/1949451)
 
 #### [58同城 HBase 平台 ZGC 应用实践](https://heapdump.cn/article/3706373)
+
+#### [新一代垃圾回收器 ZGC 的探索与实践](https://tech.meituan.com/2020/08/06/new-zgc-practice-in-meituan.html)
