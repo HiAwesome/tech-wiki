@@ -1,5 +1,7 @@
 # Java
 
+#### [Java17: The java Command](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html)
+
 #### [Guide to UUID in Java](https://www.baeldung.com/java-uuid)
 
 #### [lombok: Add jdk9 compiler support](https://github.com/projectlombok/lombok/issues/985)
