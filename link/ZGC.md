@@ -38,6 +38,7 @@
 
 #### 日志分析
 
-* 查看分配速率:           grep 'gc,alloc'
-* 查看分配暂停:           grep 'Allocation Stall'
-* 查看分配暂停统计:        grep 'Critical: Allocation Stall'
+* 查看分配速率:  grep 'gc,alloc'
+* 查看分配暂停:  grep 'Allocation Stall'
+* 查看分配暂停统计:  grep 'Critical: Allocation Stall'
+* 查看 STW 时间:  grep -E '(Pause Mark Start|Pause Mark End|Pause Relocate Start)'
