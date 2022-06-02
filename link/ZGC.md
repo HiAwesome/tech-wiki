@@ -35,3 +35,9 @@
 #### [58同城 HBase 平台 ZGC 应用实践](https://heapdump.cn/article/3706373)
 
 #### [新一代垃圾回收器 ZGC 的探索与实践](https://tech.meituan.com/2020/08/06/new-zgc-practice-in-meituan.html)
+
+#### 日志分析
+
+* 查看分配速率:           grep 'gc,alloc'
+* 查看分配暂停:           grep 'Allocation Stall'
+* 查看分配暂停统计:        grep 'Critical: Allocation Stall'
