@@ -1,5 +1,17 @@
 # Linux
 
+#### [查看 Linux 内核版本](https://www.cnblogs.com/linuxprobe/p/11664104.html)
+
+```shell
+
+uname -srm
+
+hostnamectl
+
+cat /proc/version
+
+```
+
 #### tldr less
 
 ```shell
