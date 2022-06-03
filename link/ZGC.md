@@ -4,6 +4,7 @@
 
 #### ZGC: The Next Generation Low-Latency Garbage Collector
 
+* [video](https://www.youtube.com/watch?v=OcfvBoyTvA8)
 * [cloud](http://cr.openjdk.java.net/~pliden/slides/ZGC-OracleDevLive-2020.pdf)
 * [local](../pdf/ZGC-OracleDevLive-2020.pdf)
 
