@@ -23,6 +23,19 @@
 
 **例如: 从 `git@github.com:HiAwesome/tech-wiki.git` 更新为 `https://github.com/HiAwesome/tech-wiki.git`, 即把前缀从 `git@github.com:` 更新为 `https://github.com/`.**
 
+注意，在使用 https 交互的情况下，输入密码需要粘贴一次 token 而不是 github 账户的密码，例如
+
+```shell
+git push -u origin master
+Username for 'https://github.com': moqimoqidea
+Password for 'https://moqimoqidea@github.com':
+```
+
+原因:
+
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see [Token authentication requirements for Git operations](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) for more information.
+
 ### Feature Preview
 
 Command Palette
