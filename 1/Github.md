@@ -1,5 +1,28 @@
 # Github
 
+### Some Day Use
+
+#### 公开的 dns 解析器
+
+* Google: 8.8.4.4
+* Google: 8.8.4.4
+* Cloudflare: 1.1.1.1
+* Cloudflare: 1.0.0.1
+
+#### [Troubleshooting connectivity problems](https://docs.github.com/en/get-started/using-github/troubleshooting-connectivity-problems)
+
+#### [About GitHub's IP addresses](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses)
+
+#### [Github Debug](https://github-debug.com/)
+
+#### [Github API meta](https://api.github.com/meta)
+
+从 web 中选取一个 ip, 在本机 hosts 中与 github.com 建立映射关系。
+
+将对应项目的 remote 从 ssh 更新为 https.
+
+**例如: 从 `git@github.com:HiAwesome/tech-wiki.git` 更新为 `https://github.com/HiAwesome/tech-wiki.git`, 即把前缀从 `git@github.com:` 更新为 `https://github.com/`.**
+
 ### Feature Preview
 
 Command Palette
