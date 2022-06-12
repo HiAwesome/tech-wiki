@@ -1,5 +1,7 @@
 # Java
 
+#### [Java 9 到 17 的语言特性更新](https://nanova.me/java-lang-updates/)
+
 #### [Java17: The java Command](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html)
 
 #### [Guide to UUID in Java](https://www.baeldung.com/java-uuid)
