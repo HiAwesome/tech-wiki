@@ -1,5 +1,21 @@
 # Docker
 
+#### [重启 docker daemon](https://docs.docker.com/config/daemon/systemd/)
+
+```shell
+
+sudo systemctl restart docker
+
+```
+
+#### [重启所有的容器](https://stackoverflow.com/a/38221727)
+
+```shell
+
+docker restart $(docker ps -a -q)
+
+```
+
 #### [docker in docker](https://hub.docker.com/_/docker)
 
 #### docker pull with sha256
