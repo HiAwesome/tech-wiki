@@ -1,5 +1,15 @@
 # Docker
 
+#### 杀死僵死的容器
+
+```shell
+
+ps aux | grep ${CONTAINER_ID}
+
+kill THE_PIDS
+
+```
+
 #### [重启 docker daemon](https://docs.docker.com/config/daemon/systemd/)
 
 ```shell
