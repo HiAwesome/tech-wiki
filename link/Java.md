@@ -1,6 +1,10 @@
 # Java
 
-#### [java.io.IOException: Broken pipe](https://stackoverflow.com/a/15785439)
+#### java.io.IOException: Broken pipe
+
+* [How to fix java.net.SocketException: Broken pipe?](https://stackoverflow.com/a/11970174)
+* [Java NIO: What does IOException: Broken pipe mean?](https://stackoverflow.com/a/1181325) 
+* [java.io.IOException: Broken pipe](https://stackoverflow.com/a/15785439)
 
 #### [Java 9 到 17 的语言特性更新](https://nanova.me/java-lang-updates/)
 
