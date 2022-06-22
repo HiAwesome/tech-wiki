@@ -2,6 +2,8 @@
 
 #### [Java 17 Command](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html)
 
+#### [Welcome to the ZGC Project!](https://wiki.openjdk.org/pages/viewpage.action?pageId=35454984)
+
 #### [Inside Java: GC](https://inside.java/tag/gc)
 
 #### ZGC: The Next Generation Low-Latency Garbage Collector
