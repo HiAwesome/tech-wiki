@@ -91,3 +91,5 @@ When running SPECjbb2015, on a two socket Intel Xeon E5-2690 machine, which a to
 * [带你读《新一代垃圾回收器ZGC设计与实现》之一：垃圾回收器概述](https://developer.aliyun.com/article/726110)
 * [带你读《新一代垃圾回收器ZGC设计与实现》之二：ZGC内存管理](https://developer.aliyun.com/article/726120)
 * [带你读《新一代垃圾回收器ZGC设计与实现》之三：ZGC线程](https://developer.aliyun.com/article/726124)
+
+#### [Java garbage collection: The 10-release evolution from JDK 8 to JDK 18](https://blogs.oracle.com/javamagazine/post/java-garbage-collectors-evolution)
