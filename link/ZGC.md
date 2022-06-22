@@ -4,6 +4,42 @@
 
 #### [Welcome to the ZGC Project!](https://wiki.openjdk.org/pages/viewpage.action?pageId=35454984)
 
+The Z Garbage Collector, also known as ZGC, is a garbage collector optimized for low latency and very large heaps. It has been designed with the following goals in mind:
+
+* Handle multi-terabyte heaps
+* GC pause times not exceeding 10ms
+* **No more than 15% application throughput reduction compared to using G1**
+
+At a glance, ZGC is a concurrent, currently single-generation, region-based, incrementally compacting collector. Stop-The-World phases are limited to root scanning, meaning GC pause times do not increase with the heap- or live-set size.
+
+Setting Parallel/Concurrent GC Threads
+
+ZGC uses both -XX:ParallelGCThreads=<threads> and -XX:ConcGCThreads=<threads> to determine how many worker threads to use during different GC phases. If they are not set, ZGC will try to select an appropriate number. However, please note that the optimal number of threads to use heavily depends on the characteristics of the workload you're running, which means that you almost always want to explicitly specify these to get optimal throughput and latency. We hope to be able to remove this recommendation at some point in the future, when ZGC's heuristics for this becomes good enough, but for now it's recommended that you try different settings and pick the best one.
+
+ParallelGCThreads sets the level of parallelism used during pauses and hence directly affects the pause times. Generally speaking, the more threads the better, as long as you don't over provision the machine (i.e. use more threads than cores/hw-threads) or the application root set is so small that is can easily be handled by just a few threads.
+
+The following GC phases are affected by ParallelGCThreads:
+
+* Pause Mark Start - Number of threads used for marking roots.
+* Pause Mark End - Number of threads used for weak root processing (StringTable, JNI Weak Handles, etc.).
+* Pause Relocate Start - Number of threads used for relocating roots.
+
+* ConcGCThreads sets the level of parallelism used during concurrent phases. The number of threads to use during these phases is a balance between allowing the GC to make progress and not stealing too much CPU time from the application. Generally speaking, if there are unused CPUs/cores in the system, always allow concurrent threads to use them. If the application is already using all CPUs/cores, then the machine is essentially already over-provisioned and you have to allow for a throughput reduction by either letting concurrent GC threads steal/compete for CPU time, or by actively reducing the application CPU footprint.
+
+NOTE! In general, if low latency (i.e. low application response time) is important to you, then never over-provision your system. Ideally, your system should never have more than 70% CPU utilization.
+
+The following GC phases are affected by ConcGCThreads:
+
+* Concurrent Mark - Number of threads used for concurrent marking.
+* Concurrent Reference Processing - Number of threads used for concurrent reference processing (i.e. handling Soft/Weak/Final/PhantomReference objects).
+* Concurrent Relocate - Number of threads used for concurrent relocation.
+
+Example:
+
+When running SPECjbb2015, on a two socket Intel Xeon E5-2690 machine, which a total of 2 x 8 = 16 cores (with hyper-threading, 2 x 16 = 32 HW-threads) using a 128G heap, the following options typically results in optimal throughput and latency:
+
+-XX:+UseZGC -Xms128G -Xmx128G -XX:+UseLargePages -XX:ParallelGCThreads=20 -XX:ConcGCThreads=4
+
 #### [Inside Java: GC](https://inside.java/tag/gc)
 
 #### ZGC: The Next Generation Low-Latency Garbage Collector
